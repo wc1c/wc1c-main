@@ -1,6 +1,6 @@
-=== WC1C > integration of WooCommerce with 1C products (different configurations) ===
+=== WC1C Main ===
 Contributors: WC1C
-Tags: 1c, commerceml, woocommerce, cml, woo, woo 1c, woo commerce, 1s, 1с
+Tags: commerceml, 1c, cml, ecommerce, woocommerce, woo, woo 1c, woo commerce, 1s, 1с
 Requires at least: 5.2
 Tested up to: 6.1
 Requires PHP: 7.0
