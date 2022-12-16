@@ -23,7 +23,7 @@ foreach($update->getSections() as $tab_key => $tab_name)
 	);
 }
 
-if(count($views) < 2)
+if(count($views) < 1)
 {
 	return;
 }
