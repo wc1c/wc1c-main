@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Settings\ConnectionForm;
+use Wc1c\Main\Admin\Settings\ConnectionForm;
 
 /** @var ConnectionForm $object */
 $object = $args['object'];
@@ -18,10 +18,10 @@ $object = $args['object'];
     <?php endif; ?>
     <div class="submit p-0 mt-3">
 	    <?php
-	        $button = __('Connect by WC1C site', 'wc1c');
+	        $button = __('Connect by WC1C site', 'wc1c-main');
             if($object->status)
             {
-                $button = __('Disconnect', 'wc1c');
+                $button = __('Disconnect', 'wc1c-main');
             }
         ?>
 

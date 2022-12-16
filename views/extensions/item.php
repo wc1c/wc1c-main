@@ -17,22 +17,22 @@
             <div class="col-24 mt-2 mt-md-0 col-md-9 col-lg-6">
                 <ul class="list-group m-0">
                     <li class="list-group-item m-0 list-group-item-light">
-                        <?php _e('ID:', 'wc1c'); ?>
+                        <?php _e('ID:', 'wc1c-main'); ?>
                         <span class="badge bg-secondary"><?php echo $args['id']; ?></span>
                     </li>
                     <li class="list-group-item m-0">
-                            <?php _e('Version:', 'wc1c'); ?>
+                            <?php _e('Version:', 'wc1c-main'); ?>
                             <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version', __('none')); ?>
                          </span>
                     </li>
                     <li class="list-group-item m-0">
-		                <?php _e('Versions WC1C:', 'wc1c'); ?>
-	                    <?php _e('from', 'wc1c'); ?>
+		                <?php _e('Versions WC1C:', 'wc1c-main'); ?>
+	                    <?php _e('from', 'wc1c-main'); ?>
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_wc1c_min', __('none')); ?>
                          </span>
-	                    <?php _e('to', 'wc1c'); ?>
+	                    <?php _e('to', 'wc1c-main'); ?>
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_wc1c_max', __('none')); ?>
                         </span>

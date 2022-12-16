@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Tools;
+<?php namespace Wc1c\Main\Tools;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Tools\Abstracts\ToolAbstract;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Tools\Abstracts\ToolAbstract;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Core
  *
- * @package Wc1c\Tools
+ * @package Wc1c\Main\Tools
  */
 final class Core
 {

@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Data\Contracts;
+<?php namespace Wc1c\Main\Data\Contracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Data\Abstracts\DataAbstract;
+use Wc1c\Main\Data\Abstracts\DataAbstract;
 
 /**
  * MetaStorageContract
  *
- * @package Wc1c\Data\Contracts
+ * @package Wc1c\Main\Data\Contracts
  */
 interface MetaStorageContract
 {

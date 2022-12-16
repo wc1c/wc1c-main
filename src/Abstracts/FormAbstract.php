@@ -1,11 +1,11 @@
-<?php namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Main\Abstracts;
 
 defined('ABSPATH') || exit;
 
 /**
  * FormAbstract
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Main\Abstracts
  */
 abstract class FormAbstract
 {

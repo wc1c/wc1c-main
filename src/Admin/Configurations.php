@@ -1,17 +1,17 @@
-<?php namespace Wc1c\Admin;
+<?php namespace Wc1c\Main\Admin;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Admin\Configurations\Create;
-use Wc1c\Admin\Configurations\Update;
-use Wc1c\Admin\Configurations\Delete;
-use Wc1c\Admin\Configurations\All;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Admin\Configurations\Create;
+use Wc1c\Main\Admin\Configurations\Update;
+use Wc1c\Main\Admin\Configurations\Delete;
+use Wc1c\Main\Admin\Configurations\All;
 
 /**
  * Configurations
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 class Configurations
 {

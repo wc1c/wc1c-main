@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Configuration;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Abstracts\FormAbstract;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Configuration;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Abstracts\FormAbstract;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * CreateForm
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Main\Admin\Configurations
  */
 class CreateForm extends FormAbstract
 {
@@ -39,9 +39,9 @@ class CreateForm extends FormAbstract
 	{
 		$fields['name'] =
         [
-            'title' => __('Configuration name', 'wc1c'),
+            'title' => __('Configuration name', 'wc1c-main'),
             'type' => 'text',
-            'description' => __('Enter any data up to 255 characters.', 'wc1c'),
+            'description' => __('Enter any data up to 255 characters.', 'wc1c-main'),
             'default' => '',
             'css' => 'width: 100%;',
         ];
@@ -69,7 +69,7 @@ class CreateForm extends FormAbstract
 
 		$fields['schema'] =
 		[
-			'title' => __('Configuration schema', 'wc1c'),
+			'title' => __('Configuration schema', 'wc1c-main'),
 			'type' => 'radio',
 			'description' => '',
 			'default' => $default_id,
@@ -135,7 +135,7 @@ class CreateForm extends FormAbstract
 
                         <div>
 
-	                        <?php _e('Identifier:', 'wc1c'); ?> <b><?php echo esc_attr($option_key); ?></b>
+	                        <?php _e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>
                             <hr>
                         </div>
 
@@ -185,7 +185,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Please retry.', 'wc1c')
+					'data' => __('Configuration create error. Please retry.', 'wc1c-main')
 				]
 			);
 
@@ -225,7 +225,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Name is required.', 'wc1c')
+					'data' => __('Configuration create error. Name is required.', 'wc1c-main')
 				]
 			);
 
@@ -238,7 +238,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Schema is required.', 'wc1c')
+					'data' => __('Configuration create error. Schema is required.', 'wc1c-main')
 				]
 			);
 
@@ -255,7 +255,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Name is exists.', 'wc1c')
+					'data' => __('Configuration create error. Name is exists.', 'wc1c-main')
 				]
 			);
 
@@ -272,8 +272,8 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'update',
-					'data' => __('Configuration create success. Configuration id: ', 'wc1c') . $configuration->getId()
-					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c') . '</a>)'
+					'data' => __('Configuration create success. Configuration id: ', 'wc1c-main') . $configuration->getId()
+					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
 				]
 			);
 
@@ -285,7 +285,7 @@ class CreateForm extends FormAbstract
 		(
 			[
 				'type' => 'error',
-				'data' => __('Configuration create error. Please retry saving or change fields.', 'wc1c')
+				'data' => __('Configuration create error. Please retry saving or change fields.', 'wc1c-main')
 			]
 		);
 

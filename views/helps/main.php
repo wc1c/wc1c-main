@@ -4,13 +4,13 @@
     printf
     (
         '<p>%s %s</p>',
-        __('If no understand how Integration with 1C works, how to use and supplement it, can view the documentation.', 'wc1c'),
-        __('Documentation contains all kinds of resources such as code snippets, user guides and more.', 'wc1c')
+        __('If no understand how Integration with 1C works, how to use and supplement it, can view the documentation.', 'wc1c-main'),
+        __('Documentation contains all kinds of resources such as code snippets, user guides and more.', 'wc1c-main')
     );
 ?>
 
 <a href="https://wc1c.info/docs" target="_blank" class="button button-primary">
-    <?php _e('Documentation', 'wc1c'); ?>
+    <?php _e('Documentation', 'wc1c-main'); ?>
 </a>
 
 <?php

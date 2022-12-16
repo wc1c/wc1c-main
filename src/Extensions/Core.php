@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Extensions;
+<?php namespace Wc1c\Main\Extensions;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Extensions\Contracts\ExtensionContract;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Extensions\Contracts\ExtensionContract;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Core
  *
- * @package Wc1c\Extensions
+ * @package Wc1c\Main\Extensions
  */
 final class Core
 {
@@ -28,11 +28,11 @@ final class Core
 	 * @return void
 	 * @throws Exception
 	 */
-	public function set($extensions)
+	public function set(array $extensions)
 	{
 		if(!is_array($extensions))
 		{
-			throw new Exception(__('Set $extensions is not valid.', 'wc1c'));
+			throw new Exception(__('Set $extensions is not valid.', 'wc1c-main'));
 		}
 
 		$this->extensions = $extensions;
@@ -46,16 +46,9 @@ final class Core
 	 * @return void
 	 * @throws Exception
 	 */
-	public function init($extension_id = '')
+	public function init(string $extension_id = '')
 	{
-		try
-		{
-			$extensions = $this->get();
-		}
-		catch(Exception $e)
-		{
-			throw $e;
-		}
+		$extensions = $this->get();
 
 		/**
 		 * Init specified extension
@@ -64,12 +57,12 @@ final class Core
 		{
 			if(!array_key_exists($extension_id, $extensions))
 			{
-				throw new Exception(__('Extension not found by id.', 'wc1c'));
+				throw new Exception(__('Extension not found by id.', 'wc1c-main'));
 			}
 
 			if(!$extensions[$extension_id] instanceof ExtensionContract)
 			{
-				throw new Exception(__('Extension is not implementation ExtensionContract. Skipped init.', 'wc1c'));
+				throw new Exception(__('Extension is not implementation ExtensionContract. Skipped init.', 'wc1c-main'));
 			}
 
 			if($extensions[$extension_id]->isInitialized())
@@ -84,7 +77,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				throw new Exception(__('Init extension exception:', 'wc1c') . ' ' . $e->getMessage());
+				throw new Exception(__('Init extension exception:', 'wc1c-main') . ' ' . $e->getMessage());
 			}
 
 			$this->set($extensions);
@@ -116,7 +109,7 @@ final class Core
 	 * @return array|ExtensionContract
 	 * @throws Exception
 	 */
-	public function get($extension_id = '')
+	public function get(string $extension_id = '')
 	{
 		if('' !== $extension_id)
 		{
@@ -125,7 +118,7 @@ final class Core
 				return $this->extensions[$extension_id];
 			}
 
-			throw new Exception(__('Get extension by id is unavailable.', 'wc1c'));
+			throw new Exception(__('Get extension by id is unavailable.', 'wc1c-main'));
 		}
 
 		return $this->extensions;
@@ -143,16 +136,20 @@ final class Core
 
 		if(has_filter('wc1c_extensions_loading') && 'yes' === wc1c()->settings('main')->get('extensions', 'yes'))
 		{
-			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
+			try
+			{
+				$extensions = apply_filters('wc1c_extensions_loading', $extensions);
+			}
+			catch(\Error $e)
+			{
+				throw new Exception(__('Extensions load error:', 'wc1c-main') . ' ' . $e->getMessage());
+			}
+			catch(\Exception $e)
+			{
+				throw new Exception(__('Extensions load exception:', 'wc1c-main') . ' ' . $e->getMessage());
+			}
 		}
 
-		try
-		{
-			$this->set($extensions);
-		}
-		catch(Exception $e)
-		{
-			throw new Exception(__('Extensions load exception:', 'wc1c') . ' ' . $e->getMessage());
-		}
+		$this->set($extensions);
 	}
 }

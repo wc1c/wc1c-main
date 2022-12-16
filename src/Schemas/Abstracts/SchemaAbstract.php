@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Schemas\Abstracts;
+<?php namespace Wc1c\Main\Schemas\Abstracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Configuration;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Log\Logger;
-use Wc1c\Schemas\Contracts\SchemaContract;
+use Wc1c\Main\Configuration;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Log\Logger;
+use Wc1c\Main\Schemas\Contracts\SchemaContract;
 
 /**
  * SchemaAbstract
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Main\Abstracts
  */
 abstract class SchemaAbstract implements SchemaContract
 {

@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Schemas\Productscleanercml;
+<?php namespace Wc1c\Main\Schemas\Productscleanercml;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Receiver
  *
- * @package Wc1c\Schemas\Productscleanercml
+ * @package Wc1c\Main\Schemas\Productscleanercml
  */
 final class Receiver
 {
@@ -56,7 +56,7 @@ final class Receiver
 	 */
 	public function handler()
 	{
-		$this->core()->log()->info(__('Received new request for Receiver.', 'wc1c'));
+		$this->core()->log()->info(__('Received new request for Receiver.', 'wc1c-main'));
 
 		$mode = '';
 		$type = '';
@@ -94,7 +94,7 @@ final class Receiver
 			}
 		}
 
-		$this->core()->log()->debug(__('Received request params.', 'wc1c'), ['type' => $type, 'mode=' => $mode]);
+		$this->core()->log()->debug(__('Received request params.', 'wc1c-main'), ['type' => $type, 'mode=' => $mode]);
 
 		if($type === 'catalog' && $mode !== '')
 		{
@@ -127,13 +127,13 @@ final class Receiver
 					break;
 				default:
 					do_action('wc1c_schema_productscleanercml_catalog_handler_none', $mode, $this);
-					$this->sendResponseByType('failure', __('Catalog: mode not found.', 'wc1c'));
+					$this->sendResponseByType('failure', __('Catalog: mode not found.', 'wc1c-main'));
 			}
 		}
 
 		do_action('wc1c_schema_productscleanercml_handler_none', $mode, $this);
 
-		$response_description = __('Schema: action not found.', 'wc1c');
+		$response_description = __('Schema: action not found.', 'wc1c-main');
 		$this->core()->log()->warning($response_description);
 		$this->sendResponseByType('failure', $response_description);
 	}
@@ -176,7 +176,7 @@ final class Receiver
 			$description = apply_filters('wc1c_schema_productscleanercml_receiver_send_response_by_type_description', $description, $this, $type);
 		}
 
-		$this->core()->log()->info(__('In 1C was send a response of the type:', 'wc1c') . ' ' . $type);
+		$this->core()->log()->info(__('In 1C was send a response of the type:', 'wc1c-main') . ' ' . $type);
 
 		$headers= [];
 		$headers['Content-Type'] = 'Content-Type: text/plain; charset=utf-8';
@@ -186,7 +186,7 @@ final class Receiver
 			$headers = apply_filters('wc1c_schema_productscleanercml_receiver_send_response_by_type_headers', $headers, $this, $type);
 		}
 
-		$this->core()->log()->debug(__('Headers for response.', 'wc1c'), ['context' => $headers]);
+		$this->core()->log()->debug(__('Headers for response.', 'wc1c-main'), ['context' => $headers]);
 
 		foreach($headers as $header)
 		{
@@ -238,10 +238,10 @@ final class Receiver
 			if(!isset($remote_user))
 			{
 				// todo: автоматическая запись необходимой записи в файл .htaccess с просьбой повторить выгрузку
-				$this->core()->log('schemas')->critical(__('Server in CGI mode. Not detected the presence of an entry in the root .htaccess file on the subject of the contents of the lines.', 'wc1c'), ['lines' => "RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]"]);
+				$this->core()->log('schemas')->critical(__('Server in CGI mode. Not detected the presence of an entry in the root .htaccess file on the subject of the contents of the lines.', 'wc1c-main'), ['lines' => "RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]"]);
 				$this->core()->configuration()->setStatus('error');
 				$this->core()->configuration()->save();
-				$this->sendResponseByType('failure', __('Not specified the user. Check the server settings.', 'wc1c'));
+				$this->sendResponseByType('failure', __('Not specified the user. Check the server settings.', 'wc1c-main'));
 			}
 
 			$str_tmp = base64_decode(substr($remote_user, 6));
@@ -280,14 +280,14 @@ final class Receiver
 		{
 			if($credentials['login'] !== $this->core()->getOptions('user_login', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid username.', 'wc1c'));
-				$this->sendResponseByType('failure', __('Not a valid username.', 'wc1c'));
+				$this->core()->log()->notice(__('Not a valid username.', 'wc1c-main'));
+				$this->sendResponseByType('failure', __('Not a valid username.', 'wc1c-main'));
 			}
 
 			if($credentials['password'] !== $this->core()->getOptions('user_password', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid user password.', 'wc1c'));
-				$this->sendResponseByType('failure', __('Not a valid user password.', 'wc1c'));
+				$this->core()->log()->notice(__('Not a valid user password.', 'wc1c-main'));
+				$this->sendResponseByType('failure', __('Not a valid user password.', 'wc1c-main'));
 			}
 		}
 
@@ -295,14 +295,14 @@ final class Receiver
 
 		if(session_status() === PHP_SESSION_NONE)
 		{
-			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c'));
+			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c-main'));
 			session_start();
 		}
 
 		$session_name = session_name();
 		$session_id = session_id();
 
-		$this->core()->log()->debug(__('Request authorization from 1C successfully completed.', 'wc1c'), ['session_name' => $session_name, 'session_id' => $session_id]);
+		$this->core()->log()->debug(__('Request authorization from 1C successfully completed.', 'wc1c-main'), ['session_name' => $session_name, 'session_id' => $session_id]);
 
 		$lines['success'] = 'success' . PHP_EOL;
 		$lines['session_name'] = $session_name . PHP_EOL;
@@ -316,7 +316,7 @@ final class Receiver
 			$lines = apply_filters('wc1c_schema_productscleanercml_handler_checkauth_lines', $lines);
 		}
 
-		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c'), ['data' => $lines]);
+		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c-main'), ['data' => $lines]);
 
 		foreach($lines as $line)
 		{
@@ -336,11 +336,11 @@ final class Receiver
 	{
 		if($this->core()->getOptions('receiver_check_auth_key_disabled', 'no') === 'yes')
 		{
-			$this->core()->log()->info(__('Authorization key verification is disabled. Lazy signature verification activated.', 'wc1c'));
+			$this->core()->log()->info(__('Authorization key verification is disabled. Lazy signature verification activated.', 'wc1c-main'));
 
 			if(!isset($_GET['lazysign']))
 			{
-				$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c');
+				$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c-main');
 				$this->core()->log()->warning($warning);
 
 				if($send_response)
@@ -356,7 +356,7 @@ final class Receiver
 
 			if($lazy_sign_store !== $lazy_sign)
 			{
-				$warning = __('Authorization key verification failed. 1C sent an incorrect lazy signature.', 'wc1c');
+				$warning = __('Authorization key verification failed. 1C sent an incorrect lazy signature.', 'wc1c-main');
 				$this->core()->log()->warning($warning);
 
 				if($send_response)
@@ -374,7 +374,7 @@ final class Receiver
 
 		if(!isset($_COOKIE[$session_name]))
 		{
-			$warning = __('Authorization key verification failed. 1C sent an empty session name.', 'wc1c');
+			$warning = __('Authorization key verification failed. 1C sent an empty session name.', 'wc1c-main');
 			$this->core()->log()->warning($warning);
 
 			if($send_response)
@@ -387,7 +387,7 @@ final class Receiver
 
 		if(session_status() === PHP_SESSION_NONE)
 		{
-			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c'));
+			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c-main'));
 			session_start();
 		}
 
@@ -395,7 +395,7 @@ final class Receiver
 
 		if($_COOKIE[$session_name] !== $session_id)
 		{
-			$warning = __('Authorization check failed - session id differs from the original.', 'wc1c');
+			$warning = __('Authorization check failed - session id differs from the original.', 'wc1c-main');
 
 			$this->core()->log()->warning($warning, ['client_session_id' => $_COOKIE[$session_name], 'server_session_id' => $session_id]);
 
@@ -415,22 +415,22 @@ final class Receiver
 	 */
 	public function handlerCatalogModeInit()
 	{
-		$this->core()->log()->info(__('Initialization of receiving requests from 1C.', 'wc1c'));
+		$this->core()->log()->info(__('Initialization of receiving requests from 1C.', 'wc1c-main'));
 
 		if(has_filter('wc1c_schema_productscleanercml_handler_catalog_mode_init_session'))
 		{
 			$_SESSION = apply_filters('wc1c_schema_productscleanercml_handler_catalog_mode_init_session', $_SESSION, $this);
 		}
 
-		$this->core()->log()->debug(__('Session for receiving requests.', 'wc1c'), ['session'=> $_SESSION]);
+		$this->core()->log()->debug(__('Session for receiving requests.', 'wc1c-main'), ['session'=> $_SESSION]);
 
 		if(wc1c()->filesystem()->cleanDirectory($this->core()->getUploadDirectory()))
 		{
-			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c'), ['directory' => $this->core()->getUploadDirectory()]);
+			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c-main'), ['directory' => $this->core()->getUploadDirectory()]);
 		}
 		else
 		{
-			$error = __('Failed to clear the temp directory of old files.', 'wc1c');
+			$error = __('Failed to clear the temp directory of old files.', 'wc1c-main');
 			$this->core()->log()->error($error, ['directory' => $this->core()->getUploadDirectory()]);
 			$this->sendResponseByType('failure', $error);
 		}
@@ -441,18 +441,18 @@ final class Receiver
 		$max_wc1c = $this->utilityConvertFileSize(wc1c()->settings('main')->get('php_post_max_size'));
 		$max_configuration = $this->utilityConvertFileSize($this->core()->getOptions('php_post_max_size'));
 
-		$this->core()->log()->debug(__('The maximum size of accepted files from 1C is assigned:', 'wc1c') . ' ' . size_format($max_size));
+		$this->core()->log()->debug(__('The maximum size of accepted files from 1C is assigned:', 'wc1c-main') . ' ' . size_format($max_size));
 
 		if($max_wc1c && $max_wc1c < $max_size)
 		{
 			$max_size = $max_wc1c;
-			$this->core()->log()->debug(__('Based on the global settings of WC1C, the size of received files has been reduced from 1C to:', 'wc1c') . ' ' . size_format($max_size));
+			$this->core()->log()->debug(__('Based on the global settings of WC1C, the size of received files has been reduced from 1C to:', 'wc1c-main') . ' ' . size_format($max_size));
 		}
 
 		if($max_configuration && $max_configuration < $max_size)
 		{
 			$max_size = $max_configuration;
-			$this->core()->log()->debug(__('Based on the configuration settings of WC1C, the size of received files has been reduced from 1C to:', 'wc1c') . ' ' . size_format($max_size));
+			$this->core()->log()->debug(__('Based on the configuration settings of WC1C, the size of received files has been reduced from 1C to:', 'wc1c-main') . ' ' . size_format($max_size));
 		}
 
 		$data['file_limit'] = 'file_limit=' . $max_size . PHP_EOL;
@@ -462,7 +462,7 @@ final class Receiver
 			$data = apply_filters('wc1c_schema_productscleanercml_handler_catalog_mode_init_data', $data, $this);
 		}
 
-		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c'), ['data' => $data]);
+		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c-main'), ['data' => $data]);
 
 		foreach($data as $line_id => $line)
 		{
@@ -492,7 +492,7 @@ final class Receiver
 
 		if(!wc1c()->filesystem()->exists($upload_directory))
 		{
-			$response_description = __('Directory is unavailable:', 'wc1c') . ' ' . $upload_directory;
+			$response_description = __('Directory is unavailable:', 'wc1c-main') . ' ' . $upload_directory;
 
 			$this->core()->log()->error($response_description, ['directory' => $upload_directory]);
 			$this->sendResponseByType('failure', $response_description);
@@ -507,14 +507,14 @@ final class Receiver
 
 		if(empty($filename))
 		{
-			$response_description = __('Filename is empty.', 'wc1c');
+			$response_description = __('Filename is empty.', 'wc1c-main');
 			$this->core()->log()->error($response_description);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
 		$upload_file_path = wp_normalize_path($upload_directory . $filename);
 
-		$this->core()->log()->info(__('Saving data to a file named:', 'wc1c') . ' ' . $filename, ['file_path' => $upload_file_path]);
+		$this->core()->log()->info(__('Saving data to a file named:', 'wc1c-main') . ' ' . $filename, ['file_path' => $upload_file_path]);
 
 		if(strpos($filename, 'import_files') !== false)
 		{
@@ -523,7 +523,7 @@ final class Receiver
 
 		if(!wc1c()->filesystem()->isWritable($upload_directory))
 		{
-			$response_description = __('Directory is unavailable for write.', 'wc1c');
+			$response_description = __('Directory is unavailable for write.', 'wc1c-main');
 
 			$this->core()->log()->error($response_description, ['directory' => $upload_directory]);
 			$this->sendResponseByType('failure', $response_description);
@@ -541,7 +541,7 @@ final class Receiver
 
 		if(false === $file_data)
 		{
-			$response_description = __('The request contains no data to write to the file. Retry the upload.', 'wc1c');
+			$response_description = __('The request contains no data to write to the file. Retry the upload.', 'wc1c-main');
 
 			$this->core()->log()->error($response_description);
 			$this->sendResponseByType('failure', $response_description);
@@ -549,7 +549,7 @@ final class Receiver
 
 		if(wc1c()->filesystem()->exists($upload_file_path))
 		{
-			$this->core()->log()->info(__('The file exists. Write a data to the end of an existing file.', 'wc1c'));
+			$this->core()->log()->info(__('The file exists. Write a data to the end of an existing file.', 'wc1c-main'));
 		}
 
 		$file_size = false;
@@ -562,14 +562,14 @@ final class Receiver
 		{
 			wc1c()->filesystem()->chmod($upload_file_path , 0755);
 
-			$response_description = __('The data is successfully written to a file. Recorded data size:', 'wc1c') . ' '. size_format($file_size);
+			$response_description = __('The data is successfully written to a file. Recorded data size:', 'wc1c-main') . ' '. size_format($file_size);
 
 			$this->core()->log()->info($response_description, ['file_size' => $file_size]);
 			$this->sendResponseByType('success', $response_description);
 			return;
 		}
 
-		$response_description = __('Failed to write data to file.', 'wc1c');
+		$response_description = __('Failed to write data to file.', 'wc1c-main');
 
 		$this->core()->log()->error($response_description, ['file_path' => $upload_file_path]);
 		$this->sendResponseByType('failure', $response_description);
@@ -580,13 +580,13 @@ final class Receiver
 	 */
 	public function handlerCatalogModeImport()
 	{
-		$this->core()->log()->info(__('On request from 1C - started importing data from a file.', 'wc1c'));
+		$this->core()->log()->info(__('On request from 1C - started importing data from a file.', 'wc1c-main'));
 
 		$filename = wc1c()->getVar($_GET['filename'], '');
 
 		if($filename === '')
 		{
-			$response_description = __('1C sent an empty file name for data import.', 'wc1c');
+			$response_description = __('1C sent an empty file name for data import.', 'wc1c-main');
 			$this->core()->log()->warning($response_description);
 			$this->sendResponseByType('failure', $response_description);
 		}
@@ -595,7 +595,7 @@ final class Receiver
 
 		if(!wc1c()->filesystem()->exists($file))
 		{
-			$response_description = __('File for import is not exists.', 'wc1c');
+			$response_description = __('File for import is not exists.', 'wc1c-main');
 			$this->core()->log()->error($response_description);
 			$this->sendResponseByType('success', $response_description);
 		}
@@ -606,19 +606,19 @@ final class Receiver
 
 			if($result_file_processing)
 			{
-				$response_description = __('Import of data from file completed successfully.', 'wc1c');
+				$response_description = __('Import of data from file completed successfully.', 'wc1c-main');
 				$this->core()->log()->info($response_description, ['file_name' => $filename, 'file_path' => $file]);
 				$this->sendResponseByType('success', $response_description);
 			}
 		}
 		catch(Exception $e)
 		{
-			$response_description = __('Importing data from a file ended with an error:', 'wc1c') . ' ' . $e->getMessage();
+			$response_description = __('Importing data from a file ended with an error:', 'wc1c-main') . ' ' . $e->getMessage();
 			$this->core()->log()->error($response_description, ['exception' => $e]);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
-		$response_description = __('Importing data from a file ended with an error.', 'wc1c');
+		$response_description = __('Importing data from a file ended with an error.', 'wc1c-main');
 		$this->core()->log()->error($response_description);
 		$this->sendResponseByType('failure', $response_description);
 	}

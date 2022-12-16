@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Abstracts\ScreenAbstract;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Abstracts\ScreenAbstract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Create
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Main\Admin\Configurations
  */
 class Create extends ScreenAbstract
 {

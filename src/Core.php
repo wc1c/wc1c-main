@@ -1,4 +1,4 @@
-<?php namespace Wc1c;
+<?php namespace Wc1c\Main;
 
 defined('ABSPATH') || exit;
 
@@ -6,21 +6,21 @@ use wpdb;
 use Digiom\Woplucore\Loader;
 use Digiom\Woplucore\Traits\SingletonTrait;
 use Psr\Log\LoggerInterface;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Log\Formatter;
-use Wc1c\Log\Handler;
-use Wc1c\Log\Logger;
-use Wc1c\Log\Processor;
-use Wc1c\Settings\ConnectionSettings;
-use Wc1c\Settings\Contracts\SettingsContract;
-use Wc1c\Settings\InterfaceSettings;
-use Wc1c\Settings\LogsSettings;
-use Wc1c\Settings\MainSettings;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Log\Formatter;
+use Wc1c\Main\Log\Handler;
+use Wc1c\Main\Log\Logger;
+use Wc1c\Main\Log\Processor;
+use Wc1c\Main\Settings\ConnectionSettings;
+use Wc1c\Main\Settings\Contracts\SettingsContract;
+use Wc1c\Main\Settings\InterfaceSettings;
+use Wc1c\Main\Settings\LogsSettings;
+use Wc1c\Main\Settings\MainSettings;
 
 /**
  * Core
  *
- * @package Wc1c
+ * @package Wc1c\Main
  */
 final class Core
 {
@@ -119,7 +119,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert(__('Timer not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Timer not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return;
 		}
 
@@ -129,7 +129,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert(__('Extensions not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions not loaded.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
@@ -138,7 +138,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert(__('Extensions not initialized.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions not initialized.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
@@ -147,7 +147,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert(__('Schemas not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Schemas not loaded.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
@@ -156,7 +156,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert(__('Tools not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Tools not loaded.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isAdmin())
@@ -167,7 +167,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert(__('Tools not initialized.', 'wc1c'), ['exception' => $e]);
+				wc1c()->log()->alert(__('Tools not initialized.', 'wc1c-main'), ['exception' => $e]);
 			}
 		}
 
@@ -179,7 +179,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert(__('Receiver not loaded.', 'wc1c'), ['exception' => $e]);
+				wc1c()->log()->alert(__('Receiver not loaded.', 'wc1c-main'), ['exception' => $e]);
 			}
 		}
 
@@ -234,7 +234,7 @@ final class Core
 	 */
 	public function views(): Views
 	{
-		return Views::instance()->setSlug('wc1c')->setPluginDir($this->environment()->get('plugin_directory_path'));
+		return Views::instance()->setSlug('wc1c-main')->setPluginDir($this->environment()->get('plugin_directory_path'));
 	}
 
 	/**
@@ -459,28 +459,28 @@ final class Core
 		 */
 		$tecodes_local->status_messages =
 		[
-			'status_1' => __('This activation code is active.', 'wc1c'),
-			'status_2' => __('Error: This activation code has expired.', 'wc1c'),
-			'status_3' => __('Activation code republished. Awaiting reactivation.', 'wc1c'),
-			'status_4' => __('Error: This activation code has been suspended.', 'wc1c'),
-			'code_not_found' => __('This activation code is not found.', 'wc1c'),
-			'localhost' => __('This activation code is active (localhost).', 'wc1c'),
-			'pending' => __('Error: This activation code is pending review.', 'wc1c'),
-			'download_access_expired' => __('Error: This version of the software was released after your download access expired. Please downgrade software or contact support for more information.', 'wc1c'),
-			'missing_activation_key' => __('Error: The activation code variable is empty.', 'wc1c'),
-			'could_not_obtain_local_code' => __('Error: I could not obtain a new local code.', 'wc1c'),
-			'maximum_delay_period_expired' => __('Error: The maximum local code delay period has expired.', 'wc1c'),
-			'local_code_tampering' => __('Error: The local key has been tampered with or is invalid.', 'wc1c'),
-			'local_code_invalid_for_location' => __('Error: The local code is invalid for this location.', 'wc1c'),
-			'missing_license_file' => __('Error: Please create the following file (and directories if they dont exist already): ', 'wc1c'),
-			'license_file_not_writable' => __('Error: Please make the following path writable: ', 'wc1c'),
-			'invalid_local_key_storage' => __('Error: I could not determine the local key storage on clear.', 'wc1c'),
-			'could_not_save_local_key' => __('Error: I could not save the local key.', 'wc1c'),
-			'code_string_mismatch' => __('Error: The local code is invalid for this activation code.', 'wc1c'),
-			'code_status_delete' => __('Error: This activation code has been deleted.', 'wc1c'),
-			'code_status_draft' => __('Error: This activation code has draft.', 'wc1c'),
-			'code_status_available' => __('Error: This activation code has available.', 'wc1c'),
-			'code_status_blocked' => __('Error: This activation code has been blocked.', 'wc1c'),
+			'status_1' => __('This activation code is active.', 'wc1c-main'),
+			'status_2' => __('Error: This activation code has expired.', 'wc1c-main'),
+			'status_3' => __('Activation code republished. Awaiting reactivation.', 'wc1c-main'),
+			'status_4' => __('Error: This activation code has been suspended.', 'wc1c-main'),
+			'code_not_found' => __('This activation code is not found.', 'wc1c-main'),
+			'localhost' => __('This activation code is active (localhost).', 'wc1c-main'),
+			'pending' => __('Error: This activation code is pending review.', 'wc1c-main'),
+			'download_access_expired' => __('Error: This version of the software was released after your download access expired. Please downgrade software or contact support for more information.', 'wc1c-main'),
+			'missing_activation_key' => __('Error: The activation code variable is empty.', 'wc1c-main'),
+			'could_not_obtain_local_code' => __('Error: I could not obtain a new local code.', 'wc1c-main'),
+			'maximum_delay_period_expired' => __('Error: The maximum local code delay period has expired.', 'wc1c-main'),
+			'local_code_tampering' => __('Error: The local key has been tampered with or is invalid.', 'wc1c-main'),
+			'local_code_invalid_for_location' => __('Error: The local code is invalid for this location.', 'wc1c-main'),
+			'missing_license_file' => __('Error: Please create the following file (and directories if they dont exist already): ', 'wc1c-main'),
+			'license_file_not_writable' => __('Error: Please make the following path writable: ', 'wc1c-main'),
+			'invalid_local_key_storage' => __('Error: I could not determine the local key storage on clear.', 'wc1c-main'),
+			'could_not_save_local_key' => __('Error: I could not save the local key.', 'wc1c-main'),
+			'code_string_mismatch' => __('Error: The local code is invalid for this activation code.', 'wc1c-main'),
+			'code_status_delete' => __('Error: This activation code has been deleted.', 'wc1c-main'),
+			'code_status_draft' => __('Error: This activation code has draft.', 'wc1c-main'),
+			'code_status_available' => __('Error: This activation code has available.', 'wc1c-main'),
+			'code_status_blocked' => __('Error: This activation code has been blocked.', 'wc1c-main'),
 		];
 
 		$tecodes_local->set_local_code_storage(new Tecodes\Storage());
@@ -527,7 +527,7 @@ final class Core
 
 		if(false === class_exists($use_class_name))
 		{
-			wc1c()->log()->error(__('Receiver loading: class is not exists, use is default.', 'wc1c'), ['context' => $use_class_name]);
+			wc1c()->log()->error(__('Receiver loading: class is not exists, use is default.', 'wc1c-main'), ['context' => $use_class_name]);
 			$use_class_name = $default_class_name;
 		}
 
@@ -561,13 +561,13 @@ final class Core
 
 		if(has_filter('plugin_locale'))
 		{
-			$locale = apply_filters('plugin_locale', $locale, 'wc1c');
+			$locale = apply_filters('plugin_locale', $locale, 'wc1c-main');
 		}
 
-		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
-		load_textdomain('wc1c', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-' . $locale . '.mo');
+		load_textdomain('wc1c-main', WP_LANG_DIR . '/plugins/wc1c-main-' . $locale . '.mo');
+		load_textdomain('wc1c-main', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-main-' . $locale . '.mo');
 
-		wc1c()->log()->debug(__('Localization loaded.', 'wc1c'), ['locale' => $locale]);
+		wc1c()->log()->debug(__('Localization loaded.', 'wc1c-main'), ['locale' => $locale]);
 	}
 
 	/**

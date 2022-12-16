@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Data;
+<?php namespace Wc1c\Main\Data;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Data\Contracts\StorageContract;
-use Wc1c\Data\Abstracts\DataAbstract;
-use Wc1c\Data\Storages\ConfigurationsStorage;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Data\Contracts\StorageContract;
+use Wc1c\Main\Data\Abstracts\DataAbstract;
+use Wc1c\Main\Data\Storages\ConfigurationsStorage;
 
 /**
  * Storage
  *
- * @package Wc1c\Data
+ * @package Wc1c\Main\Data
  */
 class Storage implements StorageContract
 {

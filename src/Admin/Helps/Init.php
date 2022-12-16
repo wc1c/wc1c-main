@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Admin\Helps;
+<?php namespace Wc1c\Main\Admin\Helps;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Init
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 final class Init
 {
@@ -37,7 +37,7 @@ final class Init
 		(
 			[
 				'id' => 'wc1c_help_tab',
-				'title' => __('Help', 'wc1c'),
+				'title' => __('Help', 'wc1c-main'),
 				'content' => wc1c()->views()->getViewHtml('/helps/main.php')
 			]
 		);
@@ -46,7 +46,7 @@ final class Init
 		(
 			[
 				'id' => 'wc1c_bugs_tab',
-				'title' => __('Found a bug?', 'wc1c'),
+				'title' => __('Found a bug?', 'wc1c-main'),
 				'content' => wc1c()->views()->getViewHtml('/helps/bugs.php')
 			]
 		);
@@ -55,7 +55,7 @@ final class Init
 		(
 			[
 				'id' => 'wc1c_features_tab',
-				'title' => __('Not a feature?', 'wc1c'),
+				'title' => __('Not a feature?', 'wc1c-main'),
 				'content' => wc1c()->views()->getViewHtml('/helps/features.php')
 			]
 		);

@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Admin\Columns\WooCommerce;
+<?php namespace Wc1c\Main\Admin\Columns\WooCommerce;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Orders
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 final class Orders
 {
@@ -33,7 +33,7 @@ final class Orders
 	{
 		$columns_after =
 		[
-			'wc1c' => __('1C information', 'wc1c'),
+			'wc1c' => __('1C information', 'wc1c-main'),
 		];
 
 		return array_merge($columns, $columns_after);
@@ -62,18 +62,18 @@ final class Orders
 
 				if($schema_id)
 				{
-					$content .= '<span class="na">' . __('Schema ID: ', 'wc1c') . $schema_id . '</span>';
+					$content .= '<span class="na">' . __('Schema ID: ', 'wc1c-main') . $schema_id . '</span>';
 				}
 
 				if($config_id)
 				{
-					$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
+					$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c-main')  . $config_id . '</span>';
 				}
 			}
 
 			if('' === $content)
 			{
-				$content .= '<span class="na">' . __('Not found', 'wc1c') . '</span>';
+				$content .= '<span class="na">' . __('Not found', 'wc1c-main') . '</span>';
 			}
 
 			echo $content;

@@ -1,17 +1,17 @@
-<?php namespace Wc1c\Data\Abstracts;
+<?php namespace Wc1c\Main\Data\Abstracts;
 
 defined('ABSPATH') || exit;
 
 use WP_Error;
 use DateTimeZone;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Datetime;
-use Wc1c\Traits\DatetimeUtilityTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Datetime;
+use Wc1c\Main\Traits\DatetimeUtilityTrait;
 
 /**
  * DataAbstract - Implemented by classes using the same CRUD(s) pattern
  *
- * @package Wc1c\Data\Abstracts
+ * @package Wc1c\Main\Data\Abstracts
  */
 abstract class DataAbstract
 {

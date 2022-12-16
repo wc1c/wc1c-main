@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Admin\Wizards;
+<?php namespace Wc1c\Main\Admin\Wizards;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * WizardAbstract
  *
- * @package Wc1c\Admin\Wizards
+ * @package Wc1c\Main\Admin\Wizards
  */
 abstract class WizardAbstract
 {

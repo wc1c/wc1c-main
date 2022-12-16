@@ -1,15 +1,15 @@
-<?php namespace Wc1c;
+<?php namespace Wc1c\Main;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Data\Storage;
-use Wc1c\Data\Entities\ConfigurationsData;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Data\Storage;
+use Wc1c\Main\Data\Entities\ConfigurationsData;
 
 /**
  * Configuration
  *
- * @package Wc1c
+ * @package Wc1c\Main
  */
 class Configuration extends ConfigurationsData
 {

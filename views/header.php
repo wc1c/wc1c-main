@@ -1,9 +1,9 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<h1 class="wp-heading-inline"><?php _e('Integration with 1C', 'wc1c'); ?></h1>
+<h1 class="wp-heading-inline"><?php _e('Integration with 1C', 'wc1c-main'); ?></h1>
 
 <a href="<?php echo $args['url_create']; ?>" class="page-title-action">
-	<?php _e('New configuration', 'wc1c'); ?>
+	<?php _e('New configuration', 'wc1c-main'); ?>
 </a>
 
 <?php
@@ -11,11 +11,11 @@
 
     if($settings->get('login', false))
     {
-        wc1c()->admin()->connectBox(__($settings->get('login', 'Undefined'), 'wc1c'), true);
+        wc1c()->admin()->connectBox(__($settings->get('login', 'Undefined'), 'wc1c-main'), true);
     }
     else
     {
-        wc1c()->admin()->connectBox(__( 'Connection to the WC1C', 'wc1c'));
+        wc1c()->admin()->connectBox(__( 'Connection to the WC1C', 'wc1c-main'));
     }
 ?>
 <hr class="wp-header-end">

@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Settings\Contracts;
+<?php namespace Wc1c\Main\Settings\Contracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * SettingsContract
  *
- * @package Wc1c\Settings
+ * @package Wc1c\Main\Settings
  */
 interface SettingsContract
 {

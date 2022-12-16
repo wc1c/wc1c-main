@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eda18c9fc64d6760c5f793ed13446532",
+    "content-hash": "c1d59cbebfaa975b5d037672bb09cfb4",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -97,12 +97,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/woplucore.git",
-                "reference": "74a0d5586e7270329fb3b6046ba0de89b1fcb631"
+                "reference": "ea1aa7bcc485e975690cd465888f944a9b46d5e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/woplucore/zipball/74a0d5586e7270329fb3b6046ba0de89b1fcb631",
-                "reference": "74a0d5586e7270329fb3b6046ba0de89b1fcb631",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/ea1aa7bcc485e975690cd465888f944a9b46d5e3",
+                "reference": "ea1aa7bcc485e975690cd465888f944a9b46d5e3",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
             "support": {
                 "source": "https://github.com/digiom/woplucore/tree/main"
             },
-            "time": "2022-12-10T11:32:13+00:00"
+            "time": "2022-12-16T14:36:11+00:00"
         },
         {
             "name": "digiom/wotices",

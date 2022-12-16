@@ -1,11 +1,11 @@
-<?php namespace Wc1c\Admin\Wizards;
+<?php namespace Wc1c\Main\Admin\Wizards;
 
 defined('ABSPATH') || exit;
 
 /**
  * StepAbstract
  *
- * @package Wc1c\Admin\Wizards
+ * @package Wc1c\Main\Admin\Wizards
  */
 abstract class StepAbstract
 {

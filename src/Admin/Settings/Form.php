@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Admin\Settings;
+<?php namespace Wc1c\Main\Admin\Settings;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Abstracts\FormAbstract;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Settings\Contracts\SettingsContract;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Abstracts\FormAbstract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Settings\Contracts\SettingsContract;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Form
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 abstract class Form extends FormAbstract
 {
@@ -72,7 +72,7 @@ abstract class Form extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Save error. Please retry.', 'wc1c')
+					'data' => __('Save error. Please retry.', 'wc1c-main')
 				]
 			);
 
@@ -127,7 +127,7 @@ abstract class Form extends FormAbstract
 		(
 			[
 				'type' => 'update',
-				'data' => __('Save success.', 'wc1c')
+				'data' => __('Save success.', 'wc1c-main')
 			]
 		);
 

@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Abstracts\FormAbstract;
-use Wc1c\Traits\ConfigurationsUtilityTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Abstracts\FormAbstract;
+use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
 
 /**
  * UpdateForm
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Main\Admin\Configurations
  */
 class UpdateForm extends FormAbstract
 {
@@ -45,9 +45,9 @@ class UpdateForm extends FormAbstract
 
 		$fields['status'] =
 		[
-			'title' => __('Configuration status', 'wc1c'),
+			'title' => __('Configuration status', 'wc1c-main'),
 			'type' => 'select',
-			'description' => __('Current configuration status.', 'wc1c'),
+			'description' => __('Current configuration status.', 'wc1c-main'),
 			'default' => 'inactive',
 			'options' => $options
 		];
@@ -88,7 +88,7 @@ class UpdateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Update error. Please retry.', 'wc1c')
+					'data' => __('Update error. Please retry.', 'wc1c-main')
 				]
 			);
 
@@ -134,7 +134,7 @@ class UpdateForm extends FormAbstract
 
 		$args =
         [
-            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h3>',
+            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c-main') . '</h3>',
             'object' => $this
         ];
 

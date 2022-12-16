@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Admin;
+<?php namespace Wc1c\Main\Admin;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Extensions\All;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Admin\Extensions\All;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Extensions
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 final class Extensions
 {

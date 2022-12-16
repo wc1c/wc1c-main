@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Schemas\Productscleanercml;
+<?php namespace Wc1c\Main\Schemas\Productscleanercml;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Admin
  *
- * @package Wc1c\Schemas\Productscleanercml
+ * @package Wc1c\Main\Schemas\Productscleanercml
  */
 class Admin
 {
@@ -61,9 +61,9 @@ class Admin
 	{
 		$fields['title_receiver'] =
 		[
-			'title' => __('Receiving requests from 1C', 'wc1c'),
+			'title' => __('Receiving requests from 1C', 'wc1c-main'),
 			'type' => 'title',
-			'description' => __('Authorization of requests and regulation of algorithms for receiving requests for the Receiver from the 1C programs by CommerceML protocol.', 'wc1c'),
+			'description' => __('Authorization of requests and regulation of algorithms for receiving requests for the Receiver from the 1C programs by CommerceML protocol.', 'wc1c-main'),
 		];
 
 		$lazy_sign = $this->core()->configuration()->getMeta('receiver_lazy_sign');
@@ -80,36 +80,36 @@ class Admin
 
 		$fields['url_requests'] =
 		[
-			'title' => __('Website address', 'wc1c'),
+			'title' => __('Website address', 'wc1c-main'),
 			'type' => 'raw',
 			'raw' => $url_raw,
-			'description' => __('Specified in the exchange settings on the 1C side. The Recipient is located at this address, which will receive requests from 1C. When copying, you need to get rid of whitespace characters, if they are present.', 'wc1c'),
+			'description' => __('Specified in the exchange settings on the 1C side. The Recipient is located at this address, which will receive requests from 1C. When copying, you need to get rid of whitespace characters, if they are present.', 'wc1c-main'),
 		];
 
 		$fields['user_login'] =
 		[
-			'title' => __('Username', 'wc1c'),
+			'title' => __('Username', 'wc1c-main'),
 			'type' => 'text',
-			'description' => __('Specified in 1C when setting up an exchange with a site on the 1C side. At the same time, work with data on the site is performed on behalf of the configuration owner, and not on behalf of the specified username.', 'wc1c'),
+			'description' => __('Specified in 1C when setting up an exchange with a site on the 1C side. At the same time, work with data on the site is performed on behalf of the configuration owner, and not on behalf of the specified username.', 'wc1c-main'),
 			'default' => '',
 			'css' => 'min-width: 350px;',
 		];
 
 		$fields['user_password'] =
 		[
-			'title' => __('User password', 'wc1c'),
+			'title' => __('User password', 'wc1c-main'),
 			'type' => 'password',
-			'description' => __('Specified in 1C paired with a username when setting up an exchange with a site on the 1C side. It is advisable not to specify the password for the current WordPress user.', 'wc1c'),
+			'description' => __('Specified in 1C paired with a username when setting up an exchange with a site on the 1C side. It is advisable not to specify the password for the current WordPress user.', 'wc1c-main'),
 			'default' => '',
 			'css' => 'min-width: 350px;',
 		];
 
 		$fields['receiver_check_auth_key_disabled'] =
 		[
-			'title' => __('Request signature verification', 'wc1c'),
+			'title' => __('Request signature verification', 'wc1c-main'),
 			'type' => 'checkbox',
-			'label' => __('Check the checkbox to disable request signature verification. By default, validation is performed.', 'wc1c'),
-			'description' => __('The setting disables authentication of requests from 1C. May be required only for very old versions of 1C. Enable only if there are errors in the request signature verification in the logs. If disabled, signature verification will be performed using the lazy signature from the lazysign parameter.', 'wc1c'),
+			'label' => __('Check the checkbox to disable request signature verification. By default, validation is performed.', 'wc1c-main'),
+			'description' => __('The setting disables authentication of requests from 1C. May be required only for very old versions of 1C. Enable only if there are errors in the request signature verification in the logs. If disabled, signature verification will be performed using the lazy signature from the lazysign parameter.', 'wc1c-main'),
 			'default' => 'no'
 		];
 
@@ -127,22 +127,22 @@ class Admin
 	{
 		$fields['title_other'] =
 		[
-			'title' => __('Other parameters', 'wc1c'),
+			'title' => __('Other parameters', 'wc1c-main'),
 			'type' => 'title',
-			'description' => __('Change of data processing behavior for environment compatibility and so on.', 'wc1c'),
+			'description' => __('Change of data processing behavior for environment compatibility and so on.', 'wc1c-main'),
 		];
 
 		$fields['php_post_max_size'] =
 		[
-			'title' => __('Maximum size of accepted requests', 'wc1c'),
+			'title' => __('Maximum size of accepted requests', 'wc1c-main'),
 			'type' => 'text',
 			'description' => sprintf
 			(
 				'%s<br />%s <b>%s</b><br />%s',
-				__('Enter the maximum size of accepted requests from 1C at a time in bytes. May be specified with a dimension suffix, such as 7M, where M = megabyte, K = kilobyte, G - gigabyte.', 'wc1c'),
-				__('Current WC1C limit:', 'wc1c'),
+				__('Enter the maximum size of accepted requests from 1C at a time in bytes. May be specified with a dimension suffix, such as 7M, where M = megabyte, K = kilobyte, G - gigabyte.', 'wc1c-main'),
+				__('Current WC1C limit:', 'wc1c-main'),
 				wc1c()->settings()->get('php_post_max_size', wc1c()->environment()->get('php_post_max_size')),
-				__('Can only decrease the value, because it must not exceed the limits from the WC1C settings.', 'wc1c')
+				__('Can only decrease the value, because it must not exceed the limits from the WC1C settings.', 'wc1c-main')
 			),
 			'default' => wc1c()->settings()->get('php_post_max_size', wc1c()->environment()->get('php_post_max_size')),
 			'css' => 'min-width: 100px;',
@@ -162,25 +162,25 @@ class Admin
 	{
 		$fields['title_sync'] =
 		[
-			'title' => __('Sync', 'wc1c'),
+			'title' => __('Sync', 'wc1c-main'),
 			'type' => 'title',
 			'description' => sprintf
 			('%s %s',
-			 __('Dispute resolution between existing products (goods) on the 1C side and in WooCommerce. For extended matching (example by SKU), must use the extension.', 'wc1c'),
-				__('Products will only be deleted for found matching keys.', 'wc1c')
+			 __('Dispute resolution between existing products (goods) on the 1C side and in WooCommerce. For extended matching (example by SKU), must use the extension.', 'wc1c-main'),
+				__('Products will only be deleted for found matching keys.', 'wc1c-main')
 			),
 		];
 
 		$fields['sync_by_id'] =
 		[
-			'title' => __('By external ID from 1C', 'wc1c'),
+			'title' => __('By external ID from 1C', 'wc1c-main'),
 			'type' => 'checkbox',
-			'label' => __('Check the box to enable. Enabled by default.', 'wc1c'),
+			'label' => __('Check the box to enable. Enabled by default.', 'wc1c-main'),
 			'description' => sprintf
 			(
 				'%s<hr> %s',
-				__('When creating new products based on data from 1C, a universal global identifier from 1C is filled in for them. Can also fill in global identifiers manually for manually created products.', 'wc1c'),
-				__('Enabling the option allows you to use the filled External ID to mark products (goods) as existing, and thereby run algorithms to update them.', 'wc1c')
+				__('When creating new products based on data from 1C, a universal global identifier from 1C is filled in for them. Can also fill in global identifiers manually for manually created products.', 'wc1c-main'),
+				__('Enabling the option allows you to use the filled External ID to mark products (goods) as existing, and thereby run algorithms to update them.', 'wc1c-main')
 			),
 			'default' => 'yes'
 		];
@@ -199,26 +199,26 @@ class Admin
 	{
 		$fields['title_clean'] =
 		[
-			'title' => __('Cleaning', 'wc1c'),
+			'title' => __('Cleaning', 'wc1c-main'),
 			'type' => 'title',
-			'description' => __('Comprehensive settings for cleaning options.', 'wc1c'),
+			'description' => __('Comprehensive settings for cleaning options.', 'wc1c-main'),
 		];
 
 		$fields['clean'] =
 		[
-			'title' => __('Enable', 'wc1c'),
+			'title' => __('Enable', 'wc1c-main'),
 			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('All products received via the CommerceML protocol and matching keys for synchronization will be placed in the Recycle Bin.', 'wc1c'),
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => __('All products received via the CommerceML protocol and matching keys for synchronization will be placed in the Recycle Bin.', 'wc1c-main'),
 			'default' => 'no'
 		];
 
 		$fields['clean_final'] =
 		[
-			'title' => __('Final removal', 'wc1c'),
+			'title' => __('Final removal', 'wc1c-main'),
 			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('All products received via the CommerceML protocol and matching keys for synchronization will be permanently deleted from the Recycle Bin.', 'wc1c'),
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => __('All products received via the CommerceML protocol and matching keys for synchronization will be permanently deleted from the Recycle Bin.', 'wc1c-main'),
 			'default' => 'no'
 		];
 
@@ -236,33 +236,33 @@ class Admin
 	{
 		$fields['title_logger'] =
 		[
-			'title' => __('Event logs', 'wc1c'),
+			'title' => __('Event logs', 'wc1c-main'),
 			'type' => 'title',
-			'description' => __('Maintaining event logs for the current configuration. You can view the logs through the extension or via FTP.', 'wc1c'),
+			'description' => __('Maintaining event logs for the current configuration. You can view the logs through the extension or via FTP.', 'wc1c-main'),
 		];
 
 		$fields['logger_level'] =
 		[
-			'title' => __('Level for events', 'wc1c'),
+			'title' => __('Level for events', 'wc1c-main'),
 			'type' => 'select',
-			'description' => __('All events of the selected level will be recorded in the log file. The higher the level, the less data is recorded.', 'wc1c'),
+			'description' => __('All events of the selected level will be recorded in the log file. The higher the level, the less data is recorded.', 'wc1c-main'),
 			'default' => '300',
 			'options' =>
 			[
-				'logger_level' => __('Use level for main events', 'wc1c'),
-				'100' => __('DEBUG (100)', 'wc1c'),
-				'200' => __('INFO (200)', 'wc1c'),
-				'250' => __('NOTICE (250)', 'wc1c'),
-				'300' => __('WARNING (300)', 'wc1c'),
-				'400' => __('ERROR (400)', 'wc1c'),
+				'logger_level' => __('Use level for main events', 'wc1c-main'),
+				'100' => __('DEBUG (100)', 'wc1c-main'),
+				'200' => __('INFO (200)', 'wc1c-main'),
+				'250' => __('NOTICE (250)', 'wc1c-main'),
+				'300' => __('WARNING (300)', 'wc1c-main'),
+				'400' => __('ERROR (400)', 'wc1c-main'),
 			],
 		];
 
 		$fields['logger_files_max'] =
 		[
-			'title' => __('Maximum files', 'wc1c'),
+			'title' => __('Maximum files', 'wc1c-main'),
 			'type' => 'text',
-			'description' => __('Log files created daily. This option on the maximum number of stored files. By default saved of the logs are for the last 30 days.', 'wc1c'),
+			'description' => __('Log files created daily. This option on the maximum number of stored files. By default saved of the logs are for the last 30 days.', 'wc1c-main'),
 			'default' => 10,
 			'css' => 'min-width: 20px;',
 		];

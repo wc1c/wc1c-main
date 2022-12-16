@@ -1,19 +1,19 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\InlineForm;
-use Wc1c\Admin\Traits\ProcessConfigurationTrait;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\DatetimeUtilityTrait;
-use Wc1c\Traits\SectionsTrait;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Admin\InlineForm;
+use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Traits\DatetimeUtilityTrait;
+use Wc1c\Main\Traits\SectionsTrait;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Update
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 class Update
 {
@@ -32,7 +32,7 @@ class Update
 
 		$default_sections['main'] =
 		[
-			'title' => __('Main settings', 'wc1c'),
+			'title' => __('Main settings', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [MainUpdate::class, 'instance']
 		];
@@ -82,9 +82,9 @@ class Update
 	 */
 	public function outputSchemaErrorText($text)
 	{
-		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c');
+		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c-main');
 
-		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c');
+		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c-main');
 
 		return $new_text;
 	}
@@ -125,12 +125,12 @@ class Update
 
 		$fields['name'] =
 		[
-			'title' => __('Configuration name', 'wc1c'),
+			'title' => __('Configuration name', 'wc1c-main'),
 			'type' => 'text',
-			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
+			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c-main'),
 			'default' => '',
 			'class' => 'form-control form-control-sm',
-			'button' => __('Rename', 'wc1c'),
+			'button' => __('Rename', 'wc1c-main'),
 		];
 
 		$inline_args =
@@ -159,7 +159,7 @@ class Update
 					(
 						[
 							'type' => 'update',
-							'data' => __('Configuration name update success.', 'wc1c')
+							'data' => __('Configuration name update success.', 'wc1c-main')
 						]
 					);
 				}
@@ -169,7 +169,7 @@ class Update
 					(
 						[
 							'type' => 'error',
-							'data' => __('Configuration name update error. Please retry saving or change fields.', 'wc1c')
+							'data' => __('Configuration name update error. Please retry saving or change fields.', 'wc1c-main')
 						]
 					);
 				}

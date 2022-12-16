@@ -1,18 +1,18 @@
-<?php namespace Wc1c\Admin;
+<?php namespace Wc1c\Main\Admin;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Settings\ConnectionForm;
-use Wc1c\Admin\Settings\LogsForm;
-use Wc1c\Admin\Settings\MainForm;
-use Wc1c\Admin\Settings\InterfaceForm;
-use Wc1c\Traits\SectionsTrait;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Admin\Settings\ConnectionForm;
+use Wc1c\Main\Admin\Settings\LogsForm;
+use Wc1c\Main\Admin\Settings\MainForm;
+use Wc1c\Main\Admin\Settings\InterfaceForm;
+use Wc1c\Main\Traits\SectionsTrait;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Settings
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 class Settings
 {
@@ -44,28 +44,28 @@ class Settings
 
 		$default_sections['main'] =
 		[
-			'title' => __('Main settings', 'wc1c'),
+			'title' => __('Main settings', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [MainForm::class, 'instance']
 		];
 
 		$default_sections['logs'] =
 		[
-			'title' => __('Event logs', 'wc1c'),
+			'title' => __('Event logs', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [LogsForm::class, 'instance']
 		];
 
 		$default_sections['interface'] =
 		[
-			'title' => __('Interface', 'wc1c'),
+			'title' => __('Interface', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [InterfaceForm::class, 'instance']
 		];
 
 		$default_sections['connection'] =
 		[
-			'title' => __('Connection to the WC1C', 'wc1c'),
+			'title' => __('Connection to the WC1C', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [ConnectionForm::class, 'instance']
 		];

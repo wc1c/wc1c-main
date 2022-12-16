@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Admin\Extensions;
+<?php namespace Wc1c\Main\Admin\Extensions;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Abstracts\ScreenAbstract;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Abstracts\ScreenAbstract;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * All
  *
- * @package Wc1c\Admin\Extensions
+ * @package Wc1c\Main\Admin\Extensions
  */
 class All extends ScreenAbstract
 {

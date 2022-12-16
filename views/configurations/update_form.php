@@ -11,7 +11,7 @@
                     </table>
                 </div>
                 <p class="submit">
-                    <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save configuration', 'wc1c'); ?>">
+                    <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save configuration', 'wc1c-main'); ?>">
                 </p>
             </form>
         </div>

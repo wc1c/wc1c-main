@@ -1,11 +1,11 @@
-<?php namespace Wc1c\Traits;
+<?php namespace Wc1c\Main\Traits;
 
 defined('ABSPATH') || exit;
 
 /**
  * DatetimeUtilityTrait
  *
- * @package Wc1c\Traits
+ * @package Wc1c\Main\Traits
  */
 trait DatetimeUtilityTrait
 {
@@ -111,14 +111,14 @@ trait DatetimeUtilityTrait
 	{
 		if(!$date)
 		{
-			return __('not', 'wc1c');
+			return __('not', 'wc1c-main');
 		}
 
 		$timestamp_create = $this->utilityStringToTimestamp($date) + $this->utilityTimezoneOffset();
 
 		return sprintf
 		(
-			__('%s <span class="time">in: %s</span>', 'wc1c'),
+			__('%s <span class="time">in: %s</span>', 'wc1c-main'),
 			date_i18n('d/m/Y', $timestamp_create),
 			date_i18n('H:i:s', $timestamp_create)
 		);

@@ -10,8 +10,8 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
         'W' => 
         array (
             'Wc1c\\Wc\\' => 8,
+            'Wc1c\\Main\\' => 10,
             'Wc1c\\Cml\\' => 9,
-            'Wc1c\\' => 5,
         ),
         'T' => 
         array (
@@ -40,13 +40,13 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
         array (
             0 => __DIR__ . '/..' . '/wc1c/wc/src',
         ),
+        'Wc1c\\Main\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Wc1c\\Cml\\' => 
         array (
             0 => __DIR__ . '/..' . '/wc1c/cml/src',
-        ),
-        'Wc1c\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'Tecodes\\Client\\' => 
         array (

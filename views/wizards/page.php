@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Wizards\SetupWizard;
+use Wc1c\Main\Admin\Wizards\SetupWizard;
 
 if(!isset($args['wizard']))
 {
@@ -39,7 +39,7 @@ $wizard = $args['wizard'];
             echo '<li class="nav-item">';
             //echo '<a class="'. implode(' ', $classes) .'" href="'. $wizard->getLinkByStep($step) .'">';
 	        echo '<a class="'. implode(' ', $classes) .'" href="#">';
-            echo __('Step', 'wc1c') . ' ' . $step_i;
+            echo __('Step', 'wc1c-main') . ' ' . $step_i;
 
             if(isset($step_data['name']))
             {

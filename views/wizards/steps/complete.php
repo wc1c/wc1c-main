@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Wizards\Setup\Complete;
+use Wc1c\Main\Admin\Wizards\Setup\Complete;
 
 if(!isset($args['step']))
 {
@@ -17,6 +17,6 @@ $step = $args['step'];
 
 <p class="mt-4 actions step">
     <a href="<?php echo esc_url($args['back_url']); ?>" class="button button-primary button-large button-next">
-        <?php _e('Go to use', 'wc1c'); ?>
+        <?php _e('Go to use', 'wc1c-main'); ?>
     </a>
 </p>

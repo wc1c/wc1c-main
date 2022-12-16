@@ -1,11 +1,11 @@
-<?php namespace Wc1c\Traits;
+<?php namespace Wc1c\Main\Traits;
 
 defined('ABSPATH') || exit;
 
 /**
  * SingletonTrait
  *
- * @package Wc1c\Traits
+ * @package Wc1c\Main\Traits
  */
 trait SingletonTrait
 {

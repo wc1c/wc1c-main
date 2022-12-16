@@ -1,11 +1,11 @@
-<?php namespace Wc1c\Data;
+<?php namespace Wc1c\Main\Data;
 
 defined('ABSPATH') || exit;
 
 /**
  * Meta
  *
- * @package Wc1c\Data
+ * @package Wc1c\Main\Data
  */
 class Meta implements \JsonSerializable
 {

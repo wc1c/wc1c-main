@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Migrations;
+<?php namespace Wc1c\Main\Migrations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Init
  *
- * @package Wc1c\Migrations
+ * @package Wc1c\Main\Migrations
  */
 final class Init
 {

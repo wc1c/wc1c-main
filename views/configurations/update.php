@@ -4,7 +4,7 @@
     <div class="col-24">
         <div class="px-2">
             <?php
-                $label = __('Back to configurations list', 'wc1c');
+                $label = __('Back to configurations list', 'wc1c-main');
                 wc1c()->views()->adminBackLink($label, $args['back_url']);
             ?>
         </div>

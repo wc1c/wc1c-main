@@ -1,13 +1,13 @@
-<?php namespace Wc1c;
+<?php namespace Wc1c\Main;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * Receiver
  *
- * @package Wc1c
+ * @package Wc1c\Main
  */
 final class Receiver
 {
@@ -41,15 +41,15 @@ final class Receiver
 	{
 		$wc1c_receiver = wc1c()->getVar($_GET['wc1c-receiver'], false);
 
-		wc1c()->log('receiver')->info(__('Received new request for Receiver.', 'wc1c'));
-		wc1c()->log('receiver')->debug(__('Receiver request params.', 'wc1c'), ['GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER]);
+		wc1c()->log('receiver')->info(__('Received new request for Receiver.', 'wc1c-main'));
+		wc1c()->log('receiver')->debug(__('Receiver request params.', 'wc1c-main'), ['GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER]);
 
 		wc1c()->define('WC1C_RECEIVER_REQUEST', true);
 
 		if('yes' !== wc1c()->settings()->get('receiver', 'yes'))
 		{
-			wc1c()->log('receiver')->warning(__('Receiver is offline. Request reject.', 'wc1c'));
-			die(__('Receiver is offline. Request reject.', 'wc1c'));
+			wc1c()->log('receiver')->warning(__('Receiver is offline. Request reject.', 'wc1c-main'));
+			die(__('Receiver is offline. Request reject.', 'wc1c-main'));
 		}
 
 		try
@@ -58,22 +58,22 @@ final class Receiver
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log('receiver')->warning(__('Selected configuration for Receiver is unavailable.', 'wc1c'), ['exception' => $e]);
-			die(__('Configuration for Receiver is unavailable.', 'wc1c'));
+			wc1c()->log('receiver')->warning(__('Selected configuration for Receiver is unavailable.', 'wc1c-main'), ['exception' => $e]);
+			die(__('Configuration for Receiver is unavailable.', 'wc1c-main'));
 		}
 
 		wc1c()->environment()->set('current_configuration_id', $wc1c_receiver);
 
 		if($configuration->isInactive())
 		{
-			wc1c()->log('receiver')->warning(__('Selected configuration is offline.', 'wc1c'));
-			die(__('Selected configuration is offline.', 'wc1c'));
+			wc1c()->log('receiver')->warning(__('Selected configuration is offline.', 'wc1c-main'));
+			die(__('Selected configuration is offline.', 'wc1c-main'));
 		}
 
 		if($configuration->isDraft())
 		{
-			wc1c()->log('receiver')->warning(__('Selected configuration is draft.', 'wc1c'));
-			die(__('Selected configuration is draft.', 'wc1c'));
+			wc1c()->log('receiver')->warning(__('Selected configuration is draft.', 'wc1c-main'));
+			die(__('Selected configuration is draft.', 'wc1c-main'));
 		}
 
 		try
@@ -84,7 +84,7 @@ final class Receiver
 		catch(Exception $e)
 		{
 			wc1c()->log('receiver')->error('Error saving configuration.', ['exception' => $e]);
-			die(__('Error saving configuration.', 'wc1c'));
+			die(__('Error saving configuration.', 'wc1c-main'));
 		}
 
 		try
@@ -94,7 +94,7 @@ final class Receiver
 		catch(Exception $e)
 		{
 			wc1c()->log('receiver')->error('Schema for configuration is not initialized.', ['exception' => $e]);
-			die(__('Schema for configuration is not initialized.', 'wc1c'));
+			die(__('Schema for configuration is not initialized.', 'wc1c-main'));
 		}
 
 		$action = false;
@@ -107,7 +107,7 @@ final class Receiver
 			ob_start();
 			nocache_headers();
 
-			wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the selected configuration.', 'wc1c'), ['action' => $wc1c_receiver_action]);
+			wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the selected configuration.', 'wc1c-main'), ['action' => $wc1c_receiver_action]);
 			do_action($wc1c_receiver_action);
 
 			ob_end_clean();
@@ -115,8 +115,8 @@ final class Receiver
 
 		if(false === $action)
 		{
-			wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found in selected configuration.', 'wc1c'), ['action' => $wc1c_receiver_action]);
-			die(__('Receiver request is very bad! Action not found.', 'wc1c'));
+			wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found in selected configuration.', 'wc1c-main'), ['action' => $wc1c_receiver_action]);
+			die(__('Receiver request is very bad! Action not found.', 'wc1c-main'));
 		}
 		die();
 	}
