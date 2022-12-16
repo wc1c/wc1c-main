@@ -297,7 +297,7 @@ class AllTable extends TableAbstract
 	protected function getViews(): array
 	{
 		$status_links = [];
-		$current = !empty($_REQUEST['status']) ? $_REQUEST['status'] : 'all';
+		$current = !empty($_REQUEST['status']) ? sanitize_text_field($_REQUEST['status']): 'all';
 
 		// All link
 		$class = $current === 'all' ? ' class="current"' :'';
@@ -396,14 +396,14 @@ class AllTable extends TableAbstract
 			$offset = $per_page * ($current_page - 1);
 		}
 
-		$orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'configuration_id';
-		$order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc';
+		$orderby = (!empty($_REQUEST['orderby'])) ? sanitize_text_field($_REQUEST['orderby']) : 'configuration_id';
+		$order = (!empty($_REQUEST['order'])) ? sanitize_text_field($_REQUEST['order']) : 'desc';
 
 		$storage_args = [];
 
 		if(array_key_exists('status', $_GET) && in_array($_GET['status'], $this->utilityConfigurationsGetStatuses(), true))
 		{
-			$storage_args['status'] = $_GET['status'];
+			$storage_args['status'] = sanitize_text_field($_GET['status']);
 		}
 
 		if(!empty($_REQUEST['s']))
