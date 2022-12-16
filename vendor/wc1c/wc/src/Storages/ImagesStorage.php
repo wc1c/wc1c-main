@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 
 use stdClass;
 use WP_Query;
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Wc\Contracts\ImageContract;
 use Wc1c\Wc\Contracts\ImagesStorageContract;
 use Wc1c\Wc\Contracts\MetaStorageContract;

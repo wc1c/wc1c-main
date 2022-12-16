@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 use WP_Error;
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * DataAbstract - Implemented by classes using the same CRUD(s) pattern

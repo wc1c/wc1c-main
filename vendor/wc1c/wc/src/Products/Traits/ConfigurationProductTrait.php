@@ -20,7 +20,7 @@ trait ConfigurationProductTrait
 	}
 
 	/**
-	 * @param $context
+	 * @param string $context
 	 *
 	 * @return array|string
 	 */

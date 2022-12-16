@@ -432,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "1bf4ef6170009ba90d3cb47d91ce437f61c5dd08"
+                "reference": "73f512b93fcce58a001dfb9304dd12c4a96efe27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/1bf4ef6170009ba90d3cb47d91ce437f61c5dd08",
-                "reference": "1bf4ef6170009ba90d3cb47d91ce437f61c5dd08",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/73f512b93fcce58a001dfb9304dd12c4a96efe27",
+                "reference": "73f512b93fcce58a001dfb9304dd12c4a96efe27",
                 "shasum": ""
             },
             "require": {
@@ -445,10 +445,10 @@
                 "ext-xmlreader": "*",
                 "php": ">=7.0"
             },
-            "time": "2022-12-15T22:08:51+00:00",
+            "time": "2022-12-16T20:28:05+00:00",
             "default-branch": true,
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Wc1c\\Cml\\": "src/"
@@ -484,18 +484,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/wc.git",
-                "reference": "2453d121786f330d88505fd8d5499484749052ed"
+                "reference": "1fd22ae4feb2273ac4113bceda43d444407c5e2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/wc/zipball/2453d121786f330d88505fd8d5499484749052ed",
-                "reference": "2453d121786f330d88505fd8d5499484749052ed",
+                "url": "https://api.github.com/repos/wc1c/wc/zipball/1fd22ae4feb2273ac4113bceda43d444407c5e2a",
+                "reference": "1fd22ae4feb2273ac4113bceda43d444407c5e2a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0"
             },
-            "time": "2022-11-23T15:03:30+00:00",
+            "time": "2022-12-16T20:24:16+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
