@@ -30,11 +30,6 @@ final class Core
 	 */
 	public function set(array $extensions)
 	{
-		if(!is_array($extensions))
-		{
-			throw new Exception(__('Set $extensions is not valid.', 'wc1c-main'));
-		}
-
 		$this->extensions = $extensions;
 	}
 
