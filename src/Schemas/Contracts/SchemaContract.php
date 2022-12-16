@@ -1,11 +1,11 @@
-<?php namespace Wc1c\Schemas\Contracts;
+<?php namespace Wc1c\Main\Schemas\Contracts;
 
 defined('ABSPATH') || exit;
 
 /**
  * SchemaContract
  *
- * @package Wc1c\Schemas
+ * @package Wc1c\Main\Schemas
  */
 interface SchemaContract
 {

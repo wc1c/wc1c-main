@@ -1,19 +1,19 @@
-<?php namespace Wc1c\Schemas;
+<?php namespace Wc1c\Main\Schemas;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Configuration;
-use Wc1c\Data\Storage;
-use Wc1c\Data\Storages\ConfigurationsStorage;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Schemas\Contracts\SchemaContract;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Configuration;
+use Wc1c\Main\Data\Storage;
+use Wc1c\Main\Data\Storages\ConfigurationsStorage;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Schemas\Contracts\SchemaContract;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Core
  *
- * @package Wc1c\Schemas
+ * @package Wc1c\Main\Schemas
  */
 final class Core
 {
@@ -36,7 +36,7 @@ final class Core
 	{
 		if(!is_array($schemas))
 		{
-			throw new Exception(__('$schemas is not valid', 'wc1c'));
+			throw new Exception(__('$schemas is not valid', 'wc1c-main'));
 		}
 
 		$this->schemas = $schemas;
@@ -54,7 +54,7 @@ final class Core
 	{
 		if(false === $configuration)
 		{
-			throw new Exception(__('$configuration is false', 'wc1c'));
+			throw new Exception(__('$configuration is false', 'wc1c-main'));
 		}
 
 		if(!is_object($configuration))
@@ -71,7 +71,7 @@ final class Core
 
 			if(!$storage_configurations->isExistingById($configuration))
 			{
-				throw new Exception(__('$configuration is not exists', 'wc1c'));
+				throw new Exception(__('$configuration is not exists', 'wc1c-main'));
 			}
 
 			try
@@ -86,7 +86,7 @@ final class Core
 
 		if(!$configuration instanceof Configuration)
 		{
-			throw new Exception(__('$configuration is not instanceof Configuration', 'wc1c'));
+			throw new Exception(__('$configuration is not instanceof Configuration', 'wc1c-main'));
 		}
 
 		try
@@ -100,31 +100,31 @@ final class Core
 
 		if(!is_array($schemas))
 		{
-			throw new Exception(__('$schemas is not array.', 'wc1c'));
+			throw new Exception(__('$schemas is not array.', 'wc1c-main'));
 		}
 
 		$schema_id = $configuration->getSchema();
 
 		if(!array_key_exists($schema_id, $schemas))
 		{
-			throw new Exception(__('Schema not found by id:', 'wc1c') . ' ' . $schema_id);
+			throw new Exception(__('Schema not found by id:', 'wc1c-main') . ' ' . $schema_id);
 		}
 
 		if(!is_object($schemas[$schema_id]))
 		{
-			throw new Exception(__('$schemas[$schema_id] is not object', 'wc1c'));
+			throw new Exception(__('$schemas[$schema_id] is not object', 'wc1c-main'));
 		}
 
 		$init_schema = $schemas[$schema_id];
 
 		if($init_schema->isInitialized())
 		{
-			throw new Exception(__('Old initialized, $schema_id:', 'wc1c') . ' ' . $schema_id);
+			throw new Exception(__('Old initialized, $schema_id:', 'wc1c-main') . ' ' . $schema_id);
 		}
 
 		if(!method_exists($init_schema, 'init'))
 		{
-			throw new Exception(__('Method init not found in schema, $schema_id:', 'wc1c') . ' ' . $schema_id);
+			throw new Exception(__('Method init not found in schema, $schema_id:', 'wc1c-main') . ' ' . $schema_id);
 		}
 
 		$current_configuration_id = $configuration->getId();
@@ -144,7 +144,7 @@ final class Core
 
 		if(true !== $init_schema_result)
 		{
-			throw new Exception(__('Schema is not initialized.', 'wc1c'));
+			throw new Exception(__('Schema is not initialized.', 'wc1c-main'));
 		}
 
 		$init_schema->setInitialized(true);
@@ -171,7 +171,7 @@ final class Core
 				return $this->schemas[$schema_id];
 			}
 
-			throw new RuntimeException(__('Schema by ID is unavailable.', 'wc1c'));
+			throw new RuntimeException(__('Schema by ID is unavailable.', 'wc1c-main'));
 		}
 
 		return $this->schemas;
@@ -194,7 +194,7 @@ final class Core
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
 
-		wc1c()->log()->debug(__('Schemas loaded.', 'wc1c'), ['schemas' => $schemas]);
+		wc1c()->log()->debug(__('Schemas loaded.', 'wc1c-main'), ['schemas' => $schemas]);
 
 		try
 		{
@@ -221,7 +221,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log('schemas')->error(__('Schema ProductsCML is not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log('schemas')->error(__('Schema ProductsCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return $schemas;
 		}
 
@@ -245,7 +245,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log('schemas')->error(__('Schema ProductsCleanerCML is not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log('schemas')->error(__('Schema ProductsCleanerCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return $schemas;
 		}
 

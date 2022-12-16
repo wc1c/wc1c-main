@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Abstracts\FormAbstract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Abstracts\FormAbstract;
 
 /**
  * DeleteForm
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Main\Admin\Configurations
  */
 class DeleteForm extends FormAbstract
 {
@@ -35,12 +35,12 @@ class DeleteForm extends FormAbstract
 	{
 		$fields['accept'] =
 		[
-			'title' => __('Delete confirmation', 'wc1c'),
+			'title' => __('Delete confirmation', 'wc1c-main'),
 			'type' => 'checkbox',
 			'label' => sprintf(
 				"%s<hr>%s",
-				__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c'),
-				__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c')
+				__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c-main'),
+				__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c-main')
 			),
 			'default' => 'no',
 		];
@@ -81,7 +81,7 @@ class DeleteForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Delete error. Please retry.', 'wc1c')
+					'data' => __('Delete error. Please retry.', 'wc1c-main')
 				]
 			);
 
@@ -123,7 +123,7 @@ class DeleteForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Delete error. Confirmation of final deletion is required.', 'wc1c')
+					'data' => __('Delete error. Confirmation of final deletion is required.', 'wc1c-main')
 				]
 			);
 

@@ -1,22 +1,22 @@
-<?php namespace Wc1c\Tools\Environments;
+<?php namespace Wc1c\Main\Tools\Environments;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Tools\Abstracts\ToolAbstract;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Tools\Abstracts\ToolAbstract;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Init
  *
- * @package Wc1c\Tools\Environments
+ * @package Wc1c\Main\Tools\Environments
  */
 class Init extends ToolAbstract
 {
 	use UtilityTrait;
 
 	/**
-	 * @var array Wc1c data
+	 * @var array Wc1c\Main data
 	 */
 	private $wc1c_data = [];
 
@@ -49,8 +49,8 @@ class Init extends ToolAbstract
 	public function init()
 	{
 		$this->setId('environments');
-		$this->setName(__('Environments', 'wc1c'));
-		$this->setDescription(__('Data about all current environments.', 'wc1c'));
+		$this->setName(__('Environments', 'wc1c-main'));
+		$this->setDescription(__('Data about all current environments.', 'wc1c-main'));
 
 		if(!$this->utilityIsWc1cAdminToolsRequest('environments'))
 		{
@@ -109,11 +109,11 @@ class Init extends ToolAbstract
 		{
 			if($data)
 			{
-				$data = __('yes', 'wc1c');
+				$data = __('yes', 'wc1c-main');
 			}
 			else
 			{
-				$data = __('not', 'wc1c');
+				$data = __('not', 'wc1c-main');
 			}
 		}
 
@@ -137,7 +137,7 @@ class Init extends ToolAbstract
 	{
 		$wp_data = $this->load_wp_data();
 
-		$args = ['title' => __('WordPress environment', 'wc1c'), 'data' => $wp_data];
+		$args = ['title' => __('WordPress environment', 'wc1c-main'), 'data' => $wp_data];
 
 		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
@@ -151,7 +151,7 @@ class Init extends ToolAbstract
 	{
 		$wc1c_data = $this->load_wc1c_data();
 
-		$args = ['title' => __('WC1C environment', 'wc1c'), 'data' => $wc1c_data];
+		$args = ['title' => __('WC1C environment', 'wc1c-main'), 'data' => $wc1c_data];
 
 		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
@@ -165,7 +165,7 @@ class Init extends ToolAbstract
 	{
 		$wp_data = $this->load_wc_data();
 
-		$args = ['title' => __('WooCommerce environment', 'wc1c'), 'data' => $wp_data];
+		$args = ['title' => __('WooCommerce environment', 'wc1c-main'), 'data' => $wp_data];
 
 		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
@@ -179,7 +179,7 @@ class Init extends ToolAbstract
 	{
 		$server_data = $this->load_server_data();
 
-		$args = ['title' => __('Server environment', 'wc1c'), 'data' => $server_data];
+		$args = ['title' => __('Server environment', 'wc1c-main'), 'data' => $server_data];
 
 		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
@@ -205,7 +205,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_home_url'] = array
 		(
-			'title' => __('Home URL', 'wc1c'),
+			'title' => __('Home URL', 'wc1c-main'),
 			'description' => '',
 			'data' => get_option('home')
 		);
@@ -215,7 +215,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_site_url'] = array
 		(
-			'title' => __('Site URL', 'wc1c'),
+			'title' => __('Site URL', 'wc1c-main'),
 			'description' => '',
 			'data' => get_option('siteurl')
 		);
@@ -225,7 +225,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_version'] = array
 		(
-			'title' => __('WordPress version', 'wc1c'),
+			'title' => __('WordPress version', 'wc1c-main'),
 			'description' => '',
 			'data' => get_bloginfo('version')
 		);
@@ -235,7 +235,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_multisite'] = array
 		(
-			'title' => __('WordPress multisite', 'wc1c'),
+			'title' => __('WordPress multisite', 'wc1c-main'),
 			'description' => '',
 			'data' => is_multisite()
 		);
@@ -245,7 +245,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_debug_mode'] = array
 		(
-			'title' => __('WordPress debug', 'wc1c'),
+			'title' => __('WordPress debug', 'wc1c-main'),
 			'description' => '',
 			'data' => (defined( 'WP_DEBUG' ) && WP_DEBUG)
 		);
@@ -255,7 +255,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_cron'] = array
 		(
-			'title' => __('WordPress cron', 'wc1c'),
+			'title' => __('WordPress cron', 'wc1c-main'),
 			'description' => '',
 			'data' => !(defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON)
 		);
@@ -265,7 +265,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_language'] = array
 		(
-			'title' => __('WordPress language', 'wc1c'),
+			'title' => __('WordPress language', 'wc1c-main'),
 			'description' => '',
 			'data' => get_locale()
 		);
@@ -275,7 +275,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wp_memory_limit'] = array
 		(
-			'title' => __('WordPress memory limit', 'wc1c'),
+			'title' => __('WordPress memory limit', 'wc1c-main'),
 			'description' => '',
 			'data' => WP_MEMORY_LIMIT
 		);
@@ -310,7 +310,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['server_info'] = array
 		(
-			'title' => __('Server info', 'wc1c'),
+			'title' => __('Server info', 'wc1c-main'),
 			'description' => '',
 			'data' => $_SERVER['SERVER_SOFTWARE']
 		);
@@ -320,7 +320,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_version'] = array
 		(
-			'title' => __('PHP version', 'wc1c'),
+			'title' => __('PHP version', 'wc1c-main'),
 			'description' => '',
 			'data' => PHP_VERSION
 		);
@@ -330,7 +330,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['db_version'] = array
 		(
-			'title' => __('Database version', 'wc1c'),
+			'title' => __('Database version', 'wc1c-main'),
 			'description' => '',
 			'data' => (!empty(wc1c()->database()->is_mysql) ? wc1c()->database()->db_version() : '')
 		);
@@ -340,7 +340,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['suhosin_installed'] = array
 		(
-			'title' => __('Suhosin', 'wc1c'),
+			'title' => __('Suhosin', 'wc1c-main'),
 			'description' => '',
 			'data' => extension_loaded('suhosin')
 		);
@@ -350,7 +350,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['fsockopen_or_curl'] = array
 		(
-			'title' => __('Fsockopen or curl enabled', 'wc1c'),
+			'title' => __('Fsockopen or curl enabled', 'wc1c-main'),
 			'description' => '',
 			'data' => (function_exists('fsockopen') || function_exists('curl_init'))
 		);
@@ -364,7 +364,7 @@ class Init extends ToolAbstract
 
 			$env_array['curl_version'] = array
 			(
-				'title' => __('CURL info', 'wc1c'),
+				'title' => __('CURL info', 'wc1c-main'),
 				'description' => '',
 				'data' => $curl_version['version'] . ', ' . $curl_version['ssl_version']
 			);
@@ -375,7 +375,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['default_timezone'] = array
 		(
-			'title' => __('Default timezone', 'wc1c'),
+			'title' => __('Default timezone', 'wc1c-main'),
 			'description' => '',
 			'data' => date_default_timezone_get()
 		);
@@ -385,7 +385,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_post_max_size'] = array
 		(
-			'title' => __('PHP post max size', 'wc1c'),
+			'title' => __('PHP post max size', 'wc1c-main'),
 			'description' => '',
 			'data' => ini_get('post_max_size')
 		);
@@ -395,7 +395,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_max_upload_size'] = array
 		(
-			'title' => __('PHP max upload size', 'wc1c'),
+			'title' => __('PHP max upload size', 'wc1c-main'),
 			'description' => '',
 			'data' => (wp_max_upload_size() / 1024 / 1024) . 'M'
 		);
@@ -405,7 +405,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_max_execution_time'] = array
 		(
-			'title' => __('PHP max execution time', 'wc1c'),
+			'title' => __('PHP max execution time', 'wc1c-main'),
 			'description' => '',
 			'data' => ini_get('max_execution_time')
 		);
@@ -415,7 +415,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_max_input_vars'] = array
 		(
-			'title' => __('PHP max input vars', 'wc1c'),
+			'title' => __('PHP max input vars', 'wc1c-main'),
 			'description' => '',
 			'data' => ini_get('max_input_vars')
 		);
@@ -425,7 +425,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_soapclient_enabled'] = array
 		(
-			'title' => __('PHP soapclient enabled', 'wc1c'),
+			'title' => __('PHP soapclient enabled', 'wc1c-main'),
 			'description' => '',
 			'data' => class_exists('SoapClient')
 		);
@@ -435,7 +435,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_domdocument_enabled'] = array
 		(
-			'title' => __('PHP domdocument enabled', 'wc1c'),
+			'title' => __('PHP domdocument enabled', 'wc1c-main'),
 			'description' => '',
 			'data' => class_exists('DOMDocument')
 		);
@@ -445,7 +445,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_gzip_enabled'] = array
 		(
-			'title' => __('PHP gzip enabled', 'wc1c'),
+			'title' => __('PHP gzip enabled', 'wc1c-main'),
 			'description' => '',
 			'data' => is_callable('gzopen')
 		);
@@ -455,7 +455,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['php_mbstring_enabled'] = array
 		(
-			'title' => __('PHP mbstring enabled', 'wc1c'),
+			'title' => __('PHP mbstring enabled', 'wc1c-main'),
 			'description' => '',
 			'data' => extension_loaded('mbstring')
 		);
@@ -486,7 +486,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wc1c_version'] = array
 		(
-			'title' => __('WC1C version', 'wc1c'),
+			'title' => __('WC1C version', 'wc1c-main'),
 			'description' => '',
 			'data' => WC1C()->environment()->get('wc1c_version', '')
 		);
@@ -496,7 +496,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wc1c_upload_directory'] = array
 		(
-			'title' => __('Upload directory', 'wc1c'),
+			'title' => __('Upload directory', 'wc1c-main'),
 			'description' => '',
 			'data' => WC1C()->environment()->get('wc1c_upload_directory')
 		);
@@ -509,7 +509,7 @@ class Init extends ToolAbstract
 			$extensions = wc1c()->extensions()->get();
 			$env_array['wc1c_extensions_count'] = array
 			(
-				'title' => __('Count extensions', 'wc1c'),
+				'title' => __('Count extensions', 'wc1c-main'),
 				'description' => '',
 				'data' => count($extensions)
 			);
@@ -524,7 +524,7 @@ class Init extends ToolAbstract
 			$schemas = wc1c()->schemas()->get();
 			$env_array['wc1c_schemas_count'] = array
 			(
-				'title' => __('Count schemas', 'wc1c'),
+				'title' => __('Count schemas', 'wc1c-main'),
 				'description' => '',
 				'data' => count($schemas)
 			);
@@ -540,7 +540,7 @@ class Init extends ToolAbstract
 			$tools = wc1c()->tools()->get();
 			$env_array['wc1c_tools_count'] = array
 			(
-				'title' => __('Count tools', 'wc1c'),
+				'title' => __('Count tools', 'wc1c-main'),
 				'description' => '',
 				'data' => count($tools)
 			);
@@ -568,7 +568,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wc_version'] = array
 		(
-			'title' => __('WooCommerce version', 'wc1c'),
+			'title' => __('WooCommerce version', 'wc1c-main'),
 			'description' => '',
 			'data' => WC()->version
 		);
@@ -585,7 +585,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wc_product_types'] = array
 		(
-			'title' => __('WooCommerce product types', 'wc1c'),
+			'title' => __('WooCommerce product types', 'wc1c-main'),
 			'description' => '',
 			'data' => $term_response
 		);
@@ -595,7 +595,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wc_currency'] = array
 		(
-			'title' => __('WooCommerce currency', 'wc1c'),
+			'title' => __('WooCommerce currency', 'wc1c-main'),
 			'description' => '',
 			'data' => get_woocommerce_currency()
 		);
@@ -605,7 +605,7 @@ class Init extends ToolAbstract
 		 */
 		$env_array['wc_currency_symbol'] = array
 		(
-			'title' => __('WooCommerce currency symbol', 'wc1c'),
+			'title' => __('WooCommerce currency symbol', 'wc1c-main'),
 			'description' => '',
 			'data' => get_woocommerce_currency_symbol()
 		);

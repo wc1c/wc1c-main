@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Wc\Contracts\StorageContract;
 use Wc1c\Wc\Abstracts\DataAbstract;
 use Wc1c\Wc\Storages\AttributesStorage;

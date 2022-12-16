@@ -1,4 +1,4 @@
-<?php namespace Wc1c;
+<?php namespace Wc1c\Main;
 defined('ABSPATH') || exit;
 
 $admin = Admin::instance();

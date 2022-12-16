@@ -1,20 +1,20 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Abstracts\TableAbstract;
-use Wc1c\Data\Storage;
-use Wc1c\Data\Storages\ConfigurationsStorage;
-use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Traits\ConfigurationsUtilityTrait;
-use Wc1c\Traits\DatetimeUtilityTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Abstracts\TableAbstract;
+use Wc1c\Main\Data\Storage;
+use Wc1c\Main\Data\Storages\ConfigurationsStorage;
+use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
+use Wc1c\Main\Traits\DatetimeUtilityTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * AllTable
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Main\Admin\Configurations
  */
 class AllTable extends TableAbstract
 {
@@ -113,13 +113,13 @@ class AllTable extends TableAbstract
 		{
 			return sprintf
 			(
-				__('%s <br/><span class="time">Time: %s</span>', 'wc1c'),
+				__('%s <br/><span class="time">Time: %s</span>', 'wc1c-main'),
 				date_i18n('d/m/Y', $timestamp),
 				date_i18n('H:i:s', $timestamp)
 			);
 		}
 
-		return __('No activity', 'wc1c');
+		return __('No activity', 'wc1c-main');
 	}
 
 	/**
@@ -173,14 +173,14 @@ class AllTable extends TableAbstract
 	{
 		$actions =
 		[
-			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Edit', 'wc1c') . '</a>',
-			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c') . '</a>',
+			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Edit', 'wc1c-main') . '</a>',
+			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c-main') . '</a>',
 		];
 
 		if('deleted' === $item['status'] || ('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes')))
 		{
 			unset($actions['update']);
-			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c-main') . '</a>';
 		}
 
 		if('active' === $item['status'])
@@ -193,21 +193,21 @@ class AllTable extends TableAbstract
 		$user = get_userdata($item['user_id']);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$metas['user'] = __('User: ', 'wc1c') . $user->get('nickname') . ' (' . $item['user_id']. ')';
+			$metas['user'] = __('User: ', 'wc1c-main') . $user->get('nickname') . ' (' . $item['user_id']. ')';
 		}
 		else
 		{
-			$metas['user'] =  __('User is not exists.', 'wc1c');
+			$metas['user'] =  __('User is not exists.', 'wc1c-main');
 		}
 
 		try
 		{
 			$schema = wc1c()->schemas()->get($item['schema']);
-			$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
 		}
 		catch(RuntimeException $e)
 		{
-			$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c') . ')';
+			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')';
 		}
 
 		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
@@ -256,11 +256,11 @@ class AllTable extends TableAbstract
 	{
 		$columns = [];
 
-		$columns['configuration_id'] = __('ID', 'wc1c');
-		$columns['name'] = __('Base information', 'wc1c');
-		$columns['status'] = __('Status', 'wc1c');
-		$columns['date_create'] = __('Create date', 'wc1c');
-		$columns['date_activity'] = __('Last activity', 'wc1c');
+		$columns['configuration_id'] = __('ID', 'wc1c-main');
+		$columns['name'] = __('Base information', 'wc1c-main');
+		$columns['status'] = __('Status', 'wc1c-main');
+		$columns['date_create'] = __('Create date', 'wc1c-main');
+		$columns['date_activity'] = __('Last activity', 'wc1c-main');
 
 		return $columns;
 	}
@@ -308,7 +308,7 @@ class AllTable extends TableAbstract
 			'<a href="%s" %s>%s <span class="count">(%d)</span></a>',
 			$all_url,
 			$class,
-			__('All', 'wc1c'),
+			__('All', 'wc1c-main'),
 			$this->storage_configurations->count()
 		);
 
@@ -462,7 +462,7 @@ class AllTable extends TableAbstract
 		{
 			$this->views();
 
-			$this->searchBox(__('Search', 'wc1c'), 'code');
+			$this->searchBox(__('Search', 'wc1c-main'), 'code');
 		}
 	}
 

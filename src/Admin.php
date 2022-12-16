@@ -1,21 +1,21 @@
-<?php namespace Wc1c;
+<?php namespace Wc1c\Main;
 
 defined('ABSPATH') || exit;
 
 use Digiom\Wotices\Interfaces\ManagerInterface;
 use Digiom\Wotices\Manager;
-use Wc1c\Admin\Configurations;
-use Wc1c\Admin\Extensions;
-use Wc1c\Admin\Settings;
-use Wc1c\Admin\Tools;
-use Wc1c\Traits\SectionsTrait;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Admin\Configurations;
+use Wc1c\Main\Admin\Extensions;
+use Wc1c\Main\Admin\Settings;
+use Wc1c\Main\Admin\Tools;
+use Wc1c\Main\Traits\SectionsTrait;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Admin
  *
- * @package Wc1c
+ * @package Wc1c\Main
  */
 final class Admin
 {
@@ -56,6 +56,11 @@ final class Admin
 			Admin\Wizards\Init::instance();
 		}
 
+		if(function_exists('is_plugin_active') && is_plugin_active('wc1c/wc1c.php'))
+		{
+			deactivate_plugins( 'wc1c/wc1c.php', true);
+		}
+
 		add_filter('plugin_action_links_' . wc1c()->environment()->get('plugin_basename'), [$this, 'linksLeft']);
 
 		// hook
@@ -93,8 +98,8 @@ final class Admin
 		add_submenu_page
 		(
 			'woocommerce',
-			__('Integration with 1C', 'wc1c'),
-			__('Integration with 1C', 'wc1c'),
+			__('Integration with 1C', 'wc1c-main'),
+			__('Integration with 1C', 'wc1c-main'),
 			'manage_woocommerce',
 			'wc1c',
 			[$this, 'route']
@@ -111,14 +116,14 @@ final class Admin
 
 		$default_sections['configurations'] =
 		[
-			'title' => __('Configurations', 'wc1c'),
+			'title' => __('Configurations', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [Configurations::class, 'instance']
 		];
 
 		$default_sections['tools'] =
 		[
-			'title' => __('Tools', 'wc1c'),
+			'title' => __('Tools', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [Tools::class, 'instance']
 		];
@@ -127,7 +132,7 @@ final class Admin
 		{
 			$default_sections['settings'] =
 			[
-				'title' => __('Settings', 'wc1c'),
+				'title' => __('Settings', 'wc1c-main'),
 				'visible' => true,
 				'callback' => [Settings::class, 'instance']
 			];
@@ -137,7 +142,7 @@ final class Admin
 		{
 			$default_sections['extensions'] =
 			[
-				'title' => __('Extensions', 'wc1c'),
+				'title' => __('Extensions', 'wc1c-main'),
 				'visible' => true,
 				'callback' => [Extensions::class, 'instance']
 			];
@@ -234,7 +239,7 @@ final class Admin
 	 */
 	public function linksLeft(array $links): array
 	{
-		return array_merge(['site' => '<a href="' . admin_url('admin.php?page=wc1c') . '">' . __('Settings', 'wc1c') . '</a>'], $links);
+		return array_merge(['site' => '<a href="' . admin_url('admin.php?page=wc1c') . '">' . __('Settings', 'wc1c-main') . '</a>'], $links);
 	}
 
 	/**
@@ -262,20 +267,20 @@ final class Admin
 
 			if($local_data['code_date_expires'] === 'never')
 			{
-				$local_data['code_date_expires'] = __('never', 'wc1c');
-				$text .= ' (' . __('no deadline', 'wc1c') . ')';
+				$local_data['code_date_expires'] = __('never', 'wc1c-main');
+				$text .= ' (' . __('no deadline', 'wc1c-main') . ')';
 			}
 			else
 			{
 				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
-				$text .= ' (' . __('to:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
+				$text .= ' (' . __('to:', 'wc1c-main') . ' ' . $local_data['code_date_expires'] . ')';
 			}
 
 			$class .= ' status-3';
 		}
 		elseif($status)
 		{
-			$text .= ' (' . __('no support', 'wc1c') . ')';
+			$text .= ' (' . __('no support', 'wc1c-main') . ')';
 			$class .= ' status-2';
 		}
 

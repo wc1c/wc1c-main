@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Data\Entities;
+<?php namespace Wc1c\Main\Data\Entities;
 
 defined('ABSPATH') || exit;
 
 use WP_Error;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Data\Meta;
-use Wc1c\Data\Abstracts\DataAbstract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Data\Meta;
+use Wc1c\Main\Data\Abstracts\DataAbstract;
 
 /**
  * ConfigurationsData
  *
- * @package Wc1c\Data\Entities
+ * @package Wc1c\Main\Data\Entities
  */
 abstract class ConfigurationsData extends DataAbstract
 {

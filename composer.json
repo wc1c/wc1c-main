@@ -1,12 +1,12 @@
 {
-  "name": "wc1c/wc1c",
+  "name": "wc1c/wc1c-main",
   "description": "Integration of WooCommerce with 1C products (different configurations)",
   "type": "project",
   "minimum-stability": "stable",
   "license": "GPL-3.0-or-later",
   "homepage": "https://wc1c.info",
   "autoload": {
-    "psr-4": {"Wc1c\\": "src/"}
+    "psr-4": {"Wc1c\\Main\\": "src/"}
   },
   "authors": [
     {

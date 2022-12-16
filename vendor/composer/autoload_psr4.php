@@ -7,8 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Wc1c\\Wc\\' => array($vendorDir . '/wc1c/wc/src'),
+    'Wc1c\\Main\\' => array($baseDir . '/src'),
     'Wc1c\\Cml\\' => array($vendorDir . '/wc1c/cml/src'),
-    'Wc1c\\' => array($baseDir . '/src'),
     'Tecodes\\Client\\' => array($vendorDir . '/tecodes/client/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),

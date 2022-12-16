@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Admin\Metaboxes;
+<?php namespace Wc1c\Main\Admin\Metaboxes;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Admin\Metaboxes\WooCommerce\Orders;
-use Wc1c\Admin\Metaboxes\WooCommerce\Products;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Admin\Metaboxes\WooCommerce\Orders;
+use Wc1c\Main\Admin\Metaboxes\WooCommerce\Products;
 
 /**
  * Init
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 final class Init
 {

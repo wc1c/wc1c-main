@@ -3,8 +3,8 @@
 defined('ABSPATH') || exit;
 
 use SimpleXMLElement;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
 use Wc1c\Cml\Abstracts\DataAbstract;
 use Wc1c\Cml\Entities\Catalog;
 use Wc1c\Cml\Entities\Classifier;

@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Traits\ProcessConfigurationTrait;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Delete
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Main\Admin\Configurations
  */
 class Delete
 {
@@ -52,7 +52,7 @@ class Delete
 		$force_delete = false;
 		$configuration_status = $configuration->getStatus();
 		$notice_args['type'] = 'error';
-		$notice_args['data'] = __('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c');
+		$notice_args['data'] = __('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c-main');
 
 		/**
 		 * Защита от удаления активных соединений
@@ -105,7 +105,7 @@ class Delete
 				$notice_args =
 				[
 					'type' => 'update',
-					'data' => __('The configuration has been marked as deleted.', 'wc1c')
+					'data' => __('The configuration has been marked as deleted.', 'wc1c-main')
 				];
 
 				if($force_delete)
@@ -115,14 +115,14 @@ class Delete
 					$notice_args =
 					[
 						'type' => 'update',
-						'data' => __('The configuration has been successfully deleted.', 'wc1c')
+						'data' => __('The configuration has been successfully deleted.', 'wc1c-main')
 					];
 				}
 
 				if(!$configuration->delete($force_delete))
 				{
 					$notice_args['type'] = 'error';
-					$notice_args['data'] = __('Deleting error. Please retry again.', 'wc1c');
+					$notice_args['data'] = __('Deleting error. Please retry again.', 'wc1c-main');
 				}
 			}
 		}

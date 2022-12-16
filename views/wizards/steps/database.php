@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Wizards\Setup\Database;
+use Wc1c\Main\Admin\Wizards\Setup\Database;
 
 if(!isset($args['step']))
 {
@@ -18,6 +18,6 @@ $step = $args['step'];
 <form method="post" action="">
 <p class="mt-4 actions step">
     <?php wp_nonce_field('wc1c-admin-wizard-database', '_wc1c-admin-nonce'); ?>
-    <input type="submit" name="submit" id="submit" class="button button-primary button-large button-next" value="<?php _e('Lets Go!', 'wc1c'); ?>">
+    <input type="submit" name="submit" id="submit" class="button button-primary button-large button-next" value="<?php _e('Lets Go!', 'wc1c-main'); ?>">
 </p>
 </form>

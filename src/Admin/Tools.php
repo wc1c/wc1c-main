@@ -1,17 +1,17 @@
-<?php namespace Wc1c\Admin;
+<?php namespace Wc1c\Main\Admin;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Abstracts\ScreenAbstract;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Abstracts\ScreenAbstract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Tools
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 final class Tools extends ScreenAbstract
 {

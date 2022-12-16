@@ -1,17 +1,17 @@
-<?php namespace Wc1c\Admin\Wizards;
+<?php namespace Wc1c\Main\Admin\Wizards;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Wizards\Setup\Check;
-use Wc1c\Admin\Wizards\Setup\Complete;
-use Wc1c\Admin\Wizards\Setup\Database;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Admin\Wizards\Setup\Check;
+use Wc1c\Main\Admin\Wizards\Setup\Complete;
+use Wc1c\Main\Admin\Wizards\Setup\Database;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * SetupWizard
  *
- * @package Wc1c\Admin\Wizards
+ * @package Wc1c\Main\Admin\Wizards
  */
 final class SetupWizard extends WizardAbstract
 {
@@ -50,7 +50,7 @@ final class SetupWizard extends WizardAbstract
 	{
 		$default_sections[$this->getId()] =
 		[
-			'title' => __('Setup wizard', 'wc1c'),
+			'title' => __('Setup wizard', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [__CLASS__, 'instance']
 		];
@@ -77,17 +77,17 @@ final class SetupWizard extends WizardAbstract
 		[
 			'check' =>
 			[
-				'name' => __('Compatibility', 'wc1c'),
+				'name' => __('Compatibility', 'wc1c-main'),
 				'callback' => [Check::class, 'instance'],
 			],
 			'database' =>
 			[
-				'name' => __('Database', 'wc1c'),
+				'name' => __('Database', 'wc1c-main'),
 				'callback' => [Database::class, 'instance'],
 			],
 			'complete' =>
 			[
-				'name' => __('Completing', 'wc1c'),
+				'name' => __('Completing', 'wc1c-main'),
 				'callback' => [Complete::class, 'instance'],
 			],
 		];

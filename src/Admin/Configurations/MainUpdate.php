@@ -1,18 +1,18 @@
-<?php namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Traits\ProcessConfigurationTrait;
-use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Traits\DatetimeUtilityTrait;
-use Wc1c\Traits\SectionsTrait;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
+use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Traits\DatetimeUtilityTrait;
+use Wc1c\Main\Traits\SectionsTrait;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * MainUpdate
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 class MainUpdate
 {
@@ -55,7 +55,7 @@ class MainUpdate
 					(
 						[
 							'type' => 'update',
-							'data' => __('Configuration update success.', 'wc1c')
+							'data' => __('Configuration update success.', 'wc1c-main')
 						]
 					);
 				}
@@ -65,7 +65,7 @@ class MainUpdate
 					(
 						[
 							'type' => 'error',
-							'data' => __('Configuration update error. Please retry saving or change fields.', 'wc1c')
+							'data' => __('Configuration update error. Please retry saving or change fields.', 'wc1c-main')
 						]
 					);
 				}
@@ -85,16 +85,16 @@ class MainUpdate
 
 		$args =
 		[
-			'header' => '<h3 class="p-0 m-0">' . __('About configuration', 'wc1c') . '</h3>',
+			'header' => '<h3 class="p-0 m-0">' . __('About configuration', 'wc1c-main') . '</h3>',
 			'object' => $this
 		];
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('ID: ', 'wc1c') . $configuration->getId();
+		$body .= __('ID: ', 'wc1c-main') . $configuration->getId();
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Schema ID: ', 'wc1c') . $configuration->getSchema();
+		$body .= __('Schema ID: ', 'wc1c-main') . $configuration->getSchema();
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
@@ -102,25 +102,25 @@ class MainUpdate
 		$user = get_userdata($user_id);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$body .= __('User: ', 'wc1c') . $user->get('nickname') . ' (' . $user_id. ')';
+			$body .= __('User: ', 'wc1c-main') . $user->get('nickname') . ' (' . $user_id. ')';
 		}
 		else
 		{
-			$body .= __('User is not exists.', 'wc1c');
+			$body .= __('User is not exists.', 'wc1c-main');
 		}
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateCreate());
+		$body .= __('Date create: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateCreate());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateModify());
+		$body .= __('Date modify: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateModify());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateActivity());
+		$body .= __('Date active: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateActivity());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
+		$body .= __('Directory: ', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
 		$body .= '</li>';
 
 		$size = 0;
@@ -132,7 +132,7 @@ class MainUpdate
 		}
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Directory size:', 'wc1c') . ' <b>' . size_format($size) . '</b>';
+		$body .= __('Directory size:', 'wc1c-main') . ' <b>' . size_format($size) . '</b>';
 		$body .= '</li>';
 
 		$size = 0;
@@ -144,7 +144,7 @@ class MainUpdate
 		}
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Logs directory size:', 'wc1c') . ' <b>' . size_format($size) . '</b>';
+		$body .= __('Logs directory size:', 'wc1c-main') . ' <b>' . size_format($size) . '</b>';
 		$body .= '</li>';
 
 		$body .= '</ul>';
@@ -159,7 +159,7 @@ class MainUpdate
 
 			$args =
 			[
-				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h3>',
+				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c-main') . '</h3>',
 				'object' => $this
 			];
 

@@ -19,12 +19,16 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 * Russian - always included
 
 == Installation ==
-1. Archive extract and upload folder "wc1c" to /wp-content/plugins (final path: /wp-content/plugins/wc1c/).
+1. Archive extract and upload folder "wc1c-main" to /wp-content/plugins (final path: /wp-content/plugins/wc1c-main/).
 2. Activate the plugin.
-3. Done, goto plugin settings page.
+3. Done, goto plugin settings.
 
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
+
+= 0.14.0 =
+* Rename wc1c to wc1c-main
+* Fix: more
 
 = 0.13.1 =
 * Fix: composer

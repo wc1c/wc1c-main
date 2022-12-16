@@ -1,22 +1,22 @@
-<?php namespace Wc1c\Data\Storages;
+<?php namespace Wc1c\Main\Data\Storages;
 
 defined('ABSPATH') || exit;
 
 use stdClass;
 use WP_Error;
-use Wc1c\Data\Contracts\StorageContract;
-use Wc1c\Traits\DatetimeUtilityTrait;
-use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Configuration;
-use Wc1c\Data\Contracts\MetaStorageContract;
-use Wc1c\Data\Abstracts\DataAbstract;
-use Wc1c\Data\MetaQuery;
+use Wc1c\Main\Data\Contracts\StorageContract;
+use Wc1c\Main\Traits\DatetimeUtilityTrait;
+use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Configuration;
+use Wc1c\Main\Data\Contracts\MetaStorageContract;
+use Wc1c\Main\Data\Abstracts\DataAbstract;
+use Wc1c\Main\Data\MetaQuery;
 
 /**
  * ConfigurationsStorage
  *
- * @package Wc1c\Data\Storages
+ * @package Wc1c\Main\Data\Storages
  */
 class ConfigurationsStorage implements StorageContract, MetaStorageContract
 {

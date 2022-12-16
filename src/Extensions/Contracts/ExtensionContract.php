@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Extensions\Contracts;
+<?php namespace Wc1c\Main\Extensions\Contracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
 
 /**
  * ExtensionContract
  *
- * @package Wc1c\Extenstions
+ * @package Wc1c\Main\Extenstions
  */
 interface ExtensionContract
 {

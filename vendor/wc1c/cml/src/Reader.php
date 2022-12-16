@@ -2,8 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-use RuntimeException;
 use XMLReader;
+use Wc1c\Main\Exceptions\RuntimeException;
 use Wc1c\Cml\Entities\OffersPackage;
 use Wc1c\Cml\Contracts\CatalogDataContract;
 use Wc1c\Cml\Contracts\ClassifierDataContract;

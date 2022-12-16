@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Extensions\Abstracts;
+<?php namespace Wc1c\Main\Extensions\Abstracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Extensions\Contracts\ExtensionContract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Extensions\Contracts\ExtensionContract;
 
 /**
  * ExtensionAbstract
  *
- * @package Wc1c\Extensions
+ * @package Wc1c\Main\Extensions
  */
 abstract class ExtensionAbstract implements ExtensionContract
 {
@@ -119,7 +119,7 @@ abstract class ExtensionAbstract implements ExtensionContract
 			return $default_value;
 		}
 
-		throw new RuntimeException(__('Meta value by name is not available.', 'wc1c'));
+		throw new RuntimeException(__('Meta value by name is not available.', 'wc1c-main'));
 	}
 
 	/**

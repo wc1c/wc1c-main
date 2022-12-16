@@ -13,7 +13,7 @@
 	            {
 		            $tool_object = wc1c()->tools()->init($tool_id);
 	            }
-	            catch(\Wc1c\Exceptions\Exception $e)
+	            catch(\Wc1c\Main\Exceptions\Exception $e)
 	            {
                     continue;
 	            }

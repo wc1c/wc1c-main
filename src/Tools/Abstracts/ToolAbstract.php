@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Tools\Abstracts;
+<?php namespace Wc1c\Main\Tools\Abstracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * ToolAbstract
  *
- * @package Wc1c\Tools
+ * @package Wc1c\Main\Tools
  */
 abstract class ToolAbstract
 {

@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit;
 
-$admins = Wc1c\Admin\Settings::instance();
+$admins = Wc1c\Main\Admin\Settings::instance();
 
 $views = [];
 

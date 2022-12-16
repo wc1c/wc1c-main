@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'wc1c/wc1c',
+        'name' => 'wc1c/wc1c-main',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => 'b761162e0c4da131377a8f2efeb7e6b09044c02d',
+        'reference' => 'b4451ac4f696a004e4f5f16e68ef960a3dd79338',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -35,7 +35,7 @@
         'digiom/woplucore' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '74a0d5586e7270329fb3b6046ba0de89b1fcb631',
+            'reference' => 'ea1aa7bcc485e975690cd465888f944a9b46d5e3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../digiom/woplucore',
             'aliases' => array(
@@ -101,7 +101,7 @@
         'wc1c/cml' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1bf4ef6170009ba90d3cb47d91ce437f61c5dd08',
+            'reference' => '73f512b93fcce58a001dfb9304dd12c4a96efe27',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wc1c/cml',
             'aliases' => array(
@@ -112,7 +112,7 @@
         'wc1c/wc' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2453d121786f330d88505fd8d5499484749052ed',
+            'reference' => '1fd22ae4feb2273ac4113bceda43d444407c5e2a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wc1c/wc',
             'aliases' => array(
@@ -120,10 +120,10 @@
             ),
             'dev_requirement' => false,
         ),
-        'wc1c/wc1c' => array(
+        'wc1c/wc1c-main' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => 'b761162e0c4da131377a8f2efeb7e6b09044c02d',
+            'reference' => 'b4451ac4f696a004e4f5f16e68ef960a3dd79338',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -1,13 +1,13 @@
-<?php namespace Wc1c\Admin\Wizards;
+<?php namespace Wc1c\Main\Admin\Wizards;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * UpdateWizard
  *
- * @package Wc1c\Admin\Wizards
+ * @package Wc1c\Main\Admin\Wizards
  */
 final class UpdateWizard extends WizardAbstract
 {

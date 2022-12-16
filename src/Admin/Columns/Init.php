@@ -1,17 +1,17 @@
-<?php namespace Wc1c\Admin\Columns;
+<?php namespace Wc1c\Main\Admin\Columns;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Admin\Columns\WooCommerce\Categories;
-use Wc1c\Admin\Columns\WooCommerce\Orders;
-use Wc1c\Admin\Columns\WooCommerce\Products;
-use Wc1c\Admin\Columns\WordPress\MediaLibrary;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Admin\Columns\WooCommerce\Categories;
+use Wc1c\Main\Admin\Columns\WooCommerce\Orders;
+use Wc1c\Main\Admin\Columns\WooCommerce\Products;
+use Wc1c\Main\Admin\Columns\WordPress\MediaLibrary;
 
 /**
  * Init
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 final class Init
 {

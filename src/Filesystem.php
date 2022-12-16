@@ -1,16 +1,16 @@
-<?php namespace Wc1c;
+<?php namespace Wc1c\Main;
 
 defined('ABSPATH') || exit;
 
 use ErrorException;
 use FilesystemIterator;
 use RuntimeException;
-use Wc1c\Traits\SingletonTrait;
+use Wc1c\Main\Traits\SingletonTrait;
 
 /**
  * Filesystem
  *
- * @package Wc1c
+ * @package Wc1c\Main
  */
 class Filesystem
 {

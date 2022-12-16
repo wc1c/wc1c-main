@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Admin\Settings;
+<?php namespace Wc1c\Main\Admin\Settings;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Connection;
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Connection;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * ConnectionForm
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 class ConnectionForm extends Form
 {
@@ -103,7 +103,7 @@ class ConnectionForm extends Form
 							'type' => 'update',
 							'data' => sprintf
 							(
-								__( 'The user with the login %s on the site %s successfully connected to the current site.', 'wc1c'),
+								__( 'The user with the login %s on the site %s successfully connected to the current site.', 'wc1c-main'),
 								'<strong>' . esc_html($user_login) . '</strong>',
 								'<strong>' . esc_html($site_url) . '</strong>'
 							)
@@ -125,7 +125,7 @@ class ConnectionForm extends Form
 					'type' => 'error',
 					'data' => sprintf
 					(
-						__('Error connecting user with login %s on site %s to the current site. Please try again later.', 'wc1c'),
+						__('Error connecting user with login %s on site %s to the current site. Please try again later.', 'wc1c-main'),
 						'<strong>' . esc_html($user_login) . '</strong>',
 						'<strong>' . esc_html($site_url) . '</strong>'
 					)
@@ -157,7 +157,7 @@ class ConnectionForm extends Form
 			(
 				[
 					'type' => 'error',
-					'data' => __('Connection error. Please retry.', 'wc1c')
+					'data' => __('Connection error. Please retry.', 'wc1c-main')
 				]
 			);
 
@@ -179,7 +179,7 @@ class ConnectionForm extends Form
 			(
 				[
 					'type' => 'update',
-					'data' => __('Disconnect successful. Reconnect is available', 'wc1c')
+					'data' => __('Disconnect successful. Reconnect is available', 'wc1c-main')
 				]
 			);
 
@@ -205,16 +205,16 @@ class ConnectionForm extends Form
 	{
 		$fields['connected_title'] =
 		[
-			'title' => __('Site is connected to WC1C', 'wc1c'),
+			'title' => __('Site is connected to WC1C', 'wc1c-main'),
 			'type' => 'title',
-			'description' => __('To create a new connection, need to disconnect the current connection.', 'wc1c'),
+			'description' => __('To create a new connection, need to disconnect the current connection.', 'wc1c-main'),
 		];
 
 		$fields['login'] =
 		[
-			'title' => __('Login', 'wc1c'),
+			'title' => __('Login', 'wc1c-main'),
 			'type' => 'text',
-			'description' => __('Connected login from the WC1C website.', 'wc1c'),
+			'description' => __('Connected login from the WC1C website.', 'wc1c-main'),
 			'default' => '',
 			'disabled' => true,
 			'css' => 'min-width: 300px;',
@@ -222,9 +222,9 @@ class ConnectionForm extends Form
 
 		$fields['token'] =
 		[
-			'title' => __('App token', 'wc1c'),
+			'title' => __('App token', 'wc1c-main'),
 			'type' => 'text',
-			'description' => __('The current application token for the user. This token can be revoked in your personal account on the WC1C website, as well as by clicking the Disconnect button.', 'wc1c'),
+			'description' => __('The current application token for the user. This token can be revoked in your personal account on the WC1C website, as well as by clicking the Disconnect button.', 'wc1c-main'),
 			'default' => '',
 			'disabled' => true,
 			'css' => 'min-width: 300px;',

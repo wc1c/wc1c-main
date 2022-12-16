@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Admin\Traits;
+<?php namespace Wc1c\Main\Admin\Traits;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Configuration;
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Configuration;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * ProcessConfigurationTrait
  *
- * @package Wc1c\Admin\Traits
+ * @package Wc1c\Main\Admin\Traits
  */
 trait ProcessConfigurationTrait
 {

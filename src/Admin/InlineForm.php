@@ -1,14 +1,14 @@
-<?php namespace Wc1c\Admin;
+<?php namespace Wc1c\Main\Admin;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
-use Wc1c\Abstracts\FormAbstract;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Abstracts\FormAbstract;
 
 /**
  * InlineForm
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Main\Admin
  */
 class InlineForm extends FormAbstract
 {
@@ -56,7 +56,7 @@ class InlineForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Update error. Please retry.', 'wc1c')
+					'data' => __('Update error. Please retry.', 'wc1c-main')
 				]
 			);
 

@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Admin\Wizards\Setup;
+<?php namespace Wc1c\Main\Admin\Wizards\Setup;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Admin\Wizards\StepAbstract;
-use Wc1c\Traits\SingletonTrait;
-use Wc1c\Traits\UtilityTrait;
+use Wc1c\Main\Admin\Wizards\StepAbstract;
+use Wc1c\Main\Traits\SingletonTrait;
+use Wc1c\Main\Traits\UtilityTrait;
 
 /**
  * Complete
  *
- * @package Wc1c\Admin\Wizards
+ * @package Wc1c\Main\Admin\Wizards
  */
 class Complete extends StepAbstract
 {

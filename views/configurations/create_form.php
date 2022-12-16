@@ -22,13 +22,13 @@
 
             <div class="card border-0 mt-0 p-0" style="max-width: 100%;">
                 <div class="card-body p-3">
-                   <?php _e('Enter a name for the new configuration, select a scheme, and click the create configuration button.', 'wc1c'); ?>
+                   <?php _e('Enter a name for the new configuration, select a scheme, and click the create configuration button.', 'wc1c-main'); ?>
                     <br/>
-	                <?php _e('Each exchange scheme has a unique algorithm of operation and purpose. You need to choose only the scheme you need.', 'wc1c'); ?>
+	                <?php _e('Each exchange scheme has a unique algorithm of operation and purpose. You need to choose only the scheme you need.', 'wc1c-main'); ?>
                 </div>
                 <div class="card-footer p-3">
                     <p class="submit p-0 m-0">
-                        <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Create configuration', 'wc1c'); ?>">
+                        <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Create configuration', 'wc1c-main'); ?>">
                     </p>
                 </div>
             </div>
