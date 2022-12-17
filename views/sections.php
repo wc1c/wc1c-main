@@ -7,6 +7,9 @@ $nav = '<nav class="nav-tab-wrapper woo-nav-tab-wrapper pt-0">';
 
 foreach($admin->getSections() as $tab_key => $tab_name)
 {
+	$tab_key = esc_html($tab_key);
+	$tab_name['title'] = esc_html($tab_name['title']);
+
 	if(!isset($tab_name['visible']) && $tab_name['title'] !== true)
 	{
 		continue;
@@ -22,6 +25,6 @@ foreach($admin->getSections() as $tab_key => $tab_name)
     }
 }
 
-echo $nav;
+printf('%s', $nav);
 
 echo '</nav>';
