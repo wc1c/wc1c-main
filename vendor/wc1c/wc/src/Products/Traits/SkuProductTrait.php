@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
+use Wc1c\Main\Exceptions\Exception;
 
 /**
  * SkuProductTrait
