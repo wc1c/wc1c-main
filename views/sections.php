@@ -25,6 +25,6 @@ foreach($admin->getSections() as $tab_key => $tab_name)
     }
 }
 
-printf('%s', $nav);
+printf('%s', wp_kses_post($nav));
 
 echo '</nav>';
