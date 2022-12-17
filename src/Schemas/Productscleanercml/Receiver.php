@@ -76,7 +76,7 @@ final class Receiver
 			}
 			elseif(isset($_GET['mode']))
 			{
-				$mode = $_GET['mode'];
+				$mode = sanitize_text_field($_GET['mode']);
 			}
 
 			if(array_key_exists('type', $output))
@@ -85,12 +85,12 @@ final class Receiver
 			}
 			elseif(isset($_GET['type']))
 			{
-				$type = $_GET['type'];
+				$type = sanitize_text_field($_GET['type']);
 			}
 
 			if($type === '')
 			{
-				$type = $_GET['get_param?type'];
+				$type = sanitize_text_field($_GET['get_param?type']);
 			}
 		}
 
@@ -223,16 +223,16 @@ final class Receiver
 		{
 			if(isset($_SERVER['REMOTE_USER']))
 			{
-				$remote_user = $_SERVER['REMOTE_USER'];
+				$remote_user = sanitize_text_field($_SERVER['REMOTE_USER']);
 
 				if(isset($_SERVER['REDIRECT_REMOTE_USER']))
 				{
-					$remote_user = $_SERVER['REMOTE_USER'] ?: $_SERVER['REDIRECT_REMOTE_USER'];
+					$remote_user = sanitize_text_field($_SERVER['REMOTE_USER']) ?: sanitize_text_field($_SERVER['REDIRECT_REMOTE_USER']);
 				}
 			}
 			elseif(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']))
 			{
-				$remote_user = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+				$remote_user = sanitize_text_field($_SERVER['REDIRECT_HTTP_AUTHORIZATION']);
 			}
 
 			if(!isset($remote_user))
@@ -257,8 +257,8 @@ final class Receiver
 			return $credentials;
 		}
 
-		$credentials['login'] = $_SERVER['PHP_AUTH_USER'];
-		$credentials['password'] = $_SERVER['PHP_AUTH_PW'];
+		$credentials['login'] = sanitize_text_field($_SERVER['PHP_AUTH_USER']);
+		$credentials['password'] = sanitize_text_field($_SERVER['PHP_AUTH_PW']);
 
 		return $credentials;
 	}

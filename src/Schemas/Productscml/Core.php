@@ -3,27 +3,27 @@
 defined('ABSPATH') || exit;
 
 use XMLReader;
-use Wc1c\Main\Wc\Products\AttributeProduct;
-use Wc1c\Main\Cml\Contracts\ClassifierDataContract;
-use Wc1c\Main\Cml\Contracts\ProductDataContract;
-use Wc1c\Main\Cml\Decoder;
-use Wc1c\Main\Cml\Entities\Catalog;
-use Wc1c\Main\Cml\Entities\OffersPackage;
-use Wc1c\Main\Cml\Reader;
+use Wc1c\Wc\Products\AttributeProduct;
+use Wc1c\Cml\Contracts\ClassifierDataContract;
+use Wc1c\Cml\Contracts\ProductDataContract;
+use Wc1c\Cml\Decoder;
+use Wc1c\Cml\Entities\Catalog;
+use Wc1c\Cml\Entities\OffersPackage;
+use Wc1c\Cml\Reader;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Schemas\Abstracts\SchemaAbstract;
-use Wc1c\Main\Wc\Contracts\AttributeContract;
-use Wc1c\Main\Wc\Contracts\AttributesStorageContract;
-use Wc1c\Main\Wc\Contracts\CategoriesStorageContract;
-use Wc1c\Main\Wc\Contracts\ImagesStorageContract;
-use Wc1c\Main\Wc\Contracts\ProductContract;
-use Wc1c\Main\Wc\Entities\Attribute;
-use Wc1c\Main\Wc\Entities\Category;
-use Wc1c\Main\Wc\Products\Factory;
-use Wc1c\Main\Wc\Products\SimpleProduct;
-use Wc1c\Main\Wc\Products\VariableProduct;
-use Wc1c\Main\Wc\Products\VariationVariableProduct;
-use Wc1c\Main\Wc\Storage;
+use Wc1c\Wc\Contracts\AttributeContract;
+use Wc1c\Wc\Contracts\AttributesStorageContract;
+use Wc1c\Wc\Contracts\CategoriesStorageContract;
+use Wc1c\Wc\Contracts\ImagesStorageContract;
+use Wc1c\Wc\Contracts\ProductContract;
+use Wc1c\Wc\Entities\Attribute;
+use Wc1c\Wc\Entities\Category;
+use Wc1c\Wc\Products\Factory;
+use Wc1c\Wc\Products\SimpleProduct;
+use Wc1c\Wc\Products\VariableProduct;
+use Wc1c\Wc\Products\VariationVariableProduct;
+use Wc1c\Wc\Storage;
 
 /**
  * Core

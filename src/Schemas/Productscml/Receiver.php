@@ -5,9 +5,9 @@ defined('ABSPATH') || exit;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Traits\SingletonTrait;
 use Wc1c\Main\Traits\UtilityTrait;
-use Wc1c\Main\Wc\Contracts\ImagesStorageContract;
-use Wc1c\Main\Wc\Entities\Image;
-use Wc1c\Main\Wc\Storage;
+use Wc1c\Wc\Contracts\ImagesStorageContract;
+use Wc1c\Wc\Entities\Image;
+use Wc1c\Wc\Storage;
 
 /**
  * Receiver
@@ -80,25 +80,25 @@ final class Receiver
 
 			if(array_key_exists('mode', $output))
 			{
-				$data['mode'] = $output['mode'];
+				$data['mode'] = sanitize_text_field($output['mode']);
 			}
 			elseif(isset($_GET['mode']))
 			{
-				$data['mode'] = $_GET['mode'];
+				$data['mode'] = sanitize_text_field($_GET['mode']);
 			}
 
 			if(array_key_exists('type', $output))
 			{
-				$data['type'] = $output['type'];
+				$data['type'] = sanitize_text_field($output['type']);
 			}
 			elseif(isset($_GET['type']))
 			{
-				$data['type'] = $_GET['type'];
+				$data['type'] = sanitize_text_field($_GET['type']);
 			}
 
 			if($data['type'] === '')
 			{
-				$data['type'] = $_GET['get_param?type'];
+				$data['type'] = sanitize_text_field($_GET['get_param?type']);
 			}
 		}
 
@@ -245,16 +245,16 @@ final class Receiver
 		{
 			if(isset($_SERVER['REMOTE_USER']))
 			{
-				$remote_user = $_SERVER['REMOTE_USER'];
+				$remote_user = sanitize_text_field($_SERVER['REMOTE_USER']);
 
 				if(isset($_SERVER['REDIRECT_REMOTE_USER']))
 				{
-					$remote_user = $_SERVER['REMOTE_USER'] ?: $_SERVER['REDIRECT_REMOTE_USER'];
+					$remote_user = sanitize_text_field($_SERVER['REMOTE_USER']) ?: sanitize_text_field($_SERVER['REDIRECT_REMOTE_USER']);
 				}
 			}
 			elseif(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']))
 			{
-				$remote_user = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+				$remote_user = sanitize_text_field($_SERVER['REDIRECT_HTTP_AUTHORIZATION']);
 			}
 
 			if(!isset($remote_user))
@@ -279,8 +279,8 @@ final class Receiver
 			return $credentials;
 		}
 
-		$credentials['login'] = $_SERVER['PHP_AUTH_USER'];
-		$credentials['password'] = $_SERVER['PHP_AUTH_PW'];
+		$credentials['login'] = sanitize_text_field($_SERVER['PHP_AUTH_USER']);
+		$credentials['password'] = sanitize_text_field($_SERVER['PHP_AUTH_PW']);
 
 		return $credentials;
 	}

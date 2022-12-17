@@ -2,20 +2,20 @@
 
 <?php do_action('wc1c_admin_configurations_update_before_sidebar_item_show'); ?>
 
-<div class="card border-0 mb-2 mt-0 p-0" style="max-width: 100%; <?php if(isset($args['css'])) echo $args['css']; ?>">
+<div class="card border-0 mb-2 mt-0 p-0" style="max-width: 100%; <?php if(isset($args['css'])) printf('%s', $args['css']); ?>">
     <?php if(isset($args['header'])): ?>
     <div class="card-header p-2">
-        <?php echo $args['header']; ?>
+        <?php printf('%s', $args['header']); ?>
     </div>
     <?php endif; ?>
     <?php if(isset($args['body'])): ?>
     <div class="card-body p-0">
-	    <?php echo $args['body']; ?>
+	    <?php printf('%s', $args['body']); ?>
     </div>
     <?php endif; ?>
     <?php if(isset($args['footer'])): ?>
     <div class="card-footer p-2">
-	    <?php echo $args['footer']; ?>
+	    <?php printf('%s', $args['footer']); ?>
     </div>
 	<?php endif; ?>
 </div>

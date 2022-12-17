@@ -3,14 +3,14 @@
 defined('ABSPATH') || exit;
 
 use XMLReader;
-use Wc1c\Main\Cml\Contracts\ClassifierDataContract;
-use Wc1c\Main\Cml\Contracts\ProductDataContract;
-use Wc1c\Main\Cml\Decoder;
-use Wc1c\Main\Cml\Entities\Catalog;
-use Wc1c\Main\Cml\Reader;
+use Wc1c\Cml\Contracts\ClassifierDataContract;
+use Wc1c\Cml\Contracts\ProductDataContract;
+use Wc1c\Cml\Decoder;
+use Wc1c\Cml\Entities\Catalog;
+use Wc1c\Cml\Reader;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Schemas\Abstracts\SchemaAbstract;
-use Wc1c\Main\Wc\Products\Factory;
+use Wc1c\Wc\Products\Factory;
 
 /**
  * Core
@@ -168,6 +168,7 @@ class Core extends SchemaAbstract
 			catch(Exception $e)
 			{
 				$this->log()->error(__('Import file processing not completed. ReaderCML threw an exception.', 'wc1c-main'), ['exception' => $e]);
+				break;
 			}
 		}
 
@@ -184,7 +185,7 @@ class Core extends SchemaAbstract
 	 */
 	public function processingTimer($reader)
 	{
-		if(!wc1c()->timer()->isRemainingBiggerThan(5))
+		if(wc1c()->timer()->getMaximum() !== 0 && !wc1c()->timer()->isRemainingBiggerThan(5))
 		{
 			throw new Exception(__('There was not enough time to load all the data.', 'wc1c-main'));
 		}

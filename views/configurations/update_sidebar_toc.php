@@ -5,17 +5,17 @@
 <div class="card border-0 wc1c-sidebar-toc mb-2 p-0" style="max-width: 100%;">
     <?php if(isset($args['header'])): ?>
     <div class="card-header p-2">
-        <?php echo $args['header']; ?>
+        <?php printf('%s', $args['header']); ?>
     </div>
     <?php endif; ?>
     <?php if(isset($args['body'])): ?>
     <div class="card-body p-0">
-	    <?php echo $args['body']; ?>
+	    <?php printf('%s', $args['body']); ?>
     </div>
     <?php endif; ?>
     <?php if(isset($args['footer'])): ?>
     <div class="card-footer p-2">
-	    <?php echo $args['footer']; ?>
+	    <?php printf('%s', $args['footer']); ?>
     </div>
 	<?php endif; ?>
 </div>

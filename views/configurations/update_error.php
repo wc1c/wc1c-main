@@ -12,6 +12,6 @@ $text = apply_filters('wc1c_admin_configurations_update_error_text', $text);
 ?>
 
 <div class="wc1c-configurations-alert mb-2 mt-2">
-    <h3><?php echo $title; ?></h3>
-    <p><?php echo $text; ?></p>
+    <h3><?php esc_html_e($title); ?></h3>
+    <p><?php esc_html_e($text); ?></p>
 </div>
