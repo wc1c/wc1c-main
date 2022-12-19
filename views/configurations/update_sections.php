@@ -33,5 +33,5 @@ foreach($views as $class => $view)
 {
 	$views[$class] = "<li class='nav-item pb-0 mb-0 $class'>$view";
 }
-echo implode("</li>", $views) . "</li>";
+echo wp_kses_post(implode("</li>", $views) . "</li>");
 echo '</ul>';

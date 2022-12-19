@@ -74,7 +74,7 @@ class ConnectionForm extends Form
 	{
 		if(isset($_GET['site_url'], $_GET['user_login']))
 		{
-			$site_url = urldecode(sanitize_text_field($_GET['site_url']));
+			$site_url = urldecode(esc_url_raw($_GET['site_url']));
 			$user_login = urldecode(sanitize_text_field($_GET['user_login']));
 			$password = '';
 			$sold_url = remove_query_arg(['site_url', 'user_login', 'password']);

@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Traits\SingletonTrait;
-use Wc1c\Main\Wc\Entities\Category;
+use Wc1c\Wc\Entities\Category;
 
 /**
  * Categories
