@@ -63,7 +63,7 @@ final class Products
 				$content .= '<span class="na">' . __('Not found', 'wc1c-main') . '</span>';
 			}
 
-			echo $content;
+			echo wp_kses_post($content);
 		}
 	}
 
