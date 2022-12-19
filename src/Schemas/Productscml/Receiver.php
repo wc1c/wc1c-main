@@ -373,7 +373,7 @@ final class Receiver
 			return false;
 		}
 
-		$lazy_sign = $_GET['lazysign'];
+		$lazy_sign = sanitize_text_field($_GET['lazysign']);
 		$lazy_sign_store = $this->core()->configuration()->getMeta('receiver_lazy_sign');
 
 		if($lazy_sign_store !== $lazy_sign)
