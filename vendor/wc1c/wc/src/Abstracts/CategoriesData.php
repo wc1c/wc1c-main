@@ -63,7 +63,7 @@ abstract class CategoriesData extends DataAbstract
 	 *
 	 * @return bool
 	 */
-	protected function filterNullMeta($meta)
+	protected function filterNullMeta($meta): bool
 	{
 		return !is_null($meta->value);
 	}
@@ -180,7 +180,7 @@ abstract class CategoriesData extends DataAbstract
 	 *
 	 * @return boolean
 	 */
-	public function metaExists($key = '')
+	public function metaExists($key = ''): bool
 	{
 		$this->maybeReadMetaData();
 

@@ -2,14 +2,12 @@
 
 defined('ABSPATH') || exit;
 
-use JsonSerializable;
-
 /**
  * Meta
  *
  * @package Wc1c\Wc
  */
-class Meta implements JsonSerializable
+class Meta implements \JsonSerializable
 {
 	/**
 	 * @var array Metadata data
@@ -57,7 +55,7 @@ class Meta implements JsonSerializable
 	 * @param string $key Key to set
 	 * @param mixed $value Value to set
 	 */
-	public function __set($key, $value)
+	public function __set(string $key, $value)
 	{
 		$this->current_data[$key] = $value;
 	}
@@ -70,7 +68,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @return bool
 	 */
-	public function __isset($key)
+	public function __isset(string $key)
 	{
 		return array_key_exists($key, $this->current_data);
 	}
@@ -82,14 +80,9 @@ class Meta implements JsonSerializable
 	 *
 	 * @return mixed Property value or NULL if it does not exists
 	 */
-	public function __get($key)
+	public function __get(string $key)
 	{
-		if(array_key_exists($key, $this->current_data))
-		{
-			return $this->current_data[$key];
-		}
-
-		return null;
+		return $this->current_data[$key] ?? null;
 	}
 
 	/**
@@ -97,7 +90,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function getChanges()
+	public function getChanges(): array
 	{
 		$changes = [];
 		foreach($this->current_data as $id => $value)
@@ -116,7 +109,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function getData()
+	public function getData(): array
 	{
 		return $this->data;
 	}
