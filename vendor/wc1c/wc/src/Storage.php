@@ -58,7 +58,7 @@ class Storage implements StorageContract
 	 *
 	 * @throws Exception When validation fails
 	 */
-	public function __construct($object_type)
+	public function __construct(string $object_type)
 	{
 		if(empty($object_type))
 		{
@@ -103,7 +103,7 @@ class Storage implements StorageContract
 	/**
 	 * @return string
 	 */
-	public function getCurrentObjectType()
+	public function getCurrentObjectType(): string
 	{
 		return $this->current_object_type;
 	}
@@ -119,7 +119,7 @@ class Storage implements StorageContract
 	/**
 	 * @return array
 	 */
-	protected function getStorages()
+	protected function getStorages(): array
 	{
 		return $this->storages;
 	}
@@ -127,7 +127,7 @@ class Storage implements StorageContract
 	/**
 	 * @param array $storages
 	 */
-	protected function setStorages($storages)
+	protected function setStorages(array $storages)
 	{
 		$this->storages = $storages;
 	}
@@ -160,7 +160,7 @@ class Storage implements StorageContract
 	 * @return Storage
 	 * @throws Exception When validation fails
 	 */
-	public static function load($object_type)
+	public static function load(string $object_type): Storage
 	{
 		return new Storage($object_type);
 	}
@@ -170,7 +170,7 @@ class Storage implements StorageContract
 	 *
 	 * @return string
 	 */
-	public function getCurrentClassName()
+	public function getCurrentClassName(): string
 	{
 		return $this->current_class_name;
 	}
@@ -226,7 +226,7 @@ class Storage implements StorageContract
 	 *
 	 * @return mixed
 	 */
-	public function __call($method, $parameters)
+	public function __call(string $method, $parameters)
 	{
 		if(is_callable([$this->instance, $method]))
 		{

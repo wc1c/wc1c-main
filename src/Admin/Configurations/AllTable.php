@@ -179,7 +179,6 @@ class AllTable extends TableAbstract
 
 		if('deleted' === $item['status'] || ('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes')))
 		{
-			unset($actions['update']);
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c-main') . '</a>';
 		}
 
@@ -210,7 +209,10 @@ class AllTable extends TableAbstract
 			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')';
 		}
 
-		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
+		if(has_filter('wc1c_admin_configurations_all_row_metas'))
+		{
+			$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
+		}
 
 		return sprintf
 		(
