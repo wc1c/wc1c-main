@@ -302,13 +302,13 @@ final class Receiver
 		{
 			if($credentials['login'] !== $this->core()->getOptions('user_login', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid username.', 'productscml'));
+				$this->core()->log()->notice(__('Not a valid username.', 'wc1c-main'));
 				$this->sendResponseByType('failure', __('Not a valid username.', 'wc1c-main'));
 			}
 
 			if($credentials['password'] !== $this->core()->getOptions('user_password', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid user password.', 'productscml'));
+				$this->core()->log()->notice(__('Not a valid user password.', 'wc1c-main'));
 				$this->sendResponseByType('failure', __('Not a valid user password.', 'wc1c-main'));
 			}
 		}
