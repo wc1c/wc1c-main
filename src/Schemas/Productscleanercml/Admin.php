@@ -75,42 +75,41 @@ class Admin
 			$this->core()->configuration()->saveMetaData();
 		}
 
-		$url_raw = get_site_url(null, '/?wc1c-receiver=' . $this->core()->configuration()->getId() . '&lazysign=' . $lazy_sign . '&get_param');
-		$url_raw = '<p class="input-text p-2 bg-light regular-input wc1c_urls">' . esc_html($url_raw) . '</p>';
+		$url_raw = trim(get_site_url(null, '/?wc1c-receiver=' . $this->core()->configuration()->getId() . '&lazysign=' . $lazy_sign . '&get_param'));
+		$url_raw = '<span class="d-block input-text mt-0 p-2 bg-light regular-input wc1c_urls">' . esc_url($url_raw) . '</span>';
 
 		$fields['url_requests'] =
 		[
 			'title' => __('Website address', 'wc1c-main'),
 			'type' => 'raw',
 			'raw' => $url_raw,
-			'description' => __('Specified in the exchange settings on the 1C side. The Recipient is located at this address, which will receive requests from 1C. When copying, you need to get rid of whitespace characters, if they are present.', 'wc1c-main'),
+			'description' => sprintf(
+				'%s<hr>%s',
+				__('Specified in the exchange settings on the 1C side. The Recipient is located at this address, which will receive requests from 1C.', 'wc1c-main'),
+				__('When copying, you need to get rid of whitespace characters, if they are present.', 'wc1c-main')
+			)
 		];
 
 		$fields['user_login'] =
 		[
 			'title' => __('Username', 'wc1c-main'),
 			'type' => 'text',
-			'description' => __('Specified in 1C when setting up an exchange with a site on the 1C side. At the same time, work with data on the site is performed on behalf of the configuration owner, and not on behalf of the specified username.', 'wc1c-main'),
+			'description' => sprintf(
+				'%s<hr>%s',
+				__('Specified when setting up an exchange with a site on the 1C side. Any name can be specified, except for an empty value.', 'wc1c-main'),
+				__('Work with data on the site is performed on behalf of the configuration owner, and not on behalf of the specified username.', 'wc1c-main')
+			),
 			'default' => '',
-			'css' => 'min-width: 350px;',
+			'css' => 'min-width: 377px;',
 		];
 
 		$fields['user_password'] =
 		[
 			'title' => __('User password', 'wc1c-main'),
 			'type' => 'password',
-			'description' => __('Specified in 1C paired with a username when setting up an exchange with a site on the 1C side. It is advisable not to specify the password for the current WordPress user.', 'wc1c-main'),
+			'description' => __('Specified in pair with the username when setting up on the 1C side. It is advisable not to specify a password for the current WordPress user.', 'wc1c-main'),
 			'default' => '',
-			'css' => 'min-width: 350px;',
-		];
-
-		$fields['receiver_check_auth_key_disabled'] =
-		[
-			'title' => __('Request signature verification', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the checkbox to disable request signature verification. By default, validation is performed.', 'wc1c-main'),
-			'description' => __('The setting disables authentication of requests from 1C. May be required only for very old versions of 1C. Enable only if there are errors in the request signature verification in the logs. If disabled, signature verification will be performed using the lazy signature from the lazysign parameter.', 'wc1c-main'),
-			'default' => 'no'
+			'css' => 'min-width: 377px;',
 		];
 
 		return $fields;

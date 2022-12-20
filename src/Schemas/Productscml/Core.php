@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.4.1');
+		$this->setVersion('0.4.2');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -1440,6 +1440,12 @@ class Core extends SchemaAbstract
 				$file = explode('.', basename($image));
 
 				$image_current = $images_storage->getByExternalName(reset($file));
+
+				if(false === $image_current)
+				{
+					$this->log()->notice(__('The image assignment for the product is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $image]);
+					continue;
+				}
 
 				if(is_array($image_current))
 				{

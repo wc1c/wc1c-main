@@ -293,14 +293,18 @@ final class Receiver
 
 		$lines = [];
 
+		$session_name = session_name();
+
 		if(session_status() === PHP_SESSION_NONE)
 		{
 			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c-main'));
 			session_start();
 		}
 
-		$session_name = session_name();
 		$session_id = session_id();
+
+		$this->core()->configuration()->addMetaData('session_id', maybe_serialize($session_id), true);
+		$this->core()->configuration()->saveMetaData();
 
 		$this->core()->log()->debug(__('Request authorization from 1C successfully completed.', 'wc1c-main'), ['session_name' => $session_name, 'session_id' => $session_id]);
 
@@ -330,44 +334,37 @@ final class Receiver
 	 *
 	 * @param bool $send_response
 	 *
-	 * @return bool
+	 * @return bool|void
 	 */
-	public function handlerCheckauthKey($send_response = false)
+	public function handlerCheckauthKey(bool $send_response = false)
 	{
-		if($this->core()->getOptions('receiver_check_auth_key_disabled', 'no') === 'yes')
+		if(!isset($_GET['lazysign']))
 		{
-			$this->core()->log()->info(__('Authorization key verification is disabled. Lazy signature verification activated.', 'wc1c-main'));
+			$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c-main');
+			$this->core()->log()->warning($warning);
 
-			if(!isset($_GET['lazysign']))
+			if($send_response)
 			{
-				$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c-main');
-				$this->core()->log()->warning($warning);
-
-				if($send_response)
-				{
-					$this->sendResponseByType('failure', $warning);
-				}
-
-				return false;
+				$this->sendResponseByType('failure', $warning);
 			}
 
-			$lazy_sign = sanitize_text_field($_GET['lazysign']);
-			$lazy_sign_store = $this->core()->configuration()->getMeta('receiver_lazy_sign');
+			return false;
+		}
 
-			if($lazy_sign_store !== $lazy_sign)
+		$lazy_sign = sanitize_text_field($_GET['lazysign']);
+		$lazy_sign_store = $this->core()->configuration()->getMeta('receiver_lazy_sign');
+
+		if($lazy_sign_store !== $lazy_sign)
+		{
+			$warning = __('Authorization key verification failed. 1C sent an incorrect lazy signature.', 'wc1c-main');
+			$this->core()->log()->warning($warning);
+
+			if($send_response)
 			{
-				$warning = __('Authorization key verification failed. 1C sent an incorrect lazy signature.', 'wc1c-main');
-				$this->core()->log()->warning($warning);
-
-				if($send_response)
-				{
-					$this->sendResponseByType('failure', $warning);
-				}
-
-				return false;
+				$this->sendResponseByType('failure', $warning);
 			}
 
-			return true;
+			return false;
 		}
 
 		$session_name = session_name();
@@ -385,13 +382,7 @@ final class Receiver
 			return false;
 		}
 
-		if(session_status() === PHP_SESSION_NONE)
-		{
-			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c-main'));
-			session_start();
-		}
-
-		$session_id = session_id();
+		$session_id = $this->core()->configuration()->getMeta('session_id');
 
 		if($_COOKIE[$session_name] !== $session_id)
 		{

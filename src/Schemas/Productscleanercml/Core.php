@@ -40,7 +40,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscleanercml');
-		$this->setVersion('0.1.2');
+		$this->setVersion('0.2.0');
 
 		$this->setName(__('Cleaning of products via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Cleaning of existing products in WooCommerce according to the nomenclature from 1C via the CommerceML protocol.', 'wc1c-main'));
@@ -71,7 +71,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return boolean
 	 */
-	public function init()
+	public function init(): bool
 	{
 		$this->setOptions($this->configuration()->getOptions());
 		$this->setUploadDirectory($this->configuration()->getUploadDirectory() . DIRECTORY_SEPARATOR . 'catalog');
@@ -105,7 +105,7 @@ class Core extends SchemaAbstract
 	/**
 	 * @return string
 	 */
-	public function getUploadDirectory()
+	public function getUploadDirectory(): string
 	{
 		return $this->upload_directory;
 	}
@@ -125,7 +125,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return boolean true - success, false - error
 	 */
-	public function fileProcessing($file_path)
+	public function fileProcessing(string $file_path): bool
 	{
 		try
 		{
@@ -199,7 +199,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function processingClassifier($reader)
+	public function processingClassifier(Reader $reader)
 	{
 		if($reader->filetype !== 'import' && $reader->filetype !== 'offers')
 		{
@@ -253,7 +253,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function processingCatalog($reader)
+	public function processingCatalog(Reader $reader)
 	{
 		if($reader->getFiletype() !== 'import')
 		{
