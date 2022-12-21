@@ -517,8 +517,7 @@ abstract class TableAbstract
 		$current = $this->getPagenum();
 		$removable_query_args = wp_removable_query_args();
 
-		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-
+		$current_url = set_url_scheme(esc_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg($removable_query_args, $current_url);
 
 		$page_links = [];
@@ -817,7 +816,7 @@ abstract class TableAbstract
 	{
 		list($columns, $hidden, $sortable, $primary) = $this->getColumnInfo();
 
-		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$current_url = set_url_scheme(esc_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg('paged', $current_url);
 
 		if(isset($_GET['orderby']))
