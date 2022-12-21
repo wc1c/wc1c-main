@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<h2><?php _e( 'Found a bug?', 'wc1c' ); ?></h2>
+<h2><?php _e( 'Found a bug?', 'wc1c-main' ); ?></h2>
 
 <p>
     <?php _e('First of all, you need to make sure that a bug has been found and that it has not been fixed in updates before.', 'wc1c-main'); ?>
