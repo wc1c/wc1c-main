@@ -329,19 +329,19 @@ abstract class TableAbstract
 		}
 
 		echo '<label for="bulk-action-selector-' . esc_attr($which) . '" class="screen-reader-text">' . __('Select bulk action') . '</label>';
-		echo '<select name="action' . $two . '" id="bulk-action-selector-' . esc_attr($which) . "\">\n";
+		echo '<select name="action' . esc_attr($two) . '" id="bulk-action-selector-' . esc_attr($which) . "\">\n";
 		echo '<option value="-1">' . __('Bulk Actions', 'wc1c-main') . "</option>\n";
 
 		foreach($this->_actions as $name => $title)
 		{
 			$class = 'edit' === $name ? ' class="hide-if-no-js"' : '';
-
-			echo "\t" . '<option value="' . $name . '"' . $class . '>' . $title . "</option>\n";
+            // $class in 337 string
+			echo "\t" . '<option value="' . esc_attr($name) . '"' . $class . '>' . sanitize_text_field($title) . "</option>\n";
 		}
 
 		echo "</select>\n";
 
-		submit_button(__('Apply'), 'action', '', false, array('id' => "doaction$two"));
+		submit_button(__('Apply'), 'action', '', false, ['id' => "doaction$two"]);
 		echo "\n";
 	}
 
@@ -517,8 +517,7 @@ abstract class TableAbstract
 		$current = $this->getPagenum();
 		$removable_query_args = wp_removable_query_args();
 
-		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-
+		$current_url = set_url_scheme(esc_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg($removable_query_args, $current_url);
 
 		$page_links = [];
@@ -817,7 +816,7 @@ abstract class TableAbstract
 	{
 		list($columns, $hidden, $sortable, $primary) = $this->getColumnInfo();
 
-		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$current_url = set_url_scheme(esc_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg('paged', $current_url);
 
 		if(isset($_GET['orderby']))

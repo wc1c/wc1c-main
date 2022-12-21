@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<h2><?php _e( 'Not a feature?', 'wc1c' ); ?></h2>
+<h2><?php _e( 'Not a feature?', 'wc1c-main' ); ?></h2>
 
 <p>
 	<?php _e('First of all, you need to make sure - whether the necessary opportunity is really missing.', 'wc1c-main'); ?>
