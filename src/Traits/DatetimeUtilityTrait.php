@@ -17,7 +17,7 @@ trait DatetimeUtilityTrait
 	 *
 	 * @return int
 	 */
-	public function utilityStringToTimestamp($time_string, $from_timestamp = null)
+	public function utilityStringToTimestamp($time_string, $from_timestamp = null): int
 	{
 		$original_timezone = date_default_timezone_get();
 
@@ -42,7 +42,7 @@ trait DatetimeUtilityTrait
 	 *
 	 * @return string PHP timezone string for the site
 	 */
-	public function utilityTimezoneString()
+	public function utilityTimezoneString(): string
 	{
 		// If site timezone string exists, return it
 		$timezone = get_option('timezone_string');
@@ -107,7 +107,7 @@ trait DatetimeUtilityTrait
 	 *
 	 * @return string
 	 */
-	public function utilityPrettyDate($date)
+	public function utilityPrettyDate($date): string
 	{
 		if(!$date)
 		{
