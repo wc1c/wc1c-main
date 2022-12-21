@@ -207,7 +207,7 @@ final class Receiver
 
 		if($description !== '')
 		{
-			printf('%s', sanitize_textarea_field($description));
+			printf('%s', wp_kses_post($description));
 		}
 		exit;
 	}
@@ -324,7 +324,7 @@ final class Receiver
 
 		foreach($lines as $line)
 		{
-			printf('%s', sanitize_textarea_field($line));
+			printf('%s', wp_kses_post($line));
 		}
 		die();
 	}
@@ -457,7 +457,7 @@ final class Receiver
 
 		foreach($data as $line_id => $line)
 		{
-			printf('%s', sanitize_textarea_field($line));
+			printf('%s', wp_kses_post($line));
 		}
 		exit;
 	}
