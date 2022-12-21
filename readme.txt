@@ -1,4 +1,4 @@
-=== WC1C Main ===
+=== WC1C ===
 Contributors: WC1C
 Tags: commerceml, 1c, cml, ecommerce, woocommerce, woo, woo 1c, woo commerce, 1s, 1с
 Requires at least: 5.2

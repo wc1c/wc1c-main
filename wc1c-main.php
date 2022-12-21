@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WC1C Main
+ * Plugin Name: WC1C
  * Plugin URI: https://wordpress.org/plugins/wc1c-main/
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
  * Version: 0.14.7
