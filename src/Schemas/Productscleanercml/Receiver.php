@@ -207,7 +207,7 @@ final class Receiver
 
 		if($description !== '')
 		{
-			echo $description;
+			printf('%s', sanitize_textarea_field($description));
 		}
 		exit;
 	}
@@ -324,7 +324,7 @@ final class Receiver
 
 		foreach($lines as $line)
 		{
-			echo $line;
+			printf('%s', sanitize_textarea_field($line));
 		}
 		die();
 	}
@@ -457,7 +457,7 @@ final class Receiver
 
 		foreach($data as $line_id => $line)
 		{
-			echo $line;
+			printf('%s', sanitize_textarea_field($line));
 		}
 		exit;
 	}
