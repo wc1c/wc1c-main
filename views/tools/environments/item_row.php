@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<tr class="">
-    <td class="" style="width: 40%;">
+<tr>
+    <td style="width: 40%;">
         <b><?php esc_html_e($args['title']); ?></b>
     </td>
     <td class="">
