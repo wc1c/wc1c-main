@@ -40,7 +40,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscleanercml');
-		$this->setVersion('0.2.1');
+		$this->setVersion('0.2.2');
 
 		$this->setName(__('Cleaning of products via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Cleaning of existing products in WooCommerce according to the nomenclature from 1C via the CommerceML protocol.', 'wc1c-main'));
