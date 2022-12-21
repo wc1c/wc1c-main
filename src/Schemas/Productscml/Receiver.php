@@ -74,7 +74,7 @@ final class Receiver
 			$output = [];
 			if(isset($_GET['get_param']))
 			{
-				$get_param = ltrim($_GET['get_param'], '?');
+				$get_param = ltrim(sanitize_text_field($_GET['get_param']), '?');
 				parse_str($get_param, $output);
 			}
 
@@ -229,7 +229,7 @@ final class Receiver
 
 		if($description !== '')
 		{
-			echo $description;
+			printf('%s', sanitize_textarea_field($description));
 		}
 		exit;
 	}
@@ -346,7 +346,7 @@ final class Receiver
 
 		foreach($lines as $line)
 		{
-			echo $line;
+			printf('%s', sanitize_textarea_field($line));
 		}
 		die();
 	}
@@ -493,7 +493,7 @@ final class Receiver
 
 		foreach($data as $line_id => $line)
 		{
-			echo $line;
+			printf('%s', sanitize_textarea_field($line));
 		}
 		exit;
 	}
