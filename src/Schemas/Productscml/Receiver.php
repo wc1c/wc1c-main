@@ -80,25 +80,25 @@ final class Receiver
 
 			if(array_key_exists('mode', $output))
 			{
-				$data['mode'] = sanitize_text_field($output['mode']);
+				$data['mode'] = sanitize_key($output['mode']);
 			}
 			elseif(isset($_GET['mode']))
 			{
-				$data['mode'] = sanitize_text_field($_GET['mode']);
+				$data['mode'] = sanitize_key($_GET['mode']);
 			}
 
 			if(array_key_exists('type', $output))
 			{
-				$data['type'] = sanitize_text_field($output['type']);
+				$data['type'] = sanitize_key($output['type']);
 			}
 			elseif(isset($_GET['type']))
 			{
-				$data['type'] = sanitize_text_field($_GET['type']);
+				$data['type'] = sanitize_key($_GET['type']);
 			}
 
 			if($data['type'] === '')
 			{
-				$data['type'] = sanitize_text_field($_GET['get_param?type']);
+				$data['type'] = sanitize_key($_GET['get_param?type']);
 			}
 		}
 
@@ -389,7 +389,7 @@ final class Receiver
 			return false;
 		}
 
-		$session_name = session_name();
+		$session_name = sanitize_text_field(session_name());
 
 		if(!isset($_COOKIE[$session_name]))
 		{
@@ -404,7 +404,7 @@ final class Receiver
 			return false;
 		}
 
-		$session_id = $this->core()->configuration()->getMeta('session_id');
+		$session_id = sanitize_text_field($this->core()->configuration()->getMeta('session_id'));
 
 		if($_COOKIE[$session_name] !== $session_id)
 		{
@@ -424,7 +424,7 @@ final class Receiver
 		{
 			session_id($session_id);
 
-			$this->core()->log()->info(__('PHP session none, start new PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
+			$this->core()->log()->info(__('PHP session none, restart PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
 			session_start();
 		}
 
@@ -527,7 +527,7 @@ final class Receiver
 
 		if(!wc1c()->filesystem()->exists($upload_directory))
 		{
-			$response_description = __('Directory is unavailable:', 'wc1c-main') . ' ' . $upload_directory;
+			$response_description = sprintf('%s %s', __('Directory is unavailable:', 'wc1c-main'), $upload_directory);
 
 			$this->core()->log()->error($response_description, ['directory' => $upload_directory]);
 			$this->sendResponseByType('failure', $response_description);
@@ -549,7 +549,7 @@ final class Receiver
 
 		$upload_file_path = wp_normalize_path($upload_directory . $filename);
 
-		$this->core()->log()->info(__('Saving data to a file named:', 'wc1c-main') . ' ' . $filename, ['file_path' => $upload_file_path]);
+		$this->core()->log()->info(sprintf('%s %s', __('Saving data to a file named:', 'wc1c-main'), $filename), ['file_path' => $upload_file_path]);
 
 		if(strpos($filename, 'import_files') !== false)
 		{
@@ -568,10 +568,6 @@ final class Receiver
 		if(function_exists('file_get_contents'))
 		{
 			$file_data = file_get_contents('php://input');
-		}
-		elseif(isset($GLOBALS['HTTP_RAW_POST_DATA']))
-		{
-			$file_data = &$GLOBALS['HTTP_RAW_POST_DATA'];
 		}
 
 		if(false === $file_data)
