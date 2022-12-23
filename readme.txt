@@ -1,18 +1,16 @@
 === WC1C ===
 Contributors: WC1C
-Tags: commerceml, 1c, cml, ecommerce, woocommerce, woo, woo 1c, woo commerce, 1s, 1с
+Tags: commerceml, 1c, cml, ecommerce, woocommerce, woo, woo 1c, woo commerce, 1s, 1с, 1C, 1С
 Requires at least: 5.2
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 0.14.11
+Stable tag: 0.14.12
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
 
 == Description ==
-Integration of WooCommerce with 1C products is quite complex and diverse.
-We have come a long and difficult way in order to permanently close the need for high-quality integration
-of 1C and sites created on WordPress with the WooCommerce plugin.
+Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
 
 == Translations ==
 * English - default, always included
@@ -25,6 +23,10 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
+
+= 0.14.12 =
+* Up: language files
+* Fix: more
 
 = 0.14.11 =
 * Fix: more
