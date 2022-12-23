@@ -76,7 +76,7 @@ final class MediaLibrary
 				$content .= '<span class="na">' . __('Not found', 'wc1c-main') . '</span>';
 			}
 
-			echo wp_kses_post($content);
+			printf('%s', wp_kses_post($content));
 		}
 	}
 }

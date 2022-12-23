@@ -278,7 +278,7 @@ abstract class TableAbstract
 		{
 			$views[$class] = "\t<li class='$class'>$view";
 		}
-		echo implode(" |</li>\n", $views) . "</li>\n";
+		echo wp_kses_post(implode(" |</li>\n", $views) . "</li>\n");
 		echo '</ul>';
 	}
 
