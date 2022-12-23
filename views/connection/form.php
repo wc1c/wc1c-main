@@ -25,6 +25,6 @@ $object = $args['object'];
             }
         ?>
 
-	    <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php echo $button; ?>">
+	    <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_attr_e($button); ?>">
     </div>
 </form>

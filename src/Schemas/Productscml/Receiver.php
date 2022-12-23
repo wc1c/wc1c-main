@@ -420,6 +420,14 @@ final class Receiver
 			return false;
 		}
 
+		if(session_status() === PHP_SESSION_NONE)
+		{
+			session_id($session_id);
+
+			$this->core()->log()->info(__('PHP session none, start new PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
+			session_start();
+		}
+
 		return true;
 	}
 

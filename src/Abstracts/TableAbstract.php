@@ -517,7 +517,7 @@ abstract class TableAbstract
 		$current = $this->getPagenum();
 		$removable_query_args = wp_removable_query_args();
 
-		$current_url = set_url_scheme(esc_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+		$current_url = set_url_scheme(esc_url_raw('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg($removable_query_args, $current_url);
 
 		$page_links = [];
@@ -797,7 +797,7 @@ abstract class TableAbstract
 	 *
 	 * @return int
 	 */
-	public function getColumnCount()
+	public function getColumnCount(): int
 	{
 		list ($columns, $hidden) = $this->getColumnInfo();
 		$hidden = array_intersect(array_keys($columns), array_filter($hidden));
@@ -812,11 +812,11 @@ abstract class TableAbstract
 	 *
 	 * @param bool $with_id Whether to set the id attribute or not
 	 */
-	public function printColumnHeaders($with_id = true)
+	public function printColumnHeaders(bool $with_id = true)
 	{
 		list($columns, $hidden, $sortable, $primary) = $this->getColumnInfo();
 
-		$current_url = set_url_scheme(esc_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+		$current_url = set_url_scheme(esc_url_raw('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg('paged', $current_url);
 
 		if(isset($_GET['orderby']))

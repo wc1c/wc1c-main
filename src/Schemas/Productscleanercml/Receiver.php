@@ -66,7 +66,7 @@ final class Receiver
 			$output = [];
 			if(isset($_GET['get_param']))
 			{
-				$get_param = ltrim($_GET['get_param'], '?');
+				$get_param = ltrim(sanitize_text_field($_GET['get_param']), '?');
 				parse_str($get_param, $output);
 			}
 

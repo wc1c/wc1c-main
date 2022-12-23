@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.4.4');
+		$this->setVersion('0.5.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -2532,17 +2532,32 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		if(false === $internal_product->get_manage_stock())
+		if($internal_product->get_stock_status() !== 'instock'
+		   && $internal_product->get_stock_status() !== 'outofstock'
+		   && $internal_product->get_stock_status() !==  'onbackorder')
 		{
-			$this->log()->debug(__('Inventory management at the product level is disabled. Enabling.', 'wc1c-main'));
-			$internal_product->set_manage_stock(true);
+			return $internal_product;
+		}
+
+		$internal_product->set_manage_stock(true);
+		if('yes' !== get_option('woocommerce_manage_stock'))
+		{
+			$internal_product->set_manage_stock(false);
 		}
 
 		$product_quantity = $external_product->getQuantity();
 
+		if($product_quantity < $this->getOptions('products_inventories_quantities_min', 1))
+		{
+			$product_quantity = 0;
+		}
+
 		$stock_status = $product_quantity > 0 ? 'instock' : 'outofstock';
 
-		wc_update_product_stock($internal_product, $product_quantity, 'set');
+		if($internal_product->managing_stock())
+		{
+			wc_update_product_stock($internal_product, $product_quantity, 'set');
+		}
 
 		$internal_product->set_stock_status($stock_status);
 

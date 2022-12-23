@@ -38,7 +38,7 @@ $wizard = $args['wizard'];
 
             echo '<li class="nav-item">';
             //echo '<a class="'. implode(' ', $classes) .'" href="'. $wizard->getLinkByStep($step) .'">';
-	        echo '<a class="'. implode(' ', $classes) .'" href="#">';
+	        echo wp_kses_post('<a class="'. implode(' ', $classes) .'" href="#">');
             echo __('Step', 'wc1c-main') . ' ' . $step_i;
 
             if(isset($step_data['name']))
