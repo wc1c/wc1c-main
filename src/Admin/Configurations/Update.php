@@ -45,7 +45,7 @@ class Update
 		$this->initSections($default_sections);
 		$this->setCurrentSection('main');
 
-		$configuration_id = wc1c()->getVar($_GET['configuration_id'], 0);
+		$configuration_id = absint(wc1c()->getVar($_GET['configuration_id'], 0));
 
 		if(false === $this->setConfiguration($configuration_id))
 		{
@@ -142,7 +142,7 @@ class Update
 		$inline_form = new InlineForm($inline_args);
 		$inline_form->load_saved_data(['name' => $configuration->getName()]);
 
-		if(isset($_GET['form']) && $_GET['form'] === $inline_form->get_id())
+		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $inline_form->get_id())
 		{
 			$configuration_name = $inline_form->save();
 

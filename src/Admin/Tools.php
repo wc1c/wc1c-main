@@ -59,7 +59,7 @@ final class Tools extends ScreenAbstract
 	 */
 	protected function initCurrentId()
 	{
-		$tool_id = wc1c()->getVar($_GET['tool_id'], '');
+		$tool_id = sanitize_text_field(wc1c()->getVar($_GET['tool_id'], ''));
 
 		if(!empty($tool_id) && array_key_exists($tool_id, $this->tools))
 		{

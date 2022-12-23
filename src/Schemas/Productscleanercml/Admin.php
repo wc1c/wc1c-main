@@ -122,7 +122,7 @@ class Admin
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsOther($fields)
+	public function configurationsFieldsOther($fields): array
 	{
 		$fields['title_other'] =
 		[
@@ -157,7 +157,7 @@ class Admin
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsSync($fields)
+	public function configurationsFieldsSync($fields): array
 	{
 		$fields['title_sync'] =
 		[
@@ -194,7 +194,7 @@ class Admin
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsClean($fields)
+	public function configurationsFieldsClean($fields): array
 	{
 		$fields['title_clean'] =
 		[
@@ -231,7 +231,7 @@ class Admin
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsLogs($fields)
+	public function configurationsFieldsLogs($fields): array
 	{
 		$fields['title_logger'] =
 		[

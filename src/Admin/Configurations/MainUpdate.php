@@ -35,7 +35,7 @@ class MainUpdate
 
 		$form->load_saved_data($form_data);
 
-		if(isset($_GET['form']) && $_GET['form'] === $form->get_id())
+		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $form->get_id())
 		{
 			$data = $form->save();
 

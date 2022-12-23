@@ -72,11 +72,11 @@ final class Receiver
 
 			if(array_key_exists('mode', $output))
 			{
-				$mode = $output['mode'];
+				$mode = sanitize_key($output['mode']);
 			}
 			elseif(isset($_GET['mode']))
 			{
-				$mode = sanitize_text_field($_GET['mode']);
+				$mode = sanitize_key($_GET['mode']);
 			}
 
 			if(array_key_exists('type', $output))
@@ -85,12 +85,12 @@ final class Receiver
 			}
 			elseif(isset($_GET['type']))
 			{
-				$type = sanitize_text_field($_GET['type']);
+				$type = sanitize_key($_GET['type']);
 			}
 
 			if($type === '')
 			{
-				$type = sanitize_text_field($_GET['get_param?type']);
+				$type = sanitize_key($_GET['get_param?type']);
 			}
 		}
 
@@ -303,6 +303,7 @@ final class Receiver
 
 		$session_id = session_id();
 
+		$this->core()->configuration()->addMetaData('session_name', maybe_serialize($session_name), true);
 		$this->core()->configuration()->addMetaData('session_id', maybe_serialize($session_id), true);
 		$this->core()->configuration()->saveMetaData();
 
@@ -352,7 +353,7 @@ final class Receiver
 		}
 
 		$lazy_sign = sanitize_text_field($_GET['lazysign']);
-		$lazy_sign_store = $this->core()->configuration()->getMeta('receiver_lazy_sign');
+		$lazy_sign_store = sanitize_text_field($this->core()->configuration()->getMeta('receiver_lazy_sign'));
 
 		if($lazy_sign_store !== $lazy_sign)
 		{
@@ -367,7 +368,7 @@ final class Receiver
 			return false;
 		}
 
-		$session_name = session_name();
+		$session_name = sanitize_text_field($this->core()->configuration()->getMeta('session_name'));
 
 		if(!isset($_COOKIE[$session_name]))
 		{
@@ -382,7 +383,7 @@ final class Receiver
 			return false;
 		}
 
-		$session_id = $this->core()->configuration()->getMeta('session_id');
+		$session_id = sanitize_text_field($this->core()->configuration()->getMeta('session_id'));
 
 		if($_COOKIE[$session_name] !== $session_id)
 		{
@@ -396,6 +397,14 @@ final class Receiver
 			}
 
 			return false;
+		}
+
+		if(session_status() === PHP_SESSION_NONE)
+		{
+			session_id($session_id);
+
+			$this->core()->log()->info(__('PHP session none, restart PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
+			session_start();
 		}
 
 		return true;
@@ -422,6 +431,7 @@ final class Receiver
 		else
 		{
 			$error = __('Failed to clear the temp directory of old files.', 'wc1c-main');
+
 			$this->core()->log()->error($error, ['directory' => $this->core()->getUploadDirectory()]);
 			$this->sendResponseByType('failure', $error);
 		}
@@ -524,10 +534,6 @@ final class Receiver
 		if(function_exists('file_get_contents'))
 		{
 			$file_data = file_get_contents('php://input');
-		}
-		elseif(isset($GLOBALS['HTTP_RAW_POST_DATA']))
-		{
-			$file_data = &$GLOBALS['HTTP_RAW_POST_DATA'];
 		}
 
 		if(false === $file_data)
