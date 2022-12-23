@@ -155,16 +155,14 @@ class MainForm extends Form
 
 		$fields['tecodes'] =
 		[
-			'title' => __('Support', 'wc1c-main'),
+			'title' => __('Activation', 'wc1c-main'),
 			'type' => 'title',
 			'description' => sprintf
             (
-                '%s %s <a target="_blank" href="%s">%s</a>. %s',
-                __('If there is no code to support, bug fixes and plugin updates with new features will not be released.', 'wc1c-main'),
+                '%s <a target="_blank" href="%s">%s</a>.',
                 __('The code can be obtained from the plugin website:', 'wc1c-main'),
                 $buy_url,
-                $buy_url,
-                __('Users with active codes participate in the development of integration with 1C, they have a connection with developers and other additional features.', 'wc1c-main')
+                $buy_url
             ),
         ];
 
@@ -187,10 +185,11 @@ class MainForm extends Form
             'class' => 'p-2',
             'description' => sprintf
             (
-                '%s <br /> %s <b>%s</b>',
-                __('If enter the correct code, the current environment will be activated. Enter the code only on the actual workstation.', 'wc1c-main'),
-                __('Current license API status:', 'wc1c-main'),
-                wc1c()->tecodes()->api_get_status()
+                '%s <b>%s</b><br /> <hr> %s <b>%s</b>',
+                __('If enter the correct code, the current environment will be activated.', 'wc1c-main'),
+                __('Enter the code only on the actual workstation.', 'wc1c-main'),
+                __('Current activation API status:', 'wc1c-main'),
+                esc_attr__(wc1c()->tecodes()->api_get_status(), 'wc1c-main')
             ),
             'default' => ''
         ];
