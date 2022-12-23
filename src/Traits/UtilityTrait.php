@@ -67,7 +67,7 @@ trait UtilityTrait
 			return true;
 		}
 
-		$get_tool_id = wc1c()->getVar($_GET['tool_id'], '');
+		$get_tool_id = sanitize_text_field(wc1c()->getVar($_GET['tool_id'], ''));
 
 		if($get_tool_id !== $tool_id)
 		{
@@ -84,7 +84,7 @@ trait UtilityTrait
 	 */
 	public function utilityIsWc1cAdmin()
 	{
-		if(false !== is_admin() && 'wc1c' === wc1c()->getVar($_GET['page'], ''))
+		if(false !== is_admin() && 'wc1c' === sanitize_text_field(wc1c()->getVar($_GET['page'], '')))
 		{
 			return true;
 		}
@@ -101,7 +101,7 @@ trait UtilityTrait
 	 */
 	public function utilityIsWc1cAdminSectionRequest($section = '')
 	{
-		if(wc1c()->getVar($_GET['section'], '') !== $section)
+		if(sanitize_text_field(wc1c()->getVar($_GET['section'], '')) !== $section)
 		{
 			return false;
 		}

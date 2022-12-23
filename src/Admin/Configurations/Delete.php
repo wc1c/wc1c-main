@@ -25,7 +25,7 @@ class Delete
 	 */
 	public function __construct()
 	{
-		$configuration_id = wc1c()->getVar($_GET['configuration_id'], 0);
+		$configuration_id = absint(wc1c()->getVar($_GET['configuration_id'], 0));
 		$error = $this->setConfiguration($configuration_id);
 
 		if($error)

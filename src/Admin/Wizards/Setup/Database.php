@@ -29,7 +29,7 @@ class Database extends StepAbstract
 	{
 		if(isset($_POST['_wc1c-admin-nonce']))
 		{
-			if(wp_verify_nonce($_POST['_wc1c-admin-nonce'], 'wc1c-admin-wizard-database'))
+			if(wp_verify_nonce(sanitize_text_field($_POST['_wc1c-admin-nonce']), 'wc1c-admin-wizard-database'))
 			{
 				$this->tablesInstall();
 				wp_safe_redirect($this->wizard()->getNextStepLink());

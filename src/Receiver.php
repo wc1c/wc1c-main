@@ -39,7 +39,9 @@ final class Receiver
 	 */
 	public function handleRequests()
 	{
-		$wc1c_receiver = wc1c()->getVar($_GET['wc1c-receiver'], false);
+		$_wc1c_receiver = sanitize_text_field($_GET['wc1c-receiver']);
+
+		$wc1c_receiver = wc1c()->getVar($_wc1c_receiver, false);
 
 		wc1c()->log('receiver')->info(__('Received new request for Receiver.', 'wc1c-main'));
 		wc1c()->log('receiver')->debug(__('Receiver request params.', 'wc1c-main'), ['GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER]);
