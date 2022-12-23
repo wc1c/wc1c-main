@@ -334,9 +334,9 @@ abstract class TableAbstract
 
 		foreach($this->_actions as $name => $title)
 		{
-			$class = 'edit' === $name ? ' class="hide-if-no-js"' : '';
-            // $class in 337 string
-			echo "\t" . '<option value="' . esc_attr($name) . '"' . $class . '>' . sanitize_text_field($title) . "</option>\n";
+			$class = 'edit' === $name ? 'hide-if-no-js' : '';
+
+			echo "\t" . '<option value="' . esc_attr($name) . '" class="' . esc_attr($class) . '">' . sanitize_text_field($title) . "</option>\n";
 		}
 
 		echo "</select>\n";
