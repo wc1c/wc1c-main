@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2022-12-23 14:15+0300\n"
+"POT-Creation-Date: 2022-12-24 01:12+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -154,7 +154,7 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:270 src/Admin/Settings/MainForm.php:244
+#: src/Admin.php:270 src/Admin/Settings/MainForm.php:243
 msgid "never"
 msgstr ""
 
@@ -248,7 +248,7 @@ msgid "Base information"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:263
-#: src/Admin/Settings/MainForm.php:175
+#: src/Admin/Settings/MainForm.php:173
 msgid "Status"
 msgstr ""
 
@@ -281,35 +281,35 @@ msgstr ""
 msgid "Configuration schema"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:138
+#: src/Admin/Configurations/CreateForm.php:137
 msgid "Identifier:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:188
+#: src/Admin/Configurations/CreateForm.php:187
 msgid "Configuration create error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:228
+#: src/Admin/Configurations/CreateForm.php:227
 msgid "Configuration create error. Name is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:241
+#: src/Admin/Configurations/CreateForm.php:240
 msgid "Configuration create error. Schema is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:258
+#: src/Admin/Configurations/CreateForm.php:257
 msgid "Configuration create error. Name is exists."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:275
+#: src/Admin/Configurations/CreateForm.php:274
 msgid "Configuration create success. Configuration id: "
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:276
+#: src/Admin/Configurations/CreateForm.php:275
 msgid "edit configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:288
+#: src/Admin/Configurations/CreateForm.php:287
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 
@@ -820,69 +820,59 @@ msgid ""
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:158
-msgid "Support"
+msgid "Activation"
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:163
-msgid ""
-"If there is no code to support, bug fixes and plugin updates with new "
-"features will not be released."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:164
 msgid "The code can be obtained from the plugin website:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:167
-msgid ""
-"Users with active codes participate in the development of integration with "
-"1C, they have a connection with developers and other additional features."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:178
+#: src/Admin/Settings/MainForm.php:176
 msgid ""
 "Support code activated. To activate another code, you can enter it again."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:185
+#: src/Admin/Settings/MainForm.php:183
 msgid "Code for activation"
 msgstr ""
 
+#: src/Admin/Settings/MainForm.php:189
+msgid "If enter the correct code, the current environment will be activated."
+msgstr ""
+
+#: src/Admin/Settings/MainForm.php:190
+msgid "Enter the code only on the actual workstation."
+msgstr ""
+
 #: src/Admin/Settings/MainForm.php:191
-msgid ""
-"If enter the correct code, the current environment will be activated. Enter "
-"the code only on the actual workstation."
+msgid "Current activation API status:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:192
-msgid "Current license API status:"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:254
+#: src/Admin/Settings/MainForm.php:253
 msgid "Code ID"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:256
+#: src/Admin/Settings/MainForm.php:255
 msgid "expires:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:258
+#: src/Admin/Settings/MainForm.php:257
 msgid "Instance ID"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:260
+#: src/Admin/Settings/MainForm.php:259
 msgid "Domain"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:314
+#: src/Admin/Settings/MainForm.php:313
 msgid "Activate"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:346
+#: src/Admin/Settings/MainForm.php:345
 msgid "The support code is invalid. Enter the correct code."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:379
+#: src/Admin/Settings/MainForm.php:378
 msgid "Support code activated successfully. Reload the page to display."
 msgstr ""
 
@@ -1501,151 +1491,155 @@ msgstr ""
 
 #: src/Schemas/Productscleanercml/Receiver.php:300
 #: src/Schemas/Productscml/Receiver.php:322
-#: src/Schemas/Productscml/Receiver.php:427
 msgid "PHP session none, start new PHP session."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:309
+#: src/Schemas/Productscleanercml/Receiver.php:310
 #: src/Schemas/Productscml/Receiver.php:331
 msgid "Request authorization from 1C successfully completed."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:323
-#: src/Schemas/Productscleanercml/Receiver.php:456
+#: src/Schemas/Productscleanercml/Receiver.php:324
+#: src/Schemas/Productscleanercml/Receiver.php:466
 #: src/Schemas/Productscml/Receiver.php:345
 #: src/Schemas/Productscml/Receiver.php:500
 msgid "Print lines for 1C."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:343
+#: src/Schemas/Productscleanercml/Receiver.php:344
 #: src/Schemas/Productscml/Receiver.php:365
 msgid ""
 "Authorization key verification failed. 1C did not send the name of the lazy "
 "signature."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:359
+#: src/Schemas/Productscleanercml/Receiver.php:360
 #: src/Schemas/Productscml/Receiver.php:381
 msgid ""
 "Authorization key verification failed. 1C sent an incorrect lazy signature."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:374
+#: src/Schemas/Productscleanercml/Receiver.php:375
 #: src/Schemas/Productscml/Receiver.php:396
 msgid "Authorization key verification failed. 1C sent an empty session name."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:389
+#: src/Schemas/Productscleanercml/Receiver.php:390
 #: src/Schemas/Productscml/Receiver.php:411
 msgid "Authorization check failed - session id differs from the original."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:409
+#: src/Schemas/Productscleanercml/Receiver.php:406
+#: src/Schemas/Productscml/Receiver.php:427
+msgid "PHP session none, restart PHP session."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:418
 #: src/Schemas/Productscml/Receiver.php:465
 msgid "Initialization of receiving requests from 1C."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:416
+#: src/Schemas/Productscleanercml/Receiver.php:425
 msgid "Session for receiving requests."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:420
+#: src/Schemas/Productscleanercml/Receiver.php:429
 #: src/Schemas/Productscml/Receiver.php:449
 msgid ""
 "The directory for temporary files was successfully cleared of old files."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:424
+#: src/Schemas/Productscleanercml/Receiver.php:433
 #: src/Schemas/Productscml/Receiver.php:453
 msgid "Failed to clear the temp directory of old files."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:435
+#: src/Schemas/Productscleanercml/Receiver.php:445
 #: src/Schemas/Productscml/Receiver.php:479
 msgid "The maximum size of accepted files from 1C is assigned:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:440
+#: src/Schemas/Productscleanercml/Receiver.php:450
 #: src/Schemas/Productscml/Receiver.php:484
 msgid ""
 "Based on the global settings of WC1C, the size of received files has been "
 "reduced from 1C to:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:446
+#: src/Schemas/Productscleanercml/Receiver.php:456
 #: src/Schemas/Productscml/Receiver.php:490
 msgid ""
 "Based on the configuration settings of WC1C, the size of received files has "
 "been reduced from 1C to:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:486
+#: src/Schemas/Productscleanercml/Receiver.php:496
 #: src/Schemas/Productscml/Receiver.php:530
 msgid "Directory is unavailable:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:501
+#: src/Schemas/Productscleanercml/Receiver.php:511
 #: src/Schemas/Productscml/Receiver.php:545
 msgid "Filename is empty."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:508
+#: src/Schemas/Productscleanercml/Receiver.php:518
 #: src/Schemas/Productscml/Receiver.php:552
 msgid "Saving data to a file named:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:517
+#: src/Schemas/Productscleanercml/Receiver.php:527
 #: src/Schemas/Productscml/Receiver.php:561
 msgid "Directory is unavailable for write."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:535
-#: src/Schemas/Productscml/Receiver.php:579
+#: src/Schemas/Productscleanercml/Receiver.php:541
+#: src/Schemas/Productscml/Receiver.php:575
 msgid "The request contains no data to write to the file. Retry the upload."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:543
-#: src/Schemas/Productscml/Receiver.php:587
+#: src/Schemas/Productscleanercml/Receiver.php:549
+#: src/Schemas/Productscml/Receiver.php:583
 msgid "The file exists. Write a data to the end of an existing file."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:556
-#: src/Schemas/Productscml/Receiver.php:600
+#: src/Schemas/Productscleanercml/Receiver.php:562
+#: src/Schemas/Productscml/Receiver.php:596
 msgid "The data is successfully written to a file. Recorded data size:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:563
-#: src/Schemas/Productscml/Receiver.php:665
+#: src/Schemas/Productscleanercml/Receiver.php:569
+#: src/Schemas/Productscml/Receiver.php:661
 msgid "Failed to write data to file."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:574
-#: src/Schemas/Productscml/Receiver.php:676
+#: src/Schemas/Productscleanercml/Receiver.php:580
+#: src/Schemas/Productscml/Receiver.php:672
 msgid "On request from 1C - started importing data from a file."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:580
-#: src/Schemas/Productscml/Receiver.php:682
+#: src/Schemas/Productscleanercml/Receiver.php:586
+#: src/Schemas/Productscml/Receiver.php:678
 msgid "1C sent an empty file name for data import."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:589
-#: src/Schemas/Productscml/Receiver.php:691
+#: src/Schemas/Productscleanercml/Receiver.php:595
+#: src/Schemas/Productscml/Receiver.php:687
 msgid "File for import is not exists."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:600
-#: src/Schemas/Productscml/Receiver.php:702
+#: src/Schemas/Productscleanercml/Receiver.php:606
+#: src/Schemas/Productscml/Receiver.php:698
 msgid "Import of data from file completed successfully."
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:607
-#: src/Schemas/Productscml/Receiver.php:709
+#: src/Schemas/Productscleanercml/Receiver.php:613
+#: src/Schemas/Productscml/Receiver.php:705
 msgid "Importing data from a file ended with an error:"
 msgstr ""
 
-#: src/Schemas/Productscleanercml/Receiver.php:612
-#: src/Schemas/Productscml/Receiver.php:714
+#: src/Schemas/Productscleanercml/Receiver.php:618
+#: src/Schemas/Productscml/Receiver.php:710
 msgid "Importing data from a file ended with an error."
 msgstr ""
 
@@ -3381,25 +3375,25 @@ msgstr ""
 msgid "Session for receiving requests is changed by external algorithms."
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:609
+#: src/Schemas/Productscml/Receiver.php:605
 msgid ""
 "The file was not saved to the media library. Adding is disabled in the "
 "settings."
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:631
+#: src/Schemas/Productscml/Receiver.php:627
 msgid "No name"
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:645
+#: src/Schemas/Productscml/Receiver.php:641
 msgid "The image has not been added to the media library."
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:649
+#: src/Schemas/Productscml/Receiver.php:645
 msgid "Image added to media library, id:"
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:654
+#: src/Schemas/Productscml/Receiver.php:650
 msgid ""
 "The image has not been added to the media library. It was added earlier, id:"
 msgstr ""

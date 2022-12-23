@@ -1,4 +1,4 @@
-WC1C > integration of WooCommerce with 1C products (different configurations)
+WC1C
 
 Copyright © 2018-2022 by WC1C team (http://wc1c.info)
 
