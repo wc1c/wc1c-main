@@ -239,7 +239,7 @@ final class Admin
 	 */
 	public function linksLeft(array $links): array
 	{
-		return array_merge(['site' => '<a href="' . admin_url('admin.php?page=wc1c') . '">' . __('Settings', 'wc1c-main') . '</a>'], $links);
+		return array_merge(['site' => '<a href="' . esc_url(admin_url('admin.php?page=wc1c')) . '">' . __('Settings', 'wc1c-main') . '</a>'], $links);
 	}
 
 	/**
@@ -284,6 +284,6 @@ final class Admin
 			$class .= ' status-2';
 		}
 
-		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '"> ' . $text . ' </a>';
+		echo wp_kses_post('<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . esc_attr($class) . '"> ' . sanitize_text_field($text) . ' </a>');
 	}
 }

@@ -121,7 +121,7 @@ class CreateForm extends FormAbstract
 				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html($data); ?></label>
 
 				<div class="mt-2" style="font-weight: normal;">
-					<?php echo $this->get_description_html($data); ?>
+					<?php echo wp_kses_post($this->get_description_html($data)); ?>
 				</div>
 
 			</th>
@@ -134,7 +134,6 @@ class CreateForm extends FormAbstract
 					<div class="mb-3 border-1 border-light p-2" style="border: solid;">
 
                         <div>
-
 	                        <?php _e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>
                             <hr>
                         </div>
