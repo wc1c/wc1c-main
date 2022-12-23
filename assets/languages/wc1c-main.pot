@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2022-12-24 00:52+0300\n"
+"POT-Creation-Date: 2022-12-24 01:12+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -154,7 +154,7 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:270 src/Admin/Settings/MainForm.php:244
+#: src/Admin.php:270 src/Admin/Settings/MainForm.php:243
 msgid "never"
 msgstr ""
 
@@ -248,7 +248,7 @@ msgid "Base information"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:263
-#: src/Admin/Settings/MainForm.php:175
+#: src/Admin/Settings/MainForm.php:173
 msgid "Status"
 msgstr ""
 
@@ -820,69 +820,59 @@ msgid ""
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:158
-msgid "Support"
+msgid "Activation"
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:163
-msgid ""
-"If there is no code to support, bug fixes and plugin updates with new "
-"features will not be released."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:164
 msgid "The code can be obtained from the plugin website:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:167
-msgid ""
-"Users with active codes participate in the development of integration with "
-"1C, they have a connection with developers and other additional features."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:178
+#: src/Admin/Settings/MainForm.php:176
 msgid ""
 "Support code activated. To activate another code, you can enter it again."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:185
+#: src/Admin/Settings/MainForm.php:183
 msgid "Code for activation"
 msgstr ""
 
+#: src/Admin/Settings/MainForm.php:189
+msgid "If enter the correct code, the current environment will be activated."
+msgstr ""
+
+#: src/Admin/Settings/MainForm.php:190
+msgid "Enter the code only on the actual workstation."
+msgstr ""
+
 #: src/Admin/Settings/MainForm.php:191
-msgid ""
-"If enter the correct code, the current environment will be activated. Enter "
-"the code only on the actual workstation."
+msgid "Current activation API status:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:192
-msgid "Current license API status:"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:254
+#: src/Admin/Settings/MainForm.php:253
 msgid "Code ID"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:256
+#: src/Admin/Settings/MainForm.php:255
 msgid "expires:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:258
+#: src/Admin/Settings/MainForm.php:257
 msgid "Instance ID"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:260
+#: src/Admin/Settings/MainForm.php:259
 msgid "Domain"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:314
+#: src/Admin/Settings/MainForm.php:313
 msgid "Activate"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:346
+#: src/Admin/Settings/MainForm.php:345
 msgid "The support code is invalid. Enter the correct code."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:379
+#: src/Admin/Settings/MainForm.php:378
 msgid "Support code activated successfully. Reload the page to display."
 msgstr ""
 
