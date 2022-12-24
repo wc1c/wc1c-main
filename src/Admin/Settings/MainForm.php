@@ -38,7 +38,7 @@ class MainForm extends Form
 	 *
 	 * @return array
 	 */
-	public function init_fields_configurations($fields)
+	public function init_fields_configurations($fields): array
 	{
 		$fields['configurations_title'] =
 		[
@@ -84,7 +84,7 @@ class MainForm extends Form
 	 *
 	 * @return array
 	 */
-	public function init_fields_technical($fields)
+	public function init_fields_technical($fields): array
 	{
 		$fields['technical_title'] =
 		[
@@ -128,7 +128,7 @@ class MainForm extends Form
 	 *
 	 * @return array
 	 */
-	public function init_fields_main($fields)
+	public function init_fields_main($fields): array
 	{
 		$fields['receiver'] =
 		[
@@ -149,7 +149,7 @@ class MainForm extends Form
 	 *
 	 * @return array
 	 */
-	public function init_form_fields_tecodes($fields)
+	public function init_form_fields_tecodes($fields): array
 	{
 		$buy_url = esc_url('https://wc1c.info/market/code');
 
@@ -173,7 +173,7 @@ class MainForm extends Form
                 'title' => __('Status', 'wc1c-main'),
                 'type' => 'tecodes_status',
                 'class' => 'p-2',
-                'description' => __('Support code activated. To activate another code, you can enter it again.', 'wc1c-main'),
+                'description' => __('Code activated. To activate another code, you can enter it again.', 'wc1c-main'),
                 'default' => ''
             ];
 		}
@@ -201,11 +201,11 @@ class MainForm extends Form
 	 * Generate Tecodes data HTML
 	 *
 	 * @param string $key Field key.
-	 * @param array  $data Field data.
+	 * @param array $data Field data.
 	 *
 	 * @return string
 	 */
-	public function generate_tecodes_status_html($key, $data)
+	public function generate_tecodes_status_html(string $key, array $data): string
 	{
 		$field_key = $this->get_prefix_field_key($key);
 		$defaults = array
@@ -274,11 +274,11 @@ class MainForm extends Form
 	 * Generate Tecodes Text Input HTML
 	 *
 	 * @param string $key Field key.
-	 * @param array  $data Field data.
+	 * @param array $data Field data.
 	 *
 	 * @return string
 	 */
-	public function generate_tecodes_text_html($key, $data)
+	public function generate_tecodes_text_html(string $key, array $data): string
 	{
 		$field_key = $this->get_prefix_field_key($key);
 		$defaults = array
@@ -328,7 +328,7 @@ class MainForm extends Form
 	 *
 	 * @return string
 	 */
-	public function validate_tecodes_code_field($key, $value)
+	public function validate_tecodes_code_field(string $key, string $value): string
 	{
 		if($value === '')
 		{
@@ -336,13 +336,13 @@ class MainForm extends Form
 		}
 
 		$value_valid = explode('-', $value);
-		if('WPWC1C' !== strtoupper(reset($value_valid)))
+		if('WPWC1C' !== strtoupper(reset($value_valid)) && 'WC1C' !== strtoupper(reset($value_valid)))
 		{
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('The support code is invalid. Enter the correct code.', 'wc1c-main')
+					'data' => __('The code is invalid. Enter the correct code.', 'wc1c-main')
 				]
 			);
 			return '';
@@ -375,7 +375,7 @@ class MainForm extends Form
 	        (
 		        [
 			        'type' => 'info',
-			        'data' => __('Support code activated successfully. Reload the page to display.', ('wc1c-main'))
+			        'data' => __('Code activated successfully. Reload the page to display.', ('wc1c-main'))
 		        ]
 	        );
         }
