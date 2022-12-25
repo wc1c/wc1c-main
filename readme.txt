@@ -21,6 +21,15 @@ Implementation of a mechanism for flexible exchange of various data between 1C p
 2. Activate the plugin.
 3. Done, goto plugin settings.
 
+== Screenshots ==
+
+1. Configurations
+2. Tools
+3. Settings
+4. Creating new configuration
+5. Edit configuration
+6. Edit configuration 2
+
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
