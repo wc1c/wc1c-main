@@ -280,7 +280,7 @@ final class Admin
 		}
 		elseif($status)
 		{
-			$text .= ' (' . __('no support', 'wc1c-main') . ')';
+			$text .= ' (' . __('not activated', 'wc1c-main') . ')';
 			$class .= ' status-2';
 		}
 

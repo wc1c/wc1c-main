@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: WC1C
- * Plugin URI: https://wordpress.org/plugins/wc1c-main/
- * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
- * Version: 0.14.12
+ * Plugin URI: https://wc1c.info
+ * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
+ * Version: 0.14.13
  * WC requires at least: 4.3
  * WC tested up to: 7.2
  * Requires at least: 5.2
@@ -13,7 +13,6 @@
  * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2022
  * Author: WC1C team
- * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  **/

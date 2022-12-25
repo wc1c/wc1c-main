@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
 "POT-Creation-Date: 2022-12-24 01:13+0300\n"
-"PO-Revision-Date: 2022-12-24 01:14+0300\n"
+"PO-Revision-Date: 2022-12-24 02:31+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -896,7 +896,7 @@ msgstr "Если ввести правильный код, будет актив
 
 #: src/Admin/Settings/MainForm.php:190
 msgid "Enter the code only on the actual workstation."
-msgstr "Введите код только на реальной рабочем окружении."
+msgstr "Введите код только на реальном рабочем окружении."
 
 #: src/Admin/Settings/MainForm.php:191
 msgid "Current activation API status:"
