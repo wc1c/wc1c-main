@@ -1,6 +1,6 @@
 === WC1C ===
 Contributors: WC1C
-Tags: commerceml, 1c, cml, ecommerce, woocommerce, 1s, 1с, 1C, 1С, wc1c
+Tags: commerceml, 1c, cml, ecommerce,, wc1c woocommerce, integration 1C, 1s, 1с, 1C, 1С
 Requires at least: 5.2
 Tested up to: 6.1
 Requires PHP: 7.0
@@ -8,6 +8,8 @@ Stable tag: 0.14.12
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
+
+Integration of WooCommerce with 1C products (different configurations)
 
 == Description ==
 Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
@@ -20,6 +22,33 @@ Implementation of a mechanism for flexible exchange of various data between 1C p
 1. Archive extract and upload folder "wc1c-main" to /wp-content/plugins (final path: /wp-content/plugins/wc1c-main/).
 2. Activate the plugin.
 3. Done, goto plugin settings.
+
+== Frequently Asked Questions ==
+
+= What versions of 1C are supported? =
+Work is possible with all versions of 1C, which logically requires integration with an online store. Support for a specific version of 1C depends on the scheme used on the basis of which the configuration was created.
+
+= Is it possible to update only some product data? =
+This is possible, but depends on the exchange scheme used and the extensions installed. You can not only update prices, balances separately, but also update them and other information on various conditions.
+
+= What is activation in the settings and what does it give? =
+Activation allows the WC1C team to work on improving the plugin and release updates. In addition to providing financial assistance to improve WC1C, projects with activation have additional features, transmit statistical information and error data in the background for further release of updates.
+
+= Missing feature, how to add it? =
+First of all, you need to look at the section with extensions on the official website. If there is no extension that adds the desired feature, you can develop this feature yourself, or turn to paid services.
+You can also try to ask to add this feature for free (if activated) to the main plugin, or try to implement it through actions and filters (extensibility mechanism).
+
+= Are updates being released? =
+Updates are released as needed, but only when available to the WC1C team. For more or less guaranteed receipt of timely updates, you can purchase an activation code. On average, updates are needed once a month when WooCommerce updates are released.
+
+== Screenshots ==
+
+1. Configurations
+2. Tools
+3. Settings
+4. Creating new configuration
+5. Edit configuration
+6. Edit configuration 2
 
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
