@@ -33,7 +33,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return bool
 	 */
-	protected function filterNullMeta($meta)
+	protected function filterNullMeta($meta): bool
 	{
 		return !is_null($meta->value);
 	}
@@ -43,7 +43,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return array of objects
 	 */
-	public function getMetaData()
+	public function getMetaData(): array
 	{
 		$this->maybeReadMetaData();
 
@@ -55,7 +55,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return array
 	 */
-	public function getData()
+	public function getData(): array
 	{
 		return array_merge(['id' => $this->getId()], $this->data, ['meta_data' => $this->getMetaData()]);
 	}
@@ -113,7 +113,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return bool true if it's an internal key, false otherwise
 	 */
-	protected function isInternalMetaKey($key)
+	protected function isInternalMetaKey(string $key): bool
 	{
 		$internal_meta_key = !empty($key) && $this->storage && in_array($key, $this->storage->getInternalMetaKeys(), true);
 
@@ -187,7 +187,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return boolean
 	 */
-	public function metaExists($key = '')
+	public function metaExists(string $key = ''): bool
 	{
 		$this->maybeReadMetaData();
 
@@ -201,9 +201,9 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @param array $data Key/Value pairs
 	 */
-	public function setMetaData($data)
+	public function setMetaData(array $data)
 	{
-		if(!empty($data) && is_array($data))
+		if(!empty($data))
 		{
 			$this->maybeReadMetaData();
 
@@ -270,7 +270,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return mixed|void
 	 */
-	public function updateMetaData($key, $value, $meta_id = 0)
+	public function updateMetaData(string $key, $value, $meta_id = 0)
 	{
 		if($this->isInternalMetaKey($key))
 		{
@@ -329,7 +329,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @param string $key Meta key
 	 */
-	public function deleteMetaData($key)
+	public function deleteMetaData(string $key)
 	{
 		$this->maybeReadMetaData();
 
@@ -349,7 +349,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @param int $mid Meta ID
 	 */
-	public function deleteMetaDataById($mid)
+	public function deleteMetaDataById(int $mid)
 	{
 		$this->maybeReadMetaData();
 		$array_keys = array_keys(wp_list_pluck($this->meta_data, 'id'), (int) $mid, true);
