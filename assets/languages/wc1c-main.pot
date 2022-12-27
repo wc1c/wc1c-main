@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2022-12-24 01:12+0300\n"
+"POT-Creation-Date: 2022-12-28 01:03+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -167,7 +167,7 @@ msgid "to:"
 msgstr ""
 
 #: src/Admin.php:283
-msgid "no support"
+msgid "not activated"
 msgstr ""
 
 #: src/Admin/Columns/WooCommerce/Categories.php:38
@@ -828,8 +828,7 @@ msgid "The code can be obtained from the plugin website:"
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:176
-msgid ""
-"Support code activated. To activate another code, you can enter it again."
+msgid "Code activated. To activate another code, you can enter it again."
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:183
@@ -869,11 +868,11 @@ msgid "Activate"
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:345
-msgid "The support code is invalid. Enter the correct code."
+msgid "The code is invalid. Enter the correct code."
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:378
-msgid "Support code activated successfully. Reload the page to display."
+msgid "Code activated successfully. Reload the page to display."
 msgstr ""
 
 #: src/Admin/Wizards/Setup/Database.php:43
@@ -4051,19 +4050,15 @@ msgid "WC1C"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://wordpress.org/plugins/wc1c-main/"
+msgid "https://wc1c.info"
 msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
 "Implementation of a mechanism for flexible exchange of various data between "
-"1C products and a site running WordPress using the WooCommerce plugin."
+"1C products and the WooCommerce plugin."
 msgstr ""
 
 #. Author of the plugin/theme
 msgid "WC1C team"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "https://wc1c.info"
 msgstr ""

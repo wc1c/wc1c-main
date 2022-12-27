@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2022-12-24 01:13+0300\n"
-"PO-Revision-Date: 2022-12-24 02:31+0300\n"
+"POT-Creation-Date: 2022-12-28 01:02+0300\n"
+"PO-Revision-Date: 2022-12-28 01:03+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -173,8 +173,8 @@ msgid "to:"
 msgstr "до:"
 
 #: src/Admin.php:283
-msgid "no support"
-msgstr "без поддержки"
+msgid "not activated"
+msgstr "активации нет"
 
 #: src/Admin/Columns/WooCommerce/Categories.php:38
 #: src/Admin/Columns/WooCommerce/Orders.php:36
@@ -880,11 +880,10 @@ msgid "The code can be obtained from the plugin website:"
 msgstr "Код можно получить на сайте плагина:"
 
 #: src/Admin/Settings/MainForm.php:176
-msgid ""
-"Support code activated. To activate another code, you can enter it again."
+msgid "Code activated. To activate another code, you can enter it again."
 msgstr ""
-"Код поддержки активирован. Чтобы активировать другой код, можно ввести "
-"другой код и активировать."
+"Код активирован. Чтобы активировать другой код, можно ввести другой код и "
+"активировать."
 
 #: src/Admin/Settings/MainForm.php:183
 msgid "Code for activation"
@@ -923,13 +922,12 @@ msgid "Activate"
 msgstr "Активировать"
 
 #: src/Admin/Settings/MainForm.php:345
-msgid "The support code is invalid. Enter the correct code."
-msgstr "Код поддержки недействителен. Введите правильный код."
+msgid "The code is invalid. Enter the correct code."
+msgstr "Код недействителен. Введите правильный код."
 
 #: src/Admin/Settings/MainForm.php:378
-msgid "Support code activated successfully. Reload the page to display."
-msgstr ""
-"Код поддержки успешно активирован. Перезагрузите страницу для отображения."
+msgid "Code activated successfully. Reload the page to display."
+msgstr "Код успешно активирован. Перезагрузите страницу для отображения."
 
 #: src/Admin/Wizards/Setup/Database.php:43
 msgid "Create tables error. Please retry."
@@ -2962,8 +2960,8 @@ msgid ""
 "These settings only apply to the creation of new products, ie. those "
 "products that are not found by the keys for product synchronization."
 msgstr ""
-"Эти настройки применяются только к созданию новых продуктов, т.е. те "
-"продукты, которые не найдены по ключам для синхронизации продуктов."
+"Эти настройки применяются только к созданию новых продуктов, т.е. тех "
+"продуктов, которые не найдены по ключам для синхронизации продуктов."
 
 #: src/Schemas/Productscml/Admin.php:1141
 msgid "Status of the created product"
@@ -4519,24 +4517,26 @@ msgid "WC1C"
 msgstr "WC1C"
 
 #. Plugin URI of the plugin/theme
-msgid "https://wordpress.org/plugins/wc1c-main/"
-msgstr "https://wordpress.org/plugins/wc1c-main/"
+msgid "https://wc1c.info"
+msgstr "https://wc1c.info"
 
 #. Description of the plugin/theme
 msgid ""
 "Implementation of a mechanism for flexible exchange of various data between "
-"1C products and a site running WordPress using the WooCommerce plugin."
+"1C products and the WooCommerce plugin."
 msgstr ""
 "Реализация механизма гибкого обмена различными данными между продуктами 1С и "
-"сайтом под управлением WordPress с использованием плагина WooCommerce."
+"данными плагина WooCommerce."
 
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
 
-#. Author URI of the plugin/theme
-msgid "https://wc1c.info"
-msgstr "https://wc1c.info"
+#~ msgid "no support"
+#~ msgstr "без поддержки"
+
+#~ msgid "https://wordpress.org/plugins/wc1c-main/"
+#~ msgstr "https://wordpress.org/plugins/wc1c-main/"
 
 #~ msgid "Support"
 #~ msgstr "Поддержка"
