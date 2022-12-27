@@ -51,7 +51,7 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 6. Edit configuration 2
 
 == Changelog ==
-List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
+List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
 = 0.14.14 =
 * Up: language files
