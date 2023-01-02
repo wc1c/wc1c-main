@@ -94,6 +94,22 @@ class Catalog extends DataAbstract implements CatalogDataContract
 	}
 
 	/**
+	 * @param array $warehouses
+	 */
+	public function setWarehouses(array $warehouses)
+	{
+		$this->data['warehouses'] = $warehouses;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getWarehouses(): array
+	{
+		return $this->data['warehouses'];
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isOnlyChanges(): bool

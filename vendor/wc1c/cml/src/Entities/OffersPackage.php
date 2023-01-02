@@ -104,15 +104,15 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param bool $only_changes
 	 */
-	public function setOnlyChanges($only_changes)
+	public function setOnlyChanges(bool $only_changes)
 	{
 		$this->data['only_changes'] = $only_changes;
 	}
 
 	/**
-	 * @return mixed|string
+	 * @return string
 	 */
-	public function getCatalogId()
+	public function getCatalogId(): string
 	{
 		return $this->data['catalog_id'];
 	}
@@ -141,5 +141,21 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	public function getPriceTypes(): array
 	{
 		return $this->data['price_types'];
+	}
+
+	/**
+	 * @param array $warehouses
+	 */
+	public function setWarehouses(array $warehouses)
+	{
+		$this->data['warehouses'] = $warehouses;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getWarehouses(): array
+	{
+		return $this->data['warehouses'];
 	}
 }

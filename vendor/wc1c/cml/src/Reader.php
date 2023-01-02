@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 use XMLReader;
-use Wc1c\Main\Exceptions\RuntimeException;
+use RuntimeException;
 use Wc1c\Cml\Entities\OffersPackage;
 use Wc1c\Cml\Contracts\CatalogDataContract;
 use Wc1c\Cml\Contracts\ClassifierDataContract;
@@ -322,8 +322,10 @@ class Reader
 
 	/**
 	 * Debug method
+	 *
+	 * @return void|string
 	 */
-	public function dump()
+	public function dump($print = true)
 	{
 		$reader = $this->xml_reader;
 		$nodeType = $reader->nodeType;
@@ -367,6 +369,11 @@ class Reader
 		$nodeTypeName = $this->getNodeTypeName($nodeType);
 
 		$label = sprintf("(#%d) %s %s", $nodeType, $nodeTypeName, $extra);
+
+		if(!$print)
+		{
+			return sprintf("%s%s\n", str_repeat('  ', $reader->depth), $label);
+		}
 
 		printf("%s%s\n", str_repeat('  ', $reader->depth), $label);
 	}
