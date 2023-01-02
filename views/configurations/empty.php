@@ -4,11 +4,11 @@
 	if(!empty($_REQUEST['s']))
 	{
 		$search_text = wc_clean(wp_unslash($_REQUEST['s']));
-        printf('%s %s', __( 'Configurations by query is not found, query:', 'wc1c' ), $search_text);
+        printf('%s %s', __( 'Configurations by query is not found, query:', 'wc1c-main' ), $search_text);
 	}
     else
     {
-	    esc_html_e( 'Configurations not found.', 'wc1c' );
+	    esc_html_e( 'Configurations not found.', 'wc1c-main' );
     }
 ?></h2>
 
