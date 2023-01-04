@@ -196,4 +196,16 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 		}
 		return true;
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasProperties(): bool
+	{
+		if(empty($this->data['properties']))
+		{
+			return false;
+		}
+		return true;
+	}
 }
