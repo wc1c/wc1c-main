@@ -366,7 +366,7 @@ final class Core
 	 *
 	 * @return SettingsContract
 	 */
-	public function settings($context = 'main')
+	public function settings(string $context = 'main')
 	{
 		if(!isset($this->settings[$context]))
 		{
