@@ -514,20 +514,36 @@ class Decoder
 		{
 			$property_data['values_type'] = (string)$xml_property->ТипЗначений;
 		}
+		// 2.04.1CBitrix
+		if($xml_property->ТипыЗначений->ТипЗначений->Тип)
+		{
+			$property_data['values_type'] = (string)$xml_property->ТипыЗначений->ТипЗначений->Тип;
+		}
 
 		/**
 		 * Варианты значений
 		 *
 		 * Содержит коллекцию вариантов значений свойства.
-		 * Если варианты указаны, то при указании  значений данного свойства для товаров должны использоваться значения СТРОГО из данного списка
+		 * Если варианты указаны, то при указании значений данного свойства для товаров должны использоваться значения СТРОГО из данного списка
 		 */
 		$property_values_data = [];
 		$property_data['values_variants'] = $property_values_data;
-		if($property_data['values_type'] === 'Справочник' && $xml_property->ВариантыЗначений->Справочник)
+		if($property_data['values_type'] === 'Справочник')
 		{
-			foreach($xml_property->ВариантыЗначений->Справочник as $value)
+			if($xml_property->ВариантыЗначений->Справочник)
 			{
-				$property_values_data[(string)$value->ИдЗначения] = htmlspecialchars(trim((string)$value->Значение));
+				foreach($xml_property->ВариантыЗначений->Справочник as $value)
+				{
+					$property_values_data[(string)$value->ИдЗначения] = htmlspecialchars(trim((string)$value->Значение));
+				}
+			}
+			// 2.04.1CBitrix
+			if($xml_property->ТипыЗначений->ТипЗначений)
+			{
+				foreach($xml_property->ТипыЗначений->ТипЗначений->ВариантыЗначений as $value)
+				{
+					$property_values_data[(string)$value->Ид] = htmlspecialchars(trim((string)$value->Значение));
+				}
 			}
 
 			$property_data['values_variants'] = $property_values_data;
@@ -842,13 +858,25 @@ class Decoder
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->ПометкаУдаления === 'true' ? 'yes' : 'no';
 		}
-
-		/**
-		 * УНФ
-		 */
+		/* УНФ */
 		if($xml_product_data->Статус)
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->Статус === 'Удален' ? 'yes' : 'no';
+		}
+		/* 2.04.1CBitrix */
+		if($xml_product_data->ПомеченНаУдаление)
+		{
+			$product_data['delete_mark'] = (string)$xml_product_data->ПомеченНаУдаление === 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Спецификация
+		 */
+		/* 2.04.1CBitrix */
+		$product_data['specification'] = '';
+		if($xml_product_data->Спецификация)
+		{
+			$product_data['specification'] =  htmlspecialchars(trim((string)$xml_product_data->Спецификация));
 		}
 
 		/**
