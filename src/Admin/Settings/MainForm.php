@@ -110,13 +110,20 @@ class MainForm extends Form
 		];
 
 		$fields['php_post_max_size'] =
-		[
-			'title' => __('Maximum request size', 'wc1c-main'),
-			'type' => 'text',
-			'description' => __('The setting must not take a size larger than specified in the server settings.', 'wc1c-main'),
-			'default' => wc1c()->environment()->get('php_post_max_size'),
-			'css' => 'min-width: 100px;',
-		];
+        [
+            'title' => __('Maximum request size', 'wc1c-main'),
+            'type' => 'text',
+            'description' => sprintf
+            (
+                '%s<br />%s <b>%s</b><hr>%s',
+                __('Enter the maximum size of accepted requests at a time in bytes. May be specified with a dimension suffix, such as 7M, where M = megabyte, K = kilobyte, G - gigabyte.', 'wc1c-main'),
+                __('Current SERVER limit:', 'wc1c-main'),
+                wc1c()->environment()->get('php_post_max_size'),
+                __('Can only decrease the value, because it must not exceed the limits from the server limit.', 'wc1c-main')
+            ),
+            'default' => wc1c()->environment()->get('php_post_max_size'),
+            'css' => 'min-width: 100px;',
+        ];
 
 		return $fields;
 	}
