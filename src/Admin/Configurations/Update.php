@@ -80,7 +80,7 @@ class Update
 	 *
 	 * @return string
 	 */
-	public function outputSchemaErrorText($text)
+	public function outputSchemaErrorText($text): string
 	{
 		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c-main');
 
