@@ -54,6 +54,7 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
 = 0.15.0 =
+* WC tested up to: 7.3
 * Up: ProductsCML to 0.7.0
 * Up: language files
 * Fix: more
