@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c-main',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '4346f16d02dac57b3db5a314f92d66053949d3cd',
+        'reference' => '2704437534ecc4ed0264eab11d13ed350af67239',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -123,7 +123,7 @@
         'wc1c/wc1c-main' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '4346f16d02dac57b3db5a314f92d66053949d3cd',
+            'reference' => '2704437534ecc4ed0264eab11d13ed350af67239',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
