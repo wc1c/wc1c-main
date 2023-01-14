@@ -14,47 +14,47 @@ interface OffersPackageDataContract extends DataContract
 	 *
 	 * @return string Unique identifier
 	 */
-	public function getId();
+	public function getId(): string;
 
 	/**
 	 * Получение наименования пакета предложений
 	 *
 	 * @return string Name
 	 */
-	public function getName();
+	public function getName(): string;
 
 	/**
 	 * Получение идентификатора каталога товаров
 	 *
 	 * @return string Catalog identifier
 	 */
-	public function getCatalogId();
+	public function getCatalogId(): string;
 
 	/**
 	 * Получение идентификатора классификатора, по которому описан каталог товаров
 	 *
 	 * @return string Classifier identifier
 	 */
-	public function getClassifierId();
+	public function getClassifierId(): string;
 
 	/**
 	 * Получение владельца каталога предложений
 	 *
 	 * @return CounterpartyDataContract Catalog owner
 	 */
-	public function getOwner();
+	public function getOwner(): CounterpartyDataContract;
 
 	/**
 	 * Пакет содержит только изменения, или нет.
 	 *
 	 * @return bool
 	 */
-	public function isOnlyChanges();
+	public function isOnlyChanges(): bool;
 
 	/**
 	 * Установка маркера наличия только изменений в каталоге предложений
 	 *
 	 * @param bool $only_changes
 	 */
-	public function setOnlyChanges($only_changes);
+	public function setOnlyChanges(bool $only_changes);
 }

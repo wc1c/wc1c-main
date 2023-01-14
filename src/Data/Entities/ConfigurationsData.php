@@ -141,7 +141,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return mixed
 	 */
-	public function getMeta($key = '', $single = true, $context = 'view')
+	public function getMeta(string $key = '', bool $single = true, string $context = 'view')
 	{
 		if($this->isInternalMetaKey($key))
 		{
@@ -270,7 +270,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return mixed|void
 	 */
-	public function updateMetaData(string $key, $value, $meta_id = 0)
+	public function updateMetaData(string $key, $value, int $meta_id = 0)
 	{
 		if($this->isInternalMetaKey($key))
 		{

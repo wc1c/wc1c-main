@@ -83,6 +83,34 @@ class MainUpdate
 	{
 		$configuration = $this->getConfiguration();
 
+		$configuration_options = $configuration->getOptions();
+		if(isset($configuration_options['logger_level']))
+		{
+			if((int)$configuration_options['logger_level'] === 100)
+			{
+				$args =
+				[
+					'type' => 'danger',
+					'header' => '<h4 class="alert-heading mt-0 mb-1">' . __('Debug is enabled!', 'wc1c-main') . '</h4>',
+					'object' => $this,
+					'body' => __('The current configuration has debug mode enabled. You must disable this mode after debugging is complete.', 'wc1c-main')
+				];
+			}
+
+			if((int)$configuration_options['logger_level'] === 200)
+			{
+				$args =
+				[
+					'type' => 'warning',
+					'header' => '<h4 class="alert-heading mt-0 mb-1">' . __('Info is enabled!', 'wc1c-main') . '</h4>',
+					'object' => $this,
+					'body' => __('The extended information recording mode is enabled for the current configuration. It is recommended to disable this mode after debugging is complete.', 'wc1c-main')
+				];
+			}
+
+			wc1c()->views()->getView('configurations/update_sidebar_alert_item.php', $args);
+		}
+
 		$args =
 		[
 			'header' => '<h3 class="p-0 m-0">' . __('About configuration', 'wc1c-main') . '</h3>',

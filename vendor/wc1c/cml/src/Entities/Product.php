@@ -26,6 +26,10 @@ class Product extends DataAbstract implements ProductDataContract
 		'requisites' => [],
 		'property_values' => [],
 		'characteristic_values' => [],
+		'taxes' => [],
+		'classifier_groups' => [],
+		'classifier_categories' => [],
+		'base_unit' => []
 	];
 
 	/**
@@ -109,7 +113,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 *
 	 * @param string $name Наименование реквизита для получения значения, опционально
 	 *
-	 * @return false|array|string Ложь, массив всех реквизитов или значение конкретного реквизита
+	 * @return false|array Ложь, массив всех реквизитов или значение конкретного реквизита
 	 */
 	public function getRequisites($name = '')
 	{
@@ -302,6 +306,19 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return bool
 	 */
+	public function hasBaseUnit(): bool
+	{
+		if(empty($this->data['base_unit']))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function hasImages(): bool
 	{
 		if(empty($this->data['images']))
@@ -323,6 +340,58 @@ class Product extends DataAbstract implements ProductDataContract
 		}
 
 		return $this->data['classifier_groups'];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getClassifierCategories(): array
+	{
+		if(empty($this->data['classifier_categories']))
+		{
+			return [];
+		}
+
+		return $this->data['classifier_categories'];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getTaxes(): array
+	{
+		if($this->hasTaxes())
+		{
+			return $this->data['taxes'];
+		}
+
+		return [];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getBaseUnit(): array
+	{
+		if($this->hasBaseUnit())
+		{
+			return $this->data['base_unit'];
+		}
+
+		return [];
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasTaxes(): bool
+	{
+		if(empty($this->data['taxes']))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

@@ -32,7 +32,7 @@ class Update
 
 		$default_sections['main'] =
 		[
-			'title' => __('Main settings', 'wc1c-main'),
+			'title' => __('Main', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [MainUpdate::class, 'instance']
 		];
@@ -80,7 +80,7 @@ class Update
 	 *
 	 * @return string
 	 */
-	public function outputSchemaErrorText($text)
+	public function outputSchemaErrorText($text): string
 	{
 		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c-main');
 

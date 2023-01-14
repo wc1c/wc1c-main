@@ -97,6 +97,8 @@ class Decoder
 			case 'offer':
 			case 'product':
 				return $this->decodeProduct($data);
+			case 'warehouses':
+				return $this->decodeWarehouses($data);
 			default:
 				return false;
 		}
@@ -110,6 +112,16 @@ class Decoder
 	public function decodePriceTypes(SimpleXMLElement $xml): array
 	{
 		return $this->parseXmlPriceTypes($xml);
+	}
+
+	/**
+	 * @param SimpleXMLElement $xml
+	 *
+	 * @return array
+	 */
+	public function decodeWarehouses(SimpleXMLElement $xml): array
+	{
+		return $this->parseXmlWarehouses($xml);
 	}
 
 	/**
@@ -155,9 +167,22 @@ class Decoder
 		 */
 		$data['units'] = $xml->ЕдиницыИзмерения ? $this->parseXmlUnits($xml->ЕдиницыИзмерения) : [];
 
+		/**
+		 * Категории
+		 * Определяет иерархическую структуру номенклатуры
+		 *
+		 * cml:Категория
+		 */
+		$data['categories'] = $xml->Категории ? $this->parseXmlClassifierCategories($xml->Категории) : [];
+
+		/**
+		 * Склады
+		 */
+		$data['warehouses'] = $xml->Склады ? $this->parseXmlWarehouses($xml->Склады) : [];
+
 		try
 		{
-			$classifier =  new Classifier($data);
+			$classifier = new Classifier($data);
 		}
 		catch(\Exception $e)
 		{
@@ -255,6 +280,41 @@ class Decoder
 	}
 
 	/**
+	 * Парсинг категорий из классификатора
+	 *
+	 * @param $xml_data
+	 * @param string|false $parent_id
+	 * @param array $categories
+	 *
+	 * @return array Все найденные в классификаторе категории
+	 *@throws Exception
+	 *
+	 */
+	private function parseXmlClassifierCategories($xml_data, $parent_id = false, &$categories = []): array
+	{
+		foreach($xml_data->Категория as $xml_category)
+		{
+			$id = (string)$xml_category->Ид;
+
+			try
+			{
+				$categories[$id] = $this->parseXmlClassifierCategoriesItem($xml_category, $parent_id);
+			}
+			catch(Exception $e)
+			{
+				continue;
+			}
+
+			if($xml_category->Категории)
+			{
+				$this->parseXmlClassifierCategories($xml_category->Категории, $id, $categories);
+			}
+		}
+
+		return $categories;
+	}
+
+	/**
 	 * @param $xml_group
 	 * @param string|false $parent_guid
 	 *
@@ -295,6 +355,73 @@ class Decoder
 		{
 			$data['mark_delete'] = 'yes';
 		}
+
+		$properties = [];
+		if($xml_group->Свойства)
+		{
+			foreach($xml_group->Свойства->Ид as $property)
+			{
+				$properties[] = (string)$property;
+			}
+		}
+
+		$data['properties'] = $properties;
+
+		return $data;
+	}
+
+	/**
+	 * @param $xml_category
+	 * @param string|false $parent_guid
+	 *
+	 * @return array
+	 */
+	private function parseXmlClassifierCategoriesItem($xml_category, $parent_guid = false): array
+	{
+		$category_guid = (string)$xml_category->Ид;
+		$category_name = (string)$xml_category->Наименование;
+
+		if($category_guid === '' || $category_name === '')
+		{
+			throw new RuntimeException('Category is not valid.');
+		}
+
+		$data =
+		[
+			'name' => $category_name,
+			'id' => $category_guid,
+			'parent_id' => $parent_guid ?: false,
+			'version' => $xml_category->НомерВерсии ? (string)$xml_category->НомерВерсии : '',
+		];
+
+		$data['description'] = '';
+		if($xml_category->Описание)
+		{
+			$data['description'] = (string)$xml_category->Описание;
+		}
+
+		$data['image'] = '';
+		if($xml_category->Картинка)
+		{
+			$data['image'] = (string)$xml_category->Картинка;
+		}
+
+		$data['mark_delete'] = 'no';
+		if((string)$xml_category->ПометкаУдаления === 'true')
+		{
+			$data['mark_delete'] = 'yes';
+		}
+
+		$properties = [];
+		if($xml_category->Свойства)
+		{
+			foreach($xml_category->Свойства->Ид as $property)
+			{
+				$properties[] = (string)$property;
+			}
+		}
+
+		$data['properties'] = $properties;
 
 		return $data;
 	}
@@ -387,20 +514,36 @@ class Decoder
 		{
 			$property_data['values_type'] = (string)$xml_property->ТипЗначений;
 		}
+		// 2.04.1CBitrix
+		if($xml_property->ТипыЗначений->ТипЗначений->Тип)
+		{
+			$property_data['values_type'] = (string)$xml_property->ТипыЗначений->ТипЗначений->Тип;
+		}
 
 		/**
 		 * Варианты значений
 		 *
 		 * Содержит коллекцию вариантов значений свойства.
-		 * Если варианты указаны, то при указании  значений данного свойства для товаров должны использоваться значения СТРОГО из данного списка
+		 * Если варианты указаны, то при указании значений данного свойства для товаров должны использоваться значения СТРОГО из данного списка
 		 */
 		$property_values_data = [];
 		$property_data['values_variants'] = $property_values_data;
-		if($property_data['values_type'] === 'Справочник' && $xml_property->ВариантыЗначений->Справочник)
+		if($property_data['values_type'] === 'Справочник')
 		{
-			foreach($xml_property->ВариантыЗначений->Справочник as $value)
+			if($xml_property->ВариантыЗначений->Справочник)
 			{
-				$property_values_data[(string)$value->ИдЗначения] = htmlspecialchars(trim((string)$value->Значение));
+				foreach($xml_property->ВариантыЗначений->Справочник as $value)
+				{
+					$property_values_data[(string)$value->ИдЗначения] = htmlspecialchars(trim((string)$value->Значение));
+				}
+			}
+			// 2.04.1CBitrix
+			if($xml_property->ТипыЗначений->ТипЗначений)
+			{
+				foreach($xml_property->ТипыЗначений->ТипЗначений->ВариантыЗначений as $value)
+				{
+					$property_values_data[(string)$value->Ид] = htmlspecialchars(trim((string)$value->Значение));
+				}
 			}
 
 			$property_data['values_variants'] = $property_values_data;
@@ -515,7 +658,7 @@ class Decoder
 		 * Имя базовой единицы измерения товара по ОКЕИ. В документах и коммерческих предложениях может быть указана другая единица измерения,
 		 * но при этом обязательно указывается коэффициент пересчета количества в базовую единицу товара.
 		 */
-		// todo: Базовая единица
+		$product_data['base_unit'] = $xml_product_data->БазоваяЕдиница ? $this->parseXmlProductBaseUnit($xml_product_data->БазоваяЕдиница) : [];
 
 		/**
 		 * Идентификатор товара у контрагента (идентификатор товара в системе контрагента)
@@ -524,11 +667,18 @@ class Decoder
 		$product_data['counterparty_product_guid'] = $xml_product_data->ИдТовараУКонтрагента ? (string)$xml_product_data->ИдТовараУКонтрагента : '';
 
 		/**
-		 * Категории товара
+		 * Группы товара
 		 *
 		 * Содержит идентификаторы групп, которым принадлежит данный товар в указанном классификаторе.
 		 */
 		$product_data['classifier_groups'] = $xml_product_data->Группы ? $this->parseXmlProductGroups($xml_product_data->Группы) : [];
+
+		/**
+		 * Категории товара
+		 *
+		 * Содержит идентификаторы категорий, которым принадлежит данный товар в указанном классификаторе.
+		 */
+		$product_data['classifier_categories'] = $xml_product_data->Категория ? $this->parseXmlProductCategories($xml_product_data->Категория) : [];
 
 		/**
 		 * Описание товара
@@ -582,7 +732,7 @@ class Decoder
 		if($xml_product_data->Изготовитель)
 		{
 			$product_data['manufacturer']['name'] = trim((string)$xml_product_data->Изготовитель->Наименование);
-			$product_data['manufacturer']['name_guid'] = trim((string)$xml_product_data->Изготовитель->Ид);
+			$product_data['manufacturer']['id'] = trim((string)$xml_product_data->Изготовитель->Ид);
 		}
 		elseif($xml_product_data->Производитель)
 		{
@@ -689,7 +839,7 @@ class Decoder
 		/**
 		 * Модель
 		 */
-		$product_data['model'] = $xml_product_data->Модель ? (string)$xml_product_data->Модель : [];
+		$product_data['model'] = $xml_product_data->Модель ? (string)$xml_product_data->Модель : '';
 
 		/***************************************************************************************************************************************
 		 * Технические данные
@@ -698,7 +848,7 @@ class Decoder
 		/**
 		 * Версия продукта
 		 */
-		$product_data['version_number'] = $xml_product_data->НомерВерсии ? (string)$xml_product_data->НомерВерсии : '';
+		$product_data['version'] = $xml_product_data->НомерВерсии ? (string)$xml_product_data->НомерВерсии : '';
 
 		/**
 		 * Пометка товара на удаление
@@ -708,13 +858,25 @@ class Decoder
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->ПометкаУдаления === 'true' ? 'yes' : 'no';
 		}
-
-		/**
-		 * УНФ
-		 */
+		/* УНФ */
 		if($xml_product_data->Статус)
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->Статус === 'Удален' ? 'yes' : 'no';
+		}
+		/* 2.04.1CBitrix */
+		if($xml_product_data->ПомеченНаУдаление)
+		{
+			$product_data['delete_mark'] = (string)$xml_product_data->ПомеченНаУдаление === 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Спецификация
+		 */
+		/* 2.04.1CBitrix */
+		$product_data['specification'] = '';
+		if($xml_product_data->Спецификация)
+		{
+			$product_data['specification'] =  htmlspecialchars(trim((string)$xml_product_data->Спецификация));
 		}
 
 		/**
@@ -854,6 +1016,29 @@ class Decoder
 		{
 			/**
 			 * Идентификатор группы товаров в классификаторе
+			 * cml:ИдентификаторГлобальныйТип
+			 */
+			$result[] = (string)$category_guid;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Обработка категорий продукта
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array Массив GUID (идентификаторов категорий)
+	 */
+	private function parseXmlProductCategories($xml_data): array
+	{
+		$result = [];
+
+		foreach($xml_data as $category_guid)
+		{
+			/**
+			 * Идентификатор категории товаров в классификаторе
 			 * cml:ИдентификаторГлобальныйТип
 			 */
 			$result[] = (string)$category_guid;
@@ -1237,7 +1422,7 @@ class Decoder
 			{
 				$warehouses[(string)$warehouse['ИдСклада']] =
 				[
-					'guid' => (string)$warehouse['ИдСклада'],
+					'id' => (string)$warehouse['ИдСклада'],
 					'quantity' => (float)$warehouse['КоличествоНаСкладе']
 				];
 			}
@@ -1256,7 +1441,7 @@ class Decoder
 					{
 						$warehouses[(string)$warehouse->ИдСклада] =
 						[
-							'guid' => (string)$warehouse->ИдСклада,
+							'id' => (string)$warehouse->ИдСклада,
 							'quantity' => (float)$warehouse->Количество
 						];
 					}
@@ -1280,7 +1465,7 @@ class Decoder
 
 		foreach($xml_data->Склад as $xml_warehouse)
 		{
-			$guid = (string)$xml_warehouse->Ид;
+			$id = (string)$xml_warehouse->Ид;
 			$name = trim((string)$xml_warehouse->Наименование);
 			$description = trim((string)$xml_warehouse->Комментарий);
 
@@ -1288,12 +1473,12 @@ class Decoder
 
 			// todo: Контакты
 
-			$data[$guid] = array
-			(
-				'guid' => $guid,
+			$data[$id] =
+			[
+				'id' => $id,
 				'name' => $name,
 				'description' => $description
-			);
+			];
 		}
 
 		return $data;
@@ -1350,6 +1535,37 @@ class Decoder
 	 */
 	private function parseXmlUnits($xml_data): array
 	{
-		return [];
+		$data = [];
+
+		foreach($xml_data->ЕдиницаИзмерения as $xml_data_value)
+		{
+			$data[trim((string)$xml_data_value->Код)] =
+			[
+				'code' => trim((string)$xml_data_value->Код),
+				'full_name' => trim((string)$xml_data_value->НаименованиеПолное),
+				'short_name_intl' => trim((string)$xml_data_value->МеждународноеСокращение),
+				'short_name' => trim((string)$xml_data_value->НаименованиеКраткое),
+			];
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Разбор базовой единицы измерения продукта
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array
+	 */
+	public function parseXmlProductBaseUnit($xml_data): array
+	{
+		return
+		[
+			'code' => (string)$xml_data['Код'],
+			'full_name' => $xml_data['НаименованиеПолное'] ? (string)$xml_data['НаименованиеПолное'] : '',
+			'short_name' => $xml_data['НаименованиеКраткое'] ? (string)$xml_data['НаименованиеКраткое'] : '',
+			'short_name_intl' => $xml_data['МеждународноеСокращение'] ? (string)$xml_data['МеждународноеСокращение'] : '',
+		];
 	}
 }

@@ -470,6 +470,32 @@ final class Receiver
 			$this->core()->log()->debug(__('Session for receiving requests is changed by external algorithms.', 'wc1c-main'), ['session'=> $_SESSION]);
 		}
 
+		$directory = $this->core()->getUploadDirectory();
+		$this->core()->log()->info(__('Check the directory for temporary files.', 'wc1c-main'), ['directory' => $directory]);
+
+		wc1c()->filesystem()->ensureDirectoryExists($directory);
+
+		if(!wc1c()->filesystem()->isDirectory($directory))
+		{
+			$error = __('Failed to check the temp directory.', 'wc1c-main');
+
+			$this->core()->log()->error($error, ['directory' => $directory]);
+			$this->sendResponseByType('failure', $error);
+		}
+		else
+		{
+			$ht_name = $directory . '/.htaccess';
+			if(!file_exists($ht_name))
+			{
+				$fp = fopen($ht_name, 'wb');
+				if($fp)
+				{
+					fwrite($fp, "Deny from All");
+					fclose($fp);
+				}
+			}
+		}
+
 		$data['zip'] = 'zip=no' . PHP_EOL;
 
 		$max_size = $this->utilityConvertFileSize(wc1c()->environment()->get('php_post_max_size'));

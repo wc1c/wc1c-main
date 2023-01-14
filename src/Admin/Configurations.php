@@ -65,7 +65,7 @@ class Configurations
 	 *
 	 * @return string
 	 */
-	public function init_current_action()
+	public function init_current_action(): string
 	{
 		$do_action = wc1c()->getVar($_GET['do_action'], 'all');
 
@@ -82,7 +82,7 @@ class Configurations
 	 *
 	 * @return array
 	 */
-	public function get_actions()
+	public function get_actions(): array
 	{
 		return apply_filters('wc1c_admin_configurations_get_actions', $this->actions);
 	}
@@ -92,7 +92,7 @@ class Configurations
 	 *
 	 * @param array $actions
 	 */
-	public function set_actions($actions)
+	public function set_actions(array $actions)
 	{
 		// hook
 		$actions = apply_filters('wc1c_admin_configurations_set_actions', $actions);
@@ -105,7 +105,7 @@ class Configurations
 	 *
 	 * @return string
 	 */
-	public function get_current_action()
+	public function get_current_action(): string
 	{
 		return apply_filters('wc1c_admin_configurations_get_current_action', $this->current_action);
 	}
@@ -115,7 +115,7 @@ class Configurations
 	 *
 	 * @param string $current_action
 	 */
-	public function set_current_action($current_action)
+	public function set_current_action(string $current_action)
 	{
 		// hook
 		$current_action = apply_filters('wc1c_admin_configurations_set_current_action', $current_action);
