@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.6.0');
+		$this->setVersion('0.7.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -90,6 +90,7 @@ class Core extends SchemaAbstract
 		{
 			return true;
 		}
+		$this->setInitialized(true);
 
 		$this->setOptions($this->configuration()->getOptions());
 		$this->setUploadDirectory($this->configuration()->getUploadDirectory() . DIRECTORY_SEPARATOR . 'catalog');
@@ -136,6 +137,8 @@ class Core extends SchemaAbstract
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemAttributes'], 15, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemDimensions'], 15, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemStatusTrash'], 100, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemTaxesClass'], 100, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemTaxesStatus'], 100, 4);
 
 			add_filter('wc1c_schema_productscml_processing_products_item_after_save', [$this, 'assignProductsItemImages'], 10, 4);
 
@@ -253,6 +256,11 @@ class Core extends SchemaAbstract
 			return;
 		}
 
+		if(!is_null($reader->classifier))
+		{
+			return;
+		}
+
 		if($reader->nodeName === 'Классификатор' && $reader->xml_reader->nodeType === XMLReader::ELEMENT)
 		{
 			/**
@@ -308,13 +316,13 @@ class Core extends SchemaAbstract
 			return;
 		}
 
-		$classifier_groups = $classifier->getGroups();
-
-		if(empty($classifier_groups))
+		if(!$classifier->hasGroups())
 		{
 			$this->log()->info(__('Classifier groups is empty.', 'wc1c-main'));
 			return;
 		}
+
+		$classifier_groups = $classifier->getGroups();
 
 		$create_categories = $this->getOptions('categories_classifier_groups_create', 'no');
 		$update_categories = $this->getOptions('categories_classifier_groups_update', 'no');
@@ -626,13 +634,13 @@ class Core extends SchemaAbstract
 			return;
 		}
 
-		$classifier_properties = $classifier->getProperties();
-
-		if(empty($classifier_properties))
+		if(!$classifier->hasProperties())
 		{
 			$this->log()->info(__('Classifier properties is empty.', 'wc1c-main'), ['filetype' => $reader->getFiletype()]);
 			return;
 		}
+
+		$classifier_properties = $classifier->getProperties();
 
 		$create_attributes = $this->getOptions('attributes_create_by_classifier_properties', 'no');
 		$update_attributes_values = $this->getOptions('attributes_values_by_classifier_properties', 'no');
@@ -758,17 +766,38 @@ class Core extends SchemaAbstract
 			return;
 		}
 
-		$this->configuration()->updateMetaData('classifier:' . $reader->getFiletype() . ':' . $classifier->getId(), maybe_serialize($classifier));
-		$this->configuration()->saveMetaData();
+		$classifier_push = true;
+		$all_classifiers = $this->configuration()->getMeta('classifier:' . $reader->getFiletype(), false, 'edit');
+
+		if(!empty($all_classifiers) && is_array($all_classifiers))
+		{
+			$all_classifiers_keys = wp_list_pluck($all_classifiers, 'value');
+
+			foreach($all_classifiers_keys as $key => $value)
+			{
+				if($value['id'] === $classifier->getId())
+				{
+					$classifier_push = false;
+					break;
+				}
+			}
+		}
+
+		if($classifier_push)
+		{
+			$this->configuration()->addMetaData('classifier:' . $reader->getFiletype(), ['id' => $classifier->getId(), 'name' => $classifier->getName()]);
+			$this->configuration()->addMetaData('classifier', ['id' => $classifier->getId(), 'name' => $classifier->getName(), 'filetype' => $reader->getFiletype()]);
+		}
+
+		$this->configuration()->updateMetaData('classifier:' . $reader->getFiletype() . ':' . $classifier->getId(), $classifier);
 
 		$classifier_properties = $classifier->getProperties();
 		if(!empty($classifier_properties))
 		{
-			$this->configuration()->updateMetaData('classifier-properties:' . $reader->getFiletype() . ':' . $classifier->getId(), maybe_serialize($classifier_properties));
-			$this->configuration()->saveMetaData();
+			$this->configuration()->updateMetaData('classifier-properties:' . $reader->getFiletype() . ':' . $classifier->getId(), $classifier_properties);
 		}
 
-		$this->configuration()->readMetaData();
+		$this->configuration()->save();
 	}
 
 	/**
@@ -821,6 +850,11 @@ class Core extends SchemaAbstract
 				case 'Описание':
 					$reader->catalog->setDescription($reader->xml_reader->readString());
 					break;
+				case 'Склады':
+					$warehouses = $reader->decoder()->process('warehouses', $reader->xml_reader->readOuterXml());
+					$reader->catalog->setWarehouses($warehouses);
+					$reader->next();
+					break;
 			}
 		}
 
@@ -839,6 +873,8 @@ class Core extends SchemaAbstract
 
 		if($reader->parentNodeName === 'Товары' && $reader->nodeName === 'Товар' && $reader->xml_reader->nodeType === XMLReader::ELEMENT)
 		{
+			// todo: сохранение каталога
+
 			/**
 			 * Декодирование данных продукта из XML в объект реализующий ProductDataContract
 			 */
@@ -962,9 +998,55 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemSku(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_sku', 'no'))
+		{
+			return $internal_product;
+		}
+
+		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_sku', 'no'))
+		{
+			return $internal_product;
+		}
+
+		$source = $this->getOptions('products_sku_by_cml', 'sku');
+
+		if('no' === $source)
+		{
+			return $internal_product;
+		}
+
+		$sku = '';
+		switch($source)
+		{
+			case 'code':
+				$requisite = 'Код';
+				if($external_product->hasRequisites($requisite))
+				{
+					$requisite_data = $external_product->getRequisites($requisite);
+					if(!empty($requisite_data['value']))
+					{
+						$sku = $requisite_data['value'];
+					}
+				}
+				break;
+			case 'yes_requisites':
+				$requisite = $this->getOptions('products_sku_from_requisites_name', '');
+				if($external_product->hasRequisites($requisite))
+				{
+					$requisite_data = $external_product->getRequisites($requisite);
+					if(!empty($requisite_data['value']))
+					{
+						$sku = $requisite_data['value'];
+					}
+				}
+				break;
+			default:
+				$sku = $external_product->getSku();
+		}
+
 		try
 		{
-			$internal_product->setSku($external_product->getSku());
+			$internal_product->setSku($sku);
 		}
 		catch(Exception $e)
 		{
@@ -1258,6 +1340,10 @@ class Core extends SchemaAbstract
 						}
 					}
 					break;
+				case 'yes_specification':
+					$data = $external_product->getData();
+					$short_description = $data['specification'] ?? '';
+					break;
 				default:
 					$short_description = $external_product->getDescription();
 			}
@@ -1319,6 +1405,10 @@ class Core extends SchemaAbstract
 						}
 					}
 					break;
+				case 'yes_specification':
+					$data = $external_product->getData();
+					$full_description = $data['specification'] ?? '';
+					break;
 				default:
 					$full_description = $external_product->getDescription();
 			}
@@ -1377,6 +1467,76 @@ class Core extends SchemaAbstract
 		}
 
 		$internal_product->set_category_ids($cats);
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: статус налога
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 * @throws Exception
+	 */
+	public function assignProductsItemTaxesStatus(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if($internal_product->isType('variation')) // todo: назначение налогов для вариации
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'no' === $this->getOptions('products_update_taxes_status', 'no'))
+		{
+			return $internal_product;
+		}
+
+		if('create' === $mode)
+		{
+			$internal_product->set_tax_status($this->getOptions('products_create_taxes_status', 'taxable'));
+
+			return $internal_product;
+		}
+
+		$internal_product->set_tax_status($this->getOptions('products_update_taxes_status', 'taxable'));
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: класс налога
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 * @throws Exception
+	 */
+	public function assignProductsItemTaxesClass(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if($internal_product->isType('variation')) // todo: назначение налогов для вариации
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'no' === $this->getOptions('products_update_taxes_class', 'no'))
+		{
+			return $internal_product;
+		}
+
+		if('create' === $mode)
+		{
+			$internal_product->set_tax_class($this->getOptions('products_create_taxes_class', 'standard'));
+
+			return $internal_product;
+		}
+
+		$internal_product->set_tax_class($this->getOptions('products_update_taxes_class', 'standard'));
 
 		return $internal_product;
 	}
@@ -1872,6 +2032,11 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemAttributes(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
+		if($reader->getFiletype() !== 'import')
+		{
+			return $internal_product;
+		}
+
 		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_attributes', 'yes'))
 		{
 			return $internal_product;
@@ -1882,12 +2047,7 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		$this->log()->debug(__('Assigning attributes to a product based on the properties of the product catalog.', 'wc1c-main'), ['mode' => $mode, 'filetype' => $reader->getFiletype(), 'internal_product_id' => $internal_product->getId(), 'external_product_id' => $external_product->getId()]);
-
-		if($reader->getFiletype() !== 'import')
-		{
-			return $internal_product;
-		}
+		$this->log()->info(__('Assigning attributes to a product based on the properties of the product catalog.', 'wc1c-main'), ['mode' => $mode, 'filetype' => $reader->getFiletype(), 'internal_product_id' => $internal_product->getId(), 'external_product_id' => $external_product->getId()]);
 
 		if($internal_product->isType('variable') && empty($external_product->getCharacteristicId()))
 		{
@@ -2098,12 +2258,12 @@ class Core extends SchemaAbstract
 	 */
 	public function assignOffersItemAttributes(ProductContract $internal_product, ProductDataContract $external_product, Reader $reader): ProductContract
 	{
-		$this->log()->debug(__('Assigning attributes to a product based on the properties of the offers package.', 'wc1c-main'), ['filetype' => $reader->getFiletype(), 'internal_product_id' => $internal_product->getId()]);
-
 		if($reader->getFiletype() !== 'offers')
 		{
 			return $internal_product;
 		}
+
+		$this->log()->info(__('Assigning attributes to a product based on the properties of the offers package.', 'wc1c-main'), ['filetype' => $reader->getFiletype(), 'internal_product_id' => $internal_product->getId()]);
 
 		/** @var AttributesStorageContract $attributes_storage */
 		$attributes_storage = Storage::load('attribute');
@@ -3042,11 +3202,18 @@ class Core extends SchemaAbstract
 					$reader->offers_package->setPriceTypes($price_types);
 					$reader->next();
 					break;
+				case 'Склады':
+					$warehouses = $reader->decoder()->process('warehouses', $reader->xml_reader->readOuterXml());
+					$reader->offers_package->setWarehouses($warehouses);
+					$reader->next();
+					break;
 			}
 		}
 
 		if($reader->parentNodeName === 'Предложения' && $reader->nodeName === 'Предложение' && $reader->xml_reader->nodeType === XMLReader::ELEMENT)
 		{
+			// todo: сохранение пакета предложений
+
 			$offer = $reader->decoder->process('offer', $reader->xml_reader->readOuterXml());
 
 			if(has_filter('wc1c_schema_productscml_processing_offers'))
