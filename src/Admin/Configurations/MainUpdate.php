@@ -108,7 +108,10 @@ class MainUpdate
 				];
 			}
 
-			wc1c()->views()->getView('configurations/update_sidebar_alert_item.php', $args);
+			if((int)$configuration_options['logger_level'] <= 200)
+			{
+				wc1c()->views()->getView('configurations/update_sidebar_alert_item.php', $args);
+			}
 		}
 
 		$args =
