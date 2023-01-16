@@ -29,7 +29,7 @@ class ConnectionForm extends Form
 	 */
 	public function __construct()
 	{
-		$this->set_id('settings-connection');
+		$this->setId('settings-connection');
 
 		$settings = wc1c()->settings('connection');
 
@@ -55,7 +55,7 @@ class ConnectionForm extends Form
 
 		if($this->status !== false)
 		{
-			add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_connected'], 10);
+			add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_connected'], 10);
 		}
 		else
 		{
@@ -142,9 +142,9 @@ class ConnectionForm extends Form
 	 *
 	 * @return bool
 	 */
-	public function save()
+	public function save(): bool
 	{
-		$post_data = $this->get_posted_data();
+		$post_data = $this->getPostedData();
 
 		if(!isset($post_data['_wc1c-admin-nonce']))
 		{

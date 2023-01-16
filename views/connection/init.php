@@ -16,5 +16,5 @@
 
 <div class="wc1c-configurations-alert mb-2 mt-2">
     <h3><?php esc_html_e($title); ?></h3>
-    <p><?php esc_html_e($text); ?></p>
+    <p><?php echo wp_kses_post($text); ?></p>
 </div>

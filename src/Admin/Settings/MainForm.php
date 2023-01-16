@@ -19,14 +19,14 @@ class MainForm extends Form
 	 */
 	public function __construct()
 	{
-		$this->set_id('settings-main');
+		$this->setId('settings-main');
 		$this->setSettings(new MainSettings());
 
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_form_fields_tecodes'], 10);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_form_fields_tecodes'], 10);
 
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_configurations'], 20);
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 30);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_configurations'], 20);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_technical'], 30);
 
 		$this->init();
 	}
@@ -214,7 +214,7 @@ class MainForm extends Form
 	 */
 	public function generate_tecodes_status_html(string $key, array $data): string
 	{
-		$field_key = $this->get_prefix_field_key($key);
+		$field_key = $this->getPrefixFieldKey($key);
 		$defaults = array
 		(
 			'title' => '',
@@ -238,7 +238,7 @@ class MainForm extends Form
 		?>
         <tr valign="top">
             <th scope="row" class="titledesc">
-                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); ?></label>
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->getTooltipHtml( $data ); ?></label>
             </th>
             <td class="forminp">
                 <div class="wc1c-custom-metas">
@@ -269,7 +269,7 @@ class MainForm extends Form
 		            ?>
 
                 </div>
-				<?php echo $this->get_description_html($data); // WPCS: XSS ok.?>
+				<?php echo $this->getDescriptionHtml($data); // WPCS: XSS ok.?>
             </td>
         </tr>
 		<?php
@@ -287,7 +287,7 @@ class MainForm extends Form
 	 */
 	public function generate_tecodes_text_html(string $key, array $data): string
 	{
-		$field_key = $this->get_prefix_field_key($key);
+		$field_key = $this->getPrefixFieldKey($key);
 		$defaults = array
 		(
 			'title' => '',
@@ -307,19 +307,19 @@ class MainForm extends Form
 		?>
 		<tr valign="top">
             <th scope="row" class="titledesc">
-                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); ?></label>
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->getTooltipHtml( $data ); ?></label>
             </th>
 			<td class="forminp">
                 <div class="input-group">
                     <input class="form-control input-text regular-input <?php echo esc_attr($data['class']); ?>"
                     type="<?php echo esc_attr($data['type']); ?>" name="<?php echo esc_attr($field_key); ?>"
                     id="<?php echo esc_attr($field_key); ?>" style="<?php echo esc_attr($data['css']); ?>"
-                    value="<?php echo esc_attr($this->get_field_data($key)); ?>"
-                    placeholder="<?php echo esc_attr($data['placeholder']); ?>" <?php disabled($data['disabled'], true); ?> <?php echo $this->get_custom_attribute_html($data); // WPCS: XSS ok.
+                    value="<?php echo esc_attr($this->getFieldData($key)); ?>"
+                    placeholder="<?php echo esc_attr($data['placeholder']); ?>" <?php disabled($data['disabled'], true); ?> <?php echo $this->getCustomAttributeHtml($data); // WPCS: XSS ok.
                     ?> />
                     <button name="save" class="btn btn-primary" type="submit" value="<?php _e('Activate', 'wc1c-main') ?>"><?php _e('Activate', 'wc1c-main') ?></button>
                 </div>
-                <?php echo $this->get_description_html($data); // WPCS: XSS ok.?>
+                <?php echo $this->getDescriptionHtml($data); // WPCS: XSS ok.?>
             </td>
 		</tr>
 		<?php

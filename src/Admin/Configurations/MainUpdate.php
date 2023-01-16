@@ -33,9 +33,9 @@ class MainUpdate
 		$form_data = $configuration->getOptions();
 		$form_data['status'] = $configuration->getStatus();
 
-		$form->load_saved_data($form_data);
+		$form->loadSavedData($form_data);
 
-		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $form->get_id())
+		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $form->getId())
 		{
 			$data = $form->save();
 
@@ -73,7 +73,7 @@ class MainUpdate
 		}
 
 		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
-		add_action('wc1c_admin_configurations_update_show', [$form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_update_show', [$form, 'output'], 10);
 	}
 
 	/**

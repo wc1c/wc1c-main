@@ -23,10 +23,10 @@ class Create extends ScreenAbstract
 	public function __construct()
 	{
 		$form = new CreateForm();
-		$form->load_fields();
+		$form->loadFields();
 		$form->save();
 
-		add_action('wc1c_admin_configurations_form_create_show', [$form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_form_create_show', [$form, 'output'], 10);
 
 		parent::__construct();
 	}

@@ -140,9 +140,9 @@ class Update
 		];
 
 		$inline_form = new InlineForm($inline_args);
-		$inline_form->load_saved_data(['name' => $configuration->getName()]);
+		$inline_form->loadSavedData(['name' => $configuration->getName()]);
 
-		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $inline_form->get_id())
+		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $inline_form->getId())
 		{
 			$configuration_name = $inline_form->save();
 
@@ -176,7 +176,7 @@ class Update
 			}
 		}
 
-		add_action('wc1c_admin_configurations_update_header_show', [$inline_form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_update_header_show', [$inline_form, 'output'], 10);
 	}
 
 	/**

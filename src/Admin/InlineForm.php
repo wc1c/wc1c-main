@@ -17,14 +17,14 @@ class InlineForm extends FormAbstract
 	 */
 	public function __construct($args = [])
 	{
-		$this->set_id($args['id']);
-		$this->load_fields($args['fields']);
+		$this->setId($args['id']);
+		$this->loadFields($args['fields']);
 	}
 
 	/**
 	 * Form show
 	 */
-	public function outputForm()
+	public function output()
 	{
 		$args =
 		[
@@ -41,16 +41,16 @@ class InlineForm extends FormAbstract
 	 */
 	public function save()
 	{
-		$post_data = $this->get_posted_data();
+		$post_data = $this->getPostedData();
 
-        $data_key = '_wc1c-admin-nonce-' . $this->get_id();
+        $data_key = '_wc1c-admin-nonce-' . $this->getId();
 
 		if(!isset($post_data[$data_key]))
 		{
 			return false;
 		}
 
-		if(empty($post_data) || !wp_verify_nonce($_POST[$data_key], 'wc1c-admin-' . $this->get_id() . '-save'))
+		if(empty($post_data) || !wp_verify_nonce($_POST[$data_key], 'wc1c-admin-' . $this->getId() . '-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(
@@ -63,9 +63,9 @@ class InlineForm extends FormAbstract
 			return false;
 		}
 
-		foreach($this->get_fields() as $key => $field)
+		foreach($this->getFields() as $key => $field)
 		{
-			$field_type = $this->get_field_type($field);
+			$field_type = $this->getFieldType($field);
 
 			if('title' === $field_type || 'raw' === $field_type)
 			{
@@ -74,7 +74,7 @@ class InlineForm extends FormAbstract
 
 			try
 			{
-				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
+				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
 			catch(Exception $e)
 			{
@@ -90,7 +90,7 @@ class InlineForm extends FormAbstract
 			}
 		}
 
-		return $this->get_saved_data();
+		return $this->getSavedData();
 	}
 
 	/**
@@ -101,9 +101,9 @@ class InlineForm extends FormAbstract
 	 *
 	 * @return string
 	 */
-	public function generate_text_html($key, $data)
+	public function generateTextHtml(string $key,array $data): string
 	{
-		$field_key = $this->get_prefix_field_key($key);
+		$field_key = $this->getPrefixFieldKey($key);
 
 		$defaults = array
 		(
@@ -124,7 +124,7 @@ class InlineForm extends FormAbstract
 		?>
 
 		<div class="input-group">
-			<input placeholder="<?php echo wp_kses_post( $data['title'] ); ?>" aria-label="<?php echo wp_kses_post( $data['title'] ); ?>" class="input-text fs-6 regular-input <?php echo esc_attr( $data['class'] ); ?>" type="<?php echo esc_attr( $data['type'] ); ?>" name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $field_key ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>" value="<?php echo esc_attr( $this->get_field_data( $key ) ); ?>" placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo $this->get_custom_attribute_html( $data ); ?>>
+			<input placeholder="<?php echo wp_kses_post( $data['title'] ); ?>" aria-label="<?php echo wp_kses_post( $data['title'] ); ?>" class="input-text fs-6 regular-input <?php echo esc_attr( $data['class'] ); ?>" type="<?php echo esc_attr( $data['type'] ); ?>" name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $field_key ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>" value="<?php echo esc_attr( $this->getFieldData( $key ) ); ?>" placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo $this->getCustomAttributeHtml( $data ); ?>>
 			<button type="submit" class="btn btn-outline-secondary"><?php echo wp_kses_post( $data['button'] ); ?></button>
 		</div>
 		<?php
