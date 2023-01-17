@@ -151,7 +151,7 @@ class MainUpdate
 		$user = get_userdata($user_id);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$body .= __('User: ', 'wc1c-main') . $user->get('nickname') . ' (' . $user_id. ')';
+			$body .= __('Owner:', 'wc1c-main') . ' <b>' . $user->get('nickname') . '</b> (' . $user_id. ')';
 		}
 		else
 		{
@@ -161,12 +161,15 @@ class MainUpdate
 
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date create: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateCreate());
+		$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateCreate()->getOffsetTimestamp(), current_time('timestamp')));
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date modify: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateModify());
+		$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateModify()->getOffsetTimestamp(), current_time('timestamp')));
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date active: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateActivity());
+		$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Directory: ', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';

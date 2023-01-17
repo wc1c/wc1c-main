@@ -113,9 +113,11 @@ class AllTable extends TableAbstract
 		{
 			return sprintf
 			(
-				__('%s <br/><span class="time">Time: %s</span>', 'wc1c-main'),
+				'%s <br/><span class="time">%s: %s</span><br>%s',
 				date_i18n('d/m/Y', $timestamp),
-				date_i18n('H:i:s', $timestamp)
+				__('Time', 'wc1c-main'),
+				date_i18n('H:i:s', $timestamp),
+				sprintf(_x('(%s ago)', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp')))
 			);
 		}
 
