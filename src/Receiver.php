@@ -85,16 +85,10 @@ final class Receiver
 			return;
 		}
 
-		if($configuration->isInactive())
+		if($configuration->isEnabled() === false)
 		{
 			wc1c()->log('receiver')->warning(__('Selected configuration is offline.', 'wc1c-main'));
 			die(__('Selected configuration is offline.', 'wc1c-main'));
-		}
-
-		if($configuration->isDraft())
-		{
-			wc1c()->log('receiver')->warning(__('Selected configuration is draft.', 'wc1c-main'));
-			die(__('Selected configuration is draft.', 'wc1c-main'));
 		}
 
 		try

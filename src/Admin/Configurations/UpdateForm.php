@@ -37,20 +37,19 @@ class UpdateForm extends FormAbstract
 	 */
 	public function init_fields_main($fields): array
 	{
-		$options =
-		[
-			'active' => $this->utilityConfigurationsGetStatusesLabel('active'),
-			'inactive' => $this->utilityConfigurationsGetStatusesLabel('inactive')
-		];
-
 		$fields['status'] =
-		[
-			'title' => __('Configuration status', 'wc1c-main'),
-			'type' => 'select',
-			'description' => __('Current configuration status.', 'wc1c-main'),
-			'default' => 'inactive',
-			'options' => $options
-		];
+        [
+            'title' => __('Status', 'wc1c-main'),
+            'type' => 'checkbox',
+            'label' => __('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-main'),
+            'default' => 'no',
+            'description' => sprintf
+            (
+	            '%s<hr>%s',
+	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-main'),
+	            __('The extended state is required for users, while this token is used for technical purposes.', 'wc1c-main')
+            ),
+        ];
 
 		return $fields;
 	}

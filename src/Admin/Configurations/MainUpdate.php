@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Main\Traits\DatetimeUtilityTrait;
 use Wc1c\Main\Traits\SectionsTrait;
 use Wc1c\Main\Traits\SingletonTrait;
@@ -21,6 +22,7 @@ class MainUpdate
 	use UtilityTrait;
 	use SectionsTrait;
 	use ProcessConfigurationTrait;
+	use ConfigurationsUtilityTrait;
 
 	/**
 	 * Update processing
@@ -31,7 +33,7 @@ class MainUpdate
 		$form = new UpdateForm();
 
 		$form_data = $configuration->getOptions();
-		$form_data['status'] = $configuration->getStatus();
+		$form_data['status'] = $configuration->isEnabled() ? 'yes' : 'no';
 
 		$form->loadSavedData($form_data);
 
@@ -41,7 +43,19 @@ class MainUpdate
 
 			if($data)
 			{
-				$configuration->setStatus($data['status']);
+				// Галка стоит
+				if($data['status'] === 'yes')
+				{
+					if($configuration->isEnabled() === false)
+					{
+						$configuration->setStatus('active');
+					}
+				}
+				// галка не стоит
+				else
+				{
+					$configuration->setStatus('inactive');
+				}
 				unset($data['status']);
 
 				$configuration->setDateModify(time());
@@ -122,10 +136,14 @@ class MainUpdate
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('ID: ', 'wc1c-main') . $configuration->getId();
+		$body .= __('ID:', 'wc1c-main') . ' <b>' . $configuration->getId() . '</b>';
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Schema ID: ', 'wc1c-main') . $configuration->getSchema();
+		$body .= __('Schema ID:', 'wc1c-main') . ' <b>' . $configuration->getSchema() . '</b>';
+		$body .= '</li>';
+
+		$body .= '<li class="list-group-item p-2 m-0">';
+		$body .= __('Status', 'wc1c-main') . ': <b>' . $this->utilityConfigurationsGetStatusesLabel($configuration->getStatus()) . '</b>';
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';

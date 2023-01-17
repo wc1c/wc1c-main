@@ -31,7 +31,7 @@ class Configuration extends ConfigurationsData
 	/**
 	 * Configuration constructor.
 	 *
-	 * @param int $data
+	 * @param int|Configuration $data
 	 *
 	 * @throws Exception
 	 */
@@ -67,7 +67,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return string
 	 */
-	public function getUserId($context = 'view')
+	public function getUserId(string $context = 'view'): string
 	{
 		return $this->getProp('user_id', $context);
 	}
@@ -75,7 +75,7 @@ class Configuration extends ConfigurationsData
 	/**
 	 * Set user id
 	 *
-	 * @param string $value user_id
+	 * @param string|int $value user_id
 	 */
 	public function setUserId($value)
 	{
@@ -89,7 +89,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return string
 	 */
-	public function getName($context = 'view')
+	public function getName(string $context = 'view'): string
 	{
 		return $this->getProp('name', $context);
 	}
@@ -99,7 +99,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @param string $value name
 	 */
-	public function setName($value)
+	public function setName(string $value)
 	{
 		$this->setProp('name', $value);
 	}
@@ -111,7 +111,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return string
 	 */
-	public function getStatus($context = 'view')
+	public function getStatus(string $context = 'view'): string
 	{
 		return $this->getProp('status', $context);
 	}
@@ -121,7 +121,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @param string $value status
 	 */
-	public function setStatus($value)
+	public function setStatus(string $value)
 	{
 		$this->setProp('status', $value);
 	}
@@ -133,7 +133,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return array
 	 */
-	public function getOptions($context = 'view')
+	public function getOptions(string $context = 'view'): array
 	{
 		return $this->getProp('options', $context);
 	}
@@ -143,7 +143,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @param array $value options
 	 */
-	public function setOptions($value)
+	public function setOptions(array $value)
 	{
 		$this->setProp('options', $value);
 	}
@@ -155,7 +155,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return string
 	 */
-	public function getSchema($context = 'view')
+	public function getSchema(string $context = 'view'): string
 	{
 		return $this->getProp('schema', $context);
 	}
@@ -165,7 +165,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @param string $name schema id
 	 */
-	public function setSchema($name)
+	public function setSchema(string $name)
 	{
 		$this->setProp('schema', $name);
 	}
@@ -177,7 +177,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return Datetime|NULL object if the date is set or null if there is no date.
 	 */
-	public function getDateCreate($context = 'view')
+	public function getDateCreate(string $context = 'view')
 	{
 		return $this->getProp('date_create', $context);
 	}
@@ -189,7 +189,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return Datetime|NULL object if the date is set or null if there is no date.
 	 */
-	public function getDateModify($context = 'view')
+	public function getDateModify(string $context = 'view')
 	{
 		return $this->getProp('date_modify', $context);
 	}
@@ -201,7 +201,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return Datetime|NULL object if the date is set or null if there is no date.
 	 */
-	public function getDateActivity($context = 'view')
+	public function getDateActivity(string $context = 'view')
 	{
 		return $this->getProp('date_activity', $context);
 	}
@@ -253,7 +253,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return bool True if validation passes.
 	 */
-	public function isActive()
+	public function isActive(): bool
 	{
 		return $this->isStatus('active');
 	}
@@ -263,9 +263,26 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return bool True if validation passes.
 	 */
-	public function isInactive()
+	public function isInactive(): bool
 	{
 		return $this->isStatus('inactive');
+	}
+
+	/**
+	 * Returns if configuration enabled or not enabled.
+	 *
+	 * @return bool True if passes.
+	 */
+	public function isEnabled(): bool
+	{
+		$enabled = true;
+
+		if($this->isInactive() || $this->isDraft())
+		{
+			$enabled = false;
+		}
+
+		return apply_filters('wc1c_configuration_get_enabled', $enabled, $this);
 	}
 
 	/**
@@ -273,7 +290,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return bool True if validation passes.
 	 */
-	public function isDraft()
+	public function isDraft(): bool
 	{
 		return $this->isStatus('draft');
 	}
@@ -285,7 +302,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return bool True if validation passes.
 	 */
-	public function isStatus($status = 'active')
+	public function isStatus(string $status = 'active'): bool
 	{
 		return $status === $this->getStatus();
 	}
@@ -297,7 +314,7 @@ class Configuration extends ConfigurationsData
 	 *
 	 * @return string
 	 */
-	public function getUploadDirectory($context = 'main')
+	public function getUploadDirectory(string $context = 'main'): string
 	{
 		$upload_directory = wc1c()->environment()->get('wc1c_configurations_directory') . '/' . $this->getSchema() . '-' . $this->getId();
 
