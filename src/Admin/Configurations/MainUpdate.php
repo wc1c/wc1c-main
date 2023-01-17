@@ -160,6 +160,16 @@ class MainUpdate
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
+		$body .= __('Date active:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateActivity());
+
+		if($configuration->getDateActivity())
+		{
+			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
+		}
+
+		$body .= '</div></li>';
+
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date create:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateCreate());
 
 		if($configuration->getDateCreate())
@@ -177,15 +187,7 @@ class MainUpdate
 		}
 
 		$body .= '</div></li>';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateActivity());
 
-		if($configuration->getDateActivity())
-		{
-			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
-		}
-
-		$body .= '</div></li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Directory:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
 		$body .= '</li>';
