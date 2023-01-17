@@ -64,6 +64,7 @@ namespace Wc1c\Main
 	catch(\Exception $e)
 	{
 		trigger_error($e->getMessage());
+		return;
 	}
 
 	wc1c()->register(new Context(), $loader);
