@@ -57,6 +57,8 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: ProductsCML to 0.8.0
 * Up: language files
 * Improvement: use woplucore
+* Improvement: statuses for configurations
+* Improvement: custom receiver in schemas
 * Fix: more
 
 = 0.15.1 =
