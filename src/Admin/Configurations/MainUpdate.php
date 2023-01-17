@@ -160,19 +160,19 @@ class MainUpdate
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateCreate());
+		$body .= __('Date create:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateCreate());
 		$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateCreate()->getOffsetTimestamp(), current_time('timestamp')));
-		$body .= '</li>';
+		$body .= '</div></li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateModify());
+		$body .= __('Date modify:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">'. $this->utilityPrettyDate($configuration->getDateModify());
 		$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateModify()->getOffsetTimestamp(), current_time('timestamp')));
-		$body .= '</li>';
+		$body .= '</div></li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateActivity());
+		$body .= __('Date active:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateActivity());
 		$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
-		$body .= '</li>';
+		$body .= '</div></li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Directory: ', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
+		$body .= __('Directory:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
 		$body .= '</li>';
 
 		$size = 0;
@@ -188,7 +188,7 @@ class MainUpdate
 		$body .= '</li>';
 
 		$size = 0;
-		$files = wc1c()->filesystem()->files($configuration->getUploadDirectory() . '/logs');
+		$files = wc1c()->filesystem()->files($configuration->getUploadDirectory('logs'));
 
 		foreach($files as $file)
 		{
