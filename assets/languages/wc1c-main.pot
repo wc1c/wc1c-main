@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-01-14 03:39+0300\n"
+"POT-Creation-Date: 2023-01-17 20:22+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,102 +20,6 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-
-#: src/Abstracts/FormAbstract.php:739
-msgid "Select all"
-msgstr ""
-
-#: src/Abstracts/FormAbstract.php:739
-msgid "Select none"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:111
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:111
-msgid "List View"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:112
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:112
-msgid "Excerpt View"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:198
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:198
-msgid "No items found."
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:331
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:331
-msgid "Select bulk action"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:333
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:333
-msgid "Bulk Actions"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:344
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:344
-msgid "Apply"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:402 src/Abstracts/TableAbstract.php:1108
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:402
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1109
-msgid "Show more details"
-msgstr ""
-
-#. translators: %s: Number of items.
-#. translators: Number of items.
-#. translators: %s: Number of items.
-#. translators: Number of items.
-#: src/Abstracts/TableAbstract.php:513 src/Abstracts/TableAbstract.php:1137
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:513
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1138
-#, php-format
-msgid "%s item"
-msgid_plural "%s items"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Abstracts/TableAbstract.php:561
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:562
-msgid "First page"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:575
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:576
-msgid "Previous page"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:583 src/Abstracts/TableAbstract.php:589
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:584
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:590
-msgid "Current Page"
-msgstr ""
-
-#. translators: 1: Current page, 2: Total pages.
-#: src/Abstracts/TableAbstract.php:598
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:599
-#, php-format
-msgctxt "paging"
-msgid "%1$s of %2$s"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:612
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:613
-msgid "Next page"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:626
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:627
-msgid "Last page"
-msgstr ""
-
-#: src/Abstracts/TableAbstract.php:843
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:844
-msgid "Select All"
-msgstr ""
 
 #: src/Activation.php:24
 msgid ""
@@ -181,7 +85,6 @@ msgstr ""
 #: src/Admin/Columns/WooCommerce/Orders.php:65
 #: src/Admin/Columns/WooCommerce/Products.php:84
 #: src/Admin/Columns/WordPress/MediaLibrary.php:65
-#: src/Admin/Configurations/MainUpdate.php:125
 msgid "Schema ID: "
 msgstr ""
 
@@ -199,72 +102,78 @@ msgstr ""
 msgid "Not found"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:116
-#, php-format
-msgid "%s <br/><span class=\"time\">Time: %s</span>"
+#: src/Admin/Configurations/AllTable.php:118
+msgid "Time"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:122
+#: src/Admin/Configurations/AllTable.php:120
+#, php-format
+msgctxt "%s = human-readable time difference"
+msgid "(%s ago)"
+msgstr ""
+
+#: src/Admin/Configurations/AllTable.php:124
 msgid "No activity"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:176
+#: src/Admin/Configurations/AllTable.php:178
 msgid "Edit"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:177
+#: src/Admin/Configurations/AllTable.php:179
 msgid "Mark as deleted"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:182
+#: src/Admin/Configurations/AllTable.php:184
 msgid "Remove forever"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:195
-#: src/Admin/Configurations/MainUpdate.php:133
+#: src/Admin/Configurations/AllTable.php:197
 msgid "User: "
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:199
-#: src/Admin/Configurations/MainUpdate.php:137
+#: src/Admin/Configurations/AllTable.php:201
+#: src/Admin/Configurations/MainUpdate.php:158
 msgid "User is not exists."
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:205
-#: src/Admin/Configurations/AllTable.php:209
+#: src/Admin/Configurations/AllTable.php:207
+#: src/Admin/Configurations/AllTable.php:211
 msgid "Schema:"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:209
+#: src/Admin/Configurations/AllTable.php:211
 msgid "not found, please install the schema"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:261
+#: src/Admin/Configurations/AllTable.php:263
 msgid "ID"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:262
+#: src/Admin/Configurations/AllTable.php:264
 msgid "Base information"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:263
+#: src/Admin/Configurations/AllTable.php:265
+#: src/Admin/Configurations/MainUpdate.php:146
+#: src/Admin/Configurations/UpdateForm.php:42
 #: src/Admin/Settings/MainForm.php:180
 msgid "Status"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:264
+#: src/Admin/Configurations/AllTable.php:266
 msgid "Create date"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:265
+#: src/Admin/Configurations/AllTable.php:267
 msgid "Last activity"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:313
+#: src/Admin/Configurations/AllTable.php:315
 msgid "All"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:467
+#: src/Admin/Configurations/AllTable.php:469
 msgid "Search"
 msgstr ""
 
@@ -353,68 +262,84 @@ msgstr ""
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:58
+#: src/Admin/Configurations/MainUpdate.php:72
 msgid "Configuration update success."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:68
+#: src/Admin/Configurations/MainUpdate.php:82
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:94
+#: src/Admin/Configurations/MainUpdate.php:108
 msgid "Debug is enabled!"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:96
+#: src/Admin/Configurations/MainUpdate.php:110
 msgid ""
 "The current configuration has debug mode enabled. You must disable this mode "
 "after debugging is complete."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:105
+#: src/Admin/Configurations/MainUpdate.php:119
 msgid "Info is enabled!"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:107
+#: src/Admin/Configurations/MainUpdate.php:121
 msgid ""
 "The extended information recording mode is enabled for the current "
 "configuration. It is recommended to disable this mode after debugging is "
 "complete."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:116
+#: src/Admin/Configurations/MainUpdate.php:133
 msgid "About configuration"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:122
-msgid "ID: "
+#: src/Admin/Configurations/MainUpdate.php:139 views/extensions/item.php:20
+msgid "ID:"
 msgstr ""
 
 #: src/Admin/Configurations/MainUpdate.php:142
-msgid "Date create: "
+msgid "Schema ID:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:145
-msgid "Date modify: "
-msgstr ""
-
-#: src/Admin/Configurations/MainUpdate.php:148
-msgid "Date active: "
-msgstr ""
-
-#: src/Admin/Configurations/MainUpdate.php:151
-msgid "Directory: "
+#: src/Admin/Configurations/MainUpdate.php:154
+msgid "Owner:"
 msgstr ""
 
 #: src/Admin/Configurations/MainUpdate.php:163
-msgid "Directory size:"
+msgid "Date create:"
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:164
+#: src/Admin/Configurations/MainUpdate.php:168
+#: src/Admin/Configurations/MainUpdate.php:172
+#, php-format
+msgctxt "%s = human-readable time difference"
+msgid " (%s ago)."
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:167
+msgid "Date modify:"
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:171
+msgid "Date active:"
 msgstr ""
 
 #: src/Admin/Configurations/MainUpdate.php:175
+msgid "Directory:"
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:187
+msgid "Directory size:"
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:199
 msgid "Logs directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:190
+#: src/Admin/Configurations/MainUpdate.php:214
 msgid "About schema"
 msgstr ""
 
@@ -450,19 +375,28 @@ msgstr ""
 msgid "Configuration name update error. Please retry saving or change fields."
 msgstr ""
 
-#: src/Admin/Configurations/UpdateForm.php:48
-msgid "Configuration status"
+#: src/Admin/Configurations/UpdateForm.php:44
+msgid ""
+"Check the box if you want to enable this configuration. Disabled by default."
+msgstr ""
+
+#: src/Admin/Configurations/UpdateForm.php:49
+msgid ""
+"The configuration is either enabled or disabled. In the off state, all "
+"configuration mechanisms will not work."
 msgstr ""
 
 #: src/Admin/Configurations/UpdateForm.php:50
-msgid "Current configuration status."
+msgid ""
+"The extended state is required for users, while this token is used for "
+"technical purposes."
 msgstr ""
 
-#: src/Admin/Configurations/UpdateForm.php:91 src/Admin/InlineForm.php:59
+#: src/Admin/Configurations/UpdateForm.php:90 src/Admin/InlineForm.php:59
 msgid "Update error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/UpdateForm.php:137
+#: src/Admin/Configurations/UpdateForm.php:136
 msgid "Fast navigation"
 msgstr ""
 
@@ -1112,90 +1046,82 @@ msgstr ""
 msgid "Configuration for Receiver is unavailable."
 msgstr ""
 
-#: src/Receiver.php:71 src/Receiver.php:72
-msgid "Selected configuration is offline."
-msgstr ""
-
-#: src/Receiver.php:77 src/Receiver.php:78
-msgid "Selected configuration is draft."
-msgstr ""
-
-#: src/Receiver.php:89
-msgid "Error saving configuration."
-msgstr ""
-
-#: src/Receiver.php:99
+#: src/Receiver.php:74
 msgid "Schema for configuration is not initialized."
 msgstr ""
 
-#: src/Receiver.php:112
+#: src/Receiver.php:81 src/Receiver.php:115
 msgid ""
 "The request was successfully submitted for processing in the schema for the "
 "selected configuration."
 msgstr ""
 
-#: src/Receiver.php:120
+#: src/Receiver.php:90 src/Receiver.php:91
+msgid "Selected configuration is offline."
+msgstr ""
+
+#: src/Receiver.php:102
+msgid "Error saving configuration."
+msgstr ""
+
+#: src/Receiver.php:123
 msgid ""
 "Receiver request is very bad! Action not found in selected configuration."
 msgstr ""
 
-#: src/Receiver.php:121
+#: src/Receiver.php:124
 msgid "Receiver request is very bad! Action not found."
 msgstr ""
 
-#: src/Schemas/Core.php:39
-msgid "$schemas is not valid"
-msgstr ""
-
-#: src/Schemas/Core.php:57
+#: src/Schemas/Core.php:51
 msgid "$configuration is false"
 msgstr ""
 
-#: src/Schemas/Core.php:74
+#: src/Schemas/Core.php:61
 msgid "$configuration is not exists"
 msgstr ""
 
-#: src/Schemas/Core.php:89
+#: src/Schemas/Core.php:69
 msgid "$configuration is not instanceof Configuration"
 msgstr ""
 
-#: src/Schemas/Core.php:103
+#: src/Schemas/Core.php:76
 msgid "$schemas is not array."
 msgstr ""
 
-#: src/Schemas/Core.php:110
+#: src/Schemas/Core.php:83
 msgid "Schema not found by id:"
 msgstr ""
 
-#: src/Schemas/Core.php:115
+#: src/Schemas/Core.php:88
 msgid "$schemas[$schema_id] is not object"
 msgstr ""
 
-#: src/Schemas/Core.php:122
+#: src/Schemas/Core.php:95
 msgid "Old initialized, $schema_id:"
 msgstr ""
 
-#: src/Schemas/Core.php:127
+#: src/Schemas/Core.php:100
 msgid "Method init not found in schema, $schema_id:"
 msgstr ""
 
-#: src/Schemas/Core.php:147
+#: src/Schemas/Core.php:120
 msgid "Schema is not initialized."
 msgstr ""
 
-#: src/Schemas/Core.php:174
+#: src/Schemas/Core.php:147
 msgid "Schema by ID is unavailable."
 msgstr ""
 
-#: src/Schemas/Core.php:197
+#: src/Schemas/Core.php:170
 msgid "Schemas loaded."
 msgstr ""
 
-#: src/Schemas/Core.php:224
+#: src/Schemas/Core.php:197
 msgid "Schema ProductsCML is not loaded."
 msgstr ""
 
-#: src/Schemas/Core.php:248
+#: src/Schemas/Core.php:221
 msgid "Schema ProductsCleanerCML is not loaded."
 msgstr ""
 
@@ -3827,6 +3753,85 @@ msgstr ""
 msgid "%s <span class=\"time\">in: %s</span>"
 msgstr ""
 
+#: vendor/digiom/woplucore/src/Abstracts/FormAbstract.php:771
+msgid "Select all"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/FormAbstract.php:771
+msgid "Select none"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:111
+msgid "List View"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:112
+msgid "Excerpt View"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:198
+msgid "No items found."
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:331
+msgid "Select bulk action"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:333
+msgid "Bulk Actions"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:344
+msgid "Apply"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:402
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1129
+msgid "Show more details"
+msgstr ""
+
+#. translators: %s: Number of items.
+#. translators: Number of items.
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:513
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1158
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:561
+msgid "First page"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:575
+msgid "Previous page"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:583
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:589
+msgid "Current Page"
+msgstr ""
+
+#. translators: 1: Current page, 2: Total pages.
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:598
+#, php-format
+msgctxt "paging"
+msgid "%1$s of %2$s"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:612
+msgid "Next page"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:626
+msgid "Last page"
+msgstr ""
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:843
+msgid "Select All"
+msgstr ""
+
 #: vendor/digiom/wotices/src/Types/ErrorNotice.php:39
 #: vendor/digiom/wotices/src/Types/InfoNotice.php:37
 #: vendor/digiom/wotices/src/Types/SuccessNotice.php:39
@@ -4058,10 +4063,6 @@ msgstr ""
 #: views/extensions/item.php:26 views/extensions/item.php:33
 #: views/extensions/item.php:37
 msgid "none"
-msgstr ""
-
-#: views/extensions/item.php:20
-msgid "ID:"
 msgstr ""
 
 #: views/extensions/item.php:24

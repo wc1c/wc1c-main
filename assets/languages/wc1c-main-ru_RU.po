@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-01-14 03:40+0300\n"
-"PO-Revision-Date: 2023-01-15 01:44+0300\n"
+"POT-Creation-Date: 2023-01-17 20:22+0300\n"
+"PO-Revision-Date: 2023-01-17 20:22+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -21,103 +21,6 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-
-#: src/Abstracts/FormAbstract.php:739
-msgid "Select all"
-msgstr "Выбрать все"
-
-#: src/Abstracts/FormAbstract.php:739
-msgid "Select none"
-msgstr "Выбрать ничего"
-
-#: src/Abstracts/TableAbstract.php:111
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:111
-msgid "List View"
-msgstr "Просмотр списка"
-
-#: src/Abstracts/TableAbstract.php:112
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:112
-msgid "Excerpt View"
-msgstr "Расширенный просмотр"
-
-#: src/Abstracts/TableAbstract.php:198
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:198
-msgid "No items found."
-msgstr "Конфигурации не найдены."
-
-#: src/Abstracts/TableAbstract.php:331
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:331
-msgid "Select bulk action"
-msgstr "Выбрать действие"
-
-#: src/Abstracts/TableAbstract.php:333
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:333
-msgid "Bulk Actions"
-msgstr "Массовое действие"
-
-#: src/Abstracts/TableAbstract.php:344
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:344
-msgid "Apply"
-msgstr "Применить"
-
-#: src/Abstracts/TableAbstract.php:402 src/Abstracts/TableAbstract.php:1108
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:402
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1109
-msgid "Show more details"
-msgstr "Показать больше деталей"
-
-#. translators: %s: Number of items.
-#. translators: Number of items.
-#. translators: %s: Number of items.
-#. translators: Number of items.
-#: src/Abstracts/TableAbstract.php:513 src/Abstracts/TableAbstract.php:1137
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:513
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1138
-#, php-format
-msgid "%s item"
-msgid_plural "%s items"
-msgstr[0] "%s объект"
-msgstr[1] "%s объекта"
-msgstr[2] "%s объектов"
-
-#: src/Abstracts/TableAbstract.php:561
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:562
-msgid "First page"
-msgstr "Первая страница"
-
-#: src/Abstracts/TableAbstract.php:575
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:576
-msgid "Previous page"
-msgstr "Предыдущая страница"
-
-#: src/Abstracts/TableAbstract.php:583 src/Abstracts/TableAbstract.php:589
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:584
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:590
-msgid "Current Page"
-msgstr "Текущая страница"
-
-#. translators: 1: Current page, 2: Total pages.
-#: src/Abstracts/TableAbstract.php:598
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:599
-#, php-format
-msgctxt "paging"
-msgid "%1$s of %2$s"
-msgstr "%1$s из %2$s"
-
-#: src/Abstracts/TableAbstract.php:612
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:613
-msgid "Next page"
-msgstr "Следующая"
-
-#: src/Abstracts/TableAbstract.php:626
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:627
-msgid "Last page"
-msgstr "Последняя страница"
-
-#: src/Abstracts/TableAbstract.php:843
-#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:844
-msgid "Select All"
-msgstr "Выбрать Все"
 
 #: src/Activation.php:24
 msgid ""
@@ -187,7 +90,6 @@ msgstr "Информация 1С"
 #: src/Admin/Columns/WooCommerce/Orders.php:65
 #: src/Admin/Columns/WooCommerce/Products.php:84
 #: src/Admin/Columns/WordPress/MediaLibrary.php:65
-#: src/Admin/Configurations/MainUpdate.php:125
 msgid "Schema ID: "
 msgstr "Схема (ID): "
 
@@ -205,72 +107,78 @@ msgstr "Конфигурация (ID): "
 msgid "Not found"
 msgstr "Не найдена"
 
-#: src/Admin/Configurations/AllTable.php:116
-#, php-format
-msgid "%s <br/><span class=\"time\">Time: %s</span>"
-msgstr "%s <br/><span class=\"time\">Время: %s</span>"
+#: src/Admin/Configurations/AllTable.php:118
+msgid "Time"
+msgstr "Время"
 
-#: src/Admin/Configurations/AllTable.php:122
+#: src/Admin/Configurations/AllTable.php:120
+#, php-format
+msgctxt "%s = human-readable time difference"
+msgid "(%s ago)"
+msgstr "(%s назад)"
+
+#: src/Admin/Configurations/AllTable.php:124
 msgid "No activity"
 msgstr "Не было"
 
-#: src/Admin/Configurations/AllTable.php:176
+#: src/Admin/Configurations/AllTable.php:178
 msgid "Edit"
 msgstr "Редактировать"
 
-#: src/Admin/Configurations/AllTable.php:177
+#: src/Admin/Configurations/AllTable.php:179
 msgid "Mark as deleted"
 msgstr "Пометить на удаление"
 
-#: src/Admin/Configurations/AllTable.php:182
+#: src/Admin/Configurations/AllTable.php:184
 msgid "Remove forever"
 msgstr "Удалить окончательно"
 
-#: src/Admin/Configurations/AllTable.php:195
-#: src/Admin/Configurations/MainUpdate.php:133
+#: src/Admin/Configurations/AllTable.php:197
 msgid "User: "
 msgstr "Пользователь: "
 
-#: src/Admin/Configurations/AllTable.php:199
-#: src/Admin/Configurations/MainUpdate.php:137
+#: src/Admin/Configurations/AllTable.php:201
+#: src/Admin/Configurations/MainUpdate.php:158
 msgid "User is not exists."
 msgstr "Пользователь не существует."
 
-#: src/Admin/Configurations/AllTable.php:205
-#: src/Admin/Configurations/AllTable.php:209
+#: src/Admin/Configurations/AllTable.php:207
+#: src/Admin/Configurations/AllTable.php:211
 msgid "Schema:"
 msgstr "Схема:"
 
-#: src/Admin/Configurations/AllTable.php:209
+#: src/Admin/Configurations/AllTable.php:211
 msgid "not found, please install the schema"
 msgstr "не найдена, пожалуйста установите схему"
 
-#: src/Admin/Configurations/AllTable.php:261
+#: src/Admin/Configurations/AllTable.php:263
 msgid "ID"
 msgstr "ID"
 
-#: src/Admin/Configurations/AllTable.php:262
+#: src/Admin/Configurations/AllTable.php:264
 msgid "Base information"
 msgstr "Базовая информация"
 
-#: src/Admin/Configurations/AllTable.php:263
+#: src/Admin/Configurations/AllTable.php:265
+#: src/Admin/Configurations/MainUpdate.php:146
+#: src/Admin/Configurations/UpdateForm.php:42
 #: src/Admin/Settings/MainForm.php:180
 msgid "Status"
 msgstr "Состояние"
 
-#: src/Admin/Configurations/AllTable.php:264
+#: src/Admin/Configurations/AllTable.php:266
 msgid "Create date"
 msgstr "Создана"
 
-#: src/Admin/Configurations/AllTable.php:265
+#: src/Admin/Configurations/AllTable.php:267
 msgid "Last activity"
 msgstr "Активность"
 
-#: src/Admin/Configurations/AllTable.php:313
+#: src/Admin/Configurations/AllTable.php:315
 msgid "All"
 msgstr "Все"
 
-#: src/Admin/Configurations/AllTable.php:467
+#: src/Admin/Configurations/AllTable.php:469
 msgid "Search"
 msgstr "Найти"
 
@@ -366,21 +274,21 @@ msgstr "Ошибка при удалении. Пожалуйста повтор�
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr "Ошибка удаления. Требуется подтверждение окончательного удаления."
 
-#: src/Admin/Configurations/MainUpdate.php:58
+#: src/Admin/Configurations/MainUpdate.php:72
 msgid "Configuration update success."
 msgstr "Конфигурация успешно обновлена."
 
-#: src/Admin/Configurations/MainUpdate.php:68
+#: src/Admin/Configurations/MainUpdate.php:82
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 "Ошибка обновления конфигурации. Повторите попытку сохранения или изменения "
 "полей."
 
-#: src/Admin/Configurations/MainUpdate.php:94
+#: src/Admin/Configurations/MainUpdate.php:108
 msgid "Debug is enabled!"
 msgstr "Отладка включена!"
 
-#: src/Admin/Configurations/MainUpdate.php:96
+#: src/Admin/Configurations/MainUpdate.php:110
 msgid ""
 "The current configuration has debug mode enabled. You must disable this mode "
 "after debugging is complete."
@@ -388,11 +296,11 @@ msgstr ""
 "В текущей конфигурации включен режим отладки. Отключите этот режим после "
 "завершения отладки."
 
-#: src/Admin/Configurations/MainUpdate.php:105
+#: src/Admin/Configurations/MainUpdate.php:119
 msgid "Info is enabled!"
 msgstr "Информация включена!"
 
-#: src/Admin/Configurations/MainUpdate.php:107
+#: src/Admin/Configurations/MainUpdate.php:121
 msgid ""
 "The extended information recording mode is enabled for the current "
 "configuration. It is recommended to disable this mode after debugging is "
@@ -401,39 +309,55 @@ msgstr ""
 "Расширенный режим записи информации включен для текущей конфигурации. "
 "Рекомендуется отключать этот режим после завершения отладки."
 
-#: src/Admin/Configurations/MainUpdate.php:116
+#: src/Admin/Configurations/MainUpdate.php:133
 msgid "About configuration"
 msgstr "О конфигурации"
 
-#: src/Admin/Configurations/MainUpdate.php:122
-msgid "ID: "
-msgstr "ИД: "
+#: src/Admin/Configurations/MainUpdate.php:139 views/extensions/item.php:20
+msgid "ID:"
+msgstr "ID:"
 
 #: src/Admin/Configurations/MainUpdate.php:142
-msgid "Date create: "
-msgstr "Дата создания: "
+msgid "Schema ID:"
+msgstr "Схема (ID):"
 
-#: src/Admin/Configurations/MainUpdate.php:145
-msgid "Date modify: "
-msgstr "Дата изменения: "
-
-#: src/Admin/Configurations/MainUpdate.php:148
-msgid "Date active: "
-msgstr "Последняя активность: "
-
-#: src/Admin/Configurations/MainUpdate.php:151
-msgid "Directory: "
-msgstr "Директория: "
+#: src/Admin/Configurations/MainUpdate.php:154
+msgid "Owner:"
+msgstr "Владелец:"
 
 #: src/Admin/Configurations/MainUpdate.php:163
+msgid "Date create:"
+msgstr "Дата создания:"
+
+#: src/Admin/Configurations/MainUpdate.php:164
+#: src/Admin/Configurations/MainUpdate.php:168
+#: src/Admin/Configurations/MainUpdate.php:172
+#, php-format
+msgctxt "%s = human-readable time difference"
+msgid " (%s ago)."
+msgstr " (%s назад)."
+
+#: src/Admin/Configurations/MainUpdate.php:167
+msgid "Date modify:"
+msgstr "Дата изменения:"
+
+#: src/Admin/Configurations/MainUpdate.php:171
+msgid "Date active:"
+msgstr "Последняя активность:"
+
+#: src/Admin/Configurations/MainUpdate.php:175
+msgid "Directory:"
+msgstr "Директория:"
+
+#: src/Admin/Configurations/MainUpdate.php:187
 msgid "Directory size:"
 msgstr "Размер директории:"
 
-#: src/Admin/Configurations/MainUpdate.php:175
+#: src/Admin/Configurations/MainUpdate.php:199
 msgid "Logs directory size:"
 msgstr "Размер директории журналов:"
 
-#: src/Admin/Configurations/MainUpdate.php:190
+#: src/Admin/Configurations/MainUpdate.php:214
 msgid "About schema"
 msgstr "О схеме"
 
@@ -473,19 +397,34 @@ msgstr ""
 "Ошибка обновления названия конфигурации. Повторите попытку сохранения или "
 "изменения полей."
 
-#: src/Admin/Configurations/UpdateForm.php:48
-msgid "Configuration status"
-msgstr "Состояние конфигурации"
+#: src/Admin/Configurations/UpdateForm.php:44
+msgid ""
+"Check the box if you want to enable this configuration. Disabled by default."
+msgstr ""
+"Установите флажок, если хотите включить эту конфигурацию. Отключена по "
+"умолчанию."
+
+#: src/Admin/Configurations/UpdateForm.php:49
+msgid ""
+"The configuration is either enabled or disabled. In the off state, all "
+"configuration mechanisms will not work."
+msgstr ""
+"Конфигурация либо включена, либо отключена. В выключенном состоянии все "
+"механизмы конфигурации будут выключены."
 
 #: src/Admin/Configurations/UpdateForm.php:50
-msgid "Current configuration status."
-msgstr "Текущее состояние конфигурации."
+msgid ""
+"The extended state is required for users, while this token is used for "
+"technical purposes."
+msgstr ""
+"Расширенное состояние требуется для пользователей, а этот маркер "
+"используется в технических целях."
 
-#: src/Admin/Configurations/UpdateForm.php:91 src/Admin/InlineForm.php:59
+#: src/Admin/Configurations/UpdateForm.php:90 src/Admin/InlineForm.php:59
 msgid "Update error. Please retry."
 msgstr "Ошибка при обновлении. Пожалуйста повторите."
 
-#: src/Admin/Configurations/UpdateForm.php:137
+#: src/Admin/Configurations/UpdateForm.php:136
 msgid "Fast navigation"
 msgstr "Быстрая навигация"
 
@@ -1183,92 +1122,84 @@ msgstr "Выбранная для Получателя конфигурация 
 msgid "Configuration for Receiver is unavailable."
 msgstr "Конфигурация для Получателя недоступна."
 
-#: src/Receiver.php:71 src/Receiver.php:72
-msgid "Selected configuration is offline."
-msgstr "Выбранная конфигурация выключена."
-
-#: src/Receiver.php:77 src/Receiver.php:78
-msgid "Selected configuration is draft."
-msgstr "Выбранная конфигурация является черновиком."
-
-#: src/Receiver.php:89
-msgid "Error saving configuration."
-msgstr "Ошибка сохранения конфигурации."
-
-#: src/Receiver.php:99
+#: src/Receiver.php:74
 msgid "Schema for configuration is not initialized."
 msgstr "Схема для конфигурации не инициализирована."
 
-#: src/Receiver.php:112
+#: src/Receiver.php:81 src/Receiver.php:115
 msgid ""
 "The request was successfully submitted for processing in the schema for the "
 "selected configuration."
 msgstr ""
 "Запрос успешно отправлен на обработку в схему для выбранной конфигурации."
 
-#: src/Receiver.php:120
+#: src/Receiver.php:90 src/Receiver.php:91
+msgid "Selected configuration is offline."
+msgstr "Выбранная конфигурация выключена."
+
+#: src/Receiver.php:102
+msgid "Error saving configuration."
+msgstr "Ошибка сохранения конфигурации."
+
+#: src/Receiver.php:123
 msgid ""
 "Receiver request is very bad! Action not found in selected configuration."
 msgstr ""
 "Запрос получателя очень плохой! Действие не найдено в выбранной конфигурации."
 
-#: src/Receiver.php:121
+#: src/Receiver.php:124
 msgid "Receiver request is very bad! Action not found."
 msgstr "Запрос получателя очень плохой! Действие не найдено."
 
-#: src/Schemas/Core.php:39
-msgid "$schemas is not valid"
-msgstr "$schemas не валидны"
-
-#: src/Schemas/Core.php:57
+#: src/Schemas/Core.php:51
 msgid "$configuration is false"
 msgstr "$configuration is false"
 
-#: src/Schemas/Core.php:74
+#: src/Schemas/Core.php:61
 msgid "$configuration is not exists"
 msgstr "$configuration не существует"
 
-#: src/Schemas/Core.php:89
+#: src/Schemas/Core.php:69
 msgid "$configuration is not instanceof Configuration"
 msgstr "$configuration не реализует Configuration"
 
-#: src/Schemas/Core.php:103
+#: src/Schemas/Core.php:76
 msgid "$schemas is not array."
 msgstr "$schemas не является массивом."
 
-#: src/Schemas/Core.php:110
+#: src/Schemas/Core.php:83
 msgid "Schema not found by id:"
 msgstr "Схема не найдена по ИД:"
 
-#: src/Schemas/Core.php:115
+#: src/Schemas/Core.php:88
 msgid "$schemas[$schema_id] is not object"
 msgstr "$schemas[$schema_id] не является объектом"
 
-#: src/Schemas/Core.php:122
+#: src/Schemas/Core.php:95
 msgid "Old initialized, $schema_id:"
 msgstr "Уже инициализирована, $schema_id:"
 
-#: src/Schemas/Core.php:127
+#: src/Schemas/Core.php:100
 msgid "Method init not found in schema, $schema_id:"
 msgstr "Метод для инициализации не найден в схеме, $schema_id:"
 
-#: src/Schemas/Core.php:147
+#: src/Schemas/Core.php:120
 msgid "Schema is not initialized."
 msgstr "Схема не инициализирована."
 
-#: src/Schemas/Core.php:174
+#: src/Schemas/Core.php:147
 msgid "Schema by ID is unavailable."
 msgstr "Схема по идентификатору недоступна."
 
-#: src/Schemas/Core.php:197
+#: src/Schemas/Core.php:170
 msgid "Schemas loaded."
 msgstr "Схема загружена."
 
-#: src/Schemas/Core.php:224
+#: src/Schemas/Core.php:197
 msgid "Schema ProductsCML is not loaded."
 msgstr "Схема ProductsCML не загружена."
 
-#: src/Schemas/Core.php:248
+#: src/Schemas/Core.php:221
 msgid "Schema ProductsCleanerCML is not loaded."
 msgstr "Схема ProductsCleanerCML не загружена."
 
@@ -4280,6 +4211,86 @@ msgstr "Удаленные"
 msgid "%s <span class=\"time\">in: %s</span>"
 msgstr "%s <span class=\"time\">в: %s</span>"
 
+#: vendor/digiom/woplucore/src/Abstracts/FormAbstract.php:771
+msgid "Select all"
+msgstr "Выбрать все"
+
+#: vendor/digiom/woplucore/src/Abstracts/FormAbstract.php:771
+msgid "Select none"
+msgstr "Выбрать ничего"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:111
+msgid "List View"
+msgstr "Просмотр списка"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:112
+msgid "Excerpt View"
+msgstr "Расширенный просмотр"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:198
+msgid "No items found."
+msgstr "Конфигурации не найдены."
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:331
+msgid "Select bulk action"
+msgstr "Выбрать действие"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:333
+msgid "Bulk Actions"
+msgstr "Массовое действие"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:344
+msgid "Apply"
+msgstr "Применить"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:402
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1129
+msgid "Show more details"
+msgstr "Показать больше деталей"
+
+#. translators: %s: Number of items.
+#. translators: Number of items.
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:513
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:1158
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s объект"
+msgstr[1] "%s объекта"
+msgstr[2] "%s объектов"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:561
+msgid "First page"
+msgstr "Первая страница"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:575
+msgid "Previous page"
+msgstr "Предыдущая страница"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:583
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:589
+msgid "Current Page"
+msgstr "Текущая страница"
+
+#. translators: 1: Current page, 2: Total pages.
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:598
+#, php-format
+msgctxt "paging"
+msgid "%1$s of %2$s"
+msgstr "%1$s из %2$s"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:612
+msgid "Next page"
+msgstr "Следующая"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:626
+msgid "Last page"
+msgstr "Последняя страница"
+
+#: vendor/digiom/woplucore/src/Abstracts/TableAbstract.php:843
+msgid "Select All"
+msgstr "Выбрать Все"
+
 #: vendor/digiom/wotices/src/Types/ErrorNotice.php:39
 #: vendor/digiom/wotices/src/Types/InfoNotice.php:37
 #: vendor/digiom/wotices/src/Types/SuccessNotice.php:39
@@ -4521,10 +4532,6 @@ msgstr ""
 #: views/extensions/item.php:37
 msgid "none"
 msgstr "неизвестно"
-
-#: views/extensions/item.php:20
-msgid "ID:"
-msgstr "ID:"
 
 #: views/extensions/item.php:24
 msgid "Version:"
@@ -4786,6 +4793,24 @@ msgstr "Команда WC1C"
 #. Author URI of the plugin/theme
 msgid "https://wc1c.info"
 msgstr "https://wc1c.info"
+
+#~ msgid "%s <br/><span class=\"time\">Time: %s</span>"
+#~ msgstr "%s <br/><span class=\"time\">Время: %s</span>"
+
+#~ msgid "ID: "
+#~ msgstr "ИД: "
+
+#~ msgid "Configuration status"
+#~ msgstr "Состояние конфигурации"
+
+#~ msgid "Current configuration status."
+#~ msgstr "Текущее состояние конфигурации."
+
+#~ msgid "Selected configuration is draft."
+#~ msgstr "Выбранная конфигурация является черновиком."
+
+#~ msgid "$schemas is not valid"
+#~ msgstr "$schemas не валидны"
 
 #~ msgid ""
 #~ "The setting must not take a size larger than specified in the server "
