@@ -23,7 +23,7 @@ class UpdateForm extends FormAbstract
 		$this->setId('configurations-update');
 
 		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_main'], 3);
-		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'output_navigation'], 20);
+		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputNavigation'], 20);
 
 		$this->loadFields();
 	}
@@ -128,7 +128,7 @@ class UpdateForm extends FormAbstract
 	/**
 	 * Navigation show
 	 */
-	public function output_navigation()
+	public function outputNavigation()
 	{
         $show = false;
 
@@ -151,10 +151,10 @@ class UpdateForm extends FormAbstract
 				continue;
 			}
 
-			if(method_exists($this, 'generate_navigation_html'))
+			if(method_exists($this, 'generateNavigationHtml'))
 			{
                 $show = true;
-				$body .= $this->{'generate_navigation_html'}($k, $v);
+				$body .= $this->{'generateNavigationHtml'}($k, $v);
 			}
 		}
 
@@ -176,7 +176,7 @@ class UpdateForm extends FormAbstract
 	 *
 	 * @return string
 	 */
-	public function generate_navigation_html($key, $data)
+	public function generateNavigationHtml(string $key, array $data): string
 	{
 		$field_key = $this->getPrefixFieldKey($key);
 
