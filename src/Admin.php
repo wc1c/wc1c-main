@@ -148,6 +148,17 @@ final class Admin
 			];
 		}
 
+		if(!wc1c()->tecodes()->is_valid())
+		{
+			$default_sections['promo'] =
+			[
+				'title' => __('Activation', 'wc1c-main'),
+				'visible' => true,
+				'callback' => [Admin\Activation::class, 'instance'],
+				'class' => 'promo'
+			];
+		}
+
 		$this->initSections($default_sections);
 		$this->setCurrentSection('configurations');
 
