@@ -59,6 +59,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Improvement: use woplucore
 * Improvement: statuses for configurations
 * Improvement: custom receiver in schemas
+* Improvement: configuration order by dates
 * Fix: more
 
 = 0.15.1 =
