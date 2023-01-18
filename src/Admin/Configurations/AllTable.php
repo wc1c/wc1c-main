@@ -278,6 +278,8 @@ class AllTable extends TableAbstract
 	{
 		$sortable_columns['configuration_id'] = ['configuration_id', false];
 		$sortable_columns['status'] = ['status', false];
+		$sortable_columns['date_create'] = ['date_create', false];
+		$sortable_columns['date_activity'] = ['date_activity', false];
 
 		return $sortable_columns;
 	}
