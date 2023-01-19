@@ -82,9 +82,9 @@ final class Products
 
 		if($time)
 		{
-			$content .= '<br/><span class="na">' . __('Activity:', 'wc1c-main') . ' ';
+			$content .= '<span class="na">' . __('Activity:', 'wc1c-main') . ' ';
 			$content .= sprintf(_x('%s ago.', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($time, current_time('timestamp')));
-			$content .= '</span>';
+			$content .= '</span><br/>';
 		}
 
 		if($schema_id)
