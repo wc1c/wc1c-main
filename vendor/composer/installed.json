@@ -432,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "bd0fb78c2f8965b68c5c9a52f8f0bfc6e3360f0c"
+                "reference": "05c7c425583ae202e795cdf0578f3b6c0f6c98e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/bd0fb78c2f8965b68c5c9a52f8f0bfc6e3360f0c",
-                "reference": "bd0fb78c2f8965b68c5c9a52f8f0bfc6e3360f0c",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/05c7c425583ae202e795cdf0578f3b6c0f6c98e8",
+                "reference": "05c7c425583ae202e795cdf0578f3b6c0f6c98e8",
                 "shasum": ""
             },
             "require": {
@@ -445,7 +445,7 @@
                 "ext-xmlreader": "*",
                 "php": ">=7.0"
             },
-            "time": "2023-01-17T20:16:39+00:00",
+            "time": "2023-01-19T18:10:35+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
