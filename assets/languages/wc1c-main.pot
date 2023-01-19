@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-01-17 20:22+0300\n"
+"POT-Creation-Date: 2023-01-19 01:56+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgid "Integration with 1C"
 msgstr ""
 
 #: src/Admin.php:119 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/MainForm.php:45
+#: src/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: src/Admin.php:135 src/Admin.php:242
+#: src/Admin.php:135 src/Admin.php:253
 msgid "Settings"
 msgstr ""
 
@@ -58,19 +58,23 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:270 src/Admin/Settings/MainForm.php:250
+#: src/Admin.php:155 src/Admin/Settings.php:55
+msgid "Activation"
+msgstr ""
+
+#: src/Admin.php:281 src/Admin/Settings/ActivationForm.php:229
 msgid "never"
 msgstr ""
 
-#: src/Admin.php:271
+#: src/Admin.php:282
 msgid "no deadline"
 msgstr ""
 
-#: src/Admin.php:276
+#: src/Admin.php:287
 msgid "to:"
 msgstr ""
 
-#: src/Admin.php:283
+#: src/Admin.php:294
 msgid "not activated"
 msgstr ""
 
@@ -157,7 +161,7 @@ msgstr ""
 #: src/Admin/Configurations/AllTable.php:265
 #: src/Admin/Configurations/MainUpdate.php:146
 #: src/Admin/Configurations/UpdateForm.php:42
-#: src/Admin/Settings/MainForm.php:180
+#: src/Admin/Settings/ActivationForm.php:159
 msgid "Status"
 msgstr ""
 
@@ -308,42 +312,42 @@ msgid "Owner:"
 msgstr ""
 
 #: src/Admin/Configurations/MainUpdate.php:163
-msgid "Date create:"
+msgid "Date active:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:164
-#: src/Admin/Configurations/MainUpdate.php:168
-#: src/Admin/Configurations/MainUpdate.php:172
+#: src/Admin/Configurations/MainUpdate.php:167
+#: src/Admin/Configurations/MainUpdate.php:177
+#: src/Admin/Configurations/MainUpdate.php:186
 #, php-format
 msgctxt "%s = human-readable time difference"
 msgid " (%s ago)."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:167
+#: src/Admin/Configurations/MainUpdate.php:173
+msgid "Date create:"
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:182
 msgid "Date modify:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:171
-msgid "Date active:"
-msgstr ""
-
-#: src/Admin/Configurations/MainUpdate.php:175
+#: src/Admin/Configurations/MainUpdate.php:192
 msgid "Directory:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:187
+#: src/Admin/Configurations/MainUpdate.php:204
 msgid "Directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:199
+#: src/Admin/Configurations/MainUpdate.php:216
 msgid "Logs directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:214
+#: src/Admin/Configurations/MainUpdate.php:231
 msgid "About schema"
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:35
+#: src/Admin/Configurations/Update.php:35 src/Admin/Settings.php:48
 msgid "Main"
 msgstr ""
 
@@ -412,21 +416,65 @@ msgstr ""
 msgid "Not a feature?"
 msgstr ""
 
-#: src/Admin/Settings.php:47
-msgid "Main settings"
-msgstr ""
-
-#: src/Admin/Settings.php:54 src/Schemas/Productscleanercml/Admin.php:238
+#: src/Admin/Settings.php:62 src/Schemas/Productscleanercml/Admin.php:238
 #: src/Schemas/Productscml/Admin.php:1648
 msgid "Event logs"
 msgstr ""
 
-#: src/Admin/Settings.php:61
+#: src/Admin/Settings.php:69
 msgid "Interface"
 msgstr ""
 
-#: src/Admin/Settings.php:68 views/header.php:18
+#: src/Admin/Settings.php:76 views/header.php:18
 msgid "Connection to the WC1C"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:50 src/Admin/Settings/Form.php:75
+msgid "Save error. Please retry."
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:92
+msgid "The code is invalid. Enter the correct code."
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:126
+msgid "Code activated successfully."
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:168
+msgid "Code for activation"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:174
+msgid "Enter the code only on the actual workstation."
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:175
+msgid "If enter the correct code, the current environment will be activated."
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:176
+msgid "Current activation API status:"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:239
+msgid "Code ID"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:241
+msgid "expires:"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:243
+msgid "Instance ID"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:245
+msgid "Domain"
+msgstr ""
+
+#: src/Admin/Settings/ActivationForm.php:299
+msgid "Activate"
 msgstr ""
 
 #: src/Admin/Settings/ConnectionForm.php:106
@@ -476,10 +524,6 @@ msgid ""
 "The current application token for the user. This token can be revoked in "
 "your personal account on the WC1C website, as well as by clicking the "
 "Disconnect button."
-msgstr ""
-
-#: src/Admin/Settings/Form.php:75
-msgid "Save error. Please retry."
 msgstr ""
 
 #: src/Admin/Settings/Form.php:130
@@ -655,7 +699,7 @@ msgstr ""
 msgid "Event log settings based on context."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:73 src/Admin/Settings/MainForm.php:142
+#: src/Admin/Settings/LogsForm.php:73 src/Admin/Settings/MainForm.php:140
 msgid "Receiver"
 msgstr ""
 
@@ -694,155 +738,99 @@ msgid ""
 "in the log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:47
+#: src/Admin/Settings/MainForm.php:45
 msgid "Some settings for the configurations."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:52
+#: src/Admin/Settings/MainForm.php:50
 msgid "Unique names"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:54
+#: src/Admin/Settings/MainForm.php:52
 msgid "Require unique names for configurations?"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:55
+#: src/Admin/Settings/MainForm.php:53
 msgid "If enabled, will need to provide unique names for the configurations."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:61
+#: src/Admin/Settings/MainForm.php:59
 msgid "Number in the list"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:63
+#: src/Admin/Settings/MainForm.php:61
 msgid "The number of displayed configurations on one page."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:70
+#: src/Admin/Settings/MainForm.php:68
 msgid "Deleting drafts without trash"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:72
+#: src/Admin/Settings/MainForm.php:70
 msgid "Enable deleting drafts without placing them in the trash?"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:73
+#: src/Admin/Settings/MainForm.php:71
 msgid ""
 "If enabled, configurations for connections in the draft status will be "
 "deleted without being added to the basket."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:91
+#: src/Admin/Settings/MainForm.php:89
 msgid "Technical settings"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:93
+#: src/Admin/Settings/MainForm.php:91
 msgid "Used to set up the environment."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:98 src/Schemas/Productscml/Admin.php:176
+#: src/Admin/Settings/MainForm.php:96 src/Schemas/Productscml/Admin.php:176
 msgid "Maximum time for execution PHP"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:103
+#: src/Admin/Settings/MainForm.php:101
 msgid "Value is seconds. WC1C will run until a time limit is set."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:104
+#: src/Admin/Settings/MainForm.php:102
 msgid "Server value:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:106
+#: src/Admin/Settings/MainForm.php:104
 msgid ""
 "If specify 0, the time limit will be disabled. Specifying 0 is not "
 "recommended, it is recommended not to exceed the server limit."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:114
+#: src/Admin/Settings/MainForm.php:112
 msgid "Maximum request size"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:119
+#: src/Admin/Settings/MainForm.php:117
 msgid ""
 "Enter the maximum size of accepted requests at a time in bytes. May be "
 "specified with a dimension suffix, such as 7M, where M = megabyte, K = "
 "kilobyte, G - gigabyte."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:120
+#: src/Admin/Settings/MainForm.php:118
 msgid "Current SERVER limit:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:122
+#: src/Admin/Settings/MainForm.php:120
 msgid ""
 "Can only decrease the value, because it must not exceed the limits from the "
 "server limit."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:144
+#: src/Admin/Settings/MainForm.php:142
 msgid "Enable data Receiver: background requests?"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:145
+#: src/Admin/Settings/MainForm.php:143
 msgid ""
 "It is used to receive background requests from 1C in exchange schemes. Do "
 "not disable this option if you do not know what it is for."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:165
-msgid "Activation"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:170
-msgid "The code can be obtained from the plugin website:"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:183
-msgid "Code activated. To activate another code, you can enter it again."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:190
-msgid "Code for activation"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:196
-msgid "If enter the correct code, the current environment will be activated."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:197
-msgid "Enter the code only on the actual workstation."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:198
-msgid "Current activation API status:"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:260
-msgid "Code ID"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:262
-msgid "expires:"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:264
-msgid "Instance ID"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:266
-msgid "Domain"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:320
-msgid "Activate"
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:352
-msgid "The code is invalid. Enter the correct code."
-msgstr ""
-
-#: src/Admin/Settings/MainForm.php:385
-msgid "Code activated successfully. Reload the page to display."
 msgstr ""
 
 #: src/Admin/Wizards/Setup/Database.php:43
@@ -3928,6 +3916,79 @@ msgstr ""
 msgid "Invalid image."
 msgstr ""
 
+#: views/activation/form.php:31
+msgid "Get code"
+msgstr ""
+
+#: views/activation/form.php:32
+msgid "The code can be obtained from the plugin website."
+msgstr ""
+
+#: views/activation/form.php:34 views/configurations/create_form.php:27
+msgid "Site:"
+msgstr ""
+
+#: views/activation/promo.php:7
+msgid "Your copy of the free software has not been activated."
+msgstr ""
+
+#: views/activation/promo.php:8
+msgid ""
+"We recommend that you activate your copy of the free software for stable "
+"updates and better performance."
+msgstr ""
+
+#: views/activation/promo.php:9
+msgid ""
+"After activation, this section will disappear and will no longer be shown."
+msgstr ""
+
+#: views/activation/promo.php:18
+msgid "How to activate?"
+msgstr ""
+
+#: views/activation/promo.php:20
+msgid ""
+"Get an activation code in any available way. For example, on the official "
+"website."
+msgstr ""
+
+#: views/activation/promo.php:21
+msgid "Enter the activation code in the plugin settings."
+msgstr ""
+
+#: views/activation/promo.php:26
+msgid "Why is activation required?"
+msgstr ""
+
+#: views/activation/promo.php:28
+msgid ""
+"You received a copy of the software completely free of charge and you can "
+"use it as is without any activation."
+msgstr ""
+
+#: views/activation/promo.php:29
+msgid ""
+"However, in order to receive timely, as well as necessary updates and "
+"improvements, it is necessary to activate the current environment."
+msgstr ""
+
+#: views/activation/promo.php:32
+msgid ""
+"Activation is vital for the performance of the plugin and its further active "
+"development. Dont ignore activation."
+msgstr ""
+
+#: views/activation/promo.php:33
+msgid "Each activation triggers a mechanism to improve the software you use."
+msgstr ""
+
+#: views/activation/promo.php:36
+msgid ""
+"In addition to supporting the software you use, additional features will be "
+"added."
+msgstr ""
+
 #: views/configurations/create.php:7 views/configurations/delete.php:7
 msgid "Back to all configurations"
 msgstr ""
@@ -3938,10 +3999,6 @@ msgstr ""
 
 #: views/configurations/create_form.php:25
 msgid "Additional schemes are available in extensions on the official website."
-msgstr ""
-
-#: views/configurations/create_form.php:27
-msgid "Site:"
 msgstr ""
 
 #: views/configurations/create_form.php:32
@@ -4028,13 +4085,13 @@ msgstr ""
 msgid "Connection"
 msgstr ""
 
-#: views/connection/init.php:10
+#: views/connection/init.php:14
 msgid ""
-"To receive support and official services, need to go through the "
-"authorization of external applications."
+"To receive official services and improve of the plugin, you must go through "
+"the authorization of an external application."
 msgstr ""
 
-#: views/connection/init.php:11
+#: views/connection/init.php:15
 msgid ""
 "Authorization of an external app occurs by going to the official WC1C and "
 "returning to the current site."
