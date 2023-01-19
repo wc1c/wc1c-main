@@ -24,7 +24,13 @@ trait Utility
 			'offers',
 			'prices',
 			'rests',
-			'import_files'
+			'import_files',
+			'goods',
+			'units',
+			'storages',
+			'priceLists',
+			'propertiesGoods',
+			'groups'
 		];
 
 		foreach($types as $type)
