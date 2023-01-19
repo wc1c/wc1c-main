@@ -1278,6 +1278,13 @@ class Admin
 			'none' => _x( 'None', 'Tax status', 'wc1c-main'),
 		];
 
+		$products_default_options =
+		[
+			'no' => __('Do not update', 'wc1c-main'),
+		];
+
+		$taxes_status_update = array_merge($products_default_options, $taxes_status);
+
 		$fields['products_create_taxes_status'] =
 		[
 			'title' => __('Tax status of created products', 'wc1c-main'),
@@ -1292,27 +1299,6 @@ class Admin
 			'options' => $taxes_status
 		];
 
-		$fields['products_create_taxes_class'] =
-		[
-			'title' => __('Tax class for created products', 'wc1c-main'),
-			'type' => 'select',
-			'description' => sprintf
-			(
-				'%s<hr>%s',
-				__('Choose a tax class for this product. Tax classes are used to apply different tax rates specific to certain types of product.', 'wc1c-main'),
-				__('The setting works when creating products (goods).', 'wc1c-main')
-			),
-			'default' => 'standard',
-			'options' => wc_get_product_tax_class_options()
-		];
-
-		$products_default_options =
-		[
-			'no' => __('Do not update', 'wc1c-main'),
-		];
-
-		$taxes_status_update = array_merge($products_default_options, $taxes_status);
-
 		$fields['products_update_taxes_status'] =
 		[
 			'title' => __('Tax status for updated products', 'wc1c-main'),
@@ -1325,6 +1311,20 @@ class Admin
 			),
 			'default' => 'no',
 			'options' => $taxes_status_update
+		];
+
+		$fields['products_create_taxes_class'] =
+		[
+			'title' => __('Tax class for created products', 'wc1c-main'),
+			'type' => 'select',
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('Choose a tax class for this product. Tax classes are used to apply different tax rates specific to certain types of product.', 'wc1c-main'),
+				__('The setting works when creating products (goods).', 'wc1c-main')
+			),
+			'default' => 'standard',
+			'options' => wc_get_product_tax_class_options()
 		];
 
 		$products_taxes_class_options = array_merge($products_default_options, wc_get_product_tax_class_options());

@@ -1634,11 +1634,6 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		if('update' === $mode && 'no' === $this->getOptions('products_update_taxes_status', 'no'))
-		{
-			return $internal_product;
-		}
-
 		if('create' === $mode)
 		{
 			$internal_product->set_tax_status($this->getOptions('products_create_taxes_status', 'taxable'));
@@ -1646,7 +1641,14 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		$internal_product->set_tax_status($this->getOptions('products_update_taxes_status', 'taxable'));
+		$status = $this->getOptions('products_update_taxes_status', 'no');
+
+		if('no' === $status)
+		{
+			return $internal_product;
+		}
+
+		$internal_product->set_tax_status($status);
 
 		return $internal_product;
 	}
@@ -1669,11 +1671,6 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		if('update' === $mode && 'no' === $this->getOptions('products_update_taxes_class', 'no'))
-		{
-			return $internal_product;
-		}
-
 		if('create' === $mode)
 		{
 			$internal_product->set_tax_class($this->getOptions('products_create_taxes_class', 'standard'));
@@ -1681,7 +1678,14 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		$internal_product->set_tax_class($this->getOptions('products_update_taxes_class', 'standard'));
+		$class = $this->getOptions('products_update_taxes_class', 'no');
+
+		if('no' === $class)
+		{
+			return $internal_product;
+		}
+
+		$internal_product->set_tax_class($class);
 
 		return $internal_product;
 	}
