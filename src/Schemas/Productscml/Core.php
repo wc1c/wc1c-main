@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.7.0');
+		$this->setVersion('0.8.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -179,7 +179,7 @@ class Core extends SchemaAbstract
 		{
 			$decoder = new Decoder();
 		}
-		catch(Exception $exception)
+		catch(\Throwable $exception)
 		{
 			$this->log()->error(__('The file cannot be processed. DecoderCML threw an exception.', 'wc1c-main'), ['exception' => $exception]);
 			return false;
@@ -187,15 +187,15 @@ class Core extends SchemaAbstract
 
 		if(has_filter('wc1c_schema_productscml_file_processing_decoder'))
 		{
-			$decoder = apply_filters('wc1c_schema_productscml_file_processing_decoder', $decoder, $this);
 			$this->log()->info(__('DecoderCML has been overridden by external algorithms.', 'wc1c-main'));
+			$decoder = apply_filters('wc1c_schema_productscml_file_processing_decoder', $decoder, $this);
 		}
 
 		try
 		{
 			$reader = new Reader($file_path, $decoder);
 		}
-		catch(Exception $exception)
+		catch(\Throwable $exception)
 		{
 			$this->log()->error(__('The file cannot be processed. ReaderCML threw an exception.', 'wc1c-main'), ['exception' => $exception]);
 			return false;
@@ -205,8 +205,8 @@ class Core extends SchemaAbstract
 
 		if(has_filter('wc1c_schema_productscml_file_processing_reader'))
 		{
-			$reader = apply_filters('wc1c_schema_productscml_file_processing_reader', $reader, $this);
 			$this->log()->info(__('ReaderCML has been overridden by external algorithms.', 'wc1c-main'));
+			$reader = apply_filters('wc1c_schema_productscml_file_processing_reader', $reader, $this);
 		}
 
 		while($reader->read())
@@ -215,7 +215,7 @@ class Core extends SchemaAbstract
 			{
 				do_action('wc1c_schema_productscml_file_processing_read', $reader, $this);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				$this->log()->error(__('Import file processing not completed. ReaderCML threw an exception.', 'wc1c-main'), ['exception' => $e]);
 				break;
@@ -238,6 +238,59 @@ class Core extends SchemaAbstract
 		if(wc1c()->timer()->getMaximum() !== 0 && !wc1c()->timer()->isRemainingBiggerThan(5))
 		{
 			throw new Exception(__('There was not enough time to load all the data.', 'wc1c-main'));
+		}
+	}
+
+	/**
+	 * Receiver
+	 *
+	 * @return void
+	 */
+	public function receiver()
+	{
+		if($this->configuration()->isEnabled() === false)
+		{
+			$message = __('Configuration is offline.', 'wc1c-main');
+
+			wc1c()->log('receiver')->warning($message);
+			$this->receiver->sendResponseByType('failure', $message);
+		}
+
+		try
+		{
+			$this->configuration()->setDateActivity(time());
+			$this->configuration()->save();
+		}
+		catch(Exception $e)
+		{
+			$message = __('Error saving configuration.', 'wc1c-main');
+
+			wc1c()->log('receiver')->error($message, ['exception' => $e]);
+			$this->receiver->sendResponseByType('failure', $message);
+		}
+
+		$action = false;
+		$wc1c_receiver_action = 'wc1c_receiver_' . $this->getId();
+
+		if(has_action($wc1c_receiver_action))
+		{
+			$action = true;
+
+			ob_start();
+			nocache_headers();
+
+			wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the configuration.', 'wc1c-main'), ['action' => $wc1c_receiver_action]);
+
+			do_action($wc1c_receiver_action);
+			ob_end_clean();
+		}
+
+		if(false === $action)
+		{
+			$message = __('Receiver request is very bad! Action not found.', 'wc1c-main');
+
+			wc1c()->log('receiver')->warning($message, ['action' => $wc1c_receiver_action]);
+			$this->receiver->sendResponseByType('failure', $message);
 		}
 	}
 
@@ -291,7 +344,7 @@ class Core extends SchemaAbstract
 			{
 				do_action('wc1c_schema_productscml_processing_classifier_item', $classifier, $reader, $this);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				$this->log()->warning(__('An exception was thrown while saving the classifier.', 'wc1c-main'), ['exception' => $e]);
 			}
@@ -987,6 +1040,29 @@ class Core extends SchemaAbstract
 	}
 
 	/**
+	 * Назначение данных по времени
+	 *
+	 * @param ProductContract $product Экземпляр продукта - либо существующий, либо новый
+	 *
+	 * @return mixed
+	 */
+	public function setProductTimes(ProductContract $product)
+	{
+		$time = current_time('timestamp');
+
+		/**
+		 * _wc1c_time
+		 * _wc1c_schema_time_{schema_id}
+		 * _wc1c_configuration_time_{configuration_id}
+		 */
+		$product->update_meta_data('_wc1c_time', $time);
+		$product->update_meta_data('_wc1c_schema_time_' . $this->getId(), $time);
+		$product->update_meta_data('_wc1c_configuration_time_' . $this->configuration()->getId(), $time);
+
+		return $product;
+	}
+
+	/**
 	 * Назначение данных продукта исходя из режима: артикул
 	 *
 	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
@@ -998,12 +1074,12 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemSku(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if('update' === $mode && 'yes' !== $this->getOptions('products_update_sku', 'no'))
+		if('update' === $mode && 'no' === $this->getOptions('products_update_sku', 'no'))
 		{
 			return $internal_product;
 		}
 
-		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_sku', 'no'))
+		if('create' === $mode && 'no' === $this->getOptions('products_create_adding_sku', 'yes'))
 		{
 			return $internal_product;
 		}
@@ -1044,11 +1120,21 @@ class Core extends SchemaAbstract
 				$sku = $external_product->getSku();
 		}
 
+		if('update' === $mode && 'add' === $this->getOptions('products_update_sku', 'no') && !empty($internal_product->getSku()))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'yes_yes' === $this->getOptions('products_update_sku', 'no') && empty($internal_product->getSku()) && empty($sku))
+		{
+			return $internal_product;
+		}
+
 		try
 		{
 			$internal_product->setSku($sku);
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			$this->log()->notice(__('Failed to set SKU for product.', 'wc1c-main'), ['exception' => $e, 'sku' => $external_product->getSku()]);
 		}
@@ -1079,7 +1165,12 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		$internal_product->set_catalog_visibility($this->getOptions('products_update_set_catalog_visibility', 'visible'));
+		$visible = $this->getOptions('products_update_set_catalog_visibility', '');
+
+		if(!empty($visible))
+		{
+			$internal_product->set_catalog_visibility($visible);
+		}
 
 		return $internal_product;
 	}
@@ -1112,9 +1203,18 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
+		if('no' === $this->getOptions('products_update_set_reviews_allowed', 'no'))
+		{
+			return $internal_product;
+		}
+
 		if('yes' === $this->getOptions('products_update_set_reviews_allowed', 'no'))
 		{
 			$internal_product->set_reviews_allowed(true);
+		}
+		else
+		{
+			$internal_product->set_reviews_allowed(false);
 		}
 
 		return $internal_product;
@@ -1134,6 +1234,7 @@ class Core extends SchemaAbstract
 	{
 		if($mode === 'create')
 		{
+			$internal_product->set_sold_individually(false);
 			if('yes' === $this->getOptions('products_create_set_sold_individually', 'no'))
 			{
 				$internal_product->set_sold_individually(true);
@@ -1142,9 +1243,18 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
+		if('no' === $this->getOptions('products_update_set_sold_individually', 'no'))
+		{
+			return $internal_product;
+		}
+
 		if('yes' === $this->getOptions('products_update_set_sold_individually', 'no'))
 		{
 			$internal_product->set_sold_individually(true);
+		}
+		else
+		{
+			$internal_product->set_sold_individually(false);
 		}
 
 		return $internal_product;
@@ -1169,6 +1279,7 @@ class Core extends SchemaAbstract
 
 		if($mode === 'create')
 		{
+			$internal_product->set_featured(false);
 			if('yes' === $this->getOptions('products_create_set_featured', 'no'))
 			{
 				$internal_product->set_featured(true);
@@ -1177,9 +1288,18 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
+		if('no' === $this->getOptions('products_update_set_featured', 'no'))
+		{
+			return $internal_product;
+		}
+
 		if('yes' === $this->getOptions('products_update_set_featured', 'no'))
 		{
 			$internal_product->set_featured(true);
+		}
+		else
+		{
+			$internal_product->set_featured(false);
 		}
 
 		return $internal_product;
@@ -1301,21 +1421,22 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemDescriptions(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_description', 'yes'))
+		if('create' === $mode && 'no' === $this->getOptions('products_create_adding_description', 'yes'))
 		{
 			return $internal_product;
 		}
 
-		if('update' === $mode && 'yes' !== $this->getOptions('products_update_description', 'no'))
+		if('update' === $mode && 'no' === $this->getOptions('products_update_description', 'no'))
 		{
 			return $internal_product;
 		}
 
-		$short = $this->getOptions('products_descriptions_short_by_cml', 'no');
+		$short_description = '';
+
+		$short = $this->getOptions('products_descriptions_short_by_cml', 'yes');
 
 		if('no' !== $short)
 		{
-			$short_description = '';
 			switch($short)
 			{
 				case 'yes_html':
@@ -1347,9 +1468,19 @@ class Core extends SchemaAbstract
 				default:
 					$short_description = $external_product->getDescription();
 			}
-
-			$internal_product->set_short_description($short_description);
 		}
+
+		if('update' === $mode && 'add' === $this->getOptions('products_update_description', 'yes') && !empty($internal_product->get_short_description()))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && empty($short_description) && 'yes_yes' === $this->getOptions('products_update_description', 'yes') && empty($internal_product->get_short_description()))
+		{
+			return $internal_product;
+		}
+
+		$internal_product->set_short_description($short_description);
 
 		return $internal_product;
 	}
@@ -1366,21 +1497,21 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemDescriptionsFull(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_description_full', 'no'))
+		if('create' === $mode && 'no' === $this->getOptions('products_create_adding_description_full', 'yes'))
 		{
 			return $internal_product;
 		}
 
-		if('update' === $mode && 'yes' !== $this->getOptions('products_update_description_full', 'no'))
+		if('update' === $mode && 'no' === $this->getOptions('products_update_description_full', 'no'))
 		{
 			return $internal_product;
 		}
 
-		$full = $this->getOptions('products_descriptions_by_cml', 'no');
+		$full_description = '';
+		$full = $this->getOptions('products_descriptions_by_cml', 'yes');
 
 		if('no' !== $full)
 		{
-			$full_description = '';
 			switch($full)
 			{
 				case 'yes_html':
@@ -1412,9 +1543,19 @@ class Core extends SchemaAbstract
 				default:
 					$full_description = $external_product->getDescription();
 			}
-
-			$internal_product->set_description($full_description);
 		}
+
+		if('update' === $mode && 'add' === $this->getOptions('products_update_description_full', 'yes') && !empty($internal_product->get_description()))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && empty($full_description) && 'yes_yes' === $this->getOptions('products_update_description_full', 'yes') && empty($internal_product->get_description()))
+		{
+			return $internal_product;
+		}
+
+		$internal_product->set_description($full_description);
 
 		return $internal_product;
 	}
@@ -1452,17 +1593,21 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		/** @var CategoriesStorageContract $categories_storage */
-		$categories_storage = Storage::load('category');
-
 		$cats = [];
-		foreach($external_product->getClassifierGroups() as $classifier_group)
-		{
-			$cat = $categories_storage->getByExternalId($classifier_group);
 
-			if($cat instanceof Category)
+		if($external_product->hasClassifierGroups())
+		{
+			/** @var CategoriesStorageContract $categories_storage */
+			$categories_storage = Storage::load('category');
+
+			foreach($external_product->getClassifierGroups() as $classifier_group)
 			{
-				$cats[] = $cat->getId();
+				$cat = $categories_storage->getByExternalId($classifier_group);
+
+				if($cat instanceof Category)
+				{
+					$cats[] = $cat->getId();
+				}
 			}
 		}
 
@@ -2810,7 +2955,8 @@ class Core extends SchemaAbstract
 			 */
 			if($external_product->hasCharacteristicId())
 			{
-				$this->log()->info(__('The product contains the characteristics.', 'wc1c-main')); // todo: реализация
+				$this->log()->notice(__('The product contains the characteristics.', 'wc1c-main')); // todo: реализация
+				return;
 			}
 			else
 			{
@@ -2843,12 +2989,14 @@ class Core extends SchemaAbstract
 				$internal_product = apply_filters('wc1c_schema_productscml_processing_products_item_before_save', $internal_product, $external_product, 'create', $reader);
 			}
 
+			$internal_product = $this->setProductTimes($internal_product);
+
 			try
 			{
 				$id = $internal_product->save();
 				$this->log()->info(__('The product is created.', 'wc1c-main'), ['product_id' => $id, 'product_type' => $internal_product->get_type()]);
 			}
-			catch(\Exception $e)
+			catch(\Throwable $e)
 			{
 				throw new Exception($e->getMessage());
 			}
@@ -2872,7 +3020,7 @@ class Core extends SchemaAbstract
 					$id = $internal_product->save();
 					$this->log()->info(__('The product has been updated using external algorithms.', 'wc1c-main'), ['product_id' => $id, 'product_type' => $internal_product->get_type()]);
 				}
-				catch(\Exception $e)
+				catch(\Throwable $e)
 				{
 					throw new Exception($e->getMessage());
 				}
@@ -2944,11 +3092,13 @@ class Core extends SchemaAbstract
 			$update_product = apply_filters('wc1c_schema_productscml_processing_products_item_before_save', $update_product, $external_product, 'update', $reader);
 		}
 
+		$update_product = $this->setProductTimes($update_product);
+
 		try
 		{
 			$update_product->save();
 		}
-		catch(\Exception $e)
+		catch(\Throwable $e)
 		{
 			throw new Exception($e->getMessage());
 		}
@@ -2971,7 +3121,7 @@ class Core extends SchemaAbstract
 			{
 				$update_product->save();
 			}
-			catch(\Exception $e)
+			catch(\Throwable $e)
 			{
 				throw new Exception($e->getMessage());
 			}
@@ -3130,11 +3280,13 @@ class Core extends SchemaAbstract
 			$internal_offer = apply_filters('wc1c_schema_productscml_processing_offers_item_before_save', $internal_offer, $external_offer, $reader);
 		}
 
+		$internal_offer = $this->setProductTimes($internal_offer);
+
 		try
 		{
 			$internal_offer->save();
 		}
-		catch(\Exception $e)
+		catch(\Throwable $e)
 		{
 			throw new Exception($e->getMessage());
 		}
@@ -3239,7 +3391,7 @@ class Core extends SchemaAbstract
 			{
 				do_action('wc1c_schema_productscml_processing_offers_item', $offer, $reader, $this);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				$this->log()->warning(__('An exception was thrown while processing the offer.', 'wc1c-main'), ['exception' => $e]);
 			}

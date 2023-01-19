@@ -33,7 +33,11 @@ final class Receiver
 
 		add_action('wc1c_schema_productscml_catalog_handler_checkauth', [$this, 'handlerCheckauth'], 10, 0);
 
-		add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogDirectoryClean'], 10, 0);
+		if('standard' === $this->core()->getOptions('directory_clean_mode', 'standard'))
+		{
+			add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogDirectoryClean'], 10, 0);
+		}
+
 		add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogModeInit'], 10, 0);
 
 		add_action('wc1c_schema_productscml_catalog_handler_file', [$this, 'handlerCatalogModeFile'], 10, 0);
@@ -325,6 +329,7 @@ final class Receiver
 
 		$session_id = session_id();
 
+		$this->core()->configuration()->addMetaData('session_name', maybe_serialize($session_name), true);
 		$this->core()->configuration()->addMetaData('session_id', maybe_serialize($session_id), true);
 		$this->core()->configuration()->saveMetaData();
 
@@ -362,6 +367,11 @@ final class Receiver
 	{
 		if(!isset($_GET['lazysign']))
 		{
+			if('yes' === $this->core()->getOptions('browser_debug', 'no'))
+			{
+				return true;
+			}
+
 			$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c-main');
 			$this->core()->log()->warning($warning);
 
@@ -389,7 +399,7 @@ final class Receiver
 			return false;
 		}
 
-		$session_name = sanitize_text_field(session_name());
+		$session_name = sanitize_text_field($this->core()->configuration()->getMeta('session_name'));
 
 		if(!isset($_COOKIE[$session_name]))
 		{

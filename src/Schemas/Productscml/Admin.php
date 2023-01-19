@@ -187,6 +187,43 @@ class Admin
 			'css' => 'min-width: 100px;',
 		];
 
+		$fields['browser_debug'] =
+		[
+			'title' => __('Browser debug mode', 'wc1c-main'),
+			'type' => 'checkbox',
+			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('The setting is required only for debugging activities and must be turned off when such activities are completed.', 'wc1c-main'),
+				__('Only used in debug mode.', 'wc1c-main')
+			),
+			'default' => 'no'
+		];
+
+		$clean_options =
+		[
+			'no' => __('Do not use', 'wc1c-main'),
+			'standard' => __('Standard', 'wc1c-main'),
+		];
+
+		$fields['directory_clean_mode'] =
+		[
+			'title' => __('Cleaning up a directory', 'wc1c-main'),
+			'type' => 'select',
+			'description' => sprintf
+			('<b>%s</b> - %s<br /><b>%s</b> - %s<br /><hr>%s',
+			 __('Do not use', 'wc1c-main'),
+			 __('File deletion steps will be skipped.', 'wc1c-main'),
+			 __('Standard', 'wc1c-main'),
+			 __('The standard cleaning algorithm will be used. Suitable for most users.', 'wc1c-main'),
+			 __('The choice of deletion mode must be taken very seriously.', 'wc1c-main')
+			),
+			'default' => 'standard',
+			'css' => 'min-width:100%',
+			'options' => $clean_options
+		];
+
 		return $fields;
 	}
 
@@ -858,13 +895,33 @@ class Admin
 			'default' => 'yes'
 		];
 
+		$products_update_sku_options =
+		[
+			'no' => __('Do not update', 'wc1c-main'),
+			'yes' => __('Update in any case', 'wc1c-main'),
+			'add' => __('Add if not on the site and available in 1C', 'wc1c-main'),
+			'yes_yes' => __('Update if present on the site and in 1C', 'wc1c-main'),
+		];
+
 		$fields['products_update_sku'] =
 		[
 			'title' => __('Product SKU update when requesting product updates', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('When changing the product SKU in 1C, the data will be changed on the site.', 'wc1c-main'),
-			'default' => 'no'
+			'default' => 'no',
+			'type' => 'select',
+			'description' => sprintf
+			(
+				'<b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<hr>%s',
+				__('Do not update', 'wc1c-main'),
+				__('SKUs updates will be skipped in any case.', 'wc1c-main'),
+				__('Update in any case', 'wc1c-main'),
+				__('SKUs will be updated in any case. The same value will always be on the site and in 1C.', 'wc1c-main'),
+				__('Add if not on the site and available in 1C', 'wc1c-main'),
+				__('Existing SKUs will not be affected. There will be a filling of those missing on the site if they are available in 1C.', 'wc1c-main'),
+				__('Update if present on the site and in 1C', 'wc1c-main'),
+				__('SKUs will be updated only if they are filled in 1C and on the site at the same time.', 'wc1c-main'),
+				__('The setting works when updating products (goods).', 'wc1c-main')
+			),
+			'options' => $products_update_sku_options
 		];
 
 		$products_sku_by_cml_options =
@@ -1005,37 +1062,33 @@ class Admin
 			'default' => 'yes'
 		];
 
+		$products_update_description_options =
+		[
+			'no' => __('Do not update', 'wc1c-main'),
+			'yes' => __('Update in any case', 'wc1c-main'),
+			'add' => __('Add if not on the site and available in 1C', 'wc1c-main'),
+			'yes_yes' => __('Update if present on the site and in 1C', 'wc1c-main'),
+		];
+
 		$fields['products_update_description'] =
 		[
-			'title' => __('Product description update when requesting product updates', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('When changing the product description in 1C, the data will be changed on the site.', 'wc1c-main'),
-			'default' => 'no'
-		];
-
-		$fields['products_create_adding_description_full'] =
-		[
-			'title' => __('Filling a full description of the created product', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
+			'title' => __('Description update when requesting product updates', 'wc1c-main'),
+			'default' => 'no',
+			'type' => 'select',
 			'description' => sprintf
 			(
-				'%s<hr>%s %s',
-				__('The data received from 1C may contain full descriptions of products that will be placed in the full description.', 'wc1c-main'),
-				__('If there are no brief full descriptions in 1C, you can turn off the filling and edit the data directly on the site.', 'wc1c-main'),
-				__('The choice of a source for a brief full description in 1C is in a separate settings block - Products (goods): descriptions.', 'wc1c-main')
+				'<b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<hr>%s',
+				__('Do not update', 'wc1c-main'),
+				__('Description updates will be skipped in any case.', 'wc1c-main'),
+				__('Update in any case', 'wc1c-main'),
+				__('Description will be updated in any case. The same value will always be on the site and in 1C.', 'wc1c-main'),
+				__('Add if not on the site and available in 1C', 'wc1c-main'),
+				__('Existing description will not be affected. There will be a filling of those missing on the site if they are available in 1C.', 'wc1c-main'),
+				__('Update if present on the site and in 1C', 'wc1c-main'),
+				__('Description will be updated only if they are filled in 1C and on the site at the same time.', 'wc1c-main'),
+				__('The setting works when updating products (goods).', 'wc1c-main')
 			),
-			'default' => 'no'
-		];
-
-		$fields['products_update_description_full'] =
-		[
-			'title' => __('Product full description update when requesting product updates', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('When changing the product full description in 1C, the data will be changed on the site.', 'wc1c-main'),
-			'default' => 'no'
+			'options' => $products_update_description_options
 		];
 
 		$products_descriptions_by_cml_options =
@@ -1077,6 +1130,42 @@ class Admin
 			'description' => __('The name of the requisite of the product (goods) which contains a short description of the product.', 'wc1c-main'),
 			'default' => '',
 			'css' => 'min-width: 370px;',
+		];
+
+		$fields['products_create_adding_description_full'] =
+		[
+			'title' => __('Filling a full description of the created product', 'wc1c-main'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => sprintf
+			(
+				'%s<hr>%s %s',
+				__('The data received from 1C may contain full descriptions of products that will be placed in the full description.', 'wc1c-main'),
+				__('If there are no brief full descriptions in 1C, you can turn off the filling and edit the data directly on the site.', 'wc1c-main'),
+				__('The choice of a source for a brief full description in 1C is in a separate settings block - Products (goods): descriptions.', 'wc1c-main')
+			),
+			'default' => 'no'
+		];
+
+		$fields['products_update_description_full'] =
+		[
+			'title' => __('Full description update when requesting product updates', 'wc1c-main'),
+			'default' => 'no',
+			'type' => 'select',
+			'description' => sprintf
+			(
+				'<b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<hr>%s',
+				__('Do not update', 'wc1c-main'),
+				__('Description updates will be skipped in any case.', 'wc1c-main'),
+				__('Update in any case', 'wc1c-main'),
+				__('Description will be updated in any case. The same value will always be on the site and in 1C.', 'wc1c-main'),
+				__('Add if not on the site and available in 1C', 'wc1c-main'),
+				__('Existing description will not be affected. There will be a filling of those missing on the site if they are available in 1C.', 'wc1c-main'),
+				__('Update if present on the site and in 1C', 'wc1c-main'),
+				__('Description will be updated only if they are filled in 1C and on the site at the same time.', 'wc1c-main'),
+				__('The setting works when updating products (goods).', 'wc1c-main')
+			),
+			'options' => $products_update_description_options
 		];
 
 		$fields['products_descriptions_by_cml'] =
@@ -1383,13 +1472,41 @@ class Admin
 			'options' => $statuses
 		];
 
+		$products_update_options =
+		[
+			'no' => __('Do not update', 'wc1c-main'),
+			'yes' => __('Check', 'wc1c-main'),
+			'none' => __('Uncheck', 'wc1c-main'),
+		];
+
+		$products_update_options_description = sprintf
+		(
+			'<b>%s</b> - %s<br /><b>%s</b> - %s<br /><b>%s</b> - %s<hr>%s',
+			__('Do not update', 'wc1c-main'),
+			__('The current value of the option will remain.', 'wc1c-main'),
+			__('Check', 'wc1c-main'),
+			__('The mark will be set.', 'wc1c-main'),
+			__('Uncheck', 'wc1c-main'),
+			__('The mark will be removed.', 'wc1c-main'),
+			__('The setting works when updating products (goods).', 'wc1c-main')
+		);
+
 		$fields['products_create_set_featured'] =
 		[
 			'title' => __('Featured on create products', 'wc1c-main'),
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('The created product will be marked as recommended.', 'wc1c-main'),
+			'description' => __('The created product will be marked as featured.', 'wc1c-main'),
 			'default' => 'no'
+		];
+
+		$fields['products_update_set_featured'] =
+		[
+			'title' => __('Featured on update products', 'wc1c-main'),
+			'default' => 'no',
+			'type' => 'select',
+			'description' => $products_update_options_description,
+			'options' => $products_update_options
 		];
 
 		$fields['products_create_set_sold_individually'] =
@@ -1401,7 +1518,16 @@ class Admin
 			'default' => 'no'
 		];
 
-		$options = wc_get_product_visibility_options();
+		$fields['products_update_set_sold_individually'] =
+		[
+			'title' => __('Individual sale on update products', 'wc1c-main'),
+			'default' => 'no',
+			'type' => 'select',
+			'description' => $products_update_options_description,
+			'options' => $products_update_options
+		];
+
+		$visibility_options = wc_get_product_visibility_options();
 
 		$fields['products_create_set_catalog_visibility'] =
 		[
@@ -1409,7 +1535,16 @@ class Admin
 			'type' => 'select',
 			'description' => __('This setting determines which pages products will be displayed on.', 'wc1c-main'),
 			'default' => 'visible',
-			'options' => $options
+			'options' => $visibility_options
+		];
+
+		$fields['products_update_set_catalog_visibility'] =
+		[
+			'title' => __('Product visibility on update products', 'wc1c-main'),
+			'type' => 'select',
+			'description' => __('This setting determines which pages products will be displayed on.', 'wc1c-main'),
+			'default' => '',
+			'options' => array_merge($default_statuses, $visibility_options)
 		];
 
 		$fields['products_create_set_reviews_allowed'] =
@@ -1421,40 +1556,13 @@ class Admin
 			'default' => 'no'
 		];
 
-		$fields['products_update_set_featured'] =
-		[
-			'title' => __('Featured on update products', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('The updated product will be marked as recommended.', 'wc1c-main'),
-			'default' => 'no'
-		];
-
-		$fields['products_update_set_sold_individually'] =
-		[
-			'title' => __('Individual sale on update products', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('Enable to have the product sold individually in one order. Two units of a product in one order will be impossible to order.', 'wc1c-main'),
-			'default' => 'no'
-		];
-
-		$fields['products_update_set_catalog_visibility'] =
-		[
-			'title' => __('Product visibility on update products', 'wc1c-main'),
-			'type' => 'select',
-			'description' => __('This setting determines which pages products will be displayed on.', 'wc1c-main'),
-			'default' => 'visible',
-			'options' => $options
-		];
-
 		$fields['products_update_set_reviews_allowed'] =
 		[
 			'title' => __('Allow reviews on update products', 'wc1c-main'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c-main'),
-			'description' => __('It will be allowed to leave reviews for updated products.', 'wc1c-main'),
-			'default' => 'no'
+			'default' => 'no',
+			'type' => 'select',
+			'description' => $products_update_options_description,
+			'options' => $products_update_options
 		];
 
 		return $fields;
