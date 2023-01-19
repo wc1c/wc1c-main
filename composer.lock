@@ -97,12 +97,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/woplucore.git",
-                "reference": "ea1aa7bcc485e975690cd465888f944a9b46d5e3"
+                "reference": "26833e4071c1bfcf14ab5451714d0e714074cb9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/woplucore/zipball/ea1aa7bcc485e975690cd465888f944a9b46d5e3",
-                "reference": "ea1aa7bcc485e975690cd465888f944a9b46d5e3",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/26833e4071c1bfcf14ab5451714d0e714074cb9a",
+                "reference": "26833e4071c1bfcf14ab5451714d0e714074cb9a",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
             "support": {
                 "source": "https://github.com/digiom/woplucore/tree/main"
             },
-            "time": "2022-12-16T14:36:11+00:00"
+            "time": "2023-01-19T12:56:15+00:00"
         },
         {
             "name": "digiom/wotices",
@@ -412,12 +412,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "7cf6efdf7c71f05a5b165545e344b271722a168e"
+                "reference": "05c7c425583ae202e795cdf0578f3b6c0f6c98e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/7cf6efdf7c71f05a5b165545e344b271722a168e",
-                "reference": "7cf6efdf7c71f05a5b165545e344b271722a168e",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/05c7c425583ae202e795cdf0578f3b6c0f6c98e8",
+                "reference": "05c7c425583ae202e795cdf0578f3b6c0f6c98e8",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +453,7 @@
             "support": {
                 "source": "https://github.com/wc1c/cml/tree/main"
             },
-            "time": "2023-01-11T21:50:35+00:00"
+            "time": "2023-01-19T18:10:35+00:00"
         },
         {
             "name": "wc1c/wc",

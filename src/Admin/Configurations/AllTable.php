@@ -63,7 +63,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array - list of CSS classes for the table tag
 	 */
-	protected function getTableClasses()
+	protected function getTableClasses(): array
 	{
 		return
         [
@@ -79,9 +79,9 @@ class AllTable extends TableAbstract
 	 * @param object $item
 	 * @param string $column_name
 	 *
-	 * @return mixed
+	 * @return string
 	 */
-	public function columnDefault($item, $column_name)
+	public function columnDefault($item, string $column_name): string
 	{
 		switch ($column_name)
 		{
@@ -92,7 +92,7 @@ class AllTable extends TableAbstract
 			case 'date_create':
 			case 'date_activity':
 			case 'date_modify':
-				return $this->pretty_columns_date($item, $column_name);
+				return $this->prettyColumnsDate($item, $column_name);
 			default:
 				return print_r($item, true);
 		}
@@ -104,7 +104,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string
 	 */
-	private function pretty_columns_date($item, $column_name)
+	private function prettyColumnsDate($item, $column_name): string
 	{
 		$date = $item[$column_name];
 		$timestamp = $this->utilityStringToTimestamp($date) + $this->utilityTimezoneOffset();
@@ -113,9 +113,11 @@ class AllTable extends TableAbstract
 		{
 			return sprintf
 			(
-				__('%s <br/><span class="time">Time: %s</span>', 'wc1c-main'),
+				'%s <br/><span class="time">%s: %s</span><br>%s',
 				date_i18n('d/m/Y', $timestamp),
-				date_i18n('H:i:s', $timestamp)
+				__('Time', 'wc1c-main'),
+				date_i18n('H:i:s', $timestamp),
+				sprintf(_x('(%s ago)', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp')))
 			);
 		}
 
@@ -123,13 +125,13 @@ class AllTable extends TableAbstract
 	}
 
 	/**
-	 * Account status
+	 * Configuration status
 	 *
 	 * @param $item
 	 *
 	 * @return string
 	 */
-	public function column_status($item)
+	public function columnStatus($item): string
 	{
 		$status = $this->utilityConfigurationsGetStatusesLabel($item['status']);
 		$status_return = $this->utilityConfigurationsGetStatusesLabel('error');
@@ -169,7 +171,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string
 	 */
-	public function column_name($item)
+	public function columnName($item): string
 	{
 		$actions =
 		[
@@ -276,6 +278,8 @@ class AllTable extends TableAbstract
 	{
 		$sortable_columns['configuration_id'] = ['configuration_id', false];
 		$sortable_columns['status'] = ['status', false];
+		$sortable_columns['date_create'] = ['date_create', false];
+		$sortable_columns['date_activity'] = ['date_activity', false];
 
 		return $sortable_columns;
 	}
@@ -458,7 +462,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @param string $which
 	 */
-	protected function extraTablenav($which)
+	protected function extraTablenav(string $which)
 	{
 		if('top' === $which)
 		{
@@ -474,7 +478,7 @@ class AllTable extends TableAbstract
 	 * @param string $text Button text
 	 * @param string $input_id Input ID
 	 */
-	public function searchBox($text, $input_id)
+	public function searchBox(string $text, string $input_id)
 	{
 		if(empty($_REQUEST['s']) && !$this->hasItems())
 		{

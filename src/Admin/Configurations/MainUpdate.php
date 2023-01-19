@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Main\Exceptions\RuntimeException;
+use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Main\Traits\DatetimeUtilityTrait;
 use Wc1c\Main\Traits\SectionsTrait;
 use Wc1c\Main\Traits\SingletonTrait;
@@ -21,6 +22,7 @@ class MainUpdate
 	use UtilityTrait;
 	use SectionsTrait;
 	use ProcessConfigurationTrait;
+	use ConfigurationsUtilityTrait;
 
 	/**
 	 * Update processing
@@ -31,17 +33,29 @@ class MainUpdate
 		$form = new UpdateForm();
 
 		$form_data = $configuration->getOptions();
-		$form_data['status'] = $configuration->getStatus();
+		$form_data['status'] = $configuration->isEnabled() ? 'yes' : 'no';
 
-		$form->load_saved_data($form_data);
+		$form->loadSavedData($form_data);
 
-		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $form->get_id())
+		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $form->getId())
 		{
 			$data = $form->save();
 
 			if($data)
 			{
-				$configuration->setStatus($data['status']);
+				// Галка стоит
+				if($data['status'] === 'yes')
+				{
+					if($configuration->isEnabled() === false)
+					{
+						$configuration->setStatus('active');
+					}
+				}
+				// галка не стоит
+				else
+				{
+					$configuration->setStatus('inactive');
+				}
 				unset($data['status']);
 
 				$configuration->setDateModify(time());
@@ -73,7 +87,7 @@ class MainUpdate
 		}
 
 		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
-		add_action('wc1c_admin_configurations_update_show', [$form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_update_show', [$form, 'output'], 10);
 	}
 
 	/**
@@ -122,10 +136,14 @@ class MainUpdate
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('ID: ', 'wc1c-main') . $configuration->getId();
+		$body .= __('ID:', 'wc1c-main') . ' <b>' . $configuration->getId() . '</b>';
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Schema ID: ', 'wc1c-main') . $configuration->getSchema();
+		$body .= __('Schema ID:', 'wc1c-main') . ' <b>' . $configuration->getSchema() . '</b>';
+		$body .= '</li>';
+
+		$body .= '<li class="list-group-item p-2 m-0">';
+		$body .= __('Status', 'wc1c-main') . ': <b>' . $this->utilityConfigurationsGetStatusesLabel($configuration->getStatus()) . '</b>';
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
@@ -133,7 +151,7 @@ class MainUpdate
 		$user = get_userdata($user_id);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$body .= __('User: ', 'wc1c-main') . $user->get('nickname') . ' (' . $user_id. ')';
+			$body .= __('Owner:', 'wc1c-main') . ' <b>' . $user->get('nickname') . '</b> (' . $user_id. ')';
 		}
 		else
 		{
@@ -142,16 +160,36 @@ class MainUpdate
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateCreate());
-		$body .= '</li>';
+		$body .= __('Date active:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateActivity());
+
+		if($configuration->getDateActivity())
+		{
+			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
+		}
+
+		$body .= '</div></li>';
+
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateModify());
-		$body .= '</li>';
+		$body .= __('Date create:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateCreate());
+
+		if($configuration->getDateCreate())
+		{
+			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateCreate()->getOffsetTimestamp(), current_time('timestamp')));
+		}
+
+		$body .= '</div></li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c-main') . $this->utilityPrettyDate($configuration->getDateActivity());
-		$body .= '</li>';
+		$body .= __('Date modify:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">'. $this->utilityPrettyDate($configuration->getDateModify());
+
+		if($configuration->getDateModify())
+		{
+			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateModify()->getOffsetTimestamp(), current_time('timestamp')));
+		}
+
+		$body .= '</div></li>';
+
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Directory: ', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
+		$body .= __('Directory:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
 		$body .= '</li>';
 
 		$size = 0;
@@ -167,7 +205,7 @@ class MainUpdate
 		$body .= '</li>';
 
 		$size = 0;
-		$files = wc1c()->filesystem()->files($configuration->getUploadDirectory() . '/logs');
+		$files = wc1c()->filesystem()->files($configuration->getUploadDirectory('logs'));
 
 		foreach($files as $file)
 		{

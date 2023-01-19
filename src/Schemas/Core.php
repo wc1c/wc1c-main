@@ -30,15 +30,9 @@ final class Core
 	 * @param array $schemas
 	 *
 	 * @return void
-	 * @throws Exception
 	 */
-	public function set($schemas)
+	public function set(array $schemas)
 	{
-		if(!is_array($schemas))
-		{
-			throw new Exception(__('$schemas is not valid', 'wc1c-main'));
-		}
-
 		$this->schemas = $schemas;
 	}
 
@@ -47,10 +41,10 @@ final class Core
 	 *
 	 * @param integer|Configuration $configuration
 	 *
-	 * @return boolean
+	 * @return SchemaContract
 	 * @throws Exception
 	 */
-	public function init($configuration)
+	public function init($configuration): SchemaContract
 	{
 		if(false === $configuration)
 		{
@@ -59,29 +53,15 @@ final class Core
 
 		if(!is_object($configuration))
 		{
-			try
-			{
-				/** @var ConfigurationsStorage $storage_configurations */
-				$storage_configurations = Storage::load('configuration');
-			}
-			catch(Exception $e)
-			{
-				throw $e;
-			}
+			/** @var ConfigurationsStorage $storage_configurations */
+			$storage_configurations = Storage::load('configuration');
 
 			if(!$storage_configurations->isExistingById($configuration))
 			{
 				throw new Exception(__('$configuration is not exists', 'wc1c-main'));
 			}
 
-			try
-			{
-				$configuration = new Configuration($configuration);
-			}
-			catch(Exception $e)
-			{
-				throw $e;
-			}
+			$configuration = new Configuration($configuration);
 		}
 
 		if(!$configuration instanceof Configuration)
@@ -89,14 +69,7 @@ final class Core
 			throw new Exception(__('$configuration is not instanceof Configuration', 'wc1c-main'));
 		}
 
-		try
-		{
-			$schemas = $this->get();
-		}
-		catch(Exception $e)
-		{
-			throw $e;
-		}
+		$schemas = $this->get();
 
 		if(!is_array($schemas))
 		{
@@ -160,7 +133,7 @@ final class Core
 	 * @return array|SchemaContract
 	 * @throws RuntimeException
 	 */
-	public function get($schema_id = '')
+	public function get(string $schema_id = '')
 	{
 		$schema_id = strtolower($schema_id);
 
@@ -213,7 +186,7 @@ final class Core
 	 *
 	 * @return array
 	 */
-	public function loadProductsCml($schemas)
+	public function loadProductsCml($schemas): array
 	{
 		try
 		{
@@ -237,7 +210,7 @@ final class Core
 	 *
 	 * @return array
 	 */
-	public function loadProductsCleanerCml($schemas)
+	public function loadProductsCleanerCml($schemas): array
 	{
 		try
 		{

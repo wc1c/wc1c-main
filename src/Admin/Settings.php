@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Main\Admin\Settings\ActivationForm;
 use Wc1c\Main\Admin\Settings\ConnectionForm;
 use Wc1c\Main\Admin\Settings\LogsForm;
 use Wc1c\Main\Admin\Settings\MainForm;
@@ -44,9 +45,16 @@ class Settings
 
 		$default_sections['main'] =
 		[
-			'title' => __('Main settings', 'wc1c-main'),
+			'title' => __('Main', 'wc1c-main'),
 			'visible' => true,
 			'callback' => [MainForm::class, 'instance']
+		];
+
+		$default_sections['activation'] =
+		[
+			'title' => __('Activation', 'wc1c-main'),
+			'visible' => true,
+			'callback' => [ActivationForm::class, 'instance']
 		];
 
 		$default_sections['logs'] =
@@ -81,7 +89,7 @@ class Settings
 	 *
 	 * @return string
 	 */
-	public function initCurrentSection()
+	public function initCurrentSection(): string
 	{
 		$current_section = !empty($_GET['do_settings']) ? sanitize_title($_GET['do_settings']) : 'main';
 

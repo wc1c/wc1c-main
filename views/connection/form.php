@@ -12,7 +12,7 @@ $object = $args['object'];
     <?php if($object->status) : ?>
     <div class="wc1c-admin-settings wc1c-admin-connection bg-white rounded-3 mt-2 mb-2 px-2">
         <table class="form-table wc1c-admin-form-table wc1c-admin-settings-form-table">
-		    <?php $object->generate_html($object->get_fields(), true); ?>
+		    <?php $object->generateHtml($object->getFields(), true); ?>
         </table>
     </div>
     <?php endif; ?>

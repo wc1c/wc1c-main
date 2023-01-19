@@ -77,7 +77,7 @@ abstract class TableAbstract
 		$args = wp_parse_args
 		(
 			$args,
-            [
+			[
 				'plural' => '',
 				'singular' => '',
 				'ajax' => false,
@@ -230,11 +230,11 @@ abstract class TableAbstract
 			echo '<input type="hidden" name="detached" value="' . esc_attr($_REQUEST['detached']) . '" />';
 		}
 		?>
-		<p class="search-box">
-			<label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo $text; ?>:</label>
-			<input type="search" id="<?php echo esc_attr($input_id); ?>" name="s" value="<?php _admin_search_query(); ?>"/>
-			<?php submit_button($text, '', '', false, array('id' => 'search-submit')); ?>
-		</p>
+        <p class="search-box">
+            <label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo $text; ?>:</label>
+            <input type="search" id="<?php echo esc_attr($input_id); ?>" name="s" value="<?php _admin_search_query(); ?>"/>
+			<?php submit_button($text, '', '', false, ['id' => 'search-submit']); ?>
+        </p>
 		<?php
 	}
 
@@ -278,7 +278,7 @@ abstract class TableAbstract
 		{
 			$views[$class] = "\t<li class='$class'>$view";
 		}
-		echo implode(" |</li>\n", $views) . "</li>\n";
+		echo wp_kses_post(implode(" |</li>\n", $views) . "</li>\n");
 		echo '</ul>';
 	}
 
@@ -329,19 +329,19 @@ abstract class TableAbstract
 		}
 
 		echo '<label for="bulk-action-selector-' . esc_attr($which) . '" class="screen-reader-text">' . __('Select bulk action') . '</label>';
-		echo '<select name="action' . $two . '" id="bulk-action-selector-' . esc_attr($which) . "\">\n";
-		echo '<option value="-1">' . __('Bulk Actions') . "</option>\n";
+		echo '<select name="action' . esc_attr($two) . '" id="bulk-action-selector-' . esc_attr($which) . "\">\n";
+		echo '<option value="-1">' . __('Bulk Actions', 'wc1c-main') . "</option>\n";
 
 		foreach($this->_actions as $name => $title)
 		{
-			$class = 'edit' === $name ? ' class="hide-if-no-js"' : '';
+			$class = 'edit' === $name ? 'hide-if-no-js' : '';
 
-			echo "\t" . '<option value="' . $name . '"' . $class . '>' . $title . "</option>\n";
+			echo "\t" . '<option value="' . esc_attr($name) . '" class="' . esc_attr($class) . '">' . sanitize_text_field($title) . "</option>\n";
 		}
 
 		echo "</select>\n";
 
-		submit_button(__('Apply'), 'action', '', false, array('id' => "doaction$two"));
+		submit_button(__('Apply'), 'action', '', false, ['id' => "doaction$two"]);
 		echo "\n";
 	}
 
@@ -378,7 +378,7 @@ abstract class TableAbstract
 	 *
 	 * @return string
 	 */
-	protected function rowActions($actions, $always_visible = false)
+	protected function rowActions(array $actions, bool $always_visible = false): string
 	{
 		$action_count = count($actions);
 		$i = 0;
@@ -409,15 +409,15 @@ abstract class TableAbstract
 	 *
 	 * @param string $current_mode
 	 */
-	protected function viewSwitcher($current_mode)
+	protected function viewSwitcher(string $current_mode)
 	{
 		?>
-		<input type="hidden" name="mode" value="<?php echo esc_attr($current_mode); ?>"/>
-		<div class="view-switch">
+        <input type="hidden" name="mode" value="<?php echo esc_attr($current_mode); ?>"/>
+        <div class="view-switch">
 			<?php
 			foreach($this->modes as $mode => $title)
 			{
-				$classes = array('view-' . $mode);
+				$classes = ['view-' . $mode];
 				if($current_mode === $mode)
 				{
 					$classes[] = 'current';
@@ -430,7 +430,7 @@ abstract class TableAbstract
 				);
 			}
 			?>
-		</div>
+        </div>
 		<?php
 	}
 
@@ -439,7 +439,7 @@ abstract class TableAbstract
 	 *
 	 * @return int
 	 */
-	public function getPagenum()
+	public function getPagenum(): int
 	{
 		$page_num = isset($_REQUEST['paged']) ? absint($_REQUEST['paged']) : 0;
 
@@ -459,7 +459,7 @@ abstract class TableAbstract
 	 *
 	 * @return int
 	 */
-	protected function getItemsPerPage($option, $default = 20)
+	protected function getItemsPerPage(string $option, int $default = 20): int
 	{
 		$per_page = (int) get_user_option($option);
 		if(empty($per_page) || $per_page < 1)
@@ -486,7 +486,7 @@ abstract class TableAbstract
 	 *
 	 * @param string $which
 	 */
-	protected function pagination($which)
+	protected function pagination(string $which)
 	{
 		if(empty($this->_pagination_args))
 		{
@@ -517,8 +517,7 @@ abstract class TableAbstract
 		$current = $this->getPagenum();
 		$removable_query_args = wp_removable_query_args();
 
-		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-
+		$current_url = set_url_scheme(esc_url_raw('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg($removable_query_args, $current_url);
 
 		$page_links = [];
@@ -658,7 +657,7 @@ abstract class TableAbstract
 	 *
 	 * @return array
 	 */
-	abstract public function getColumns();
+	abstract public function getColumns(): array;
 
 	/**
 	 * Get a list of sortable columns. The format is:
@@ -670,7 +669,7 @@ abstract class TableAbstract
 	 *
 	 * @return array
 	 */
-	protected function getSortableColumns()
+	protected function getSortableColumns(): array
 	{
 		return [];
 	}
@@ -680,7 +679,7 @@ abstract class TableAbstract
 	 *
 	 * @return string Name of the default primary column, in this case, an empty string
 	 */
-	protected function getDefaultPrimaryColumnName()
+	protected function getDefaultPrimaryColumnName(): string
 	{
 		$columns = $this->getColumns();
 		$column  = '';
@@ -756,7 +755,7 @@ abstract class TableAbstract
 		}
 
 		$columns = get_column_headers($this->screen);
-		$hidden  = get_hidden_columns($this->screen);
+		$hidden = get_hidden_columns($this->screen);
 
 		$sortable_columns = $this->getSortableColumns();
 
@@ -798,7 +797,7 @@ abstract class TableAbstract
 	 *
 	 * @return int
 	 */
-	public function getColumnCount()
+	public function getColumnCount(): int
 	{
 		list ($columns, $hidden) = $this->getColumnInfo();
 		$hidden = array_intersect(array_keys($columns), array_filter($hidden));
@@ -813,16 +812,16 @@ abstract class TableAbstract
 	 *
 	 * @param bool $with_id Whether to set the id attribute or not
 	 */
-	public function printColumnHeaders($with_id = true)
+	public function printColumnHeaders(bool $with_id = true)
 	{
 		list($columns, $hidden, $sortable, $primary) = $this->getColumnInfo();
 
-		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$current_url = set_url_scheme(esc_url_raw('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg('paged', $current_url);
 
 		if(isset($_GET['orderby']))
 		{
-			$current_orderby = $_GET['orderby'];
+			$current_orderby = sanitize_text_field($_GET['orderby']);
 		}
 		else
 		{
@@ -859,7 +858,7 @@ abstract class TableAbstract
 			{
 				$class[] = 'check-column';
 			}
-			elseif(in_array($column_key, array('posts', 'comments', 'links')))
+            elseif(in_array($column_key, ['posts', 'comments', 'links']))
 			{
 				$class[] = 'num';
 			}
@@ -913,31 +912,31 @@ abstract class TableAbstract
 
 		$this->screen->render_screen_reader_content('heading_list');
 		?>
-		<table class="wp-list-table <?php echo implode(' ', $this->getTableClasses()); ?>">
-			<thead>
-			<tr>
+        <table class="wp-list-table <?php echo implode(' ', $this->getTableClasses()); ?>">
+            <thead>
+            <tr>
 				<?php $this->printColumnHeaders(); ?>
-			</tr>
-			</thead>
+            </tr>
+            </thead>
 
-			<tbody id="the-list"
+            <tbody id="the-list"
 				<?php
 				if($singular)
 				{
 					echo " data-wp-lists='list:$singular'";
 				}
 				?>
-			>
+            >
 			<?php $this->displayRowsOrPlaceholder(); ?>
-			</tbody>
+            </tbody>
 
-			<tfoot>
-			<tr>
+            <tfoot>
+            <tr>
 				<?php $this->printColumnHeaders(false); ?>
-			</tr>
-			</tfoot>
+            </tr>
+            </tfoot>
 
-		</table>
+        </table>
 		<?php
 		$this->displayTablenav('bottom');
 	}
@@ -947,9 +946,9 @@ abstract class TableAbstract
 	 *
 	 * @return array List of CSS classes for the table tag
 	 */
-	protected function getTableClasses()
+	protected function getTableClasses(): array
 	{
-		return array('widefat', 'fixed', 'striped', $this->_args['plural']);
+		return ['widefat', 'fixed', 'striped', $this->_args['plural']];
 	}
 
 	/**
@@ -957,27 +956,27 @@ abstract class TableAbstract
 	 *
 	 * @param string $which
 	 */
-	protected function displayTablenav($which)
+	protected function displayTablenav(string $which)
 	{
 		if('top' === $which)
 		{
 			wp_nonce_field('bulk-' . $this->_args['plural']);
 		}
 		?>
-		<div class="tablenav <?php echo esc_attr($which); ?>">
+        <div class="tablenav <?php echo esc_attr($which); ?>">
 
 			<?php if($this->hasItems()) : ?>
-				<div class="alignleft actions bulkactions">
+                <div class="alignleft actions bulkactions">
 					<?php $this->bulkActions($which); ?>
-				</div>
+                </div>
 			<?php
 			endif;
 			$this->extraTablenav($which);
 			$this->pagination($which);
 			?>
 
-			<br class="clear"/>
-		</div>
+            <br class="clear"/>
+        </div>
 		<?php
 	}
 
@@ -986,7 +985,7 @@ abstract class TableAbstract
 	 *
 	 * @param string $which
 	 */
-	protected function extraTablenav($which) {}
+	protected function extraTablenav(string $which) {}
 
 	/**
 	 * Generate the tbody element for the list table
@@ -1031,13 +1030,23 @@ abstract class TableAbstract
 	/**
 	 * @param object $item
 	 * @param string $column_name
+     *
+     * @return string
 	 */
-	protected function columnDefault($item, $column_name) {}
+	protected function columnDefault($item, string $column_name): string
+	{
+        return '';
+    }
 
 	/**
 	 * @param object $item
+     *
+     * @return string
 	 */
-	protected function columnCb($item) {}
+	protected function columnCb($item): string
+	{
+        return '';
+    }
 
 	/**
 	 * Generates the columns for a single row of the table
@@ -1074,14 +1083,25 @@ abstract class TableAbstract
 				echo $this->columnCb($item);
 				echo '</th>';
 			}
-			elseif(method_exists($this, '_column_' . $column_name))
+            elseif(method_exists($this, '_column_' . $column_name))
 			{
 				echo $this->{'_column_' . $column_name}($item, $classes, $data, $primary);
 			}
-			elseif(method_exists($this, 'column_' . $column_name))
+            elseif(method_exists($this, 'column_' . $column_name))
 			{
 				echo "<td $attributes>";
 				echo $this->{'column_' . $column_name}($item);
+				echo $this->handleRowActions($item, $column_name, $primary);
+				echo '</td>';
+			}
+            elseif(method_exists($this, '_column' . ucfirst($column_name)))
+			{
+				echo $this->{'_column' . ucfirst($column_name)}($item, $classes, $data, $primary);
+			}
+            elseif(method_exists($this, 'column' . ucfirst($column_name)))
+			{
+				echo "<td $attributes>";
+				echo $this->{'column' . ucfirst($column_name)}($item);
 				echo $this->handleRowActions($item, $column_name, $primary);
 				echo '</td>';
 			}

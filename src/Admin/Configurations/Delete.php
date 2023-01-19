@@ -86,7 +86,7 @@ class Delete
 
 				if(!$delete_form->save())
 				{
-					add_action('wc1c_admin_configurations_form_delete_show', [$delete_form, 'outputForm']);
+					add_action('wc1c_admin_configurations_form_delete_show', [$delete_form, 'output']);
 					add_action('wc1c_admin_show', [$this, 'output'], 10);
 				}
 				else

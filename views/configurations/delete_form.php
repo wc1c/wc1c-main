@@ -7,7 +7,7 @@
             <?php
                 if(isset($args) && is_array($args))
                 {
-                    $args['object']->generate_html($args['object']->get_fields(), true);
+                    $args['object']->generateHtml($args['object']->getFields(), true);
                 }
             ?>
         </table>

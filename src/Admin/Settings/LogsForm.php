@@ -19,10 +19,10 @@ class LogsForm extends Form
 	 */
 	public function __construct()
 	{
-		$this->set_id('settings-logs');
+		$this->setId('settings-logs');
 		$this->setSettings(new LogsSettings());
 
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
 
 		$this->init();
 	}

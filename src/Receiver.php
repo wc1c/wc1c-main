@@ -64,18 +64,31 @@ final class Receiver
 			die(__('Configuration for Receiver is unavailable.', 'wc1c-main'));
 		}
 
+		try
+		{
+			$schema = wc1c()->schemas()->init($configuration);
+		}
+		catch(Exception $e)
+		{
+			wc1c()->log('receiver')->error('Schema for configuration is not initialized.', ['exception' => $e]);
+			die(__('Schema for configuration is not initialized.', 'wc1c-main'));
+		}
+
 		wc1c()->environment()->set('current_configuration_id', $wc1c_receiver);
 
-		if($configuration->isInactive())
+		if(method_exists($schema, 'receiver'))
+		{
+			wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the selected configuration.', 'wc1c-main'), ['action' => 'receiver']);
+
+			$schema->receiver();
+
+			return;
+		}
+
+		if($configuration->isEnabled() === false)
 		{
 			wc1c()->log('receiver')->warning(__('Selected configuration is offline.', 'wc1c-main'));
 			die(__('Selected configuration is offline.', 'wc1c-main'));
-		}
-
-		if($configuration->isDraft())
-		{
-			wc1c()->log('receiver')->warning(__('Selected configuration is draft.', 'wc1c-main'));
-			die(__('Selected configuration is draft.', 'wc1c-main'));
 		}
 
 		try
@@ -87,16 +100,6 @@ final class Receiver
 		{
 			wc1c()->log('receiver')->error('Error saving configuration.', ['exception' => $e]);
 			die(__('Error saving configuration.', 'wc1c-main'));
-		}
-
-		try
-		{
-			wc1c()->schemas()->init($configuration);
-		}
-		catch(Exception $e)
-		{
-			wc1c()->log('receiver')->error('Schema for configuration is not initialized.', ['exception' => $e]);
-			die(__('Schema for configuration is not initialized.', 'wc1c-main'));
 		}
 
 		$action = false;

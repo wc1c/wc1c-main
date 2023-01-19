@@ -175,13 +175,7 @@ class Reader
 		}
 
 		$this->file = $file_path;
-
 		$this->setFiletype($this->cmlDetectFileType($file_path));
-
-		if($this->getFiletype() === '')
-		{
-			throw new RuntimeException('CommerceML filetype is not valid.');
-		}
 	}
 
 	/**

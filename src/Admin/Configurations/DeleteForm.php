@@ -17,11 +17,11 @@ class DeleteForm extends FormAbstract
 	 */
 	public function __construct()
 	{
-		$this->set_id('configurations-delete');
+		$this->setId('configurations-delete');
 
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_main'], 10);
 
-		$this->load_fields();
+		$this->loadFields();
 	}
 
 	/**
@@ -51,7 +51,7 @@ class DeleteForm extends FormAbstract
 	/**
 	 * Form show
 	 */
-	public function outputForm()
+	public function output()
 	{
 		$args =
 		[
@@ -68,7 +68,7 @@ class DeleteForm extends FormAbstract
 	 */
 	public function save()
 	{
-		$post_data = $this->get_posted_data();
+		$post_data = $this->getPostedData();
 
 		if(!isset($post_data['_wc1c-admin-nonce-configurations-delete']))
 		{
@@ -88,9 +88,9 @@ class DeleteForm extends FormAbstract
 			return false;
 		}
 
-		foreach($this->get_fields() as $key => $field)
+		foreach($this->getFields() as $key => $field)
 		{
-			$field_type = $this->get_field_type($field);
+			$field_type = $this->getFieldType($field);
 
 			if('title' === $field_type || 'raw' === $field_type)
 			{
@@ -99,7 +99,7 @@ class DeleteForm extends FormAbstract
 
 			try
 			{
-				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
+				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
 			catch(Exception $e)
 			{
@@ -115,7 +115,7 @@ class DeleteForm extends FormAbstract
 			}
 		}
 
-		$data = $this->get_saved_data();
+		$data = $this->getSavedData();
 
 		if(!isset($data['accept']) || $data['accept'] !== 'yes')
 		{

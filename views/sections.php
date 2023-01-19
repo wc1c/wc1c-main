@@ -15,13 +15,15 @@ foreach($admin->getSections() as $tab_key => $tab_name)
 		continue;
 	}
 
+	$class = $tab_name['class'] ?? '';
+
     if($tab_key === $admin->getCurrentSection())
     {
-        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab nav-tab-active">' . $tab_name['title'] . '</a>';
+        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab nav-tab-active ' . esc_attr($class) . '">' . $tab_name['title'] . '</a>';
     }
     else
     {
-        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab">' . $tab_name['title'] . '</a>';
+        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab ' . esc_attr($class) . '">' . $tab_name['title'] . '</a>';
     }
 }
 

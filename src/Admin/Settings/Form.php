@@ -44,9 +44,9 @@ abstract class Form extends FormAbstract
 	 */
 	protected function init()
 	{
-		$this->load_fields();
+		$this->loadFields();
 		$this->getSettings()->init();
-		$this->load_saved_data($this->getSettings()->get());
+		$this->loadSavedData($this->getSettings()->get());
 		$this->save();
 
 		add_action('wc1c_admin_show', [$this, 'outputForm']);
@@ -59,7 +59,7 @@ abstract class Form extends FormAbstract
 	 */
 	public function save()
 	{
-		$post_data = $this->get_posted_data();
+		$post_data = $this->getPostedData();
 
 		if(!isset($post_data['_wc1c-admin-nonce']))
 		{
@@ -82,16 +82,16 @@ abstract class Form extends FormAbstract
 		/**
 		 * All form fields validate
 		 */
-		foreach($this->get_fields() as $key => $field)
+		foreach($this->getFields() as $key => $field)
 		{
-			if('title' === $this->get_field_type($field))
+			if('title' === $this->getFieldType($field))
 			{
 				continue;
 			}
 
 			try
 			{
-				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
+				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
 			catch(Exception $e)
 			{
@@ -107,7 +107,7 @@ abstract class Form extends FormAbstract
 
 		try
 		{
-			$this->getSettings()->set($this->get_saved_data());
+			$this->getSettings()->set($this->getSavedData());
 			$this->getSettings()->save();
 		}
 		catch(Exception $e)

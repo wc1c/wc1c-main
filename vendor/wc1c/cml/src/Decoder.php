@@ -435,16 +435,21 @@ class Decoder
 	 */
 	private function parseXmlClassifierProperties($xml_data): array
 	{
-		if($xml_data->Свойство)
+		$properties = [];
+
+		if(isset($xml_data->Свойство))
 		{
 			$properties_xml_data = $xml_data->Свойство;
 		}
-		else
+		elseif(isset($xml_data->СвойствоНоменклатуры))
 		{
 			$properties_xml_data = $xml_data->СвойствоНоменклатуры;
 		}
 
-		$properties = [];
+		if(empty($properties_xml_data))
+		{
+			return $properties;
+		}
 
 		foreach($properties_xml_data as $property_xml_data)
 		{
@@ -453,7 +458,7 @@ class Decoder
 				$property_data = $this->parseXmlClassifierPropertiesItem($property_xml_data);
 				$properties[$property_data['id']] = $property_data;
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				continue;
 			}
@@ -484,13 +489,13 @@ class Decoder
 		/**
 		 * Описание свойства, например, для чего оно предназначено
 		 */
-		$property_data['description'] = htmlspecialchars(trim((string)$xml_property->Описание));
+		$property_data['description'] = isset($xml_property->Описание) ? htmlspecialchars(trim((string)$xml_property->Описание)) : '';
 
 		/**
 		 * Обязательное
 		 */
 		$property_data['required'] = 'no';
-		if($xml_property->Обязательное)
+		if(isset($xml_property->Обязательное))
 		{
 			$property_data['required'] = (string)$xml_property->Обязательное === 'true' ? 'yes' : 'no';
 		}
@@ -499,7 +504,7 @@ class Decoder
 		 * Множественное
 		 */
 		$property_data['multiple'] = 'no';
-		if($xml_property->Множественное)
+		if(isset($xml_property->Множественное))
 		{
 			$property_data['multiple'] = (string)$xml_property->Множественное === 'true' ? 'yes' : 'no';
 		}
@@ -510,12 +515,12 @@ class Decoder
 		 * Один из следующих типов: Строка (по умолчанию), Число,  ДатаВремя, Справочник
 		 */
 		$property_data['values_type'] = 'Строка';
-		if($xml_property->ТипЗначений)
+		if(isset($xml_property->ТипЗначений))
 		{
 			$property_data['values_type'] = (string)$xml_property->ТипЗначений;
 		}
 		// 2.04.1CBitrix
-		if($xml_property->ТипыЗначений->ТипЗначений->Тип)
+		if(isset($xml_property->ТипыЗначений->ТипЗначений->Тип))
 		{
 			$property_data['values_type'] = (string)$xml_property->ТипыЗначений->ТипЗначений->Тип;
 		}
@@ -530,7 +535,7 @@ class Decoder
 		$property_data['values_variants'] = $property_values_data;
 		if($property_data['values_type'] === 'Справочник')
 		{
-			if($xml_property->ВариантыЗначений->Справочник)
+			if(isset($xml_property->ВариантыЗначений->Справочник))
 			{
 				foreach($xml_property->ВариантыЗначений->Справочник as $value)
 				{
@@ -538,7 +543,7 @@ class Decoder
 				}
 			}
 			// 2.04.1CBitrix
-			if($xml_property->ТипыЗначений->ТипЗначений)
+			if(isset($xml_property->ТипыЗначений->ТипЗначений))
 			{
 				foreach($xml_property->ТипыЗначений->ТипЗначений->ВариантыЗначений as $value)
 				{
@@ -555,7 +560,7 @@ class Decoder
 		 * Свойство может (или должно) использоваться при описании товаров в каталоге, пакете предложений, документах
 		 */
 		$property_data['use_products'] = 'no';
-		if($xml_property->ДляТоваров)
+		if(isset($xml_property->ДляТоваров))
 		{
 			$property_data['use_products'] = (string)$xml_property->ДляТоваров === 'true' ? 'yes' : 'no';
 		}
@@ -566,7 +571,7 @@ class Decoder
 		 * Свойство может (должно) использоваться при описании товара в пакете предложений. Например: гарантийный срок, способ доставки
 		 */
 		$property_data['use_offers'] = 'no';
-		if($xml_property->ДляПредложений)
+		if(isset($xml_property->ДляПредложений))
 		{
 			$property_data['use_offers'] = (string)$xml_property->ДляПредложений === 'true' ? 'yes' : 'no';
 		}
@@ -576,7 +581,7 @@ class Decoder
 		 *
 		 * Свойство может (должно) использоваться при описании товара в документе. Например: серийный номер
 		 */
-		if($xml_property->ДляДокументов)
+		if(isset($xml_property->ДляДокументов))
 		{
 			$property_data['use_documents'] = (string)$xml_property->ДляПредложений === 'true' ? 'yes' : 'no';
 		}
@@ -585,7 +590,7 @@ class Decoder
 		 * Внешний
 		 */
 		$property_data['external']  = 'no';
-		if($xml_property->Внешний)
+		if(isset($xml_property->Внешний))
 		{
 			$property_data['external'] = (string)$xml_property->Внешний === 'true' ? 'yes' : 'no';
 		}
@@ -594,7 +599,7 @@ class Decoder
 		 * Информационное
 		 */
 		$property_data['informational']  = 'no';
-		if($xml_property->Информационное)
+		if(isset($xml_property->Информационное))
 		{
 			$property_data['informational'] = (string)$xml_property->Информационное === 'true' ? 'yes' : 'no';
 		}
@@ -603,7 +608,7 @@ class Decoder
 		 * Маркер удаления
 		 */
 		$property_data['mark_delete']  = 'no';
-		if($xml_property->ПометкаУдаления)
+		if(isset($xml_property->ПометкаУдаления))
 		{
 			$property_data['mark_delete'] = (string)$xml_property->ПометкаУдаления === 'true' ? 'yes' : 'no';
 		}
@@ -612,7 +617,7 @@ class Decoder
 		 * Номер версии
 		 */
 		$property_data['version']  = '';
-		if($xml_property->НомерВерсии)
+		if(isset($xml_property->НомерВерсии))
 		{
 			$property_data['version'] = (string)$xml_property->НомерВерсии;
 		}
@@ -630,7 +635,7 @@ class Decoder
 	 */
 	private function parseXmlProduct($xml_product_data): array
 	{
-		if(!$xml_product_data->Ид)
+		if(!isset($xml_product_data->Ид))
 		{
 			throw new Exception('$product_xml_data->Ид empty.');
 		}
@@ -640,17 +645,17 @@ class Decoder
 		/**
 		 * Наименование товара
 		 */
-		$product_data['name'] = $xml_product_data->Наименование ? (string)$xml_product_data->Наименование : '';
+		$product_data['name'] = isset($xml_product_data->Наименование) ? (string)$xml_product_data->Наименование : '';
 
 		/**
 		 * Артикул
 		 */
-		$product_data['sku'] = $xml_product_data->Артикул ? (string)$xml_product_data->Артикул : '';
+		$product_data['sku'] = isset($xml_product_data->Артикул) ? (string)$xml_product_data->Артикул : '';
 
 		/**
 		 * Штрихкод
 		 */
-		$product_data['ean'] = $xml_product_data->Штрихкод ? (string)$xml_product_data->Штрихкод : '';
+		$product_data['ean'] = isset($xml_product_data->Штрихкод) ? (string)$xml_product_data->Штрихкод : '';
 
 		/*
 		 * Базовая единица
@@ -658,32 +663,32 @@ class Decoder
 		 * Имя базовой единицы измерения товара по ОКЕИ. В документах и коммерческих предложениях может быть указана другая единица измерения,
 		 * но при этом обязательно указывается коэффициент пересчета количества в базовую единицу товара.
 		 */
-		$product_data['base_unit'] = $xml_product_data->БазоваяЕдиница ? $this->parseXmlProductBaseUnit($xml_product_data->БазоваяЕдиница) : [];
+		$product_data['base_unit'] = isset($xml_product_data->БазоваяЕдиница) ? $this->parseXmlProductBaseUnit($xml_product_data->БазоваяЕдиница) : [];
 
 		/**
 		 * Идентификатор товара у контрагента (идентификатор товара в системе контрагента)
 		 * cml:ИдентификаторГлобальныйТип
 		 */
-		$product_data['counterparty_product_guid'] = $xml_product_data->ИдТовараУКонтрагента ? (string)$xml_product_data->ИдТовараУКонтрагента : '';
+		$product_data['counterparty_product_guid'] = isset($xml_product_data->ИдТовараУКонтрагента) ? (string)$xml_product_data->ИдТовараУКонтрагента : '';
 
 		/**
 		 * Группы товара
 		 *
 		 * Содержит идентификаторы групп, которым принадлежит данный товар в указанном классификаторе.
 		 */
-		$product_data['classifier_groups'] = $xml_product_data->Группы ? $this->parseXmlProductGroups($xml_product_data->Группы) : [];
+		$product_data['classifier_groups'] = isset($xml_product_data->Группы) ? $this->parseXmlProductGroups($xml_product_data->Группы) : [];
 
 		/**
 		 * Категории товара
 		 *
 		 * Содержит идентификаторы категорий, которым принадлежит данный товар в указанном классификаторе.
 		 */
-		$product_data['classifier_categories'] = $xml_product_data->Категория ? $this->parseXmlProductCategories($xml_product_data->Категория) : [];
+		$product_data['classifier_categories'] = isset($xml_product_data->Категория) ? $this->parseXmlProductCategories($xml_product_data->Категория) : [];
 
 		/**
 		 * Описание товара
 		 */
-		$description = $xml_product_data->Описание ? htmlspecialchars(trim((string)$xml_product_data->Описание)) : '';
+		$description =isset($xml_product_data->Описание) ? htmlspecialchars(trim((string)$xml_product_data->Описание)) : '';
 		$product_data['description'] = str_replace(["\r\n", "\r", "\n"], "<br />", $description);
 
 		/**
@@ -692,10 +697,10 @@ class Decoder
 		 * Имя файла картинки для номенклатурной позиции. Файлы картинок могут поставляться отдельно
 		 * от передаваемого файла с коммерческой информацией
 		 */
-		$product_data['images'] = $xml_product_data->Картинка ? $this->parseXmlProductImages($xml_product_data->Картинка) : [];
+		$product_data['images'] = isset($xml_product_data->Картинка) ? $this->parseXmlProductImages($xml_product_data->Картинка) : [];
 
 		// CML 2.04
-		if($xml_product_data->ОсновнаяКартинка)
+		if(isset($xml_product_data->ОсновнаяКартинка))
 		{
 			$product_data['images'] = $this->parseXmlProductImages($xml_product_data->ОсновнаяКартинка);
 		}
@@ -707,17 +712,17 @@ class Decoder
 		/**
 		 * Страна
 		 */
-		$product_data['country'] = $xml_product_data->Страна ? (string)$xml_product_data->Страна : '';
+		$product_data['country'] = isset($xml_product_data->Страна) ? (string)$xml_product_data->Страна : '';
 
 		/**
 		 * Торговая марка
 		 */
-		$product_data['trademark'] = $xml_product_data->ТорговаяМарка ? (string)$xml_product_data->ТорговаяМарка : '';
+		$product_data['trademark'] = isset($xml_product_data->ТорговаяМарка) ? (string)$xml_product_data->ТорговаяМарка : '';
 
 		/*
 		 * Владелец торговой марки
 		 */
-		$product_data['trademark_owner'] = $xml_product_data->ВладелецТорговойМарки ? $this->decodeCounterparty($xml_product_data->ВладелецТорговойМарки) : '';
+		$product_data['trademark_owner'] = isset($xml_product_data->ВладелецТорговойМарки) ? $this->decodeCounterparty($xml_product_data->ВладелецТорговойМарки) : '';
 
 		/*
 		 * Производитель todo: вынести разбор в отдельный метод и добавить try catch
@@ -729,12 +734,12 @@ class Decoder
 		 * Изготовитель - Контрагент
 		 */
 		$product_data['manufacturer'] = [];
-		if($xml_product_data->Изготовитель)
+		if(isset($xml_product_data->Изготовитель))
 		{
 			$product_data['manufacturer']['name'] = trim((string)$xml_product_data->Изготовитель->Наименование);
 			$product_data['manufacturer']['id'] = trim((string)$xml_product_data->Изготовитель->Ид);
 		}
-		elseif($xml_product_data->Производитель)
+		elseif(isset($xml_product_data->Производитель))
 		{
 			$product_data['manufacturer']['name'] = trim((string)$xml_product_data->Производитель);
 		}
@@ -745,12 +750,12 @@ class Decoder
 		 * Описывает значения свойств (характеристик) номенклатурной позиции в соответствии с указанным классификатором.
 		 * Если классификатор не указан, то включать данный элемент не имеет смысла.
 		 */
-		$product_data['property_values'] = $xml_product_data->ЗначенияСвойств ? $this->parseXmlProductPropertyValues($xml_product_data->ЗначенияСвойств) : [];
+		$product_data['property_values'] = isset($xml_product_data->ЗначенияСвойств) ? $this->parseXmlProductPropertyValues($xml_product_data->ЗначенияСвойств) : [];
 
 		/*
 		 * Налоговые ставки продукта
 		 */
-		$product_data['taxes'] = $xml_product_data->СтавкиНалогов ? $this->parseXmlProductTaxes($xml_product_data->СтавкиНалогов) : [];
+		$product_data['taxes'] = isset($xml_product_data->СтавкиНалогов) ? $this->parseXmlProductTaxes($xml_product_data->СтавкиНалогов) : [];
 
 		/*
 		 * Акцизы
@@ -781,11 +786,11 @@ class Decoder
 		 * Определяет значение произвольного реквизита документа
 		 */
 		$requisites_values = false;
-		if($xml_product_data->ЗначениеРеквизита) // cml 2.05-
+		if(isset($xml_product_data->ЗначениеРеквизита)) // cml 2.05-
 		{
 			$requisites_values = $xml_product_data->ЗначениеРеквизита;
 		}
-		elseif($xml_product_data->ЗначенияРеквизитов) // cml 2.05+
+		elseif(isset($xml_product_data->ЗначенияРеквизитов)) // cml 2.05+
 		{
 			$requisites_values = $xml_product_data->ЗначенияРеквизитов;
 		}
@@ -798,7 +803,7 @@ class Decoder
 		/**
 		 * Цены
 		 */
-		$product_data['prices'] = $xml_product_data->Цены ? $this->parseXmlProductPrice($xml_product_data->Цены) : [];
+		$product_data['prices'] = isset($xml_product_data->Цены) ? $this->parseXmlProductPrice($xml_product_data->Цены) : [];
 
 		/**
 		 * Количество предлагаемого товара. Например, может быть указан остаток на складе.
@@ -839,7 +844,7 @@ class Decoder
 		/**
 		 * Модель
 		 */
-		$product_data['model'] = $xml_product_data->Модель ? (string)$xml_product_data->Модель : '';
+		$product_data['model'] = isset($xml_product_data->Модель) ? (string)$xml_product_data->Модель : '';
 
 		/***************************************************************************************************************************************
 		 * Технические данные
@@ -848,23 +853,23 @@ class Decoder
 		/**
 		 * Версия продукта
 		 */
-		$product_data['version'] = $xml_product_data->НомерВерсии ? (string)$xml_product_data->НомерВерсии : '';
+		$product_data['version'] = isset($xml_product_data->НомерВерсии) ? (string)$xml_product_data->НомерВерсии : '';
 
 		/**
 		 * Пометка товара на удаление
 		 */
 		$product_data['delete_mark'] = 'no';
-		if($xml_product_data->ПометкаУдаления)
+		if(isset($xml_product_data->ПометкаУдаления))
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->ПометкаУдаления === 'true' ? 'yes' : 'no';
 		}
 		/* УНФ */
-		if($xml_product_data->Статус)
+		if(isset($xml_product_data->Статус))
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->Статус === 'Удален' ? 'yes' : 'no';
 		}
 		/* 2.04.1CBitrix */
-		if($xml_product_data->ПомеченНаУдаление)
+		if(isset($xml_product_data->ПомеченНаУдаление))
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->ПомеченНаУдаление === 'true' ? 'yes' : 'no';
 		}
@@ -874,54 +879,12 @@ class Decoder
 		 */
 		/* 2.04.1CBitrix */
 		$product_data['specification'] = '';
-		if($xml_product_data->Спецификация)
+		if(isset($xml_product_data->Спецификация))
 		{
-			$product_data['specification'] =  htmlspecialchars(trim((string)$xml_product_data->Спецификация));
+			$product_data['specification'] = htmlspecialchars(trim((string)$xml_product_data->Спецификация));
 		}
-
-		/**
-		 * Code из 1С?
-		 */
-		$product_data['code'] = '';
 
 		return $product_data;
-	}
-
-	/**
-	 * Возвращает преобразованный числовой id из Код товара торговой системы
-	 *
-	 * @param $code
-	 *
-	 * @return int
-	 */
-	private function parse_xml_product_code($code)
-	{
-		$out = '';
-
-		// Пока руки не дошли до преобразования, надо откидывать префикс, а после лидирующие нули
-		$length = mb_strlen($code);
-		$begin = -1;
-
-		for ($i = 0; $i <= $length; $i++)
-		{
-			$char = mb_substr($code,$i,1);
-			// ищем первую цифру не ноль
-			if($begin === -1 && is_numeric($char) && $char != '0')
-			{
-				$begin = $i;
-				$out = $char;
-			}
-			else
-			{
-				// начало уже определено, читаем все цифры до конца
-				if(is_numeric($char))
-				{
-					$out .= $char;
-				}
-			}
-		}
-
-		return (int)$out;
 	}
 
 	/**
@@ -934,7 +897,7 @@ class Decoder
 	 */
 	private function parseXmlProductCharacteristics($xml_data): array
 	{
-		if(!$xml_data->ХарактеристикаТовара)
+		if(!isset($xml_data->ХарактеристикаТовара))
 		{
 			throw new Exception('$xml_data->ХарактеристикаТовара is empty.');
 		}
@@ -951,7 +914,7 @@ class Decoder
 			 * 2.06+
 			 */
 			$id = '';
-			if($product_feature->Ид)
+			if(isset($product_feature->Ид))
 			{
 				$id = trim(htmlspecialchars((string) $product_feature->Ид));
 			}
@@ -1012,13 +975,13 @@ class Decoder
 	{
 		$result = [];
 
-		foreach($xml_data->Ид as $category_guid)
+		foreach($xml_data->Ид as $group_guid)
 		{
 			/**
 			 * Идентификатор группы товаров в классификаторе
 			 * cml:ИдентификаторГлобальныйТип
 			 */
-			$result[] = (string)$category_guid;
+			$result[] = (string)$group_guid;
 		}
 
 		return $result;
@@ -1105,26 +1068,26 @@ class Decoder
 			 *
 			 * cml:ИдентификаторГлобальныйТип
 			 */
-			$price_type_guid = (string) $price_data->ИдТипаЦены;
+			$price_type_guid = (string)$price_data->ИдТипаЦены;
 
 			/*
 			 * Представление цены так, как оно отображается в прайс-листе. Например: 10у.е./за 1000 шт
 			 *
 			 * cml:НаименованиеТип
 			 */
-			$price_presentation = $price_data->Представление ? (string) $price_data->Представление : '';
+			$price_presentation = $price_data->Представление ? (string)$price_data->Представление : '';
 
 			/*
 			 * Цена за единицу товара
 			 *
 			 * cml:СуммаТип
 			 */
-			$price = $price_data->ЦенаЗаЕдиницу ? (float) $price_data->ЦенаЗаЕдиницу : 0;
+			$price = $price_data->ЦенаЗаЕдиницу ? (float)$price_data->ЦенаЗаЕдиницу : 0;
 
 			/*
 			 * Коэффициент
 			 */
-			$rate = $price_data->Коэффициент ? (float) $price_data->Коэффициент : 1;
+			$rate = $price_data->Коэффициент ? (float)$price_data->Коэффициент : 1;
 
 			/*
 			 * Валюта
@@ -1133,27 +1096,27 @@ class Decoder
 			 *
 			 * cml:ВалютаТип
 			 */
-			$currency = $price_data->Валюта ? (string) $price_data->Валюта : 'RUB';
+			$currency = $price_data->Валюта ? (string)$price_data->Валюта : 'RUB';
 
 			/*
 			 * Минимальное количество товара в указанных единицах, для которого действует данная цена.
 			 *
 			 * cml:КоличествоТип
 			 */
-			$min_quantity = $price_data->МинКоличество ? (string) $price_data->МинКоличество : '0';
+			$min_quantity = $price_data->МинКоличество ? (string)$price_data->МинКоличество : '0';
 
 			/*
 			 * todo: обрабатывать правильно
 			 *
 			 * cml:ЕдиницаИзмерения
 			 */
-			$unit = $price_data->Единица ? (string) $price_data->Единица : '';
+			$unit = $price_data->Единица ? (string)$price_data->Единица : '';
 
 			/**
 			 * Собираем итог
 			 */
-			$data_prices[$price_type_guid] = array
-			(
+			$data_prices[$price_type_guid] =
+			[
 				'price' => $price,
 				'price_type_id' => $price_type_guid,
 				'price_rate' => $rate,
@@ -1161,7 +1124,7 @@ class Decoder
 				'price_presentation' => $price_presentation,
 				'price_unit' => $unit,
 				'min_quantity' => $min_quantity,
-			);
+			];
 		}
 
 		return $data_prices;
@@ -1326,11 +1289,11 @@ class Decoder
 			// Вид налога. Например, НДС
 			$name = trim((string)$product_tax->Наименование);
 
-			// Ставка налога в процентах
-			$rate_percent = (float)$product_tax->Ставка;
+			// Ставка налога
+			$rate = (string)$product_tax->Ставка;
 
 			// final
-			$taxes[$name] = $rate_percent;
+			$taxes[$name] = $rate;
 		}
 
 		return $taxes;
@@ -1350,7 +1313,7 @@ class Decoder
 		/**
 		 * Идентификатор свойства в классификаторе товаров
 		 *
-		 * cml:ИдентфикаторГлобальныйТип
+		 * cml:ИдентификаторГлобальныйТип
 		 */
 		$property_data['property_guid'] = (string)$xml_property_data->Ид;
 
@@ -1513,14 +1476,14 @@ class Decoder
 
 			//todo: cml:Налог
 
-			$data[$guid] = array
-			(
+			$data[$guid] =
+			[
 				'guid' => $guid,
 				'name' => $name,
 				'currency' => $currency,
 				'code' => (string)$code,
 				'description' => $description
-			);
+			];
 		}
 
 		return $data;

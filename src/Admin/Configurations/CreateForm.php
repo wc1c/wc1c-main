@@ -21,11 +21,11 @@ class CreateForm extends FormAbstract
 	 */
 	public function __construct()
 	{
-		$this->set_id('configurations-create');
+		$this->setId('configurations-create');
 
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+		add_filter('wc1c_' . $this->getId() . '_form_load_fields', [$this, 'init_fields_main'], 10);
 
-		$this->load_fields();
+		$this->loadFields();
 	}
 
 	/**
@@ -89,9 +89,9 @@ class CreateForm extends FormAbstract
 	 *
 	 * @return string
 	 */
-	public function generate_radio_html($key, $data)
+	public function generateRadioHtml(string $key, array $data): string
 	{
-		$field_key = $this->get_prefix_field_key($key);
+		$field_key = $this->getPrefixFieldKey($key);
 
 		$defaults = array
 		(
@@ -118,10 +118,10 @@ class CreateForm extends FormAbstract
 		?>
 		<tr valign="top">
 			<th scope="row" class="titledesc">
-				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html($data); ?></label>
+				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->getTooltipHtml($data); ?></label>
 
 				<div class="mt-2" style="font-weight: normal;">
-					<?php echo wp_kses_post($this->get_description_html($data)); ?>
+					<?php echo wp_kses_post($this->getDescriptionHtml($data)); ?>
 				</div>
 
 			</th>
@@ -138,7 +138,7 @@ class CreateForm extends FormAbstract
                             <hr>
                         </div>
 
-						<input name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php disabled( $data['disabled'], true ); ?> class="<?php echo esc_attr( $data['class'] ); ?>" type="radio" value="<?php echo esc_attr($option_key); ?>" <?php checked( (string) $option_key, esc_attr( $this->get_field_data( $key ) ) ); ?> />
+						<input name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php disabled( $data['disabled'], true ); ?> class="<?php echo esc_attr( $data['class'] ); ?>" type="radio" value="<?php echo esc_attr($option_key); ?>" <?php checked( (string) $option_key, esc_attr( $this->getFieldData( $key ) ) ); ?> />
 
 						<label class="<?php echo esc_attr( $data['class_label'] ); ?>" for="<?php echo esc_attr( $option_key ); ?>">
 							<?php echo wp_kses_post($option_value); ?>
@@ -169,9 +169,9 @@ class CreateForm extends FormAbstract
 	 * @return bool
 	 * @throws Exception
 	 */
-	public function save()
+	public function save(): bool
 	{
-		$post_data = $this->get_posted_data();
+		$post_data = $this->getPostedData();
 
 		if(!isset($post_data['_wc1c-admin-nonce']))
 		{
@@ -191,9 +191,9 @@ class CreateForm extends FormAbstract
 			return false;
 		}
 
-		foreach($this->get_fields() as $key => $field)
+		foreach($this->getFields() as $key => $field)
 		{
-			$field_type = $this->get_field_type($field);
+			$field_type = $this->getFieldType($field);
 
 			if('title' === $field_type || 'raw' === $field_type)
 			{
@@ -202,7 +202,7 @@ class CreateForm extends FormAbstract
 
 			try
 			{
-				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
+				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
 			catch(Exception $e)
 			{
@@ -216,7 +216,7 @@ class CreateForm extends FormAbstract
 			}
 		}
 
-		$data = $this->get_saved_data();
+		$data = $this->getSavedData();
 
 		if(empty($data['name']))
 		{
@@ -276,7 +276,7 @@ class CreateForm extends FormAbstract
 				]
 			);
 
-			$this->set_saved_data([]);
+			$this->setSavedData([]);
 			return true;
 		}
 
@@ -294,7 +294,7 @@ class CreateForm extends FormAbstract
 	/**
 	 * Form show
 	 */
-	public function outputForm()
+	public function output()
 	{
 		$args =
 		[
