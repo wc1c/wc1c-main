@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Traits\SingletonTrait;
+use Digiom\Woplucore\Traits\SingletonTrait;
 
 /**
  * Products
@@ -78,15 +78,23 @@ final class Products
 	{
 		$schema_id = get_post_meta($post_id, '_wc1c_schema_id', true);
 		$config_id = get_post_meta($post_id, '_wc1c_configuration_id', true);
+		$time = get_post_meta($post_id, '_wc1c_time', true);
 
 		if($schema_id)
 		{
-			$content .= '<span class="na">' . __('Schema ID: ', 'wc1c-main') . $schema_id . '</span>';
+			$content .= '<span class="na">' . __('Schema ID:', 'wc1c-main') . ' ' . $schema_id . '</span>';
 		}
 
 		if($config_id)
 		{
-			$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c-main')  . $config_id . '</span>';
+			$content .= '<br/><span class="na">' . __('Configuration ID:', 'wc1c-main') . ' ' . $config_id . '</span>';
+		}
+
+		if($time)
+		{
+			$content .= '<br/><span class="na">' . __('Activity:', 'wc1c-main') . ' ';
+			$content .= sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($time, current_time('timestamp')));
+			$content .= '</span>';
 		}
 
 		return $content;
