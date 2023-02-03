@@ -19,6 +19,8 @@ final class Orders
 	public function __construct()
 	{
 		add_filter('manage_edit-shop_order_columns',  [$this, 'manage_edit_order_columns']);
+		add_filter('wc1c_admin_interface_orders_lists_column', [$this, 'wc1c_admin_interface_orders_lists_column'], 10, 2);
+
 		add_action('manage_shop_order_posts_custom_column', [$this, 'manage_order_posts_custom_column'], 10, 2);
 	}
 
@@ -55,21 +57,6 @@ final class Orders
 			{
 				$content = apply_filters('wc1c_admin_interface_orders_lists_column', $content, $post_id);
 			}
-			else
-			{
-				$schema_id = get_post_meta($post_id, '_wc1c_schema_id', true);
-				$config_id = get_post_meta($post_id, '_wc1c_configuration_id', true);
-
-				if($schema_id)
-				{
-					$content .= '<span class="na">' . __('Schema ID: ', 'wc1c-main') . $schema_id . '</span>';
-				}
-
-				if($config_id)
-				{
-					$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c-main')  . $config_id . '</span>';
-				}
-			}
 
 			if('' === $content)
 			{
@@ -78,5 +65,38 @@ final class Orders
 
 			echo wp_kses_post($content);
 		}
+	}
+
+	/**
+	 *
+	 * @param $content
+	 * @param $post_id
+	 *
+	 * @return string
+	 */
+	public function wc1c_admin_interface_orders_lists_column($content, $post_id): string
+	{
+		$schema_id = get_post_meta($post_id, '_wc1c_schema_id', true);
+		$config_id = get_post_meta($post_id, '_wc1c_configuration_id', true);
+		$time = get_post_meta($post_id, '_wc1c_time', true);
+
+		if($time)
+		{
+			$content .= '<span class="na">' . __('Activity:', 'wc1c-main') . ' ';
+			$content .= sprintf(_x('%s ago.', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($time, current_time('timestamp')));
+			$content .= '</span><br/>';
+		}
+
+		if($schema_id)
+		{
+			$content .= '<span class="na">' . __('Schema ID:', 'wc1c-main') . ' ' . $schema_id . '</span>';
+		}
+
+		if($config_id)
+		{
+			$content .= '<br/><span class="na">' . __('Configuration ID:', 'wc1c-main') . ' ' . $config_id . '</span>';
+		}
+
+		return $content;
 	}
 }
