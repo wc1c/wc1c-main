@@ -61,7 +61,7 @@ namespace Wc1c\Main
 		$loader->registerDeactivation([Deactivation::class, 'instance']);
 		$loader->registerUninstall([Uninstall::class, 'instance']);
 	}
-	catch(\Exception $e)
+	catch(\Throwable $e)
 	{
 		trigger_error($e->getMessage());
 		return;
