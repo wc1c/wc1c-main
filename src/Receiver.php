@@ -2,8 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Exceptions\Exception;
-
 /**
  * Receiver
  *
@@ -58,7 +56,7 @@ final class Receiver
 		{
 			$configuration = new Configuration($wc1c_receiver);
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('receiver')->warning(__('Selected configuration for Receiver is unavailable.', 'wc1c-main'), ['exception' => $e]);
 			die(__('Configuration for Receiver is unavailable.', 'wc1c-main'));
@@ -68,7 +66,7 @@ final class Receiver
 		{
 			$schema = wc1c()->schemas()->init($configuration);
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('receiver')->error('Schema for configuration is not initialized.', ['exception' => $e]);
 			die(__('Schema for configuration is not initialized.', 'wc1c-main'));
@@ -96,7 +94,7 @@ final class Receiver
 			$configuration->setDateActivity(time());
 			$configuration->save();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('receiver')->error('Error saving configuration.', ['exception' => $e]);
 			die(__('Error saving configuration.', 'wc1c-main'));
