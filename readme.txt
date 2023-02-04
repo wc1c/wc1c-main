@@ -53,6 +53,12 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 == Changelog ==
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
+= 0.17.0 =
+* WC tested up to: 7.4
+* Up: ProductsCML to 0.9.0
+* Up: language files
+* Fix: more
+
 = 0.16.0 =
 * Up: ProductsCML to 0.8.0
 * Up: language files
