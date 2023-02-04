@@ -80,7 +80,7 @@ class Decoder
 			{
 				$data = new SimpleXMLElement($data);
 			}
-			catch(\Exception $e)
+			catch(\Throwable $e)
 			{
 				return false;
 			}
@@ -219,26 +219,27 @@ class Decoder
 	/**
 	 * @param $xml
 	 *
-	 * @return false|Product
+	 * @return Product
+	 * @throws Exception
 	 */
-	public function decodeProduct($xml)
+	public function decodeProduct($xml): Product
 	{
 		try
 		{
 			$data = $this->parseXmlProduct($xml);
 		}
-		catch(\Exception $e)
+		catch(\Throwable $e)
 		{
-			return false;
+			throw new Exception('Product parse: ' . $e->getMessage());
 		}
 
 		try
 		{
 			$product = new Product($data);
 		}
-		catch(\Exception $e)
+		catch(\Throwable $e)
 		{
-			return false;
+			throw new Exception('Product instance: ' . $e->getMessage());
 		}
 
 		return $product;
@@ -779,7 +780,7 @@ class Decoder
 		/**
 		 * Характеристики товара. Товар с разными характеристиками может иметь разную цену и остатки.
 		 */
-		$product_data['characteristics'] = $xml_product_data->ХарактеристикиТовара ? $this->parseXmlProductCharacteristics($xml_product_data->ХарактеристикиТовара) : [];
+		$product_data['characteristics'] = isset($xml_product_data->ХарактеристикиТовара) ? $this->parseXmlProductCharacteristics($xml_product_data->ХарактеристикиТовара) : [];
 
 		/**
 		 * Значения реквизитов товара
@@ -897,11 +898,6 @@ class Decoder
 	 */
 	private function parseXmlProductCharacteristics($xml_data): array
 	{
-		if(!isset($xml_data->ХарактеристикаТовара))
-		{
-			throw new Exception('$xml_data->ХарактеристикаТовара is empty.');
-		}
-
 		$characteristics = [];
 
 		// Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену и остатки
