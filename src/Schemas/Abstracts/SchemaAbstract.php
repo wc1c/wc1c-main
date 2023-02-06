@@ -44,6 +44,11 @@ abstract class SchemaAbstract implements SchemaContract
 	 */
 	private $configuration_prefix = '';
 
+    /**
+     * @var string Unique configuration prefix  wc1c_schema_{schema_id}
+     */
+    private $schema_prefix = '';
+
 	/**
 	 * @var string Current version
 	 */
@@ -74,17 +79,21 @@ abstract class SchemaAbstract implements SchemaContract
 	/**
 	 * @return bool
 	 */
-	public function isInitialized()
-	{
+	public function isInitialized(): bool
+    {
 		return $this->initialized;
 	}
 
-	/**
-	 * @param bool $initialized
-	 */
-	public function setInitialized($initialized)
-	{
+    /**
+     * @param bool $initialized
+     *
+     * @return SchemaAbstract
+     */
+	public function setInitialized(bool $initialized): SchemaAbstract
+    {
 		$this->initialized = $initialized;
+
+        return $this;
 	}
 
 	/**
@@ -92,10 +101,10 @@ abstract class SchemaAbstract implements SchemaContract
 	 *
 	 * @param $id
 	 *
-	 * @return $this
+	 * @return SchemaAbstract
 	 */
-	protected function setId($id)
-	{
+	protected function setId($id): SchemaAbstract
+    {
 		$this->id = $id;
 
 		return $this;
@@ -108,8 +117,8 @@ abstract class SchemaAbstract implements SchemaContract
 	 *
 	 * @return string
 	 */
-	public function getId($lower = true)
-	{
+	public function getId(bool $lower = true): string
+    {
 		if($lower)
 		{
 			return strtolower($this->id);
@@ -121,49 +130,61 @@ abstract class SchemaAbstract implements SchemaContract
 	/**
 	 * @return string
 	 */
-	public function getName()
-	{
+	public function getName(): string
+    {
 		return $this->name;
 	}
 
-	/**
-	 * @param string $name
-	 */
-	protected function setName($name)
-	{
+    /**
+     * @param string $name
+     *
+     * @return SchemaAbstract
+     */
+	protected function setName(string $name): SchemaAbstract
+    {
 		$this->name = $name;
+
+        return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getDescription()
-	{
+	public function getDescription(): string
+    {
 		return $this->description;
 	}
 
-	/**
-	 * @param string $description
-	 */
-	protected function setDescription($description)
-	{
+    /**
+     * @param string $description
+     *
+     * @return SchemaAbstract
+     */
+	protected function setDescription(string $description): SchemaAbstract
+    {
 		$this->description = $description;
+
+        return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getAuthor()
-	{
+	public function getAuthor(): string
+    {
 		return $this->author;
 	}
 
-	/**
-	 * @param string $author
-	 */
-	protected function setAuthor($author)
-	{
+    /**
+     * @param string $author
+     *
+     * @return SchemaAbstract
+     */
+	protected function setAuthor(string $author): SchemaAbstract
+    {
 		$this->author = $author;
+
+        return $this;
 	}
 
 	/**
@@ -173,8 +194,8 @@ abstract class SchemaAbstract implements SchemaContract
 	 *
 	 * @return $this
 	 */
-	public function setOptions($options)
-	{
+	public function setOptions($options): SchemaAbstract
+    {
 		$this->options = $options;
 
 		return $this;
@@ -188,7 +209,7 @@ abstract class SchemaAbstract implements SchemaContract
 	 *
 	 * @return array|bool|null
 	 */
-	public function getOptions($key = '', $default = null)
+	public function getOptions(string $key = '', $default = null)
 	{
 		if($key !== '')
 		{
@@ -211,31 +232,34 @@ abstract class SchemaAbstract implements SchemaContract
 	/**
 	 * @return string
 	 */
-	public function getVersion()
-	{
+	public function getVersion(): string
+    {
 		return $this->version;
 	}
 
-	/**
-	 * @param string $version
-	 */
-	protected function setVersion($version)
-	{
+    /**
+     * @param string $version
+     * @return SchemaAbstract
+     */
+	protected function setVersion(string $version): SchemaAbstract
+    {
 		$this->version = $version;
+
+        return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getPrefix()
-	{
+	public function getPrefix(): string
+    {
 		return $this->prefix;
 	}
 
 	/**
 	 * @param string $prefix
 	 */
-	public function setPrefix($prefix)
+	public function setPrefix(string $prefix)
 	{
 		$this->prefix = $prefix;
 	}
@@ -243,50 +267,73 @@ abstract class SchemaAbstract implements SchemaContract
 	/**
 	 * @return string
 	 */
-	public function getConfigurationPrefix()
-	{
+	public function getConfigurationPrefix(): string
+    {
 		return $this->configuration_prefix;
 	}
 
-	/**
-	 * @param string $configuration_prefix
-	 */
-	public function setConfigurationPrefix($configuration_prefix)
-	{
+    /**
+     * @param string $configuration_prefix
+     *
+     * @return SchemaAbstract
+     */
+	public function setConfigurationPrefix(string $configuration_prefix): SchemaAbstract
+    {
 		$this->configuration_prefix = $configuration_prefix;
+
+        return $this;
 	}
 
 	/**
 	 * @return string Unique schema prefix wc1c_schema_{schema_id}
 	 */
-	public function getSchemaPrefix()
-	{
-		return 'wc1c_schema_' . $this->getId();
+	public function getSchemaPrefix(): string
+    {
+        if(empty($this->schema_prefix))
+        {
+            return 'wc1c_schema_' . $this->getId();
+        }
+
+        return $this->schema_prefix;
 	}
+
+    /**
+     * @param string $schema_prefix
+     *
+     * @return SchemaAbstract
+     */
+    public function setSchemaPrefix(string $schema_prefix): SchemaAbstract
+    {
+        $this->schema_prefix = $schema_prefix;
+
+        return $this;
+    }
 
 	/**
 	 * @return Configuration
 	 */
-	public function configuration()
-	{
+	public function configuration(): Configuration
+    {
 		return $this->configuration;
 	}
 
 	/**
-	 * @param Configuration|null $configuration
+	 * @param Configuration $configuration
 	 */
-	public function setConfiguration($configuration)
+	public function setConfiguration(Configuration $configuration)
 	{
 		$this->configuration = $configuration;
 	}
 
-	/**
-	 * Logger
-	 *
-	 * @return Logger
-	 */
-	public function log($channel = 'configurations')
-	{
+    /**
+     * Logger
+     *
+     * @param string $channel
+     *
+     * @return Logger
+     */
+	public function log(string $channel = 'configurations'): Logger
+    {
 		$name = $this->configuration()->getUploadDirectory('logs') . DIRECTORY_SEPARATOR . $channel;
 
 		if($channel === 'configurations')
