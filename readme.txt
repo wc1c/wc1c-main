@@ -58,6 +58,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: ProductsCML to 0.9.0
 * Up: ProductsCleanerCML to 0.4.0
 * Up: language files
+* Up: Bootstrap to 5.2.3
 * Fix: more
 
 = 0.16.0 =
