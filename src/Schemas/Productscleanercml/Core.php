@@ -40,7 +40,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscleanercml');
-		$this->setVersion('0.3.0');
+		$this->setVersion('0.4.0');
 
 		$this->setName(__('Cleaning of products via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Cleaning of existing products in WooCommerce according to the nomenclature from 1C via the CommerceML protocol.', 'wc1c-main'));
@@ -102,6 +102,56 @@ class Core extends SchemaAbstract
 		return true;
 	}
 
+    /**
+     * Receiver
+     *
+     * @return void
+     */
+    public function receiver()
+    {
+        if($this->configuration()->isEnabled() === false)
+        {
+            $message = __('Configuration is offline.', 'wc1c-main');
+
+            wc1c()->log('receiver')->warning($message);
+            $this->receiver->sendResponseByType('failure', $message);
+        }
+
+        try
+        {
+            $this->configuration()->setDateActivity(time());
+            $this->configuration()->save();
+        }
+        catch(\Throwable $e)
+        {
+            $message = __('Error saving configuration.', 'wc1c-main');
+
+            wc1c()->log('receiver')->error($message, ['exception' => $e]);
+            $this->receiver->sendResponseByType('failure', $message);
+        }
+
+        $action = false;
+        $wc1c_receiver_action = 'wc1c_receiver_' . $this->getId();
+
+        if(has_action($wc1c_receiver_action))
+        {
+            $action = true;
+
+            ob_start();
+            nocache_headers();
+            do_action($wc1c_receiver_action);
+            ob_end_clean();
+        }
+
+        if(false === $action)
+        {
+            $message = __('Receiver request is very bad! Action not found.', 'wc1c-main');
+
+            wc1c()->log('receiver')->warning($message, ['action' => $wc1c_receiver_action]);
+            $this->receiver->sendResponseByType('failure', $message);
+        }
+    }
+
 	/**
 	 * @return string
 	 */
@@ -131,7 +181,7 @@ class Core extends SchemaAbstract
 		{
 			$decoder = new Decoder();
 		}
-		catch(Exception $exception)
+		catch(\Throwable $exception)
 		{
 			$this->log()->error(__('The file cannot be processed. DecoderCML threw an exception.', 'wc1c-main'), ['exception' => $exception]);
 			return false;
@@ -146,7 +196,7 @@ class Core extends SchemaAbstract
 		{
 			$reader = new Reader($file_path, $decoder);
 		}
-		catch(Exception $exception)
+		catch(\Throwable $exception)
 		{
 			$this->log()->error(__('The file cannot be processed. ReaderCML threw an exception.', 'wc1c-main'), ['exception' => $exception]);
 			return false;
@@ -165,7 +215,7 @@ class Core extends SchemaAbstract
 			{
 				do_action('wc1c_schema_productscleanercml_file_processing_read', $reader, $this);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				$this->log()->error(__('Import file processing not completed. ReaderCML threw an exception.', 'wc1c-main'), ['exception' => $e]);
 				break;
@@ -183,7 +233,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingTimer($reader)
+	public function processingTimer(Reader $reader)
 	{
 		if(wc1c()->timer()->getMaximum() !== 0 && !wc1c()->timer()->isRemainingBiggerThan(5))
 		{
@@ -236,7 +286,7 @@ class Core extends SchemaAbstract
 			{
 				do_action('wc1c_schema_productscleanercml_processing_classifier_item', $classifier, $reader, $this);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				$this->log()->warning(__('An exception was thrown while saving the classifier.', 'wc1c-main'), ['exception' => $e]);
 			}
@@ -327,7 +377,7 @@ class Core extends SchemaAbstract
 			{
 				do_action('wc1c_schema_productscleanercml_processing_products_item', $product, $reader, $this);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				$this->log()->warning(__('An exception was thrown while saving the product.', 'wc1c-main'), ['exception' => $e]);
 			}
@@ -345,7 +395,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingProductsItem($external_product, $reader)
+	public function processingProductsItem(ProductDataContract $external_product, Reader $reader)
 	{
 		$this->log()->info(__('Processing a product from a catalog of products.', 'wc1c-main'), ['product_id' => $external_product->getId(), 'product_characteristic_id' => $external_product->getCharacteristicId()]);
 
@@ -384,7 +434,7 @@ class Core extends SchemaAbstract
 		 *
 		 * @return int|false
 		 */
-		if(has_filter('wc1c_schema_productscleanercml_processing_products_search'))
+		if(empty($product_id) && has_filter('wc1c_schema_productscleanercml_processing_products_search'))
 		{
 			$product_id = apply_filters('wc1c_schema_productscleanercml_processing_products_search', $product_id, $external_product, $this, $reader);
 			$this->log()->debug(__('Product search result by external algorithms.', 'wc1c-main'), ['product_ids' => $product_id]);
@@ -393,7 +443,7 @@ class Core extends SchemaAbstract
 		/**
 		 * Ни один продукт не найден
 		 */
-		if(0 === $product_id)
+		if(empty($product_id))
 		{
 			$this->log()->info(__('Product is not found.', 'wc1c-main'));
 			return;

@@ -26,6 +26,11 @@ final class Receiver
 	 */
 	public function initHandler()
 	{
+        if('standard' === $this->core()->getOptions('directory_clean_mode', 'standard'))
+        {
+            add_action('wc1c_schema_productscleanercml_catalog_handler_init', [$this, 'handlerCatalogDirectoryClean'], 10, 0);
+        }
+
 		add_action('wc1c_receiver_' . $this->core()->getId(), [$this, 'handler'], 10, 0);
 		add_action('wc1c_schema_productscleanercml_catalog_handler_checkauth', [$this, 'handlerCheckauth'], 10, 0);
 		add_action('wc1c_schema_productscleanercml_catalog_handler_init', [$this, 'handlerCatalogModeInit'], 10, 0);
@@ -38,15 +43,15 @@ final class Receiver
 	/**
 	 * @return Core
 	 */
-	public function core()
-	{
+	public function core(): Core
+    {
 		return $this->core;
 	}
 
 	/**
 	 * @param Core $core
 	 */
-	public function setCore($core)
+	public function setCore(Core $core)
 	{
 		$this->core = $core;
 	}
@@ -164,7 +169,7 @@ final class Receiver
 	 * @param string $type
 	 * @param string $description
 	 */
-	public function sendResponseByType($type = 'failure', $description = '')
+	public function sendResponseByType(string $type = 'failure', $description = '')
 	{
 		if(has_filter('wc1c_schema_productscleanercml_receiver_send_response_type'))
 		{
@@ -215,8 +220,8 @@ final class Receiver
 	/**
 	 * @return array
 	 */
-	public function getCredentialsByServer()
-	{
+	public function getCredentialsByServer(): array
+    {
 		$credentials = [];
 
 		if(!isset($_SERVER['PHP_AUTH_USER']))
@@ -335,12 +340,17 @@ final class Receiver
 	 *
 	 * @param bool $send_response
 	 *
-	 * @return bool|void
-	 */
-	public function handlerCheckauthKey(bool $send_response = false)
-	{
+	 * @return bool
+     */
+	public function handlerCheckauthKey(bool $send_response = false): bool
+    {
 		if(!isset($_GET['lazysign']))
 		{
+            if('yes' === $this->core()->getOptions('browser_debug', 'no'))
+            {
+                return true;
+            }
+
 			$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c-main');
 			$this->core()->log()->warning($warning);
 
@@ -410,6 +420,32 @@ final class Receiver
 		return true;
 	}
 
+    /**
+     * Cleaning the directory for temporary files.
+     *
+     * @return void
+     */
+    public function handlerCatalogDirectoryClean()
+    {
+        $directory = $this->core()->getUploadDirectory();
+
+        $this->core()->log()->info(__('Cleaning the directory for temporary files.', 'wc1c-main'), ['directory' => $directory]);
+
+        wc1c()->filesystem()->ensureDirectoryExists($directory);
+
+        if(wc1c()->filesystem()->cleanDirectory($directory))
+        {
+            $this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c-main'), ['directory' => $this->core()->getUploadDirectory()]);
+        }
+        else
+        {
+            $error = __('Failed to clear the temp directory of old files.', 'wc1c-main');
+
+            $this->core()->log()->error($error, ['directory' => $directory]);
+            $this->sendResponseByType('failure', $error);
+        }
+    }
+
 	/**
 	 * Init
 	 */
@@ -423,18 +459,6 @@ final class Receiver
 		}
 
 		$this->core()->log()->debug(__('Session for receiving requests.', 'wc1c-main'), ['session'=> $_SESSION]);
-
-		if(wc1c()->filesystem()->cleanDirectory($this->core()->getUploadDirectory()))
-		{
-			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c-main'), ['directory' => $this->core()->getUploadDirectory()]);
-		}
-		else
-		{
-			$error = __('Failed to clear the temp directory of old files.', 'wc1c-main');
-
-			$this->core()->log()->error($error, ['directory' => $this->core()->getUploadDirectory()]);
-			$this->sendResponseByType('failure', $error);
-		}
 
 		$data['zip'] = 'zip=no' . PHP_EOL;
 
@@ -476,8 +500,7 @@ final class Receiver
 	 * Uploading files from 1C to a local directory
 	 *
 	 * @return void
-	 * @throws Exception
-	 */
+     */
 	public function handlerCatalogModeFile()
 	{
 		$upload_directory = $this->core()->getUploadDirectory() . DIRECTORY_SEPARATOR;
@@ -509,7 +532,8 @@ final class Receiver
 		if(empty($filename))
 		{
 			$response_description = __('Filename is empty.', 'wc1c-main');
-			$this->core()->log()->error($response_description);
+
+            $this->core()->log()->error($response_description);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
@@ -584,7 +608,8 @@ final class Receiver
 		if($filename === '')
 		{
 			$response_description = __('1C sent an empty file name for data import.', 'wc1c-main');
-			$this->core()->log()->warning($response_description);
+
+            $this->core()->log()->warning($response_description);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
@@ -593,7 +618,8 @@ final class Receiver
 		if(!wc1c()->filesystem()->exists($file))
 		{
 			$response_description = __('File for import is not exists.', 'wc1c-main');
-			$this->core()->log()->error($response_description);
+
+            $this->core()->log()->error($response_description);
 			$this->sendResponseByType('success', $response_description);
 		}
 
@@ -604,19 +630,22 @@ final class Receiver
 			if($result_file_processing)
 			{
 				$response_description = __('Import of data from file completed successfully.', 'wc1c-main');
-				$this->core()->log()->info($response_description, ['file_name' => $filename, 'file_path' => $file]);
+
+                $this->core()->log()->info($response_description, ['file_name' => $filename, 'file_path' => $file]);
 				$this->sendResponseByType('success', $response_description);
 			}
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			$response_description = __('Importing data from a file ended with an error:', 'wc1c-main') . ' ' . $e->getMessage();
-			$this->core()->log()->error($response_description, ['exception' => $e]);
+
+            $this->core()->log()->error($response_description, ['exception' => $e]);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
 		$response_description = __('Importing data from a file ended with an error.', 'wc1c-main');
-		$this->core()->log()->error($response_description);
+
+        $this->core()->log()->error($response_description);
 		$this->sendResponseByType('failure', $response_description);
 	}
 }
