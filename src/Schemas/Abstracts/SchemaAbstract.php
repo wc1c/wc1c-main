@@ -87,9 +87,9 @@ abstract class SchemaAbstract implements SchemaContract
     /**
      * @param bool $initialized
      *
-     * @return SchemaAbstract
+     * @return SchemaContract
      */
-	public function setInitialized(bool $initialized): SchemaAbstract
+	public function setInitialized(bool $initialized): SchemaContract
     {
 		$this->initialized = $initialized;
 
@@ -101,9 +101,9 @@ abstract class SchemaAbstract implements SchemaContract
 	 *
 	 * @param $id
 	 *
-	 * @return SchemaAbstract
+	 * @return SchemaContract
 	 */
-	protected function setId($id): SchemaAbstract
+	public function setId($id): SchemaContract
     {
 		$this->id = $id;
 
@@ -138,9 +138,9 @@ abstract class SchemaAbstract implements SchemaContract
     /**
      * @param string $name
      *
-     * @return SchemaAbstract
+     * @return SchemaContract
      */
-	protected function setName(string $name): SchemaAbstract
+	public function setName(string $name): SchemaContract
     {
 		$this->name = $name;
 
@@ -158,9 +158,9 @@ abstract class SchemaAbstract implements SchemaContract
     /**
      * @param string $description
      *
-     * @return SchemaAbstract
+     * @return SchemaContract
      */
-	protected function setDescription(string $description): SchemaAbstract
+	public function setDescription(string $description): SchemaContract
     {
 		$this->description = $description;
 
@@ -178,9 +178,9 @@ abstract class SchemaAbstract implements SchemaContract
     /**
      * @param string $author
      *
-     * @return SchemaAbstract
+     * @return SchemaContract
      */
-	protected function setAuthor(string $author): SchemaAbstract
+	public function setAuthor(string $author): SchemaContract
     {
 		$this->author = $author;
 
@@ -190,11 +190,11 @@ abstract class SchemaAbstract implements SchemaContract
 	/**
 	 * Set schema options
 	 *
-	 * @param $options
+	 * @param array $options
 	 *
 	 * @return $this
 	 */
-	public function setOptions($options): SchemaAbstract
+	public function setOptions(array $options): SchemaContract
     {
 		$this->options = $options;
 
@@ -207,7 +207,7 @@ abstract class SchemaAbstract implements SchemaContract
 	 * @param string $key - unique option id
 	 * @param null $default - false for error
 	 *
-	 * @return array|bool|null
+	 * @return mixed
 	 */
 	public function getOptions(string $key = '', $default = null)
 	{
@@ -239,9 +239,10 @@ abstract class SchemaAbstract implements SchemaContract
 
     /**
      * @param string $version
-     * @return SchemaAbstract
+     *
+     * @return SchemaContract
      */
-	protected function setVersion(string $version): SchemaAbstract
+	public function setVersion(string $version): SchemaContract
     {
 		$this->version = $version;
 
@@ -275,9 +276,9 @@ abstract class SchemaAbstract implements SchemaContract
     /**
      * @param string $configuration_prefix
      *
-     * @return SchemaAbstract
+     * @return SchemaContract
      */
-	public function setConfigurationPrefix(string $configuration_prefix): SchemaAbstract
+	public function setConfigurationPrefix(string $configuration_prefix): SchemaContract
     {
 		$this->configuration_prefix = $configuration_prefix;
 
@@ -300,9 +301,9 @@ abstract class SchemaAbstract implements SchemaContract
     /**
      * @param string $schema_prefix
      *
-     * @return SchemaAbstract
+     * @return SchemaContract
      */
-    public function setSchemaPrefix(string $schema_prefix): SchemaAbstract
+    public function setSchemaPrefix(string $schema_prefix): SchemaContract
     {
         $this->schema_prefix = $schema_prefix;
 
