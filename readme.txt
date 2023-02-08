@@ -59,6 +59,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: ProductsCleanerCML to 0.4.0
 * Up: language files
 * Up: Bootstrap to 5.2.3
+* Up: woplucore to latest
 * Fix: more
 
 = 0.16.0 =
