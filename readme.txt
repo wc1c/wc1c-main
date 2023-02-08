@@ -60,6 +60,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: language files
 * Up: Bootstrap to 5.2.3
 * Up: woplucore to latest
+* Up: CML library
 * Fix: more
 
 = 0.16.0 =
