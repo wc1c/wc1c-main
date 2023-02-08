@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 use SimpleXMLElement;
+use Wc1c\Cml\Entities\OrderDocument;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Exceptions\RuntimeException;
 use Wc1c\Cml\Abstracts\DataAbstract;
@@ -99,6 +100,8 @@ class Decoder
 				return $this->decodeProduct($data);
 			case 'warehouses':
 				return $this->decodeWarehouses($data);
+            case 'document\order':
+                return $this->decodeDocumentOrder($data);
 			default:
 				return false;
 		}
@@ -123,6 +126,35 @@ class Decoder
 	{
 		return $this->parseXmlWarehouses($xml);
 	}
+
+    /**
+     * @param SimpleXMLElement $xml
+     *
+     * @return OrderDocument
+     * @throws Exception
+     */
+    public function decodeDocumentOrder(SimpleXMLElement $xml): OrderDocument
+    {
+        try
+        {
+            $data = $this->parseXmlOrder($xml);
+        }
+        catch(\Throwable $e)
+        {
+            throw new Exception('Order parse: ' . $e->getMessage());
+        }
+
+        try
+        {
+            $order = new OrderDocument($data);
+        }
+        catch(\Throwable $e)
+        {
+            throw new Exception('Order instance: ' . $e->getMessage());
+        }
+
+        return $order;
+    }
 
 	/**
 	 * @param SimpleXMLElement $xml
@@ -626,6 +658,266 @@ class Decoder
 		return $property_data;
 	}
 
+    /**
+     * Разбор заказа
+     *
+     * @param $xml_data
+     *
+     * @return array
+     * @throws Exception
+     */
+    private function parseXmlOrder($xml_data): array
+    {
+        if(!isset($xml_data->Ид))
+        {
+            throw new Exception('$xml_data->Ид empty.');
+        }
+
+        /**
+         * Идентификатор
+         */
+        $order_data['id'] = (string)$xml_data->Ид;
+
+        /**
+         * Номер
+         */
+        $order_data['number'] = isset($xml_data->Номер) ? (string)$xml_data->Номер : '';
+
+        /**
+         * Дата
+         */
+        $order_data['date'] = isset($xml_data->Дата) ? (string)$xml_data->Дата : '';
+
+        /**
+         * Дата
+         */
+        $order_data['date_payment'] = isset($xml_data->ДатаПлатежа) ? (string)$xml_data->ДатаПлатежа : '';
+
+        /**
+         * Валюта
+         */
+        $order_data['currency'] = isset($xml_data->Валюта) ? (string)$xml_data->Валюта : '';
+
+        /**
+         * ХозОперация
+         */
+        $order_data['operation'] = isset($xml_data->ХозОперация) ? (string)$xml_data->ХозОперация : '';
+
+        /**
+         * Роль
+         */
+        $order_data['role'] = isset($xml_data->Роль) ? (string)$xml_data->Роль : '';
+
+        /**
+         * Курс
+         */
+        $order_data['course'] = isset($xml_data->Курс) ? (string)$xml_data->Курс : '';
+
+        /**
+         * Сумма
+         */
+        $order_data['total'] = isset($xml_data->Сумма) ? (float)$xml_data->Сумма : '';
+
+        /**
+         * Время
+         */
+        $order_data['time'] = isset($xml_data->Время) ? (string)$xml_data->Время : '';
+
+        /**
+         * Комментарий
+         */
+        $comment = isset($xml_data->Комментарий) ? htmlspecialchars(trim((string)$xml_data->Комментарий)) : '';
+        $order_data['comment'] = str_replace(["\r\n", "\r", "\n"], "<br />", $comment);
+
+        /**
+         * Контрагенты
+         */
+        $order_data['contragents'] = isset($xml_data->Контрагенты) ? $this->parseXmlDocumentContragents($xml_data->Контрагенты) : [];
+
+        /**
+         * Налоги
+         */
+        $order_data['taxes'] = isset($xml_data->Налоги) ? $this->parseXmlDocumentTaxes($xml_data->Налоги) : [];
+
+        /**
+         * Товары
+         */
+        $order_data['products'] = isset($xml_data->Товары) ? $this->parseXmlDocumentProducts($xml_data->Товары) : [];
+
+        /***************************************************************************************************************************************
+         * Дополнительные данные
+         *------------------------------------------------------------------------------------------------------------------------------------*/
+
+        /**
+         * Значения реквизитов заказа
+         */
+        $requisites_values = false;
+        if(isset($xml_data->ЗначениеРеквизита)) // cml 2.05-
+        {
+            $requisites_values = $xml_data->ЗначениеРеквизита;
+        }
+        elseif(isset($xml_data->ЗначенияРеквизитов)) // cml 2.05+
+        {
+            $requisites_values = $xml_data->ЗначенияРеквизитов;
+        }
+        $order_data['requisites'] = $requisites_values ? $this->parseXmlProductRequisites($requisites_values) : [];
+
+        /***************************************************************************************************************************************
+         * Прочие данные
+         *------------------------------------------------------------------------------------------------------------------------------------*/
+
+        /**
+         * Версия
+         */
+        $order_data['version'] = isset($xml_data->НомерВерсии) ? (string)$xml_data->НомерВерсии : '';
+
+        /**
+         * Пометка на удаление
+         */
+        $order_data['delete_mark'] = 'no';
+        if(isset($xml_data->ПометкаУдаления))
+        {
+            $order_data['delete_mark'] = (string)$xml_data->ПометкаУдаления === 'true' ? 'yes' : 'no';
+        }
+        /* УНФ */
+        if(isset($xml_data->Статус))
+        {
+            $order_data['delete_mark'] = (string)$xml_data->Статус === 'Удален' ? 'yes' : 'no';
+        }
+        /* 2.04.1CBitrix */
+        if(isset($xml_data->ПомеченНаУдаление))
+        {
+            $order_data['delete_mark'] = (string)$xml_data->ПомеченНаУдаление === 'true' ? 'yes' : 'no';
+        }
+        if(isset($order_data['requisites']['ПометкаУдаления']))
+        {
+            $order_data['delete_mark'] = $order_data['requisites']['ПометкаУдаления'] === 'true' ? 'yes' : 'no';
+        }
+
+        return $order_data;
+    }
+
+    /**
+     * Разбор продуктов документа
+     *
+     * @param $xml_data
+     *
+     * @return array
+     */
+    private function parseXmlDocumentProducts($xml_data): array
+    {
+        $products = [];
+
+        foreach($xml_data->Товар as $document_product)
+        {
+            if(empty($document_product->Ид))
+            {
+                continue;
+            }
+
+            /**
+             * Идентификаторы
+             */
+            $product = $this->parseXmlProductId($document_product->Ид);
+
+            /**
+             * Наименование товара
+             */
+            $product['name'] = isset($document_product->Наименование) ? (string)$document_product->Наименование : '';
+
+            /**
+             * Артикул
+             */
+            $product['sku'] = isset($document_product->Артикул) ? (string)$document_product->Артикул : '';
+
+            /*
+             * Базовая единица
+             *
+             * Имя базовой единицы измерения товара по ОКЕИ. В документах и коммерческих предложениях может быть указана другая единица измерения,
+             * но при этом обязательно указывается коэффициент пересчета количества в базовую единицу товара.
+             */
+            $product['base_unit'] = isset($document_product->БазоваяЕдиница) ? $this->parseXmlProductBaseUnit($document_product->БазоваяЕдиница) : [];
+
+            /**
+             * Единица
+             */
+            $product['unit'] = isset($document_product->Единица) ? (string)$document_product->Единица : '';
+
+            /**
+             * ЦенаЗаЕдиницу
+             */
+            $product['price_by_unit'] = isset($document_product->ЦенаЗаЕдиницу) ? (float)$document_product->ЦенаЗаЕдиницу : '';
+
+            /**
+             * Количество
+             */
+            $product['quantity'] = isset($document_product->Количество) ? (float)$document_product->Количество : 0;
+
+            /**
+             * Сумма
+             */
+            $product['total'] = isset($document_product->Сумма) ? (float)$document_product->Сумма : '';
+
+            /**
+             * Коэффициент
+             */
+            $product['coefficient'] = isset($document_product->Коэффициент) ? (string)$document_product->Коэффициент : '';
+
+            /**
+             * Реквизиты
+             */
+            $product['requisites'] = isset($document_product->ЗначенияРеквизитов) ? $this->parseXmlProductRequisites($document_product->ЗначенияРеквизитов) : [];
+
+            /**
+             * Налоги
+             */
+            $product['taxes'] = isset($document_product->Налоги) ? $this->parseXmlDocumentTaxes($document_product->Налоги) : '';
+
+            // final
+            $products[] = $product;
+        }
+
+        return $products;
+    }
+
+    /**
+     * Разбор налоговых ставок документа
+     *
+     * @param $xml_data
+     *
+     * @return array
+     */
+    private function parseXmlDocumentTaxes($xml_data): array
+    {
+        $taxes = [];
+
+        foreach($xml_data->Налог as $document_tax)
+        {
+            // Вид налога. Например, НДС
+            $name = trim((string)$document_tax->Наименование);
+
+            // Сумма налога
+            $total = (string)$document_tax->Сумма;
+
+            // Ставка налога
+            $rate = (string)$document_tax->Ставка;
+
+            // Учтено в сумме
+            $in_total = isset($document_tax->УчтеноВСумм) ? (string)$document_tax->УчтеноВСумме : '';
+
+            // final
+            $taxes[$name] =
+            [
+                'name' => $name,
+                'rate' => $rate,
+                'total' => $total,
+                'in_total' => $in_total
+            ];
+        }
+
+        return $taxes;
+    }
+
 	/**
 	 * Разбор одной позиции продукта
 	 *
@@ -874,6 +1166,10 @@ class Decoder
 		{
 			$product_data['delete_mark'] = (string)$xml_product_data->ПомеченНаУдаление === 'true' ? 'yes' : 'no';
 		}
+        if(isset($product_data['requisites']['ПометкаУдаления']))
+        {
+            $product_data['delete_mark'] = $product_data['requisites']['ПометкаУдаления'] === 'true' ? 'yes' : 'no';
+        }
 
 		/**
 		 * Спецификация
@@ -1224,49 +1520,84 @@ class Decoder
 		return $quantity;
 	}
 
+    /**
+     * Разбор реквизитов продукта
+     *
+     * @param $xml_data
+     *
+     * @return array
+     */
+    private function parseXmlProductRequisites($xml_data): array
+    {
+        $requisites_data = [];
+
+        foreach($xml_data->ЗначениеРеквизита as $requisite)
+        {
+            $name = (string)$requisite->Наименование;
+            $value = (string)$requisite->Значение;
+
+            if(empty($value))
+            {
+                continue;
+            }
+
+            if(isset($requisites_data[$name]))
+            {
+                $old_value = $requisites_data[$name]['value'];
+
+                if(!is_array($old_value))
+                {
+                    $requisites_data[$name]['value'] = [];
+                    $requisites_data[$name]['value'][] = $old_value;
+                }
+                $requisites_data[$name]['value'][] = $value;
+
+                continue;
+            }
+
+            $requisites_data[$name] =
+                [
+                    'name' => $name,
+                    'value' => $value
+                ];
+        }
+
+        return $requisites_data;
+    }
+
 	/**
-	 * Разбор реквизитов продукта
+	 * Разбор контрагентов документа
 	 *
 	 * @param $xml_data
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductRequisites($xml_data): array
+	private function parseXmlDocumentContragents($xml_data): array
 	{
-		$requisites_data = [];
+		$data = [];
 
-		foreach($xml_data->ЗначениеРеквизита as $requisite)
+		foreach($xml_data->Контрагент as $contragent)
 		{
-			$name = (string)$requisite->Наименование;
-			$value = (string)$requisite->Значение;
+            $id = (string)$contragent->Ид;
+            if(empty($id))
+            {
+                continue;
+            }
 
-			if(empty($value))
-			{
-				continue;
-			}
+            $name = isset($contragent->Наименование) ? (string)$contragent->Наименование : '';
+            $full_name = isset($contragent->ПолноеНаименование) ? (string)$contragent->ПолноеНаименование : '';
+            $role = isset($contragent->Роль) ? (string)$contragent->Роль : '';
 
-			if(isset($requisites_data[$name]))
-			{
-				$old_value = $requisites_data[$name]['value'];
-
-				if(!is_array($old_value))
-				{
-					$requisites_data[$name]['value'] = [];
-					$requisites_data[$name]['value'][] = $old_value;
-				}
-				$requisites_data[$name]['value'][] = $value;
-
-				continue;
-			}
-
-			$requisites_data[$name] =
+			$data[$name] =
 			[
+                'id' => $id,
 				'name' => $name,
-				'value' => $value
+                'full_name' => $full_name,
+				'role' => $role
 			];
 		}
 
-		return $requisites_data;
+		return $data;
 	}
 
 	/**
