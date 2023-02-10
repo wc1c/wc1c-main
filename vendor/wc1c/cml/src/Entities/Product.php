@@ -29,7 +29,8 @@ class Product extends DataAbstract implements ProductDataContract
 		'taxes' => [],
 		'classifier_groups' => [],
 		'classifier_categories' => [],
-		'base_unit' => []
+		'base_unit' => [],
+        'barcode' => '',
 	];
 
 	/**
@@ -37,7 +38,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 */
 	public function getId()
 	{
-		if(!isset($this->data['id']))
+		if(empty($this->data['id']))
 		{
 			return false;
 		}
@@ -50,13 +51,26 @@ class Product extends DataAbstract implements ProductDataContract
 	 */
 	public function getSku()
 	{
-		if(!isset($this->data['sku']))
+		if(empty($this->data['sku']))
 		{
 			return false;
 		}
 
 		return $this->data['sku'];
 	}
+
+    /**
+     * @return string|false
+     */
+    public function getBarcode()
+    {
+        if(empty($this->data['barcode']))
+        {
+            return false;
+        }
+
+        return $this->data['barcode'];
+    }
 
 	/**
 	 * @param $id

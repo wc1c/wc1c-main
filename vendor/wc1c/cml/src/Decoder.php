@@ -948,7 +948,7 @@ class Decoder
 		/**
 		 * Штрихкод
 		 */
-		$product_data['ean'] = isset($xml_product_data->Штрихкод) ? (string)$xml_product_data->Штрихкод : '';
+		$product_data['barcode'] = isset($xml_product_data->Штрихкод) ? (string)$xml_product_data->Штрихкод : '';
 
 		/*
 		 * Базовая единица

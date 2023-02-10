@@ -413,12 +413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "466ba7472fecd2aab41686a58e3d88778771d01d"
+                "reference": "4e745a1dab2b84d8099e2fb8759f2cd7754334d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/466ba7472fecd2aab41686a58e3d88778771d01d",
-                "reference": "466ba7472fecd2aab41686a58e3d88778771d01d",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/4e745a1dab2b84d8099e2fb8759f2cd7754334d5",
+                "reference": "4e745a1dab2b84d8099e2fb8759f2cd7754334d5",
                 "shasum": ""
             },
             "require": {
@@ -454,7 +454,7 @@
             "support": {
                 "source": "https://github.com/wc1c/cml/tree/main"
             },
-            "time": "2023-02-08T22:57:07+00:00"
+            "time": "2023-02-10T20:00:51+00:00"
         },
         {
             "name": "wc1c/wc",
