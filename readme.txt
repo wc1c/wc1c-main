@@ -54,6 +54,7 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
 = 0.17.0 =
+* PHP tested up to: 8.2
 * WC tested up to: 7.4
 * Up: ProductsCML to 0.9.0
 * Up: ProductsCleanerCML to 0.4.0
@@ -61,6 +62,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: Bootstrap to 5.2.3
 * Up: woplucore to latest
 * Up: CML library
+* Up: Wotices to latest
 * Fix: more
 
 = 0.16.0 =
