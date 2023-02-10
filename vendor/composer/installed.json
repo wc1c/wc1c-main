@@ -141,8 +141,8 @@
         },
         {
             "name": "digiom/wotices",
-            "version": "dev-main",
-            "version_normalized": "dev-main",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/wotices.git",
@@ -158,7 +158,6 @@
                 "php": ">=7.0"
             },
             "time": "2023-02-10T18:25:38+00:00",
-            "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {

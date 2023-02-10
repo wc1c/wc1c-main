@@ -29,7 +29,7 @@
     "wc1c/cml": "dev-main",
     "wc1c/wc": "dev-main",
     "digiom/woplucore": "dev-main",
-    "digiom/wotices": "dev-main",
+    "digiom/wotices": "1.*",
     "digiom/psr7wp": "dev-main",
     "digiom/woap": "dev-main",
     "tecodes/client": "dev-main",

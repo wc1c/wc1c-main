@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1d59cbebfaa975b5d037672bb09cfb4",
+    "content-hash": "485ed5d646b04c8f5d4f0b6275824043",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -137,7 +137,7 @@
         },
         {
             "name": "digiom/wotices",
-            "version": "dev-main",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/wotices.git",
@@ -152,7 +152,6 @@
             "require": {
                 "php": ">=7.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -512,7 +511,6 @@
         "wc1c/cml": 20,
         "wc1c/wc": 20,
         "digiom/woplucore": 20,
-        "digiom/wotices": 20,
         "digiom/psr7wp": 20,
         "digiom/woap": 20,
         "tecodes/client": 20
