@@ -656,7 +656,7 @@ class Filesystem
             {
                 $current_dir .= '/';
             }
-            $res = $current_dir.$relative_path;
+            $res = $current_dir . $relative_path;
         }
 
         if(mb_strpos($res, "\0") !== false)

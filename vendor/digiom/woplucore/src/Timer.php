@@ -67,9 +67,9 @@ class Timer
 	/**
 	 * Set timer started
 	 *
-	 * @param int $started
+	 * @param int|float $started
 	 */
-	public function setStarted(int $started)
+	public function setStarted($started)
 	{
 		$this->started = $started;
 	}
@@ -97,7 +97,7 @@ class Timer
 	/**
 	 * Get available seconds bigger than secs
 	 *
-	 * @param int $seconds
+	 * @param int|float $seconds
 	 *
 	 * @return bool
 	 */
