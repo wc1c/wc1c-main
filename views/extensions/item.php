@@ -9,12 +9,12 @@
     </div>
     <div class="card-body p-2">
         <div class="row g-0">
-            <div class="col-24 col-md-15 col-lg-18">
+            <div class="col-24 col-md-15 col-lg-18 p-0">
                 <p class="card-text mt-2 mb-2">
 		            <?php printf('%s', wp_kses_post($args['object']->getMeta('description', __('none')))); ?>
                 </p>
             </div>
-            <div class="col-24 mt-2 mt-md-0 col-md-9 col-lg-6">
+            <div class="col-24 mt-2 mt-md-0 col-md-9 col-lg-6 p-0">
                 <ul class="list-group m-0">
                     <li class="list-group-item m-0 list-group-item-light">
                         <?php _e('ID:', 'wc1c-main'); ?>

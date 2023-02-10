@@ -1,13 +1,12 @@
-<?php defined('ABSPATH') || exit; ?>
+<?php defined('ABSPATH') || exit;
 
-<?php
-    $text = sprintf
-    (
-        '%s %s<hr>%s',
-        __('Your copy of the free software has not been activated.', 'wc1c-main'),
-        __('We recommend that you activate your copy of the free software for stable updates and better performance.', 'wc1c-main'),
-        __('After activation, this section will disappear and will no longer be shown.', 'wc1c-main')
-    );
+$text = sprintf
+(
+    '%s %s<hr>%s',
+    __('Your copy of the free software has not been activated.', 'wc1c-main'),
+    __('We recommend that you activate your copy of the free software for stable updates and better performance.', 'wc1c-main'),
+    __('After activation, this section will disappear and will no longer be shown.', 'wc1c-main')
+);
 ?>
 
 <div class="alert wc1c-configurations-alert mb-2 mt-2">

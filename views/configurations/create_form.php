@@ -2,7 +2,7 @@
 
 <form method="post" action="">
     <div class="row g-0">
-        <div class="col-24 col-lg-17">
+        <div class="col-24 col-lg-17 p-0">
             <div class="pe-0 pe-lg-2">
                 <?php wp_nonce_field('wc1c-admin-configurations-create-save', '_wc1c-admin-nonce'); ?>
                 <div class="bg-white p-1 mb-2 rounded-3">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-24 col-lg-7">
+        <div class="col-24 col-lg-7 p-0">
             <?php do_action('wc1c_admin_configurations_create_sidebar_before_show'); ?>
 
             <div class="alert alert-secondary border-0 mи-4" style="max-width: 100%;">

@@ -9,7 +9,7 @@ $object = $args['object'];
 
 <form method="post" action="" class="mt-2">
     <div class="row g-0">
-        <div class="col-24 col-lg-17">
+        <div class="col-24 col-lg-17 p-0">
             <div class="pe-0 pe-lg-2">
 	            <?php wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce'); ?>
                 <div class="wc1c-admin-settings wc1c-admin-connection bg-white rounded-3 mb-2 px-2">
@@ -24,7 +24,7 @@ $object = $args['object'];
                 </div>
             </div>
         </div>
-        <div class="col-24 col-lg-7">
+        <div class="col-24 col-lg-7 p-0">
 			<?php do_action('wc1c_admin_settings_activation_sidebar_before_show'); ?>
 
             <div class="alert alert-warning border-0 mb-4" style="max-width: 100%;">
