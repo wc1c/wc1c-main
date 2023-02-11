@@ -53,4 +53,9 @@ interface ClassifierDataContract extends DataContract
 	 * @return array Classifier units
 	 */
 	public function getUnits(): array;
+
+    /**
+     * @return array Classifier warehouses
+     */
+    public function getWarehouses(): array;
 }

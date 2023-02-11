@@ -167,9 +167,13 @@ class Decoder
 		$data['id'] = (string)$xml->Ид;
 		$data['name'] = (string)$xml->Наименование;
 		$data['description'] = $xml->Описание ? (string)$xml->Описание : '';
+
+        /*
+         * Владелец
+         */
 		$data['owner'] = $this->decodeCounterparty($xml->Владелец);
 
-		/**
+		/*
 		 * Группы
 		 * Определяет иерархическую структуру номенклатуры
 		 *
@@ -177,7 +181,7 @@ class Decoder
 		 */
 		$data['groups'] = $xml->Группы ? $this->parseXmlClassifierGroups($xml->Группы) : [];
 
-		/**
+		/*
 		 * Свойства
 		 * Содержит коллекцию свойств, значения которых можно или нужно указать ДЛЯ ВСЕХ товаров в
 		 * каталоге, пакете предложений, документах
@@ -186,7 +190,7 @@ class Decoder
 		 */
 		$data['properties'] = $xml->Свойства ? $this->parseXmlClassifierProperties($xml->Свойства) : [];
 
-		/**
+		/*
 		 * Типы цен
 		 * Определяет типы цен, которые могут быть использованы при формировании пакета коммерческих предложений
 		 *
@@ -194,12 +198,12 @@ class Decoder
 		 */
 		$data['price_types'] = $xml->ТипыЦен ? $this->parseXmlPriceTypes($xml->ТипыЦен) : [];
 
-		/**
+		/*
 		 * Единицы измерения
 		 */
 		$data['units'] = $xml->ЕдиницыИзмерения ? $this->parseXmlUnits($xml->ЕдиницыИзмерения) : [];
 
-		/**
+		/*
 		 * Категории
 		 * Определяет иерархическую структуру номенклатуры
 		 *
@@ -207,16 +211,21 @@ class Decoder
 		 */
 		$data['categories'] = $xml->Категории ? $this->parseXmlClassifierCategories($xml->Категории) : [];
 
-		/**
+		/*
 		 * Склады
 		 */
 		$data['warehouses'] = $xml->Склады ? $this->parseXmlWarehouses($xml->Склады) : [];
+
+        /*
+         * Подписанты
+         */
+        // todo: реализация
 
 		try
 		{
 			$classifier = new Classifier($data);
 		}
-		catch(\Exception $e)
+		catch(\Throwable $e)
 		{
 			return false;
 		}

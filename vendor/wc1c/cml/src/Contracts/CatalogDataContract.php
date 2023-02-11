@@ -28,4 +28,18 @@ interface CatalogDataContract extends DataContract
 	 * @return CounterpartyDataContract Catalog owner
 	 */
 	public function getOwner(): CounterpartyDataContract;
+
+    /**
+     * Каталог содержит только изменения, или нет.
+     *
+     * @return bool
+     */
+    public function isOnlyChanges(): bool;
+
+    /**
+     * Установка маркера наличия только изменений в каталоге товаров
+     *
+     * @param bool $only_changes
+     */
+    public function setOnlyChanges(bool $only_changes);
 }

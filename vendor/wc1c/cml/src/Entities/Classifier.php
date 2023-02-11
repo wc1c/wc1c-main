@@ -208,4 +208,20 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 		}
 		return true;
 	}
+
+    /**
+     * @param array $warehouses
+     */
+    public function setWarehouses(array $warehouses)
+    {
+        $this->data['warehouses'] = $warehouses;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWarehouses(): array
+    {
+        return $this->data['warehouses'];
+    }
 }
