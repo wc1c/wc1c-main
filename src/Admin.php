@@ -179,7 +179,8 @@ final class Admin
 	 */
 	public function initScripts()
 	{
-		wp_enqueue_script('wc1c_admin_tocbot', wc1c()->environment()->get('plugin_directory_url') . 'assets/js/tocbot/tocbot.min.js');
+        wp_enqueue_script('wc1c_admin_bootstrap', wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap.bundle.min.js');
+        wp_enqueue_script('wc1c_admin_tocbot', wc1c()->environment()->get('plugin_directory_url') . 'assets/js/tocbot/tocbot.min.js');
 		wp_enqueue_script('wc1c_admin_main', wc1c()->environment()->get('plugin_directory_url') . 'assets/js/admin.js');
 	}
 
