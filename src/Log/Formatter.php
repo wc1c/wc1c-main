@@ -2,13 +2,11 @@
 
 defined('ABSPATH') || exit;
 
-use Monolog\Formatter\JsonFormatter;
-
 /**
  * Formatter
  *
  * @package Wc1c\Main
  */
-final class Formatter extends JsonFormatter
+final class Formatter extends \Monolog\Formatter\JsonFormatter
 {
 }
