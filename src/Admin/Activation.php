@@ -30,6 +30,6 @@ final class Activation extends ScreenAbstract
 	{
 		$args['object'] = $this;
 
-		wc1c()->views()->getView('activation/promo.php', $args);
+		wc1c()->views()->getView('promo/activation.php', $args);
 	}
 }
