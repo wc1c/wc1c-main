@@ -6,7 +6,7 @@ use Wc1c\Main\Abstracts\ScreenAbstract;
 use Wc1c\Main\Traits\SingletonTrait;
 
 /**
- * Tools
+ * Activation
  *
  * @package Wc1c\Main\Admin\Promo
  */
