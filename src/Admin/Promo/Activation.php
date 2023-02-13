@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Main\Admin;
+<?php namespace Wc1c\Main\Admin\Promo;
 
 defined('ABSPATH') || exit;
 
@@ -8,7 +8,7 @@ use Wc1c\Main\Traits\SingletonTrait;
 /**
  * Tools
  *
- * @package Wc1c\Main\Admin
+ * @package Wc1c\Main\Admin\Promo
  */
 final class Activation extends ScreenAbstract
 {

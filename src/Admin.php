@@ -154,7 +154,7 @@ final class Admin
 			[
 				'title' => __('Activation', 'wc1c-main'),
 				'visible' => true,
-				'callback' => [Admin\Activation::class, 'instance'],
+				'callback' => [Admin\Promo\Activation::class, 'instance'],
 				'class' => 'promo'
 			];
 		}
