@@ -157,6 +157,22 @@ class Decoder
     }
 
 	/**
+	 * @param $id
+	 *
+	 * @return string
+	 */
+	public function normalizeId($id): string
+	{
+		$_guid = explode("#", $id);
+		if(empty($_guid[0]) && !empty($_guid[1]))
+		{
+			$_guid[0] = $_guid[1];
+		}
+
+		return $_guid[0];
+	}
+
+	/**
 	 * @param SimpleXMLElement $xml
 	 *
 	 * @return Classifier|false
@@ -164,7 +180,7 @@ class Decoder
 	 */
 	public function decodeClassifier(SimpleXMLElement $xml)
 	{
-		$data['id'] = (string)$xml->Ид;
+		$data['id'] = $this->normalizeId((string)$xml->Ид);
 		$data['name'] = (string)$xml->Наименование;
 		$data['description'] = $xml->Описание ? (string)$xml->Описание : '';
 
@@ -912,7 +928,7 @@ class Decoder
             $rate = (string)$document_tax->Ставка;
 
             // Учтено в сумме
-            $in_total = isset($document_tax->УчтеноВСумм) ? (string)$document_tax->УчтеноВСумме : '';
+            $in_total = isset($document_tax->УчтеноВСумме) ? (string)$document_tax->УчтеноВСумме : '';
 
             // final
             $taxes[$name] =
@@ -1810,15 +1826,40 @@ class Decoder
 			 */
 			$currency = $price_type->Валюта ? (string)$price_type->Валюта : 'RUB';
 
-			//todo: cml:Налог
+			$tax = [];
+			if($price_type->Налог)
+			{
+				$tax['name'] = $price_type->Налог->Наименование ? (string)$price_type->Налог->Наименование : '';
+				$tax['in_total'] = $price_type->Налог->УчтеноВСумме ? (string)$price_type->Налог->УчтеноВСумме : 'true';
+				$tax['excise'] = $price_type->Налог->Акциз ? (string)$price_type->Налог->Акциз : 'false';
+
+				if($tax['in_total'] === 'true')
+				{
+					$tax['in_total'] = 'yes';
+				}
+				else
+				{
+					$tax['in_total'] = 'no';
+				}
+
+				if($tax['excise'] === 'true')
+				{
+					$tax['excise'] = 'yes';
+				}
+				else
+				{
+					$tax['excise'] = 'no';
+				}
+			}
 
 			$data[$guid] =
 			[
-				'guid' => $guid,
+				'id' => $guid,
 				'name' => $name,
 				'currency' => $currency,
 				'code' => (string)$code,
-				'description' => $description
+				'description' => $description,
+				'tax' => $tax
 			];
 		}
 
