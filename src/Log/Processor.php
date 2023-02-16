@@ -2,13 +2,11 @@
 
 defined('ABSPATH') || exit;
 
-use Monolog\Processor\UidProcessor;
-
 /**
  * Processor
  *
  * @package Wc1c\Main
  */
-final class Processor extends UidProcessor
+final class Processor extends \Monolog\Processor\UidProcessor
 {
 }

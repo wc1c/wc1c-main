@@ -371,4 +371,12 @@ class Reader
 
 		printf("%s%s\n", str_repeat('  ', $reader->depth), $label);
 	}
+
+    /**
+     * @return bool
+     */
+    public function isElement(): bool
+    {
+        return $this->xml_reader->nodeType === XMLReader::ELEMENT;
+    }
 }

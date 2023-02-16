@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit;?>
 
 <div class="row g-0">
-    <div class="col-24">
+    <div class="col-24 p-0">
         <div class="px-2">
             <?php
                 $label = __('Back to configurations list', 'wc1c-main');

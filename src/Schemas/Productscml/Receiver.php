@@ -3,6 +3,9 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Schemas\Abstracts\Cml\ReceiverAbstract;
+use Wc1c\Main\Schemas\Contracts\SchemaContract;
+use Wc1c\Main\Traits\CoreTrait;
 use Wc1c\Main\Traits\SingletonTrait;
 use Wc1c\Main\Traits\UtilityTrait;
 use Wc1c\Wc\Contracts\ImagesStorageContract;
@@ -14,13 +17,14 @@ use Wc1c\Wc\Storage;
  *
  * @package Wc1c\Main\Schemas\Productscml
  */
-final class Receiver
+final class Receiver extends ReceiverAbstract
 {
 	use SingletonTrait;
 	use UtilityTrait;
+	use CoreTrait;
 
 	/**
-	 * @var Core Schema core
+	 * @var SchemaContract Core Schema core
 	 */
 	protected $core;
 
@@ -47,80 +51,21 @@ final class Receiver
 	}
 
 	/**
-	 * @return Core
-	 */
-	public function core(): Core
-	{
-		return $this->core;
-	}
-
-	/**
-	 * @param Core $core
-	 */
-	public function setCore(Core $core)
-	{
-		$this->core = $core;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getModeAndType(): array
-	{
-		$data =
-		[
-			'mode' => '',
-			'type' => ''
-		];
-
-		if(wc1c()->getVar($_GET['get_param'], '') !== '' || wc1c()->getVar($_GET['get_param?type'], '') !== '')
-		{
-			$output = [];
-			if(isset($_GET['get_param']))
-			{
-				$get_param = ltrim(sanitize_text_field($_GET['get_param']), '?');
-				parse_str($get_param, $output);
-			}
-
-			if(array_key_exists('mode', $output))
-			{
-				$data['mode'] = sanitize_key($output['mode']);
-			}
-			elseif(isset($_GET['mode']))
-			{
-				$data['mode'] = sanitize_key($_GET['mode']);
-			}
-
-			if(array_key_exists('type', $output))
-			{
-				$data['type'] = sanitize_key($output['type']);
-			}
-			elseif(isset($_GET['type']))
-			{
-				$data['type'] = sanitize_key($_GET['type']);
-			}
-
-			if($data['type'] === '')
-			{
-				$data['type'] = sanitize_key($_GET['get_param?type']);
-			}
-		}
-
-		return $data;
-	}
-
-	/**
 	 * Handler
 	 */
 	public function handler()
 	{
 		$this->core()->log()->info(__('Received new request for Receiver.', 'wc1c-main'));
 
-		$mode_and_type = $this->getModeAndType();
+		$mode_and_type = $this->detectModeAndType();
 		$mode = $mode_and_type['mode'];
 		$type = $mode_and_type['type'];
 
 		$this->core()->log()->debug(__('Received request params.', 'wc1c-main'), ['type' => $type, 'mode=' => $mode]);
+
+        $this->core()->configuration()->addMetaData('_receiver_mode', $mode, true);
+        $this->core()->configuration()->addMetaData('_receiver_type', $type, true);
+        $this->core()->configuration()->saveMetaData();
 
 		if($type === 'catalog' && $mode !== '')
 		{
@@ -159,7 +104,8 @@ final class Receiver
 
 		do_action('wc1c_schema_productscml_handler_none', $mode, $this);
 
-		$response_description = __('Schema: action not found.', 'wc1c-main');
+		$response_description = __('Action is not found in schema.', 'wc1c-main');
+
 		$this->core()->log()->warning($response_description);
 		$this->sendResponseByType('failure', $response_description);
 	}
@@ -306,14 +252,18 @@ final class Receiver
 		{
 			if($credentials['login'] !== $this->core()->getOptions('user_login', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid username.', 'wc1c-main'));
-				$this->sendResponseByType('failure', __('Not a valid username.', 'wc1c-main'));
+                $message = __('Not a valid username.', 'wc1c-main');
+
+				$this->core()->log()->notice($message);
+				$this->sendResponseByType('failure', $message);
 			}
 
 			if($credentials['password'] !== $this->core()->getOptions('user_password', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid user password.', 'wc1c-main'));
-				$this->sendResponseByType('failure', __('Not a valid user password.', 'wc1c-main'));
+                $message = __('Not a valid user password.', 'wc1c-main');
+
+				$this->core()->log()->notice($message);
+				$this->sendResponseByType('failure', $message);
 			}
 		}
 
@@ -434,7 +384,7 @@ final class Receiver
 		{
 			session_id($session_id);
 
-			$this->core()->log()->info(__('PHP session none, restart PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
+			$this->core()->log()->info(__('PHP session none, restart last PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
 			session_start();
 		}
 
@@ -579,6 +529,7 @@ final class Receiver
 		if(empty($filename))
 		{
 			$response_description = __('Filename is empty.', 'wc1c-main');
+
 			$this->core()->log()->error($response_description);
 			$this->sendResponseByType('failure', $response_description);
 		}
@@ -659,6 +610,7 @@ final class Receiver
 						if(false === $image_current)
 						{
 							$new_image = new Image();
+                            $this->core()->setImageTimes($new_image);
 
 							$new_image->setName(__('No name', 'wc1c-main'));
 							$new_image->setExternalName($image_file_name[0]);
@@ -683,6 +635,9 @@ final class Receiver
 						}
 						else
 						{
+                            $image_current = $this->core()->setImageTimes($image_current);
+                            $image_current->save();
+
 							$response_description .= '. ' . __('The image has not been added to the media library. It was added earlier, id:', 'wc1c-main') . ' ' . $image_current->getId();
 						}
 					}
@@ -712,7 +667,8 @@ final class Receiver
 		if($filename === '')
 		{
 			$response_description = __('1C sent an empty file name for data import.', 'wc1c-main');
-			$this->core()->log()->warning($response_description);
+
+            $this->core()->log()->warning($response_description);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
@@ -721,7 +677,8 @@ final class Receiver
 		if(!wc1c()->filesystem()->exists($file))
 		{
 			$response_description = __('File for import is not exists.', 'wc1c-main');
-			$this->core()->log()->error($response_description);
+
+            $this->core()->log()->error($response_description);
 			$this->sendResponseByType('success', $response_description);
 		}
 
@@ -732,19 +689,22 @@ final class Receiver
 			if($result_file_processing)
 			{
 				$response_description = __('Import of data from file completed successfully.', 'wc1c-main');
-				$this->core()->log()->info($response_description, ['file_name' => $filename, 'file_path' => $file]);
+
+                $this->core()->log()->info($response_description, ['file_name' => $filename, 'file_path' => $file]);
 				$this->sendResponseByType('success', $response_description);
 			}
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			$response_description = __('Importing data from a file ended with an error:', 'wc1c-main') . ' ' . $e->getMessage();
-			$this->core()->log()->error($response_description, ['exception' => $e]);
+
+            $this->core()->log()->error($response_description, ['exception' => $e]);
 			$this->sendResponseByType('failure', $response_description);
 		}
 
 		$response_description = __('Importing data from a file ended with an error.', 'wc1c-main');
-		$this->core()->log()->error($response_description);
+
+        $this->core()->log()->error($response_description);
 		$this->sendResponseByType('failure', $response_description);
 	}
 }

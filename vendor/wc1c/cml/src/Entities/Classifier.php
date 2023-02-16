@@ -14,6 +14,24 @@ use Wc1c\Cml\Contracts\CounterpartyDataContract;
 class Classifier extends DataAbstract implements ClassifierDataContract
 {
 	/**
+	 * @var array
+	 */
+	protected $data =
+	[
+		'id' => '',
+		'name' => '',
+		'description' => '',
+		'owner' => null,
+		'groups' => [],
+		'categories' => [],
+		'units' => [],
+		'properties' => [],
+		'price_types' => [],
+		'warehouses' => [],
+		'only_changes' => false,
+	];
+
+	/**
 	 * @return string
 	 */
 	public function getId(): string
@@ -94,6 +112,14 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	}
 
 	/**
+	 * @param array $groups
+	 */
+	public function assignGroups(array $groups)
+	{
+		$this->data['groups'] = array_merge($this->data['groups'], $groups);
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getCategories(): array
@@ -110,6 +136,14 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	}
 
 	/**
+	 * @param array $categories
+	 */
+	public function assignCategories(array $categories)
+	{
+		$this->data['categories'] = array_merge($this->data['categories'], $categories);
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getUnits(): array
@@ -123,6 +157,14 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	public function setUnits(array $units)
 	{
 		$this->data['units'] = $units;
+	}
+
+	/**
+	 * @param array $units
+	 */
+	public function assignUnits(array $units)
+	{
+		$this->data['units'] = array_merge($this->data['units'], $units);
 	}
 
 	/**
@@ -144,6 +186,16 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	}
 
 	/**
+	 * @param array $properties
+	 *
+	 * @return void
+	 */
+	public function assignProperties(array $properties)
+	{
+		$this->data['properties'] = array_merge($this->data['properties'], $properties);
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getPriceTypes(): array
@@ -159,6 +211,16 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	public function setPriceTypes(array $price_types)
 	{
 		$this->data['price_types'] = $price_types;
+	}
+
+	/**
+	 * @param array $price_types
+	 *
+	 * @return void
+	 */
+	public function assignPriceTypes(array $price_types)
+	{
+		$this->data['price_types'] = array_merge($this->data['price_types'], $price_types);
 	}
 
 	/**
@@ -207,5 +269,69 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasPriceTypes(): bool
+	{
+		if(empty($this->data['price_types']))
+		{
+			return false;
+		}
+		return true;
+	}
+
+    /**
+     * @param array $warehouses
+     */
+    public function setWarehouses(array $warehouses)
+    {
+        $this->data['warehouses'] = $warehouses;
+    }
+
+	/**
+	 * @param array $warehouses
+	 */
+	public function assignWarehouses(array $warehouses)
+	{
+		$this->data['warehouses'] = array_merge($this->data['warehouses'], $warehouses);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasWarehouses(): bool
+	{
+		if(empty($this->data['warehouses']))
+		{
+			return false;
+		}
+		return true;
+	}
+
+    /**
+     * @return array
+     */
+    public function getWarehouses(): array
+    {
+        return $this->data['warehouses'];
+    }
+
+	/**
+	 * @return bool
+	 */
+	public function isOnlyChanges(): bool
+	{
+		return $this->data['only_changes'];
+	}
+
+	/**
+	 * @param bool $only_changes
+	 */
+	public function setOnlyChanges(bool $only_changes)
+	{
+		$this->data['only_changes'] = $only_changes;
 	}
 }

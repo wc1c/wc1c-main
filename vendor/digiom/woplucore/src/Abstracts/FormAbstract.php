@@ -336,8 +336,8 @@ abstract class FormAbstract
 	 */
 	public function sanitizeTooltip(string $var): string
 	{
-		return htmlspecialchars(wp_kses(html_entity_decode($var), array
-		(
+		return htmlspecialchars(wp_kses(html_entity_decode($var),
+		[
 			'br' => [],
 			'em' => [],
 			'strong' => [],
@@ -347,7 +347,7 @@ abstract class FormAbstract
 			'li' => [],
 			'ol' => [],
 			'p' => [],
-		)));
+		]));
 	}
 
 	/**
@@ -442,6 +442,53 @@ abstract class FormAbstract
                 </fieldset>
             </td>
         </tr>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Generate Datetime Input HTML
+	 *
+	 * @param string $key - field key
+	 * @param array $data - field data
+	 *
+	 * @return string
+	 */
+	public function generateDatetimeHtml(string $key, array $data): string
+	{
+		$field_key = $this->getPrefixFieldKey($key);
+
+		$defaults =
+		[
+			'title' => '',
+			'disabled' => false,
+			'class' => '',
+			'css' => '',
+			'placeholder' => '',
+			'type' => 'datetime',
+			'desc_tip' => false,
+			'description' => '',
+			'custom_attributes' => [],
+		];
+
+		$data = wp_parse_args($data, $defaults);
+		$data['type'] = 'datetime-local';
+
+		ob_start();
+		?>
+		<tr valign="top">
+			<th scope="row" class="titledesc">
+				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->getTooltipHtml($data ); ?></label>
+			</th>
+			<td class="forminp">
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
+					<input class="input-text regular-input <?php echo esc_attr( $data['class'] ); ?>" type="<?php echo esc_attr( $data['type'] ); ?>" name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $field_key ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>" value="<?php echo esc_attr( $this->getFieldData($key ) ); ?>" placeholder="<?php echo esc_attr($data['placeholder'] ); ?>" <?php disabled($data['disabled'], true ); ?> <?php echo $this->getCustomAttributeHtml($data ); ?> />
+					<?php echo $this->getDescriptionHtml($data ); ?>
+				</fieldset>
+			</td>
+		</tr>
 		<?php
 
 		return ob_get_clean();
@@ -845,6 +892,22 @@ abstract class FormAbstract
 	}
 
 	/**
+	 * Validate datetime field
+	 * Make sure the data is escaped correctly, etc
+	 *
+	 * @param string $key - field key
+	 * @param string $value - posted Value
+	 *
+	 * @return string
+	 */
+	public function validateDatetimeField(string $key, $value): string
+	{
+		$value = is_null($value) ? '' : $value;
+
+		return wp_kses_post(trim(stripslashes($value)));
+	}
+
+	/**
 	 * Validate textarea field
 	 *
 	 * @param string $key - field key
@@ -921,6 +984,18 @@ abstract class FormAbstract
 		}
 
 		return is_scalar($var) ? sanitize_text_field($var) : $var;
+	}
+
+	/**
+	 * Run clean over posted textarea but maintain line breaks
+	 *
+	 * @param string $var
+	 *
+	 * @return string
+	 */
+	public function sanitizeDatetime(string $var): string
+	{
+		return implode("\n", array_map([$this, 'clean'], explode("\n", $var)));
 	}
 
 	/**

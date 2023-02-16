@@ -23,8 +23,8 @@ class Filesystem
 	 *
 	 * @return bool
 	 */
-	public function exists($path)
-	{
+	public function exists(string $path): bool
+    {
 		return file_exists($path);
 	}
 
@@ -188,8 +188,8 @@ class Filesystem
 	 *
 	 * @return bool
 	 */
-	public function move(string $path, string $target)
-	{
+	public function move(string $path, string $target): bool
+    {
 		return rename($path, $target);
 	}
 
@@ -217,7 +217,7 @@ class Filesystem
 
 				$success = false;
 			}
-			catch(ErrorException $e)
+			catch(\Throwable $e)
 			{
 				$success = false;
 			}
@@ -333,7 +333,7 @@ class Filesystem
 	 *
 	 * @return string|false
 	 */
-	public function mimeType($path)
+	public function mimeType(string $path)
 	{
 		return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
 	}
@@ -627,4 +627,50 @@ class Filesystem
 	{
 		return defined('PHP_WINDOWS_VERSION_MAJOR');
 	}
+
+    /**
+     * @param string $current_dir
+     * @param string $relative_path
+     *
+     * @return false|string
+     * @throws RuntimeException
+     */
+    public function rel2abs(string $current_dir, string $relative_path)
+    {
+        if($relative_path === '')
+        {
+            return false;
+        }
+
+        if(0 === mb_strpos($relative_path, '/') || preg_match("#^[a-z]:/#i", $relative_path))
+        {
+            $res = $relative_path;
+        }
+        else
+        {
+            if(0 !== mb_strpos($current_dir, '/') && !preg_match("#^[a-z]:/#i", $current_dir))
+            {
+                $current_dir = '/' . $current_dir;
+            }
+            if(mb_substr($current_dir, -1) !== "/")
+            {
+                $current_dir .= '/';
+            }
+            $res = $current_dir . $relative_path;
+        }
+
+        if(mb_strpos($res, "\0") !== false)
+        {
+            throw new \RuntimeException($res);
+        }
+
+        $res = wp_normalize_path($res);
+
+        if(0 !== mb_strpos($res, '/') && !preg_match("#^[a-z]:/#i", $res))
+        {
+            $res = '/' . $res;
+        }
+
+        return rtrim($res, ".\\+ ");
+    }
 }

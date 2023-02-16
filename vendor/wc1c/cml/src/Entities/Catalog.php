@@ -14,6 +14,19 @@ use Wc1c\Cml\Contracts\CounterpartyDataContract;
 class Catalog extends DataAbstract implements CatalogDataContract
 {
 	/**
+	 * @var array
+	 */
+	protected $data =
+	[
+		'only_changes' => false,
+		'id' => '',
+		'classifier_id' => '',
+		'name' => '',
+		'description' => '',
+		'owner' => null,
+	];
+
+	/**
 	 * @return string
 	 */
 	public function getId(): string
@@ -91,22 +104,6 @@ class Catalog extends DataAbstract implements CatalogDataContract
 	public function setOwner(CounterpartyDataContract $owner)
 	{
 		$this->data['owner'] = $owner;
-	}
-
-	/**
-	 * @param array $warehouses
-	 */
-	public function setWarehouses(array $warehouses)
-	{
-		$this->data['warehouses'] = $warehouses;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getWarehouses(): array
-	{
-		return $this->data['warehouses'];
 	}
 
 	/**

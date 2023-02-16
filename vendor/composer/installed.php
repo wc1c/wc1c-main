@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c-main',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '1e52a1591e5072ab020498f9ea05bfcc11c5c92f',
+        'reference' => '0366501507ddb97864ef88c7823f5a2b1b1a3d57',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -35,7 +35,7 @@
         'digiom/woplucore' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '26833e4071c1bfcf14ab5451714d0e714074cb9a',
+            'reference' => '149d9f1dc789fd8144cf49e1534fb50c7b647094',
             'type' => 'library',
             'install_path' => __DIR__ . '/../digiom/woplucore',
             'aliases' => array(
@@ -44,14 +44,12 @@
             'dev_requirement' => false,
         ),
         'digiom/wotices' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '6513f6804a04dbf3904945499995aa2cb467c835',
+            'pretty_version' => '1.1.0',
+            'version' => '1.1.0.0',
+            'reference' => '1bc3a6909245727e639bf5b0fad6ed71a61cf89a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../digiom/wotices',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(
@@ -101,7 +99,7 @@
         'wc1c/cml' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '05c7c425583ae202e795cdf0578f3b6c0f6c98e8',
+            'reference' => 'b796a8f25027ff409e70149ffe16f819a47fbb2f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wc1c/cml',
             'aliases' => array(
@@ -123,7 +121,7 @@
         'wc1c/wc1c-main' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '1e52a1591e5072ab020498f9ea05bfcc11c5c92f',
+            'reference' => '0366501507ddb97864ef88c7823f5a2b1b1a3d57',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

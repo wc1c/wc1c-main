@@ -14,6 +14,21 @@ use Wc1c\Cml\Contracts\OffersPackageDataContract;
 class OffersPackage extends DataAbstract implements OffersPackageDataContract
 {
 	/**
+	 * @var array
+	 */
+	protected $data =
+	[
+		'id' => '',
+		'classifier_id' => '',
+		'catalog_id' => '',
+		'name' => '',
+		'owner' => null,
+		'price_types' => [],
+		'warehouses' => [],
+		'only_changes' => false,
+	];
+
+	/**
 	 * @return string
 	 */
 	public function getId(): string
@@ -157,5 +172,47 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	public function getWarehouses(): array
 	{
 		return $this->data['warehouses'];
+	}
+
+	/**
+	 * @param array $price_types
+	 *
+	 * @return void
+	 */
+	public function assignPriceTypes(array $price_types)
+	{
+		$this->data['price_types'] = array_merge($this->data['price_types'], $price_types);
+	}
+
+	/**
+	 * @param array $warehouses
+	 */
+	public function assignWarehouses(array $warehouses)
+	{
+		$this->data['warehouses'] = array_merge($this->data['warehouses'], $warehouses);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasPriceTypes(): bool
+	{
+		if(empty($this->data['price_types']))
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasWarehouses(): bool
+	{
+		if(empty($this->data['warehouses']))
+		{
+			return false;
+		}
+		return true;
 	}
 }

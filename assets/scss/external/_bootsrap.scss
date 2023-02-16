@@ -1,11 +1,11 @@
 /*
 *** Init
  */
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/functions";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/variables";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/maps";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/mixins";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/utilities";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/functions";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/variables";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/maps";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/mixins";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/utilities";
 
 @import "../variables";
 @import "../mixins";
@@ -13,22 +13,22 @@
 /*
 *** bootstrap
  */
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/root";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/buttons";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/transitions";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/badge";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/button-group";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/list-group";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/grid";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/card";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/tables";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/progress";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/forms";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/nav";
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/alert";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/root";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/buttons";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/transitions";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/badge";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/button-group";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/list-group";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/grid";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/card";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/tables";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/progress";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/forms";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/nav";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/alert";
 
 // Helpers
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/helpers";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/helpers";
 
 // Utilities
-@import "G:/Sources/bootstrap/bootstrap-5.2.2/scss/utilities/api";
+@import "G:/Sources/bootstrap/bootstrap-5.2.3/scss/utilities/api";

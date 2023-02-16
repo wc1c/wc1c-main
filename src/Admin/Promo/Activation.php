@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Main\Admin;
+<?php namespace Wc1c\Main\Admin\Promo;
 
 defined('ABSPATH') || exit;
 
@@ -6,9 +6,9 @@ use Wc1c\Main\Abstracts\ScreenAbstract;
 use Wc1c\Main\Traits\SingletonTrait;
 
 /**
- * Tools
+ * Activation
  *
- * @package Wc1c\Main\Admin
+ * @package Wc1c\Main\Admin\Promo
  */
 final class Activation extends ScreenAbstract
 {
@@ -30,6 +30,6 @@ final class Activation extends ScreenAbstract
 	{
 		$args['object'] = $this;
 
-		wc1c()->views()->getView('activation/promo.php', $args);
+		wc1c()->views()->getView('promo/activation.php', $args);
 	}
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1d59cbebfaa975b5d037672bb09cfb4",
+    "content-hash": "485ed5d646b04c8f5d4f0b6275824043",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -97,15 +97,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/woplucore.git",
-                "reference": "26833e4071c1bfcf14ab5451714d0e714074cb9a"
+                "reference": "149d9f1dc789fd8144cf49e1534fb50c7b647094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/woplucore/zipball/26833e4071c1bfcf14ab5451714d0e714074cb9a",
-                "reference": "26833e4071c1bfcf14ab5451714d0e714074cb9a",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/149d9f1dc789fd8144cf49e1534fb50c7b647094",
+                "reference": "149d9f1dc789fd8144cf49e1534fb50c7b647094",
                 "shasum": ""
             },
             "require": {
+                "ext-fileinfo": "*",
+                "ext-mbstring": "*",
                 "php": ">=7.0"
             },
             "default-branch": true,
@@ -131,26 +133,25 @@
             "support": {
                 "source": "https://github.com/digiom/woplucore/tree/main"
             },
-            "time": "2023-01-19T12:56:15+00:00"
+            "time": "2023-02-10T18:08:08+00:00"
         },
         {
             "name": "digiom/wotices",
-            "version": "dev-main",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/wotices.git",
-                "reference": "6513f6804a04dbf3904945499995aa2cb467c835"
+                "reference": "1bc3a6909245727e639bf5b0fad6ed71a61cf89a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/wotices/zipball/6513f6804a04dbf3904945499995aa2cb467c835",
-                "reference": "6513f6804a04dbf3904945499995aa2cb467c835",
+                "url": "https://api.github.com/repos/digiom/wotices/zipball/1bc3a6909245727e639bf5b0fad6ed71a61cf89a",
+                "reference": "1bc3a6909245727e639bf5b0fad6ed71a61cf89a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -171,9 +172,9 @@
             "description": "Notices for WordPress",
             "homepage": "https://digiom.ru",
             "support": {
-                "source": "https://github.com/digiom/wotices/tree/1.0.0"
+                "source": "https://github.com/digiom/wotices/tree/1.1.0"
             },
-            "time": "2022-07-19T17:39:19+00:00"
+            "time": "2023-02-10T18:25:38+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -412,12 +413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "05c7c425583ae202e795cdf0578f3b6c0f6c98e8"
+                "reference": "b796a8f25027ff409e70149ffe16f819a47fbb2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/05c7c425583ae202e795cdf0578f3b6c0f6c98e8",
-                "reference": "05c7c425583ae202e795cdf0578f3b6c0f6c98e8",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/b796a8f25027ff409e70149ffe16f819a47fbb2f",
+                "reference": "b796a8f25027ff409e70149ffe16f819a47fbb2f",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +454,7 @@
             "support": {
                 "source": "https://github.com/wc1c/cml/tree/main"
             },
-            "time": "2023-01-19T18:10:35+00:00"
+            "time": "2023-02-16T17:48:07+00:00"
         },
         {
             "name": "wc1c/wc",
@@ -510,7 +511,6 @@
         "wc1c/cml": 20,
         "wc1c/wc": 20,
         "digiom/woplucore": 20,
-        "digiom/wotices": 20,
         "digiom/psr7wp": 20,
         "digiom/woap": 20,
         "tecodes/client": 20

@@ -323,6 +323,11 @@ class Configuration extends ConfigurationsData
 			$upload_directory .= '/logs';
 		}
 
+        if($context === 'files')
+        {
+            $upload_directory .= '/files';
+        }
+
 		return $upload_directory;
 	}
 }
