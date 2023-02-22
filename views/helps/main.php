@@ -14,9 +14,9 @@ printf
 </a>
 
 <?php
-    if(has_action('wc1c_admin_help_main_show'))
-    {
-        echo '<hr>';
-        do_action('wc1c_admin_help_main_show');
-    }
+if(has_action('wc1c_admin_help_main_show'))
+{
+    echo '<hr>';
+    do_action('wc1c_admin_help_main_show');
+}
 ?>
