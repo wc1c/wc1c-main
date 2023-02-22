@@ -43,7 +43,8 @@ class AllTable extends TableAbstract
 		{
 			$this->storage_configurations = Storage::load('configuration');
 		}
-		catch(Exception $e){}
+		catch(\Throwable $e)
+        {}
 
 		parent::__construct($params);
 	}
@@ -298,8 +299,7 @@ class AllTable extends TableAbstract
 	 * Creates the different status filter links at the top of the table.
 	 *
 	 * @return array
-	 * @throws Exception
-	 */
+     */
 	protected function getViews(): array
 	{
 		$status_links = [];
