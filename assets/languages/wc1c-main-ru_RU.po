@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
 "POT-Creation-Date: 2023-02-16 23:02+0300\n"
-"PO-Revision-Date: 2023-02-16 23:05+0300\n"
+"PO-Revision-Date: 2023-02-27 15:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -2315,7 +2315,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:584
 msgid "Filling the parent categories of the created product"
-msgstr "Заполнение родительских категорий создаваемого продукта"
+msgstr "Заполнение родительских категорий создаваемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:590
 msgid ""
@@ -2685,7 +2685,7 @@ msgstr "Источники и алгоритмы заполнения артик
 
 #: src/Schemas/Productscml/Admin.php:877
 msgid "Filling the SKU of the created product"
-msgstr "Заполнение артикула создаваемого продукта"
+msgstr "Заполнение артикула создаваемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:883
 msgid ""
@@ -2938,7 +2938,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:1046
 msgid "Filling the description of the created product"
-msgstr "Заполнение описания создаваемого продукта"
+msgstr "Заполнение описания создаваемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:1052
 msgid ""
@@ -3076,7 +3076,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:1131
 msgid "Filling a full description of the created product"
-msgstr "Заполнение полного описания создаваемого продукта"
+msgstr "Заполнение полного описания создаваемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:1137
 msgid ""
@@ -3366,7 +3366,7 @@ msgstr "Регулирование прочих алгоритмов работ�
 
 #: src/Schemas/Productscml/Admin.php:1439
 msgid "Status of the created product"
-msgstr "Статус создаваемого продукта"
+msgstr "Статус создаваемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:1444
 msgid ""
@@ -3543,7 +3543,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:1625
 msgid "The stock status of product created"
-msgstr "Статус запаса создаваемого продукта"
+msgstr "Статус запаса создаваемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:1630
 msgid ""
@@ -3563,7 +3563,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:1646
 msgid "Product stock status update when requesting product updates"
-msgstr "Обновление статуса запасов продукта при запросе обновлений продуктов"
+msgstr "Обновление статуса запасов обновляемых продуктов"
 
 #: src/Schemas/Productscml/Admin.php:1648
 msgid ""
@@ -3910,7 +3910,7 @@ msgstr "Присвоение атрибутов продукту на основ
 
 #: src/Schemas/Productscml/Core.php:2327
 msgid "Zeroing the characteristics of a variable product."
-msgstr "Обнуление характеристик переменного продукта."
+msgstr "Обнуление характеристик вариативного продукта."
 
 #: src/Schemas/Productscml/Core.php:2341 src/Schemas/Productscml/Core.php:2557
 msgid "Processing of product properties."
@@ -4036,7 +4036,7 @@ msgstr "Установка запасов по количеству предло
 
 #: src/Schemas/Productscml/Core.php:3063
 msgid "Products create is disabled. Product create skipped."
-msgstr "Функция создания продуктов отключена. Создание продукта пропущено."
+msgstr "Создание новых продуктов отключено. Создание продукта пропущено."
 
 #: src/Schemas/Productscml/Core.php:3073
 msgid "The use of products delete mark is disabled. Processing skipped."
@@ -5062,7 +5062,7 @@ msgid ""
 "1C products and the WooCommerce plugin."
 msgstr ""
 "Реализация механизма гибкого обмена различными данными между продуктами 1С и "
-"данными плагина WooCommerce."
+"плагином WooCommerce."
 
 #. Author of the plugin/theme
 msgid "WC1C team"
