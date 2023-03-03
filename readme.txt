@@ -56,6 +56,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 = 0.18.0 =
 * Up: ProductsCML to 0.10.0
 * Up: language files
+* Up: CML library
 * Fix: more
 
 = 0.17.0 =
