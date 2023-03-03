@@ -57,6 +57,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: ProductsCML to 0.10.0
 * Up: language files
 * Up: CML library
+* Up: Woplucore to latest
 * Fix: more
 
 = 0.17.0 =
