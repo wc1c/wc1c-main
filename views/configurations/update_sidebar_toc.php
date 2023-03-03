@@ -2,7 +2,7 @@
 
 <?php do_action('wc1c_admin_configurations_update_before_sidebar_toc_show'); ?>
 
-<div class="card border-0 wc1c-sidebar-toc mb-2 p-0" style="max-width: 100%;">
+<div class="card border-0 wc1c-sidebar-toc mb-2 p-0 w-100">
     <?php if(isset($args['header'])): ?>
     <div class="card-header p-2">
         <?php printf('%s', wp_kses_post($args['header'])); ?>
