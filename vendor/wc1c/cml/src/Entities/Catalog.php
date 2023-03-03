@@ -24,6 +24,7 @@ class Catalog extends DataAbstract implements CatalogDataContract
 		'name' => '',
 		'description' => '',
 		'owner' => null,
+		'warehouses' => [],
 	];
 
 	/**
@@ -120,5 +121,41 @@ class Catalog extends DataAbstract implements CatalogDataContract
 	public function setOnlyChanges(bool $only_changes)
 	{
 		$this->data['only_changes'] = $only_changes;
+	}
+
+	/**
+	 * @param array $warehouses
+	 */
+	public function assignWarehouses(array $warehouses)
+	{
+		$this->data['warehouses'] = array_merge($this->data['warehouses'], $warehouses);
+	}
+
+	/**
+	 * @param array $warehouses
+	 */
+	public function setWarehouses(array $warehouses)
+	{
+		$this->data['warehouses'] = $warehouses;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getWarehouses(): array
+	{
+		return $this->data['warehouses'];
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasWarehouses(): bool
+	{
+		if(empty($this->data['warehouses']))
+		{
+			return false;
+		}
+		return true;
 	}
 }

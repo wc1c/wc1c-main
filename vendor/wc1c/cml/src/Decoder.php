@@ -1006,7 +1006,7 @@ class Decoder
 		/**
 		 * Описание товара
 		 */
-		$description =isset($xml_product_data->Описание) ? htmlspecialchars(trim((string)$xml_product_data->Описание)) : '';
+		$description = isset($xml_product_data->Описание) ? htmlspecialchars(trim((string)$xml_product_data->Описание)) : '';
 		$product_data['description'] = str_replace(["\r\n", "\r", "\n"], "<br />", $description);
 
 		/**
