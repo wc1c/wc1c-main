@@ -514,6 +514,7 @@ class Decoder
 			try
 			{
 				$property_data = $this->parseXmlClassifierPropertiesItem($property_xml_data);
+
 				$properties[$property_data['id']] = $property_data;
 			}
 			catch(\Throwable $e)
@@ -590,22 +591,35 @@ class Decoder
 		 * Если варианты указаны, то при указании значений данного свойства для товаров должны использоваться значения СТРОГО из данного списка
 		 */
 		$property_values_data = [];
-		$property_data['values_variants'] = $property_values_data;
 		if($property_data['values_type'] === 'Справочник')
 		{
 			if(isset($xml_property->ВариантыЗначений->Справочник))
 			{
 				foreach($xml_property->ВариантыЗначений->Справочник as $value)
 				{
-					$property_values_data[(string)$value->ИдЗначения] = htmlspecialchars(trim((string)$value->Значение));
+					$values_variants_value_data = htmlspecialchars(trim((string)$value->Значение));
+
+					if(empty($values_variants_value_data))
+					{
+						continue;
+					}
+
+					$property_values_data[(string)$value->ИдЗначения] = $values_variants_value_data;
 				}
 			}
 			// 2.04.1CBitrix
-			if(isset($xml_property->ТипыЗначений->ТипЗначений))
+			if($xml_property->ТипыЗначений->ТипЗначений)
 			{
-				foreach($xml_property->ТипыЗначений->ТипЗначений->ВариантыЗначений as $value)
+				foreach($xml_property->ТипыЗначений->ТипЗначений->ВариантыЗначений->ВариантЗначения as $values_variants_value)
 				{
-					$property_values_data[(string)$value->Ид] = htmlspecialchars(trim((string)$value->Значение));
+					$values_variants_value_data = htmlspecialchars(trim((string)$values_variants_value->Значение));
+
+					if(empty($values_variants_value_data))
+					{
+						continue;
+					}
+
+					$property_values_data[(string)$values_variants_value->Ид] = $values_variants_value_data;
 				}
 			}
 
@@ -1484,6 +1498,12 @@ class Decoder
 			 * Значение свойства может быть значением, либо ссылкой на значение справочника классификатора.
 			 */
 			$property_values_data['value'] = $xml_property_values_data->Значение ? (string)$xml_property_values_data->Значение : '';
+
+			// 2.04.1CBitrix
+			if(empty($property_values_data['value'] ))
+			{
+				$property_values_data['value'] = $xml_property_values_data->ИдЗначения ? (string)$xml_property_values_data->ИдЗначения : '';
+			}
 
 			/**
 			 * Add to all

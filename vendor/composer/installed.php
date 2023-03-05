@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c-main',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '8fa91432751f27dc683d947253df33cb7ead9d73',
+        'reference' => '43f366b63c22ffced293ecb7ce8da4b11c5e4906',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -99,7 +99,7 @@
         'wc1c/cml' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '30d3594ad76049f70ac8d9ebfe381fba31a2c889',
+            'reference' => '19ab5ca9eeaa51d553e06b50a88848aed1eb2603',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wc1c/cml',
             'aliases' => array(
@@ -121,7 +121,7 @@
         'wc1c/wc1c-main' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '8fa91432751f27dc683d947253df33cb7ead9d73',
+            'reference' => '43f366b63c22ffced293ecb7ce8da4b11c5e4906',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
