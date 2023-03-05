@@ -52,22 +52,12 @@ class Core extends SchemaAbstract
 	public $receiver;
 
 	/**
-	 * @var string[]
-	 */
-	public $offers_types =
-	[
-		'offers',
-		'rests',
-		'prices',
-	];
-
-	/**
 	 * Core constructor.
 	 */
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.9.0');
+		$this->setVersion('0.10.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -170,22 +160,6 @@ class Core extends SchemaAbstract
 	public function getUploadDirectory(): string
 	{
 		return $this->upload_directory;
-	}
-
-	/**
-	 * @return array string[]
-	 */
-	public function getOffersTypes(): array
-	{
-		return $this->offers_types;
-	}
-
-	/**
-	 * @param string[] $offers_types
-	 */
-	public function setOffersTypes(array $offers_types)
-	{
-		$this->offers_types = $offers_types;
 	}
 
 	/**
@@ -402,11 +376,6 @@ class Core extends SchemaAbstract
 	 */
 	public function processingClassifierGroups(ClassifierDataContract $classifier, Reader $reader)
 	{
-		if($reader->getFiletype() !== 'import')
-		{
-			return;
-		}
-
 		if(!$classifier->hasGroups())
 		{
 			$this->log()->info(__('Classifier groups is empty.', 'wc1c-main'));
@@ -720,11 +689,6 @@ class Core extends SchemaAbstract
 	 */
 	public function processingClassifierProperties(ClassifierDataContract $classifier, Reader $reader)
 	{
-		if($reader->getFiletype() !== 'import' && $reader->getFiletype() !== 'offers')
-		{
-			return;
-		}
-
 		if(!$classifier->hasProperties())
 		{
 			$this->log()->info(__('Classifier properties is empty.', 'wc1c-main'), ['filetype' => $reader->getFiletype()]);
@@ -958,27 +922,34 @@ class Core extends SchemaAbstract
 	 */
 	public function processingCatalog(Reader $reader)
 	{
-		if($reader->getFiletype() !== 'import')
+		if(false === $reader->isElement())
 		{
 			return;
 		}
 
-		if(is_null($reader->catalog))
+		if($reader->nodeName === 'Каталог')
 		{
-			$reader->catalog = new Catalog();
-		}
+			if(is_null($reader->catalog))
+			{
+				$reader->catalog = new Catalog();
+			}
 
-		if($reader->nodeName === 'Каталог' && $reader->isElement())
-		{
 			$only_changes = $reader->xml_reader->getAttribute('СодержитТолькоИзменения') ?: true;
 			if($only_changes === 'false')
 			{
 				$only_changes = false;
 			}
 			$reader->catalog->setOnlyChanges($only_changes);
+
+            if(false === $only_changes)
+            {
+                $this->log()->notice(__('The time of the last full exchange has been set.', 'wc1c-main'));
+                $this->configuration()->addMetaData('_catalog_full_time', current_time('timestamp'), true);
+                $this->configuration()->saveMetaData();
+            }
 		}
 
-		if($reader->parentNodeName === 'Каталог' && $reader->isElement())
+		if($reader->parentNodeName === 'Каталог')
 		{
 			switch($reader->nodeName)
 			{
@@ -1009,7 +980,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Пропуск создания и обновления продуктов
 		 */
-		if($reader->nodeName === 'Товары' && $reader->isElement()
+		if($reader->nodeName === 'Товары'
             && 'yes' !== $this->getOptions('products_update', 'no')
             && 'yes' !== $this->getOptions('products_create', 'no')
 		)
@@ -1018,7 +989,7 @@ class Core extends SchemaAbstract
 			$reader->next();
 		}
 
-		if($reader->parentNodeName === 'Товары' && $reader->nodeName === 'Товар' && $reader->isElement())
+		if($reader->parentNodeName === 'Товары' && $reader->nodeName === 'Товар')
 		{
 			$product_xml = new SimpleXMLElement($reader->xml_reader->readOuterXml());
 
@@ -1697,12 +1668,17 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemCategories(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_category', 'yes'))
+		if('create' === $mode && 'no' === $this->getOptions('products_create_adding_category', 'yes'))
 		{
 			return $internal_product;
 		}
 
-		if('update' === $mode && 'yes' !== $this->getOptions('products_update_categories', 'no'))
+        if('create' === $mode && false === $external_product->hasClassifierGroups())
+        {
+            return $internal_product;
+        }
+
+		if('update' === $mode && 'no' === $this->getOptions('products_update_categories', 'no'))
 		{
 			return $internal_product;
 		}
@@ -1712,33 +1688,101 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		if('create' === $mode && false === $external_product->hasClassifierGroups())
-		{
-			return $internal_product;
-		}
+        $source = $this->getOptions('products_categories_source', 'classifier_groups');
 
-		$cats = [];
+        if('no' === $source)
+        {
+            return $internal_product;
+        }
 
-		if($external_product->hasClassifierGroups())
-		{
-			/** @var CategoriesStorageContract $categories_storage */
-			$categories_storage = Storage::load('category');
+        $cats = [];
 
-			foreach($external_product->getClassifierGroups() as $classifier_group)
-			{
-				$cat = $categories_storage->getByExternalId($classifier_group);
+        if(($source === 'classifier_groups') && $external_product->hasClassifierGroups())
+        {
+            $classifier_groups = $external_product->getClassifierGroups();
 
-				if($cat instanceof Category)
-				{
-					$cats[] = $cat->getId();
-				}
-			}
-		}
+            /** @var CategoriesStorageContract $categories_storage */
+            $categories_storage = Storage::load('category');
+
+            foreach($classifier_groups as $classifier_group)
+            {
+                $cat = $categories_storage->getByExternalId($classifier_group);
+
+                if($cat instanceof Category)
+                {
+                    $cats[] = $cat->getId();
+                }
+            }
+        }
+
+        if('update' === $mode && 'add' === $this->getOptions('products_update_categories', 'no') && !empty($internal_product->get_category_ids()))
+        {
+            return $internal_product;
+        }
+
+        if('update' === $mode && empty($cats) && 'yes_yes' === $this->getOptions('products_update_categories', 'no') && empty($internal_product->get_category_ids()))
+        {
+            return $internal_product;
+        }
+
+        if
+        (
+            ('create' === $mode && $this->getOptions('products_create_adding_category_fill_parent', 'yes') === 'yes')
+            ||
+            ('update' === $mode && $this->getOptions('products_update_categories_fill_parent', 'yes') === 'yes')
+        )
+        {
+            $this->fillParentCategories($product_categories);
+        }
 
 		$internal_product->set_category_ids($cats);
 
 		return $internal_product;
 	}
+
+    /**
+     * Заполняет родительские категории у продукта
+     *
+     * @param $product_categories
+     *
+     * @return array
+     */
+    private function fillParentCategories(&$product_categories): array
+    {
+        if(empty($product_categories))
+        {
+            return $product_categories;
+        }
+
+        foreach($product_categories as $category_id)
+        {
+            $parents = $this->findParentCategories($category_id);
+
+            foreach($parents as $parent_id)
+            {
+                $key = array_search($parent_id, $product_categories, true);
+
+                if($key === false)
+                {
+                    $product_categories[] = $parent_id;
+                }
+            }
+        }
+
+        return $product_categories;
+    }
+
+    /**
+     * Поиск всех родительских категорий
+     *
+     * @param int $category_id
+     *
+     * @return array
+     */
+    private function findParentCategories(int $category_id): array
+    {
+        return get_ancestors($category_id, 'product_cat');
+    }
 
 	/**
 	 * Назначение данных продукта исходя из режима: статус налога
@@ -1827,6 +1871,11 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemImages(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
+		if('yes' !== $this->getOptions('products_images_by_cml', 'no'))
+		{
+			return $internal_product;
+		}
+
 		if('create' === $mode && false === $external_product->hasImages())
 		{
 			return $internal_product;
@@ -1842,29 +1891,35 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
-		if('update' === $mode && 'yes' !== $this->getOptions('products_update_images', 'no'))
+		if('update' === $mode && 'no' === $this->getOptions('products_update_images', 'no'))
 		{
 			return $internal_product;
 		}
 
-		if('yes' !== $this->getOptions('products_images_by_cml', 'no'))
+		$images_mode = $this->getOptions('products_update_images', 'no');
+		$images_max = $this->getOptions('products_images_by_cml_max', 10);
+		$external_images = $external_product->getImages();
+
+		if('update' === $mode && 'add' === $images_mode && !empty($internal_product->get_image_id()))
 		{
 			return $internal_product;
 		}
 
-		$max_images = $this->getOptions('products_images_by_cml_max', 10);
+		if('update' === $mode && empty($external_images) && 'yes_yes' === $images_mode && empty($internal_product->get_image_id()))
+		{
+			return $internal_product;
+		}
 
 		/** @var ImagesStorageContract $images_storage */
 		$images_storage = Storage::load('image');
 
-		$images = $external_product->getImages();
 		$gallery_image_ids = [];
 
-		if(is_array($images))
+		if(is_array($external_images))
 		{
-			foreach($images as $index => $image)
+			foreach($external_images as $index => $image)
 			{
-				if($index >= $max_images)
+				if($index >= $images_max)
 				{
 					$this->log()->notice(__('The maximum possible number of images has been processed. The rest of the images are skip.', 'wc1c-main'));
 					break;
@@ -1923,7 +1978,19 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemDimensions(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if('yes' !== $this->getOptions('products_dimensions_by_requisites', 'no'))
+		if('create' === $mode && 'no' === $this->getOptions('products_create_adding_dimensions', 'yes'))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'no' === $this->getOptions('products_update_dimensions', 'no'))
+		{
+			return $internal_product;
+		}
+
+		$dimensions_source =  $this->getOptions('products_dimensions_source', 'yes_requisites');
+
+		if($dimensions_source === 'no')
 		{
 			return $internal_product;
 		}
@@ -1934,7 +2001,7 @@ class Core extends SchemaAbstract
 		$weight = '';
 		$weight_name = trim($this->getOptions('products_dimensions_by_requisites_weight_from_name', 'Вес'));
 
-		if($weight_name !== '' && $external_product->hasRequisites($weight_name))
+		if($weight_name !== '' && $dimensions_source === 'yes_requisites' && $external_product->hasRequisites($weight_name))
 		{
 			$requisite_data = $external_product->getRequisites($weight_name);
 			if(!empty($requisite_data['value']))
@@ -1943,12 +2010,30 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		if(has_filter('wc1c_products_dimensions_by_requisites_weight'))
+		if(has_filter('wc1c_schema_productscml_products_dimensions_weight'))
 		{
-			$weight = apply_filters('wc1c_products_dimensions_by_requisites_weight', $weight, $internal_product, $external_product, $mode, $reader, $this);
+			$weight = apply_filters('wc1c_schema_productscml_products_dimensions_weight', $weight, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$internal_product->set_weight($weight);
+		if('update' === $mode && 'add' === $this->getOptions('products_update_dimensions', 'no') && empty($internal_product->get_weight()))
+		{
+			$internal_product->set_weight($weight);
+		}
+
+		if('update' === $mode && !empty($weight) && 'yes_yes' === $this->getOptions('products_update_dimensions', 'no') && !empty($internal_product->get_weight()))
+		{
+			$internal_product->set_weight($weight);
+		}
+
+		if('update' === $mode && 'yes' === $this->getOptions('products_update_dimensions', 'no'))
+		{
+			$internal_product->set_weight($weight);
+		}
+
+		if('create' === $mode)
+		{
+			$internal_product->set_weight($weight);
+		}
 
 		/**
 		 * Длина
@@ -1956,7 +2041,7 @@ class Core extends SchemaAbstract
 		$length = '';
 		$length_name = trim($this->getOptions('products_dimensions_by_requisites_length_from_name', 'Длина'));
 
-		if($length_name !== '' && $external_product->hasRequisites($length_name))
+		if($length_name !== '' && $dimensions_source === 'yes_requisites' && $external_product->hasRequisites($length_name))
 		{
 			$requisite_data = $external_product->getRequisites($length_name);
 			if(!empty($requisite_data['value']))
@@ -1965,12 +2050,30 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		if(has_filter('wc1c_products_dimensions_by_requisites_length'))
+		if(has_filter('wc1c_schema_productscml_products_dimensions_length'))
 		{
-			$length = apply_filters('wc1c_products_dimensions_by_requisites_length', $length, $internal_product, $external_product, $mode, $reader, $this);
+			$length = apply_filters('wc1c_schema_productscml_products_dimensions_length', $length, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$internal_product->set_length($length);
+		if('update' === $mode && 'add' === $this->getOptions('products_update_dimensions', 'no') && empty($internal_product->get_length()))
+		{
+			$internal_product->set_length($length);
+		}
+
+		if('update' === $mode && !empty($length) && 'yes_yes' === $this->getOptions('products_update_dimensions', 'no') && !empty($internal_product->get_length()))
+		{
+			$internal_product->set_length($length);
+		}
+
+		if('update' === $mode && 'yes' === $this->getOptions('products_update_dimensions', 'no'))
+		{
+			$internal_product->set_length($length);
+		}
+
+		if('create' === $mode)
+		{
+			$internal_product->set_length($length);
+		}
 
 		/**
 		 * Ширина
@@ -1978,7 +2081,7 @@ class Core extends SchemaAbstract
 		$width = '';
 		$width_name = trim($this->getOptions('products_dimensions_by_requisites_width_from_name', 'Ширина'));
 
-		if($width_name !== '' && $external_product->hasRequisites($width_name))
+		if($width_name !== '' && $dimensions_source === 'yes_requisites' && $external_product->hasRequisites($width_name))
 		{
 			$requisite_data = $external_product->getRequisites($width_name);
 			if(!empty($requisite_data['value']))
@@ -1987,12 +2090,30 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		if(has_filter('wc1c_products_dimensions_by_requisites_width'))
+		if(has_filter('wc1c_schema_productscml_products_dimensions_width'))
 		{
-			$width = apply_filters('wc1c_products_dimensions_by_requisites_width', $width, $internal_product, $external_product, $mode, $reader, $this);
+			$width = apply_filters('wc1c_schema_productscml_products_dimensions_width', $width, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$internal_product->set_width($width);
+		if('update' === $mode && 'add' === $this->getOptions('products_update_dimensions', 'no') && empty($internal_product->get_width()))
+		{
+			$internal_product->set_width($width);
+		}
+
+		if('update' === $mode && !empty($width) && 'yes_yes' === $this->getOptions('products_update_dimensions', 'no') && !empty($internal_product->get_width()))
+		{
+			$internal_product->set_width($width);
+		}
+
+		if('update' === $mode && 'yes' === $this->getOptions('products_update_dimensions', 'no'))
+		{
+			$internal_product->set_width($width);
+		}
+
+		if('create' === $mode)
+		{
+			$internal_product->set_width($width);
+		}
 
 		/**
 		 * Высота
@@ -2000,7 +2121,7 @@ class Core extends SchemaAbstract
 		$height = '';
 		$height_name = trim($this->getOptions('products_dimensions_by_requisites_height_from_name', 'Высота'));
 
-		if($height_name !== '' && $external_product->hasRequisites($height_name))
+		if($height_name !== '' && $dimensions_source === 'yes_requisites' && $external_product->hasRequisites($height_name))
 		{
 			$requisite_data = $external_product->getRequisites($height_name);
 			if(!empty($requisite_data['value']))
@@ -2009,12 +2130,30 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		if(has_filter('wc1c_products_dimensions_by_requisites_height'))
+		if(has_filter('wc1c_schema_productscml_products_dimensions_height'))
 		{
-			$height = apply_filters('wc1c_products_dimensions_by_requisites_height', $height, $internal_product, $external_product, $mode, $reader, $this);
+			$height = apply_filters('wc1c_schema_productscml_products_dimensions_height', $height, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$internal_product->set_height($height);
+		if('update' === $mode && 'add' === $this->getOptions('products_update_dimensions', 'no') && empty($internal_product->get_height()))
+		{
+			$internal_product->set_height($height);
+		}
+
+		if('update' === $mode && !empty($height) && 'yes_yes' === $this->getOptions('products_update_dimensions', 'no') && !empty($internal_product->get_height()))
+		{
+			$internal_product->set_height($height);
+		}
+
+		if('update' === $mode && 'yes' === $this->getOptions('products_update_dimensions', 'no'))
+		{
+			$internal_product->set_height($height);
+		}
+
+		if('create' === $mode)
+		{
+			$internal_product->set_height($height);
+		}
 
 		return $internal_product;
 	}
@@ -3157,6 +3296,8 @@ class Core extends SchemaAbstract
 			return;
 		}
 
+        $this->log()->info(__('Product is found. Updating.', 'wc1c-main'));
+
 		/**
 		 * Обновление существующих продуктов отключено
 		 */
@@ -3306,7 +3447,7 @@ class Core extends SchemaAbstract
 
 		if(empty($internal_offer_id) && empty($external_offer->getCharacteristicId()))
 		{
-			$this->log()->notice(__('Product not found. Offer update skipped.', 'wc1c-main'), ['offer' => $external_offer]);
+			$this->log()->notice(__('Product not found. Offer update skipped.', 'wc1c-main'), ['offer' => $external_offer->getData()]);
 			return;
 		}
 
@@ -3430,7 +3571,7 @@ class Core extends SchemaAbstract
 	 */
 	public function processingOffers(Reader $reader)
 	{
-		if(!in_array($reader->getFiletype(), $this->getOffersTypes(), true))
+		if(false === $reader->isElement())
 		{
 			return;
 		}
@@ -3440,7 +3581,7 @@ class Core extends SchemaAbstract
 			$reader->offers_package = new OffersPackage();
 		}
 
-		if($reader->nodeName === 'ПакетПредложений' && $reader->isElement())
+		if($reader->nodeName === 'ПакетПредложений')
 		{
 			$only_changes = $reader->xml_reader->getAttribute('СодержитТолькоИзменения') ?: true;
 			if($only_changes === 'false')
@@ -3454,13 +3595,13 @@ class Core extends SchemaAbstract
 				$this->log()->debug(__('The offer package object contains only the changes.', 'wc1c-main'));
 			}
 		}
-		elseif($reader->nodeName === 'ИзмененияПакетаПредложений' && $reader->isElement())
+		elseif($reader->nodeName === 'ИзмененияПакетаПредложений')
 		{
 			$this->log()->debug(__('The offer package object contains only the changes.', 'wc1c-main'));
 			$reader->offers_package->setOnlyChanges(true);
 		}
 
-		if(($reader->parentNodeName === 'ПакетПредложений' || $reader->parentNodeName === 'ИзмененияПакетаПредложений') && $reader->isElement())
+		if(($reader->parentNodeName === 'ПакетПредложений' || $reader->parentNodeName === 'ИзмененияПакетаПредложений'))
 		{
 			switch($reader->nodeName)
 			{
@@ -3497,7 +3638,7 @@ class Core extends SchemaAbstract
 			}
 		}
 
-        if($reader->nodeName === 'Предложения' && $reader->isElement())
+        if($reader->nodeName === 'Предложения')
         {
 			if(false === $reader->offers_package->isOnlyChanges())
 			{
@@ -3522,7 +3663,7 @@ class Core extends SchemaAbstract
 	        }
         }
 
-		if($reader->parentNodeName === 'Предложения' && $reader->nodeName === 'Предложение' && $reader->isElement())
+		if($reader->parentNodeName === 'Предложения' && $reader->nodeName === 'Предложение')
 		{
 			$offer_xml = new SimpleXMLElement($reader->xml_reader->readOuterXml());
 
