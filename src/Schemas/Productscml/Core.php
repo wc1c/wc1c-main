@@ -57,7 +57,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.10.1');
+		$this->setVersion('0.10.2');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -2439,11 +2439,6 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemAttributes(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if($reader->getFiletype() !== 'import')
-		{
-			return $internal_product;
-		}
-
 		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_attributes', 'yes'))
 		{
 			return $internal_product;
@@ -2474,7 +2469,7 @@ class Core extends SchemaAbstract
 		{
 			$this->log()->info(__('Processing of product properties.', 'wc1c-main'));
 
-			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->getFiletype() . ':' . $reader->catalog->getClassifierId()));
+			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->catalog->getClassifierId()));
 
 			foreach($external_product->getPropertyValues() as $property_id => $property_value)
 			{
@@ -2696,7 +2691,7 @@ class Core extends SchemaAbstract
 				$property_values_from_characteristics = $external_product->getCharacteristics();
 			}
 
-			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->getFiletype() . ':' . $reader->offers_package->getClassifierId()));
+			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->offers_package->getClassifierId()));
 
 			foreach($external_product->getPropertyValues() as $property_id => $property_value)
 			{
