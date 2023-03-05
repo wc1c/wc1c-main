@@ -57,7 +57,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.10.0');
+		$this->setVersion('0.10.1');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -1732,7 +1732,7 @@ class Core extends SchemaAbstract
             ('update' === $mode && $this->getOptions('products_update_categories_fill_parent', 'yes') === 'yes')
         )
         {
-            $this->fillParentCategories($product_categories);
+            $this->fillParentCategories($cats);
         }
 
 		$internal_product->set_category_ids($cats);
@@ -1745,15 +1745,10 @@ class Core extends SchemaAbstract
      *
      * @param $product_categories
      *
-     * @return array
+     * @return array|mixed
      */
-    private function fillParentCategories(&$product_categories): array
+    private function fillParentCategories(&$product_categories)
     {
-        if(empty($product_categories))
-        {
-            return $product_categories;
-        }
-
         foreach($product_categories as $category_id)
         {
             $parents = $this->findParentCategories($category_id);
