@@ -21,7 +21,7 @@
 </p>
 
 <p>
-	<a href=" <?php echo admin_url('admin.php?page=wc1с&section=tools&tool_id=environments'); ?>" class="button">
+	<a href="<?php echo admin_url('admin.php?page=wc1с&section=tools&tool_id=environments'); ?>" class="button">
 		<?php _e('Environments', 'wc1c-main'); ?>
 	</a>
 </p>

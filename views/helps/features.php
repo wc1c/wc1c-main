@@ -27,10 +27,10 @@
 </p>
 
 <p>
-	<a href="https://wc1c.info/features" class="button" target="_blank">
+	<a href="//wc1c.info/features" class="button" target="_blank">
 		<?php _e('Features', 'wc1c-main'); ?>
 	</a>
-    <a href="https://wc1c.info/extensions" class="button" target="_blank">
+    <a href="//wc1c.info/extensions" class="button" target="_blank">
 		<?php _e('Extensions', 'wc1c-main'); ?>
     </a>
 </p>

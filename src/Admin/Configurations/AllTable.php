@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Abstracts\TableAbstract;
 use Wc1c\Main\Data\Storage;
@@ -43,7 +44,8 @@ class AllTable extends TableAbstract
 		{
 			$this->storage_configurations = Storage::load('configuration');
 		}
-		catch(Exception $e){}
+		catch(\Throwable $e)
+        {}
 
 		parent::__construct($params);
 	}
@@ -205,8 +207,29 @@ class AllTable extends TableAbstract
 		{
 			$schema = wc1c()->schemas()->get($item['schema']);
 			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+
+            if($item['schema'] === 'productscml')
+            {
+                $configuration = new Configuration($item['configuration_id']);
+                $full_time = $configuration->getMeta('_catalog_full_time', true);
+
+                if(!empty($full_time))
+                {
+                    $timestamp = $full_time + $this->utilityTimezoneOffset();
+
+                    $metas['productscml-catalog-full'] = sprintf
+                    (
+                        '%s %s (<span class="time">%s %s</span> %s)',
+                        __('Full exchange:', 'wc1c-main'),
+                        sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp'))),
+                        date_i18n('d/m/Y', $timestamp),
+                        __('in', 'wc1c-main'),
+                        date_i18n('H:i:s', $timestamp)
+                      );
+                }
+            }
 		}
-		catch(RuntimeException $e)
+		catch(\Throwable $e)
 		{
 			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')';
 		}
@@ -298,8 +321,7 @@ class AllTable extends TableAbstract
 	 * Creates the different status filter links at the top of the table.
 	 *
 	 * @return array
-	 * @throws Exception
-	 */
+     */
 	protected function getViews(): array
 	{
 		$status_links = [];
