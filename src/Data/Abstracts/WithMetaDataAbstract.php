@@ -7,6 +7,6 @@ defined('ABSPATH') || exit;
  *
  * @package Wc1c\Main\Data\Abstracts
  */
-abstract class DataAbstract extends \Digiom\Woplucore\Data\Abstracts\DataAbstract
+abstract class WithMetaDataAbstract extends \Digiom\Woplucore\Data\Abstracts\WithMetaDataAbstract
 {
 }
