@@ -566,20 +566,20 @@ class MetaQuery
 
 				if('LIKE' === $meta_compare_key)
 				{
-					$join .= $wpdb->prepare(" ON ($this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.name LIKE %s )", '%' . $wpdb->esc_like($clause['key']) . '%');
+					$join .= $wpdb->prepare(" ON ($this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.name LIKE %s )", '%' . $wpdb->esc_like($clause['key']) . '%'); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 				}
 				else
 				{
-					$join .= $wpdb->prepare(" ON ($this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.name = %s )", $clause['key']);
+					$join .= $wpdb->prepare(" ON ($this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.name = %s )", $clause['key']); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 				}
 
 				// All other JOIN clauses.
 			}
 			else
 			{
-				$join .= " INNER JOIN $this->meta_table";
-				$join .= $i ? " AS $alias" : '';
-				$join .= " ON ( $this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column )";
+				$join .= " INNER JOIN $this->meta_table"; /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
+				$join .= $i ? " AS $alias" : ''; /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
+				$join .= " ON ( $this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column )"; /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 			}
 
 			$this->table_aliases[] = $alias;
@@ -590,8 +590,8 @@ class MetaQuery
 		$clause['alias'] = $alias;
 
 		// Determine the data type.
-		$_meta_type     = isset($clause['type']) ? $clause['type'] : '';
-		$meta_type      = $this->get_cast_for_type($_meta_type);
+		$_meta_type = isset($clause['type']) ? $clause['type'] : '';
+		$meta_type = $this->get_cast_for_type($_meta_type);
 		$clause['cast'] = $meta_type;
 
 		// Fallback for clause keys is the table alias. Key must be a string.
@@ -647,15 +647,15 @@ class MetaQuery
 				{
 					case '=':
 					case 'EXISTS':
-						$where = $wpdb->prepare("$alias.name = %s", trim($clause['key']));
+						$where = $wpdb->prepare("$alias.name = %s", trim($clause['key'])); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 					case 'LIKE':
 						$meta_compare_value = '%' . $wpdb->esc_like(trim($clause['key'])) . '%';
-						$where = $wpdb->prepare("$alias.name LIKE %s", $meta_compare_value);
+						$where = $wpdb->prepare("$alias.name LIKE %s", $meta_compare_value); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 					case 'IN':
 						$meta_compare_string = "$alias.name IN (" . substr(str_repeat(',%s', count($clause['key'])), 1) . ')';
-						$where = $wpdb->prepare($meta_compare_string, $clause['key']);
+						$where = $wpdb->prepare($meta_compare_string, $clause['key']); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 					case 'RLIKE':
 					case 'REGEXP':
@@ -668,24 +668,24 @@ class MetaQuery
 						{
 							$cast = '';
 						}
-						$where = $wpdb->prepare("$alias.name $operator $cast %s", trim($clause['key']));
+						$where = $wpdb->prepare("$alias.name $operator $cast %s", trim($clause['key'])); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 
 					case '!=':
 					case 'NOT EXISTS':
 						$meta_compare_string = $meta_compare_string_start . "AND $subquery_alias.name = %s " . $meta_compare_string_end;
-						$where = $wpdb->prepare($meta_compare_string, $clause['key']);
+						$where = $wpdb->prepare($meta_compare_string, $clause['key']); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 					case 'NOT LIKE':
 						$meta_compare_string = $meta_compare_string_start . "AND $subquery_alias.name LIKE %s " . $meta_compare_string_end;
 
 						$meta_compare_value = '%' . $wpdb->esc_like(trim($clause['key'])) . '%';
-						$where = $wpdb->prepare($meta_compare_string, $meta_compare_value);
+						$where = $wpdb->prepare($meta_compare_string, $meta_compare_value); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 					case 'NOT IN':
 						$array_subclause = '(' . substr(str_repeat(',%s', count($clause['key'])), 1) . ') ';
 						$meta_compare_string = $meta_compare_string_start . "AND $subquery_alias.name IN " . $array_subclause . $meta_compare_string_end;
-						$where = $wpdb->prepare($meta_compare_string, $clause['key']);
+						$where = $wpdb->prepare($meta_compare_string, $clause['key']); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 					case 'NOT REGEXP':
 						$operator = $meta_compare_key;
@@ -699,7 +699,7 @@ class MetaQuery
 						}
 
 						$meta_compare_string = $meta_compare_string_start . "AND $subquery_alias.name REGEXP $cast %s " . $meta_compare_string_end;
-						$where = $wpdb->prepare($meta_compare_string, $clause['key']);
+						$where = $wpdb->prepare($meta_compare_string, $clause['key']); /* phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared */
 						break;
 				}
 
