@@ -6,8 +6,6 @@ use Digiom\Woplucore\Data\Abstracts\WithMetaDataStorageAbstract;
 use Digiom\Woplucore\Data\Meta;
 use Wc1c\Main\Data\Abstracts\DataAbstract;
 use Wc1c\Main\Data\Entities\Configuration;
-use Wc1c\Main\Data\Interfaces\DataStorageInterface;
-use Wc1c\Main\Data\Interfaces\MetaStorageInterface;
 use Wc1c\Main\Data\MetaQuery;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Exceptions\RuntimeException;
@@ -18,7 +16,7 @@ use WP_Error;
  *
  * @package Wc1c\Main\Data\Storages
  */
-class ConfigurationsStorage extends WithMetaDataStorageAbstract implements DataStorageInterface, MetaStorageInterface
+class ConfigurationsStorage extends WithMetaDataStorageAbstract
 {
 	/**
 	 * @return string
