@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 /**
- * DataAbstract - Implemented by classes using the same CRUD(s) pattern
+ * WithMetaDataAbstract - Implemented by classes using the same CRUD(s) pattern with metadata
  *
  * @package Wc1c\Main\Data\Abstracts
  */
