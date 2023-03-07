@@ -2,16 +2,16 @@
 
 defined('ABSPATH') || exit;
 
-use WP_Error;
-use Wc1c\Main\Data\Interfaces\DataStorageInterface;
-use Wc1c\Main\Data\Interfaces\MetaStorageInterface;
 use Digiom\Woplucore\Data\Abstracts\WithMetaDataStorageAbstract;
 use Digiom\Woplucore\Data\Meta;
-use Wc1c\Main\Exceptions\RuntimeException;
-use Wc1c\Main\Exceptions\Exception;
-use Wc1c\Main\Configuration;
 use Wc1c\Main\Data\Abstracts\DataAbstract;
+use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Data\Interfaces\DataStorageInterface;
+use Wc1c\Main\Data\Interfaces\MetaStorageInterface;
 use Wc1c\Main\Data\MetaQuery;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
+use WP_Error;
 
 /**
  * ConfigurationsStorage

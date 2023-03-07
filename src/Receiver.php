@@ -1,5 +1,7 @@
 <?php namespace Wc1c\Main;
 
+use Wc1c\Main\Data\Entities\Configuration;
+
 defined('ABSPATH') || exit;
 
 /**
