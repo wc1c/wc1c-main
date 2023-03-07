@@ -381,7 +381,7 @@ class ConfigurationsStorage extends WithMetaDataStorageAbstract
 	 *
 	 * @return bool
 	 */
-	public function deleteMeta(&$data, Meta $meta): array
+	public function deleteMeta(&$data, Meta $meta)
 	{
 		$meta_table = $this->getMetaTableName();
 
