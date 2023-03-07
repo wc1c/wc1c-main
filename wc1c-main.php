@@ -67,5 +67,7 @@ namespace Wc1c\Main
 		return false;
 	}
 
-	wc1c()->register(new Context(), $loader);
+	$context = new Context(__FILE__, 'wc1c', $loader);
+
+	wc1c()->register($context);
 }
