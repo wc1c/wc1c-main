@@ -32,14 +32,14 @@ namespace
 
 		include_once __DIR__ . '/vendor/autoload.php';
 
-		/**
-		 * Main instance of WC1C
-		 *
-		 * @return Wc1c\Main\Core
-		 */
+        /**
+         * For external use
+         *
+         * @return Wc1c\Main\Core Main instance of core
+         */
 		function wc1c(): Wc1c\Main\Core
 		{
-			return Wc1c\Main\Core::instance();
+			return Wc1c\Main\Core();
 		}
 	}
 }
@@ -49,6 +49,16 @@ namespace
  */
 namespace Wc1c\Main
 {
+    /**
+     * For internal use
+     *
+     * @return Core Main instance of plugin core
+     */
+    function core(): Core
+    {
+        return Core::instance();
+    }
+
 	$loader = new \Digiom\Woplucore\Loader();
 
 	try
