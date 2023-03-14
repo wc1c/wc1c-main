@@ -8,7 +8,7 @@ use Digiom\Woplucore\Data\Interfaces\DataStorageInterface;
 /**
  * DataStorageAbstract
  *
- * @package Wc1c\Main\Data\Storages
+ * @package Digiom\Woplucore\Data\Abstracts
  */
 abstract class DataStorageAbstract implements DataStorageInterface
 {

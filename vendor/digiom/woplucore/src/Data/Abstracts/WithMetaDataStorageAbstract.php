@@ -7,9 +7,9 @@ use Digiom\Woplucore\Data\Meta;
 use Digiom\Woplucore\Traits\DatetimeUtilityTrait;
 
 /**
- * DataStorageAbstract
+ * WithMetaDataStorageAbstract
  *
- * @package Wc1c\Main\Data\Storages
+ * @package Digiom\Woplucore\Data\Abstracts
  */
 abstract class WithMetaDataStorageAbstract extends DataStorageAbstract implements MetaStorageInterface
 {

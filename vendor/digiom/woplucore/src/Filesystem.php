@@ -2,7 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use ErrorException;
 use FilesystemIterator;
 use RuntimeException;
 use Digiom\Woplucore\Traits\SingletonTrait;

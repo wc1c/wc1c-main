@@ -61,7 +61,14 @@ class MetaQuery
 	 */
 	public function get_meta_table($type)
 	{
-		return wc1c()->database()->base_prefix . 'wc1c_' . $type . 's_meta';
+		global $wpdb;
+
+		if(empty($type))
+		{
+			return $wpdb->base_prefix . $this->primary_table . '_meta';
+		}
+
+		return $wpdb->base_prefix . $this->primary_table . '_' . $type . 's_meta';
 	}
 
 	/**
@@ -319,7 +326,7 @@ class MetaQuery
 		 * @param object $context The main query object
 		 */
 		return apply_filters_ref_array
-		('wc1c_data_meta_get_sql',
+		($this->primary_table . '_data_meta_get_sql',
 			[
 				$sql,
 				$this->queries,
@@ -853,7 +860,7 @@ class MetaQuery
 		 *
 		 * @param MetaQuery $this MetaQuery object
 		 */
-		return apply_filters('wc1c_data_meta_query_find_compatible_table_alias', $alias, $clause, $parent_query, $this);
+		return apply_filters($this->primary_table . '_data_meta_query_find_compatible_table_alias', $alias, $clause, $parent_query, $this);
 	}
 
 	/**
