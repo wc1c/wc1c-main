@@ -54,6 +54,7 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
 = 0.19.0 =
+* WC tested up to: 7.5
 * Up: ProductsCML to 0.11.0
 * Ability: use Woplucore
 * Up: Woplucore to latest
