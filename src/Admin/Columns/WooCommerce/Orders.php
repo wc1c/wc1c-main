@@ -83,7 +83,7 @@ final class Orders
 		if($time)
 		{
 			$content .= '<span class="na">' . __('Activity:', 'wc1c-main') . ' ';
-			$content .= sprintf(_x('%s ago.', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($time, current_time('timestamp')));
+			$content .= sprintf(_x('%s ago.', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($time, current_time('timestamp', true)));
 			$content .= '</span><br/>';
 		}
 
