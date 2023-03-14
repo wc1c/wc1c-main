@@ -225,6 +225,15 @@ class AllTable extends TableAbstract
                         date_i18n('H:i:s', $timestamp)
                       );
                 }
+				else
+				{
+					$metas['productscml-catalog-full'] = sprintf
+					(
+						'%s %s',
+						__('Full exchange:', 'wc1c-main'),
+						__('not produced', 'wc1c-main')
+					);
+				}
             }
 		}
 		catch(\Throwable $e)
