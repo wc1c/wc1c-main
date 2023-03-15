@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 use SimpleXMLElement;
+use Wc1c\Main\Exceptions\TimerException;
 use Wc1c\Main\Traits\UtilityTrait;
 use Wc1c\Wc\Entities\Image;
 use Wc1c\Wc\Products\AttributeProduct;
@@ -57,7 +58,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.10.2');
+		$this->setVersion('0.11.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -241,7 +242,7 @@ class Core extends SchemaAbstract
 	{
 		if(wc1c()->timer()->getMaximum() !== 0 && !wc1c()->timer()->isRemainingBiggerThan(5))
 		{
-			throw new Exception(__('There was not enough time to load all the data.', 'wc1c-main'));
+			throw new TimerException(__('There was not enough time to load all the data.', 'wc1c-main'));
 		}
 	}
 
@@ -252,6 +253,11 @@ class Core extends SchemaAbstract
 	 */
 	public function receiver()
 	{
+		if('no' !== $this->getOptions('ob_end_clean', 'no'))
+		{
+			ob_end_clean();
+		}
+
 		if($this->configuration()->isEnabled() === false)
 		{
 			$message = __('Configuration is offline.', 'wc1c-main');
@@ -262,6 +268,8 @@ class Core extends SchemaAbstract
 
 		try
 		{
+			$this->configuration()->setStatus('processing');
+
 			$this->configuration()->setDateActivity(time());
 			$this->configuration()->save();
 		}
@@ -376,6 +384,11 @@ class Core extends SchemaAbstract
 	 */
 	public function processingClassifierGroups(ClassifierDataContract $classifier, Reader $reader)
 	{
+		if($reader->schema_version === '3.1' && $reader->getFiletype() !== 'groups')
+		{
+			return;
+		}
+
 		if(!$classifier->hasGroups())
 		{
 			$this->log()->info(__('Classifier groups is empty.', 'wc1c-main'));
@@ -689,6 +702,11 @@ class Core extends SchemaAbstract
 	 */
 	public function processingClassifierProperties(ClassifierDataContract $classifier, Reader $reader)
 	{
+		if($reader->schema_version === '3.1' && $reader->getFiletype() !== 'propertiesGoods')
+		{
+			return;
+		}
+
 		if(!$classifier->hasProperties())
 		{
 			$this->log()->info(__('Classifier properties is empty.', 'wc1c-main'), ['filetype' => $reader->getFiletype()]);
@@ -944,7 +962,7 @@ class Core extends SchemaAbstract
             if(false === $only_changes)
             {
                 $this->log()->notice(__('The time of the last full exchange has been set.', 'wc1c-main'));
-                $this->configuration()->addMetaData('_catalog_full_time', current_time('timestamp'), true);
+                $this->configuration()->addMetaData('_catalog_full_time', current_time('timestamp', true), true);
                 $this->configuration()->saveMetaData();
             }
 		}
@@ -1114,7 +1132,7 @@ class Core extends SchemaAbstract
 	 */
 	public function setProductTimes(ProductContract $product): ProductContract
 	{
-		$time = current_time('timestamp');
+		$time = current_time('timestamp', true);
 
 		/**
 		 * _wc1c_time
@@ -1137,7 +1155,7 @@ class Core extends SchemaAbstract
      */
     public function setImageTimes(Image $image): Image
     {
-        $time = current_time('timestamp');
+        $time = current_time('timestamp', true);
 
         /**
          * _wc1c_time
@@ -2943,6 +2961,11 @@ class Core extends SchemaAbstract
 	 */
 	public function assignOffersItemPrices(ProductContract $internal_product, ProductDataContract $external_product, Reader $reader): ProductContract
 	{
+		if($reader->schema_version === '3.1' && $reader->getFiletype() !== 'prices')
+		{
+			return $internal_product;
+		}
+
 		$this->log()->debug(__('Prices processing.', 'wc1c-main'), ['filetype' => $reader->getFiletype(), 'product_id' => $internal_product->getId(), 'offer_id' => $external_product->getId(), 'offer_characteristic_id' => $external_product->getCharacteristicId()]);
 
 		if(false === $external_product->hasPrices())
@@ -3065,6 +3088,11 @@ class Core extends SchemaAbstract
 	 */
 	public function assignOffersItemInventories(ProductContract $internal_product, ProductDataContract $external_product, Reader $reader): ProductContract
 	{
+		if($reader->schema_version === '3.1' && $reader->getFiletype() !== 'rests')
+		{
+			return $internal_product;
+		}
+
 		$this->log()->debug(__('Inventories processing.', 'wc1c-main'), ['filetype' => $reader->getFiletype(), 'product_id' => $internal_product->getId(), 'offer_id' => $external_product->getId(), 'offer_characteristic_id' => $external_product->getCharacteristicId()]);
 
 		if('yes' !== $this->getOptions('products_inventories_by_offers_quantity', 'no'))
