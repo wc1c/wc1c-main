@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Digiom\Woplucore\Abstracts\CoreAbstract;
 use wpdb;
 use Digiom\Woplucore\Loader;
 use Digiom\Woplucore\Traits\SingletonTrait;
@@ -22,24 +23,14 @@ use Wc1c\Main\Settings\MainSettings;
  *
  * @package Wc1c\Main
  */
-final class Core
+final class Core extends CoreAbstract
 {
 	use SingletonTrait;
-
-	/**
-	 * @var Loader
-	 */
-	private $loader;
 
 	/**
 	 * @var array
 	 */
 	private $log = [];
-
-	/**
-	 * @var Context
-	 */
-	private $context;
 
 	/**
 	 * @var Timer
@@ -69,38 +60,6 @@ final class Core
 	public function __construct()
 	{
 		do_action('wc1c_core_loaded');
-	}
-
-	/**
-	 * @param $context
-	 * @param $loader
-	 *
-	 * @return void
-	 */
-	public function register($context, $loader)
-	{
-		if(has_filter('wc1c_context_loading'))
-		{
-			$context = apply_filters('wc1c_context_loading', $context);
-		}
-
-		$this->context = $context;
-
-		if(has_filter('wc1c_loader_loading'))
-		{
-			$loader = apply_filters('wc1c_loader_loading', $loader);
-		}
-
-		$this->loader = $loader;
-
-		// init
-		add_action('init', [$this, 'init'], 3);
-
-		// admin
-		if(false !== is_admin())
-		{
-			add_action('init', [$this, 'admin'], 5);
-		}
 	}
 
 	/**
@@ -235,26 +194,6 @@ final class Core
 	public function views(): Views
 	{
 		return Views::instance()->setSlug('wc1c-main')->setPluginDir($this->environment()->get('plugin_directory_path'));
-	}
-
-	/**
-	 * Context
-	 *
-	 * @return Context
-	 */
-	public function context(): Context
-	{
-		return $this->context;
-	}
-
-	/**
-	 * Loader
-	 *
-	 * @return Loader
-	 */
-	public function loader(): Loader
-	{
-		return $this->loader;
 	}
 
 	/**

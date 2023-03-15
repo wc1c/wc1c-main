@@ -4,17 +4,20 @@
   "type": "library",
   "license": "GPL-3.0-or-later",
   "homepage": "https://digiom.ru",
-  "authors": [
+  "authors":
+  [
     {
       "name": "Frescoref",
       "email": "frescoref@gmail.com",
       "role": "Developer"
     }
   ],
-  "autoload": {
+  "autoload":
+  {
     "psr-4": {"Digiom\\Woplucore\\": "src/"}
   },
-  "require": {
+  "require":
+  {
     "php": ">=7.0",
     "ext-fileinfo": "*",
     "ext-mbstring": "*"

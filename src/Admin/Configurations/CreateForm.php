@@ -2,9 +2,9 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Configuration;
-use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Abstracts\FormAbstract;
+use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Traits\UtilityTrait;
 
 /**
@@ -131,7 +131,7 @@ class CreateForm extends FormAbstract
 
 					<?php foreach ( (array) $data['options'] as $option_key => $option_value ) : ?>
 
-					<div class="mb-3 border-1 border-light p-2" style="border: solid;">
+					<div class="mb-3 border border-secondary rounded-2 p-2" style="border: solid;">
 
                         <div>
 	                        <?php _e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>

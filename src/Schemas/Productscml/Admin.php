@@ -208,6 +208,20 @@ class Admin
 			'options' => $clean_options
 		];
 
+		$fields['ob_end_clean'] =
+		[
+			'title' => __('Clearing the buffer before the receiver', 'wc1c-main'),
+			'type' => 'checkbox',
+			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('When enabled, buffering will be disabled in the request receiver and the output buffer will be cleared.', 'wc1c-main'),
+				__('Used for sites that have viruses.', 'wc1c-main')
+			),
+			'default' => 'no'
+		];
+
 		return $fields;
 	}
 

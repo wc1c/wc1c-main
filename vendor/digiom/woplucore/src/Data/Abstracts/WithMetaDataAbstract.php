@@ -1,26 +1,18 @@
-<?php namespace Wc1c\Main\Data\Entities;
+<?php namespace Digiom\Woplucore\Data\Abstracts;
 
 defined('ABSPATH') || exit;
 
+use Digiom\Woplucore\Data\Meta;
+use Digiom\Woplucore\Data\Exceptions\Exception;
 use WP_Error;
-use Wc1c\Main\Exceptions\Exception;
-use Wc1c\Main\Data\Meta;
-use Wc1c\Main\Data\Abstracts\DataAbstract;
 
 /**
- * ConfigurationsData
+ * WithMetaDataAbstract - Implemented by classes using the same CRUD(s) pattern with metadata
  *
- * @package Wc1c\Main\Data\Entities
+ * @package Digiom\Woplucore\Data\Abstracts
  */
-abstract class ConfigurationsData extends DataAbstract
+abstract class WithMetaDataAbstract extends DataAbstract
 {
-	/**
-	 * This is the name of this object type
-	 *
-	 * @var string
-	 */
-	protected $object_type = 'configuration';
-
 	/**
 	 * @var array|null
 	 */
@@ -70,7 +62,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return bool|WP_Error
 	 */
-	public function setProps($props, $context = 'set')
+	public function setProps(array $props, string $context = 'set')
 	{
 		$errors = false;
 
@@ -234,7 +226,7 @@ abstract class ConfigurationsData extends DataAbstract
 	 *
 	 * @return void
 	 */
-	public function addMetaData($key, $value, $unique = false)
+	public function addMetaData(string $key, $value, bool $unique = false)
 	{
 		if($this->isInternalMetaKey($key))
 		{

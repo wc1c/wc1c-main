@@ -2,50 +2,28 @@
 
 defined('ABSPATH') || exit;
 
-use stdClass;
-use WP_Error;
-use Wc1c\Main\Data\Contracts\StorageContract;
-use Wc1c\Main\Traits\DatetimeUtilityTrait;
-use Wc1c\Main\Exceptions\RuntimeException;
-use Wc1c\Main\Exceptions\Exception;
-use Wc1c\Main\Configuration;
-use Wc1c\Main\Data\Contracts\MetaStorageContract;
+use Digiom\Woplucore\Data\Abstracts\WithMetaDataStorageAbstract;
+use Digiom\Woplucore\Data\Meta;
 use Wc1c\Main\Data\Abstracts\DataAbstract;
+use Wc1c\Main\Data\Entities\Configuration;
 use Wc1c\Main\Data\MetaQuery;
+use Wc1c\Main\Exceptions\Exception;
+use Wc1c\Main\Exceptions\RuntimeException;
+use WP_Error;
 
 /**
  * ConfigurationsStorage
  *
  * @package Wc1c\Main\Data\Storages
  */
-class ConfigurationsStorage implements StorageContract, MetaStorageContract
+class ConfigurationsStorage extends WithMetaDataStorageAbstract
 {
-	use DatetimeUtilityTrait;
-
-	/**
-	 * @var array Data stored in meta keys, but not considered "meta" for an object.
-	 */
-	protected $internal_meta_keys = [];
-
-	/**
-	 * @var array Metadata which should exist in the DB, even if empty
-	 */
-	protected $must_exist_meta_keys = [];
-
 	/**
 	 * @return string
 	 */
-	public function getTableName()
+	public function getTableName(): string
 	{
 		return wc1c()->database()->base_prefix . 'wc1c';
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMetaTableName()
-	{
-		return $this->getTableName() . '_meta';
 	}
 
 	/**
@@ -225,13 +203,13 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 * @param Configuration $data Data object
 	 * @param array $args Array of args to pass to the delete method
 	 */
-	public function delete(&$data, $args = [])
+	public function delete(&$data, array $args = []): bool
 	{
 		$object_id = $data->getId();
 
 		if(!$object_id)
 		{
-			return;
+			return false;
 		}
 
 		$args = wp_parse_args
@@ -261,6 +239,8 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 
 			do_action('wc1c_data_storage_configuration_after_trash', $object_id);
 		}
+
+		return true;
 	}
 
 	/**
@@ -270,7 +250,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 *
 	 * @return bool
 	 */
-	public function isExistingById($object_id)
+	public function isExistingById(int $object_id): bool
 	{
 		return (bool) wc1c()->database()->get_var
 		(
@@ -327,36 +307,14 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	}
 
 	/**
-	 * Return list of internal meta keys
-	 *
-	 * @return array
-	 */
-	public function getInternalMetaKeys()
-	{
-		return $this->internal_meta_keys;
-	}
-
-	/**
-	 * Callback to remove unwanted meta data
-	 *
-	 * @param object $meta Meta object to check if it should be excluded or not
-	 *
-	 * @return bool
-	 */
-	protected function excludeInternalMetaKeys($meta)
-	{
-		return !in_array($meta->meta_key, $this->internal_meta_keys, true) && 0 !== stripos($meta->meta_key, 'wp_');
-	}
-
-	/**
 	 * Add new piece of meta
 	 *
 	 * @param DataAbstract $data Data object
-	 * @param stdClass $meta (containing ->key and ->value)
+	 * @param Meta $meta (containing ->key and ->value)
 	 *
 	 * @return int meta ID
 	 */
-	public function addMeta(&$data, $meta)
+	public function addMeta(&$data, Meta $meta): int
 	{
 		$meta_table = $this->getMetaTableName();
 
@@ -419,11 +377,11 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 * Deletes meta based on meta ID
 	 *
 	 * @param DataAbstract $data Data object
-	 * @param stdClass $meta (containing at least -> id).
+	 * @param Meta $meta (containing at least -> id).
 	 *
 	 * @return bool
 	 */
-	public function deleteMeta(&$data, $meta)
+	public function deleteMeta(&$data, Meta $meta)
 	{
 		$meta_table = $this->getMetaTableName();
 
@@ -467,11 +425,11 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 * Update meta
 	 *
 	 * @param DataAbstract $data Data object
-	 * @param stdClass $meta (containing ->id, ->key and ->value).
+	 * @param Meta $meta (containing ->id, ->key and ->value).
 	 *
 	 * @return bool
 	 */
-	public function updateMeta(&$data, $meta)
+	public function updateMeta(&$data, Meta $meta)
 	{
 		$meta_table = $this->getMetaTableName();
 
@@ -530,7 +488,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 *
 	 * @return object|false Meta object or false.
 	 */
-	public function getMetadataById($meta_id)
+	public function getMetadataById(int $meta_id)
 	{
 		$meta_table = $this->getMetaTableName();
 
@@ -567,7 +525,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 *
 	 * @return array
 	 */
-	public function readMeta(&$data)
+	public function readMeta(&$data): array
 	{
 		$meta_table = $this->getMetaTableName();
 
@@ -591,24 +549,11 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	}
 
 	/**
-	 * Internal meta keys we don't want exposed as part of meta_data. This is in
-	 * addition to all data props with _ prefix.
-	 *
-	 * @param string $key Prefix to be added to meta keys
-	 *
-	 * @return string
-	 */
-	protected function prefixKey($key)
-	{
-		return '_' === substr($key, 0, 1) ? $key : '_' . $key;
-	}
-
-	/**
 	 * Retrieves the total count of table entries
 	 *
 	 * @return int
 	 */
-	public function count()
+	public function count(): int
 	{
 		$count = wc1c()->database()->get_var('SELECT COUNT(*) FROM ' . $this->getTableName() . ';');
 
@@ -660,9 +605,9 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 * @param array $args Args
 	 * @param string $type
 	 *
-	 * @return mixed
+	 * @return array|false|object
 	 */
-	public function getData($args = [], $type = OBJECT)
+	public function getData(array $args = [], $type = OBJECT)
 	{
 		if(!$args || !is_array($args) || count($args) <= 0)
 		{
@@ -754,7 +699,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 	 *
 	 * @return string
 	 */
-	private function parseQueryConditions($query)
+	private function parseQueryConditions(array $query): string
 	{
 		$result = '';
 

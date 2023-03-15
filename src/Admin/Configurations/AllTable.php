@@ -2,12 +2,10 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Configuration;
-use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Abstracts\TableAbstract;
+use Wc1c\Main\Data\Entities\Configuration;
 use Wc1c\Main\Data\Storage;
 use Wc1c\Main\Data\Storages\ConfigurationsStorage;
-use Wc1c\Main\Exceptions\RuntimeException;
 use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Main\Traits\DatetimeUtilityTrait;
 use Wc1c\Main\Traits\UtilityTrait;
@@ -136,34 +134,42 @@ class AllTable extends TableAbstract
 	public function columnStatus($item): string
 	{
 		$status = $this->utilityConfigurationsGetStatusesLabel($item['status']);
-		$status_return = $this->utilityConfigurationsGetStatusesLabel('error');
+
+		$status_class = '';
+		$status_description = '';
 
 		if($item['status'] === 'draft')
 		{
-			$status_return = '<span class="draft">' . $status . '</span>';
+			$status_class = 'draft';
+			$status_description = __('An initial setup is required.', 'wc1c-main');
 		}
 		if($item['status'] === 'active')
 		{
-			$status_return = '<span class="active">' . $status . '</span>';
+			$status_class = 'active';
+			$status_description = __('All configuration algorithms are active.', 'wc1c-main');
 		}
 		if($item['status'] === 'inactive')
 		{
-			$status_return = '<span class="inactive">' . $status . '</span>';
+			$status_class = 'inactive';
+			$status_description = __('All configuration algorithms are disabled.', 'wc1c-main');
 		}
 		if($item['status'] === 'processing')
 		{
-			$status_return = '<span class="processing">' . $status . '</span>';
+			$status_class = 'processing';
+			$status_description = __('Data is being exchanged. Changing settings is not recommended.', 'wc1c-main');
 		}
 		if($item['status'] === 'error')
 		{
-			$status_return = '<span class="error">' . $status . '</span>';
+			$status_class = 'error';
+			$status_description = __('An error has occurred. You need to look at the event logs, they contain detailed information.', 'wc1c-main');
 		}
 		if($item['status'] === 'deleted')
 		{
-			$status_return = '<span class="deleted">' . $status . '</span>';
+			$status_class = 'deleted';
+			$status_description = __('Awaiting final removal. All algorithms are disabled.', 'wc1c-main');
 		}
 
-		return $status_return;
+		return '<span class="' . $status_class . '" data-bs-toggle="popover" data-bs-trigger="hover focus click" data-bs-content="' . $status_description . '">' . $status . '</span>';
 	}
 
 	/**
@@ -227,6 +233,15 @@ class AllTable extends TableAbstract
                         date_i18n('H:i:s', $timestamp)
                       );
                 }
+				else
+				{
+					$metas['productscml-catalog-full'] = sprintf
+					(
+						'%s %s',
+						__('Full exchange:', 'wc1c-main'),
+						__('not produced', 'wc1c-main')
+					);
+				}
             }
 		}
 		catch(\Throwable $e)

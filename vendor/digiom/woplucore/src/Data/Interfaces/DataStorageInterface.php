@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Main\Data\Contracts;
+<?php namespace Digiom\Woplucore\Data\Interfaces;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Data\Abstracts\DataAbstract;
+use Digiom\Woplucore\Data\Abstracts\DataAbstract;
 
 /**
- * StorageContract
+ * DataStorageInterface
  *
- * @package Wc1c\Main\Data\Contracts
+ * @package Digiom\Woplucore\Data\Interfaces
  */
-interface StorageContract
+interface DataStorageInterface
 {
 	/**
 	 * Method to create a new record of a Data based object
@@ -40,5 +40,5 @@ interface StorageContract
 	 *
 	 * @return bool result
 	 */
-	public function delete(&$data, $args = []);
+	public function delete(&$data, array $args = []): bool;
 }

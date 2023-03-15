@@ -3,9 +3,9 @@
  * Plugin Name: WC1C
  * Plugin URI: https://wordpress.org/plugins/wc1c-main/
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
- * Version: 0.18.2
+ * Version: 0.19.0
  * WC requires at least: 4.3
- * WC tested up to: 7.4
+ * WC tested up to: 7.5
  * Requires at least: 5.2
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
@@ -30,16 +30,24 @@ namespace
 	{
 		define('WC1C_PLUGIN_FILE', __FILE__);
 
-		include_once __DIR__ . '/vendor/autoload.php';
+		$autoloader = __DIR__ . '/vendor/autoload.php';
 
-		/**
-		 * Main instance of WC1C
-		 *
-		 * @return Wc1c\Main\Core
-		 */
+		if(!is_readable($autoloader))
+		{
+			trigger_error('File is not found: ' . $autoloader);
+			return false;
+		}
+
+		require_once $autoloader;
+
+        /**
+         * For external use
+         *
+         * @return Wc1c\Main\Core Main instance of core
+         */
 		function wc1c(): Wc1c\Main\Core
 		{
-			return Wc1c\Main\Core::instance();
+			return Wc1c\Main\Core();
 		}
 	}
 }
@@ -49,6 +57,16 @@ namespace
  */
 namespace Wc1c\Main
 {
+    /**
+     * For internal use
+     *
+     * @return Core Main instance of plugin core
+     */
+    function core(): Core
+    {
+        return Core::instance();
+    }
+
 	$loader = new \Digiom\Woplucore\Loader();
 
 	try
@@ -67,5 +85,7 @@ namespace Wc1c\Main
 		return false;
 	}
 
-	wc1c()->register(new Context(), $loader);
+	$context = new Context(__FILE__, 'wc1c', $loader);
+
+	wc1c()->register($context);
 }

@@ -153,6 +153,18 @@ final class Receiver extends ReceiverAbstract
 			$type = apply_filters('wc1c_schema_productscml_receiver_send_response_type', $type, $this);
 		}
 
+		if($type === 'success')
+		{
+			$this->core()->configuration()->setStatus('active');
+			$this->core()->configuration()->save();
+		}
+
+		if($type === 'failure')
+		{
+			$this->core()->configuration()->setStatus('error');
+			$this->core()->configuration()->save();
+		}
+
 		if(has_filter('wc1c_schema_productscml_receiver_send_response_by_type_description'))
 		{
 			$description = apply_filters('wc1c_schema_productscml_receiver_send_response_by_type_description', $description, $this, $type);
@@ -219,11 +231,11 @@ final class Receiver extends ReceiverAbstract
 
 			if(!isset($remote_user))
 			{
-				// todo: автоматическая запись необходимой записи в файл .htaccess с просьбой повторить выгрузку
-				$this->core()->log('schemas')->critical(__('Server in CGI mode. Not detected the presence of an entry in the root .htaccess file on the subject of the contents of the lines.', 'wc1c-main'), ['lines' => "RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]"]);
-				$this->core()->configuration()->setStatus('error');
-				$this->core()->configuration()->save();
-				$this->sendResponseByType('failure', __('Not specified the user. Check the server settings.', 'wc1c-main'));
+				$descriptions = __('Server in CGI mode. Not detected the presence of an entry in the root .htaccess file on the subject of the contents of the lines.', 'wc1c-main');
+
+				$this->core()->log('schemas')->critical($descriptions, ['lines' => "RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]"]);
+
+				$this->sendResponseByType('failure', $descriptions);
 			}
 
 			$str_tmp = base64_decode(substr($remote_user, 6));
@@ -300,7 +312,7 @@ final class Receiver extends ReceiverAbstract
 		$lines['session_id'] = $session_id . PHP_EOL;
 
 		$lines['bitrix_sessid'] = 'sessid=' . $session_id . PHP_EOL;
-		$lines['timestamp'] = 'timestamp=' . time() . PHP_EOL;
+		$lines['timestamp'] = 'timestamp=' . current_time('timestamp', true) . PHP_EOL;
 
 		if(has_filter('wc1c_schema_productscml_handler_checkauth_lines'))
 		{
