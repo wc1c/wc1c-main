@@ -2,9 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-use Digiom\Woplucore\Abstracts\CoreAbstract;
 use wpdb;
-use Digiom\Woplucore\Loader;
+use Digiom\Woplucore\Abstracts\CoreAbstract;
 use Digiom\Woplucore\Traits\SingletonTrait;
 use Psr\Log\LoggerInterface;
 use Wc1c\Main\Exceptions\Exception;
