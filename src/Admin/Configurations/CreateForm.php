@@ -131,7 +131,7 @@ class CreateForm extends FormAbstract
 
 					<?php foreach ( (array) $data['options'] as $option_key => $option_value ) : ?>
 
-					<div class="mb-3 border-1 border-light p-2" style="border: solid;">
+					<div class="mb-3 border border-secondary rounded-2 p-2" style="border: solid;">
 
                         <div>
 	                        <?php _e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>
