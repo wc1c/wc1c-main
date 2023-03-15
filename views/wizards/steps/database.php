@@ -12,8 +12,8 @@ $step = $args['step'];
 
 ?>
 
-<h1><?php _e( 'Creating tables in the database', 'wc1c' ); ?></h1>
-<p><?php _e( 'If continue, the required tables will be created in the database.', 'wc1c' ); ?></p>
+<h1><?php _e( 'Creating tables in the database', 'wc1c-main' ); ?></h1>
+<p><?php _e( 'If continue, the required tables will be created in the database.', 'wc1c-main' ); ?></p>
 
 <form method="post" action="">
     <p class="mt-4 actions step">
