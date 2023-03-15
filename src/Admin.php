@@ -251,7 +251,7 @@ final class Admin
 	 */
 	public function linksLeft(array $links): array
 	{
-		return array_merge(['site' => '<a href="' . esc_url(admin_url('admin.php?page=wc1c')) . '">' . __('Settings', 'wc1c-main') . '</a>'], $links);
+		return array_merge(['site' => '<a href="' . esc_url(admin_url('admin.php?page=wc1c')) . '">' . __('Dashboard', 'wc1c-main') . '</a>'], $links);
 	}
 
 	/**
