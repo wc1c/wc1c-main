@@ -58,7 +58,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.11.0');
+		$this->setVersion('0.11.1');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -425,7 +425,7 @@ class Core extends SchemaAbstract
 			foreach($classifier_groups as $group_id => $group)
 			{
 				$category = false;
-
+				var_dump($group);
 				$this->log()->debug(__('Classifier group processing.', 'wc1c-main'), ['group_id' => $group_id, 'group' => $group]);
 
 				/**
@@ -455,8 +455,15 @@ class Core extends SchemaAbstract
 				 */
 				if(!empty($category) && is_array($category))
 				{
-					$this->log()->warning(__('More than one category found by ID from 1C. Assigning the first available.', 'wc1c-main'), ['categories' => $category]);
 					$category = $category[0];
+
+					$cats_data =[];
+					foreach($category as $category_key => $category_obj)
+					{
+						$cats_data[$category_key] = $category_obj->getData();
+					}
+
+					$this->log()->warning(__('More than one category found by ID from 1C. Assigning the first available.', 'wc1c-main'), ['categories' => $cats_data]);
 				}
 
 				/**
@@ -574,6 +581,7 @@ class Core extends SchemaAbstract
 					if('yes' === $update_name)
 					{
 						$category->setName($group['name']);
+						var_dump($group['name']);
 					}
 
 					/**
@@ -614,8 +622,8 @@ class Core extends SchemaAbstract
 						}
 					}
 
-					$category->save();
-
+					var_dump($category->save());
+					var_dump($category->getName());
 					$this->log()->info(__('Update of existing category data completed successfully.', 'wc1c-main'));
 					continue;
 				}
@@ -861,7 +869,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Если классификатор существует, обновляем данные пришедшего из текущего
 		 */
-		if($internal_classifier instanceof ClassifierDataContract)
+		if($internal_classifier instanceof ClassifierDataContract && $classifier->isOnlyChanges())
 		{
 			if($internal_classifier->hasProperties())
 			{
