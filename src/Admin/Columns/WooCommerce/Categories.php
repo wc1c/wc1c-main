@@ -66,7 +66,7 @@ final class Categories
 				{
 					$category = new Category($id);
 				}
-				catch(Exception $e)
+				catch(\Throwable $e)
 				{
 					return $columns;
 				}
