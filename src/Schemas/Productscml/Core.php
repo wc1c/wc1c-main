@@ -58,7 +58,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.11.1');
+		$this->setVersion('0.11.2');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -620,6 +620,8 @@ class Core extends SchemaAbstract
 							}
 						}
 					}
+
+                    $category->save();
 
 					$this->log()->info(__('Update of existing category data completed successfully.', 'wc1c-main'));
 					continue;
