@@ -307,6 +307,15 @@ class Admin
             'default' => 'no'
         ];
 
+		$fields['categories_classifier_groups_create_assign_image'] =
+		[
+			'title' => __('Assign image on creating', 'wc1c-main'),
+			'type' => 'checkbox',
+			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => __('If there is a image in 1C, it will also be assigned in WooCommerce. The setting is triggered when a category is created.', 'wc1c-main'),
+			'default' => 'yes'
+		];
+
 		$fields['categories_update'] =
 		[
 			'title' => __('Updating categories', 'wc1c-main'),
@@ -357,6 +366,15 @@ class Admin
             It should be borne in mind that descriptions in 1C are not always stored. Therefore, you should not enable this function if the descriptions were filled out on the site.', 'wc1c-main'),
             'default' => 'no'
         ];
+
+		$fields['categories_classifier_groups_update_image'] =
+		[
+			'title' => __('Updating categories image', 'wc1c-main'),
+			'type' => 'checkbox',
+			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => __('If the category was previously linked to 1C data, then when changing the image in 1C, the image will also change in WooCommerce.', 'wc1c-main'),
+			'default' => 'no'
+		];
 
 		$fields['categories_update_only_configuration'] =
 		[

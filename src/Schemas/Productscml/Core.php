@@ -414,13 +414,21 @@ class Core extends SchemaAbstract
 
 			$assign_description = $this->getOptions('categories_classifier_groups_create_assign_description', 'no');
 			$assign_parent = $this->getOptions('categories_classifier_groups_create_assign_parent', 'yes');
+			$assign_image = $this->getOptions('categories_classifier_groups_create_assign_image', 'no');
 
 			$update_parent = $this->getOptions('categories_classifier_groups_update_parent', 'yes');
 			$update_description = $this->getOptions('categories_classifier_groups_update_description', 'no');
 			$update_name = $this->getOptions('categories_classifier_groups_update_name', 'no');
+			$update_image = $this->getOptions('categories_classifier_groups_update_image', 'no');
 
 			/** @var CategoriesStorageContract $categories_storage */
 			$categories_storage = Storage::load('category');
+
+			if('yes' === $assign_image || 'yes' === $update_image)
+			{
+				/** @var ImagesStorageContract $images_storage */
+				$images_storage = Storage::load('image');
+			}
 
 			foreach($classifier_groups as $group_id => $group)
 			{
@@ -584,6 +592,42 @@ class Core extends SchemaAbstract
 					}
 
 					/**
+					 * Обновление изображения
+					 */
+					if('yes' === $update_image && isset($images_storage))
+					{
+						$image_id = 0;
+
+						if(isset($group['image']))
+						{
+							$file = explode('.', basename($group['image']));
+
+							$image_current = $images_storage->getByExternalName(reset($file));
+
+							if(false === $image_current)
+							{
+								$this->log()->notice(__('The image updating for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+								continue;
+							}
+
+							if(is_array($image_current))
+							{
+								$image_current = reset($image_current);
+							}
+
+							$image_id = $image_current->getId();
+
+							if(0 === $image_id)
+							{
+								$this->log()->notice(__('The image updating for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+								continue;
+							}
+						}
+
+						$category->setImageId($image_id);
+					}
+
+					/**
 					 * Обновление описания
 					 */
 					if('yes' === $update_description)
@@ -681,6 +725,39 @@ class Core extends SchemaAbstract
 					if('yes' === $assign_description)
 					{
 						$category->setDescription($group['description']);
+					}
+
+					if('yes' === $assign_image && isset($images_storage))
+					{
+						$image_id = 0;
+
+						if(isset($group['image']))
+						{
+							$file = explode('.', basename($group['image']));
+
+							$image_current = $images_storage->getByExternalName(reset($file));
+
+							if(false === $image_current)
+							{
+								$this->log()->notice(__('The image assignment for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+								continue;
+							}
+
+							if(is_array($image_current))
+							{
+								$image_current = reset($image_current);
+							}
+
+							$image_id = $image_current->getId();
+
+							if(0 === $image_id)
+							{
+								$this->log()->notice(__('The image assignment for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+								continue;
+							}
+						}
+
+						$category->setImageId($image_id);
 					}
 
 					$category->save();
