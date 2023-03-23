@@ -2,7 +2,7 @@
 Contributors: WC1C, Frescoref
 Tags: commerceml, 1c, cml, ecommerce, wc1c, woocommerce, integration 1C, 1s, 1с, 1C, 1С
 Requires at least: 5.2
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.0
 Stable tag: 0.20.0
 License: GNU General Public License v3.0
