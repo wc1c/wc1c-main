@@ -485,18 +485,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/wc.git",
-                "reference": "4ea7580b7f1471a6816dd17c6cb57142740e8790"
+                "reference": "eafa2b62093f2bd3b6b0706255805983f6b2b6e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/wc/zipball/4ea7580b7f1471a6816dd17c6cb57142740e8790",
-                "reference": "4ea7580b7f1471a6816dd17c6cb57142740e8790",
+                "url": "https://api.github.com/repos/wc1c/wc/zipball/eafa2b62093f2bd3b6b0706255805983f6b2b6e3",
+                "reference": "eafa2b62093f2bd3b6b0706255805983f6b2b6e3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0"
             },
-            "time": "2022-12-20T18:54:44+00:00",
+            "time": "2023-03-23T07:24:23+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
