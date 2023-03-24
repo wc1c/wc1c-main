@@ -14,6 +14,12 @@ Integration of WooCommerce with 1C products (different configurations)
 == Description ==
 Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
 
+= Features =
+* Automation of work with products (goods, services) 1C and WooCommerce.
+* Automation of work with orders for products (goods, services) 1C and WooCommerce.
+* Expandability.
+All features: [https://wc1c.info/features](https://wc1c.info/features)
+
 == Translations ==
 * English - default, always included
 * Russian - always included
