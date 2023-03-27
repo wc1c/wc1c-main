@@ -181,6 +181,15 @@ class AllTable extends TableAbstract
 	 */
 	public function columnName($item): string
 	{
+		try
+		{
+			$configuration = new Configuration($item['configuration_id']);
+		}
+		catch(\Throwable $e)
+		{
+			return $e->getMessage();
+		}
+
 		$actions =
 		[
 			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Open', 'wc1c-main') . '</a>',
@@ -192,7 +201,7 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c-main') . '</a>';
 		}
 
-		if('active' === $item['status'])
+		if($configuration->isEnabled())
 		{
 			unset($actions['delete']);
 		}
@@ -214,9 +223,8 @@ class AllTable extends TableAbstract
 			$schema = wc1c()->schemas()->get($item['schema']);
 			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
 
-            if($item['schema'] === 'productscml')
+            if($item['schema'] === 'productscml' || $item['schema'] === 'pqcml')
             {
-                $configuration = new Configuration($item['configuration_id']);
                 $full_time = $configuration->getMeta('_catalog_full_time', true);
 
                 if(!empty($full_time))
