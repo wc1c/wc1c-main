@@ -153,15 +153,21 @@ final class Receiver extends ReceiverAbstract
 			$type = apply_filters('wc1c_schema_productscml_receiver_send_response_type', $type, $this);
 		}
 
-		if($type === 'success')
+		if($this->core()->configuration()->isEnabled())
 		{
-			$this->core()->configuration()->setStatus('active');
-			$this->core()->configuration()->save();
-		}
+			$status = $this->core()->configuration()->getStatus();
 
-		if($type === 'failure')
-		{
-			$this->core()->configuration()->setStatus('error');
+			if($type === 'success')
+			{
+				$status = 'active';
+			}
+
+			if($type === 'failure')
+			{
+				$status = 'error';
+			}
+
+			$this->core()->configuration()->setStatus($status);
 			$this->core()->configuration()->save();
 		}
 
@@ -607,7 +613,7 @@ final class Receiver extends ReceiverAbstract
 			/*
 			 * Adding to media library
 			 */
-			if(wc1c()->filesystem()->extension($upload_file_path) !== 'xml' && 'yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no'))
+			if('yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no') && wc1c()->filesystem()->extension($upload_file_path) !== 'xml')
 			{
 				if('yes' !== $this->core()->getOptions('media_library', 'no'))
 				{
