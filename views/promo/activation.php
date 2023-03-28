@@ -16,7 +16,7 @@ $text = sprintf
 <div class="">
     <h2><?php _e('How to activate?', 'wc1c-main'); ?></h2>
     <ul>
-        <li class="fs-6"><b>1.</b> <?php _e('Get an activation code in any available way. For example, on the official website.', 'wc1c-main'); ?></li>
+        <li class="fs-6"><b>1.</b> <?php _e('Get an activation code in any available way. For example, on the official website.', 'wc1c-main'); ?> (<a href="://wc1c.info/market/code">https://wc1c.info/market/code</a>)</li>
         <li class="fs-6"><b>2.</b> <?php _e('Enter the activation code in the plugin settings.', 'wc1c-main'); ?> (<a href="<?php printf('%s', get_home_url('', add_query_arg(['section' => 'settings', 'do_settings' => 'activation']))) ?>"><?php printf('%s', get_home_url('', add_query_arg(['section' => 'settings', 'do_settings' => 'activation']))) ?></a>)</li>
     </ul>
 </div>
