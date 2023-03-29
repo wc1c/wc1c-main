@@ -20,7 +20,7 @@ Implementation of a mechanism for flexible exchange of various data between 1C p
 - Exchange of data on products in both directions.
 - Selective data update.
 - Flexible matching of existing data (synchronization).
-- Источники для данных.
+- Sources for data.
 ✅ Automation of work with orders for products (goods, services) 1C and WooCommerce.
 - Data exchange on orders in both directions.
 - Upload additional data such as payments and deliveries.
