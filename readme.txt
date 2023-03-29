@@ -65,6 +65,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Up: language files
 * Up: CML library
 * Improvement: promo for codes
+* Ability: use Woplucore
 * Fix: more
 
 = 0.19.2 =
