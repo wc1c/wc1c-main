@@ -30,11 +30,11 @@ class LogsForm extends Form
 	/**
 	 * Add settings for logger
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function init_fields_logger($fields)
+	public function init_fields_logger(array $fields): array
 	{
 		$fields['logger_level'] =
 		[
@@ -59,6 +59,15 @@ class LogsForm extends Form
 			'description' => __('Log files created daily. This option on the maximum number of stored files. By default saved of the logs are for the last 30 days.', 'wc1c-main'),
 			'default' => 30,
 			'css' => 'min-width: 20px;',
+		];
+
+		$fields['logger_output'] =
+		[
+			'title' => __('Output on display', 'wc1c-main'),
+			'type' => 'checkbox',
+			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+			'description' => __('All entries in the event logs will be displayed.', 'wc1c-main'),
+			'default' => 'no'
 		];
 
 		$fields['logger_title_level'] =

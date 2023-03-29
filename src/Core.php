@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Main\Log\StreamHandler;
 use wpdb;
 use Digiom\Woplucore\Abstracts\CoreAbstract;
 use Digiom\Woplucore\Traits\SingletonTrait;
@@ -276,8 +277,13 @@ final class Core extends CoreAbstract
 
 				$logger->pushProcessor($uid_processor);
 				$logger->pushHandler($handler);
+
+				if('yes' === $this->settings('logs')->get('logger_output', 'no'))
+				{
+					$logger->pushHandler(new StreamHandler('php://output', Logger::DEBUG));
+				}
 			}
-			catch(\Exception $e){}
+			catch(\Throwable $e){}
 
 			/**
 			 * Внешние назначения для логгера
