@@ -185,7 +185,7 @@ class Admin
 			'default' => 'no'
 		];
 
-		$clean_options =
+		$response_options =
 		[
 			'no' => __('Do not use', 'wc1c-main'),
 			'standard' => __('Standard', 'wc1c-main'),
@@ -205,7 +205,7 @@ class Admin
 			),
 			'default' => 'standard',
 			'css' => 'min-width:100%',
-			'options' => $clean_options
+			'options' => $response_options
 		];
 
 		$fields['ob_end_clean'] =
@@ -220,6 +220,29 @@ class Admin
 				__('Used for sites that have viruses.', 'wc1c-main')
 			),
 			'default' => 'no'
+		];
+
+		$response_options =
+		[
+			'failure' => __('Failure', 'wc1c-main'),
+			'success' => __('Success', 'wc1c-main'),
+		];
+
+		$fields['response_unknown_action'] =
+		[
+			'title' => __('Response on unknown action', 'wc1c-main'),
+			'type' => 'select',
+			'description' => sprintf
+			('<b>%s</b> - %s<br /><b>%s</b> - %s<br /><hr>%s',
+			 __('Failure', 'wc1c-main'),
+			 __('Error information will be sent.', 'wc1c-main'),
+			 __('Success', 'wc1c-main'),
+			 __('Information about the successful processing of the request will be sent.', 'wc1c-main'),
+			 __('You need to understand what this setting is for. The default is to always throw an error.', 'wc1c-main')
+			),
+			'default' => 'failure',
+			'css' => 'min-width:100%',
+			'options' => $response_options
 		];
 
 		return $fields;

@@ -107,7 +107,7 @@ final class Receiver extends ReceiverAbstract
 		$response_description = __('Action is not found in schema.', 'wc1c-main');
 
 		$this->core()->log()->warning($response_description);
-		$this->sendResponseByType('failure', $response_description);
+		$this->sendResponseByType($this->core()->getOptions('response_unknown_action', 'failure'), $response_description);
 	}
 
 	/**
@@ -616,7 +616,7 @@ final class Receiver extends ReceiverAbstract
 			/*
 			 * Adding to media library
 			 */
-			if('yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no') && $file_extension !== 'xml')
+			if($file_extension !== 'xml' && 'yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no'))
 			{
 				if('yes' !== $this->core()->getOptions('media_library', 'no'))
 				{
