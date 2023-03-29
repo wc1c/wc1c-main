@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Settings\Abstracts\SettingsAbstract;
+use Wc1c\Main\Abstracts\SettingsAbstract;
 
 /**
  * ConnectionSettings
