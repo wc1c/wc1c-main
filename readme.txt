@@ -27,6 +27,7 @@ Implementation of a mechanism for flexible exchange of various data between 1C p
 - Flexible upload format settings.
 ✅ Big data support.
 ✅ Support for weak hosting.
+✅ Maintaining event logs of various levels for timely response to problems.
 ✅ Expandability.
 
 All features: [https://wc1c.info/features](https://wc1c.info/features)
