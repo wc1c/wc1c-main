@@ -15,20 +15,20 @@ Integration of WooCommerce with 1C products (different configurations)
 Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
 
 = Features =
-✅ Automation of work with products (goods, services) 1C and WooCommerce.
+* ✅ Automation of work with products (goods, services) 1C and WooCommerce.
 - Various product types, including feature-based variations.
 - Exchange of data on products in both directions.
 - Selective data update.
 - Flexible matching of existing data (synchronization).
 - Sources for data.
-✅ Automation of work with orders for products (goods, services) 1C and WooCommerce.
+* ✅ Automation of work with orders for products (goods, services) 1C and WooCommerce.
 - Data exchange on orders in both directions.
 - Upload additional data such as payments and deliveries.
 - Flexible upload format settings.
-✅ Big data support.
-✅ Support for weak hosting.
-✅ Maintaining event logs of various levels for timely response to problems.
-✅ Expandability.
+* ✅ Big data support.
+* ✅ Support for weak hosting.
+* ✅ Maintaining event logs of various levels for timely response to problems.
+* ✅ Expandability.
 
 All features: [https://wc1c.info/features](https://wc1c.info/features)
 
