@@ -2,9 +2,9 @@
 Contributors: WC1C, Frescoref
 Tags: commerceml, 1c, cml, ecommerce, wc1c, woocommerce, integration 1C, 1s, 1с, 1C, 1С
 Requires at least: 5.2
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 0.19.2
+Stable tag: 0.20.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
@@ -13,6 +13,12 @@ Integration of WooCommerce with 1C products (different configurations)
 
 == Description ==
 Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
+
+= Features =
+* Automation of work with products (goods, services) 1C and WooCommerce.
+* Automation of work with orders for products (goods, services) 1C and WooCommerce.
+* Expandability.
+All features: [https://wc1c.info/features](https://wc1c.info/features)
 
 == Translations ==
 * English - default, always included
@@ -52,6 +58,15 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 
 == Changelog ==
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
+
+= 0.20.0 =
+* WP tested up to: 6.2
+* Up: ProductsCML to 0.12.0
+* Up: language files
+* Up: CML library
+* Improvement: promo for codes
+* Ability: use Woplucore
+* Fix: more
 
 = 0.19.2 =
 * Up: ProductsCML to 0.11.2

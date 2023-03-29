@@ -232,6 +232,30 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение идентификатора изображения категории
+	 *
+	 * @param string $context Контекст запроса
+	 *
+	 * @return int|mixed Идентификатор изображения
+	 */
+	public function getImageId(string $context = 'view')
+	{
+		return $this->getMeta('thumbnail_id', true, $context);
+	}
+
+	/**
+	 * Установка идентификатора изображения из галереи
+	 *
+	 * @param int|string $image_id Идентификатор изображения
+	 *
+	 * @return void
+	 */
+	public function setImageId($image_id)
+	{
+		$this->addMetaData('thumbnail_id', $image_id, true);
+	}
+
+	/**
 	 * Получение идентификации родительских категорий в 1C
 	 *
 	 * @param string $context Контекст запроса

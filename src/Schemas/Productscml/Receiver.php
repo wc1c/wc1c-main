@@ -107,7 +107,7 @@ final class Receiver extends ReceiverAbstract
 		$response_description = __('Action is not found in schema.', 'wc1c-main');
 
 		$this->core()->log()->warning($response_description);
-		$this->sendResponseByType('failure', $response_description);
+		$this->sendResponseByType($this->core()->getOptions('response_unknown_action', 'failure'), $response_description);
 	}
 
 	/**
@@ -153,15 +153,21 @@ final class Receiver extends ReceiverAbstract
 			$type = apply_filters('wc1c_schema_productscml_receiver_send_response_type', $type, $this);
 		}
 
-		if($type === 'success')
+		if($this->core()->configuration()->isEnabled())
 		{
-			$this->core()->configuration()->setStatus('active');
-			$this->core()->configuration()->save();
-		}
+			$status = $this->core()->configuration()->getStatus();
 
-		if($type === 'failure')
-		{
-			$this->core()->configuration()->setStatus('error');
+			if($type === 'success')
+			{
+				$status = 'active';
+			}
+
+			if($type === 'failure')
+			{
+				$status = 'error';
+			}
+
+			$this->core()->configuration()->setStatus($status);
 			$this->core()->configuration()->save();
 		}
 
@@ -602,12 +608,15 @@ final class Receiver extends ReceiverAbstract
 		{
 			wc1c()->filesystem()->chmod($upload_file_path , 0755);
 
+            $file_extension = wc1c()->filesystem()->extension($upload_file_path);
+            $file_hash = wc1c()->filesystem()->hash($upload_file_path);
+
 			$response_description = __('The data is successfully written to a file. Recorded data size:', 'wc1c-main') . ' '. size_format($file_size);
 
 			/*
 			 * Adding to media library
 			 */
-			if(wc1c()->filesystem()->extension($upload_file_path) !== 'xml' && 'yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no'))
+			if($file_extension !== 'xml' && 'yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no'))
 			{
 				if('yes' !== $this->core()->getOptions('media_library', 'no'))
 				{
@@ -629,6 +638,32 @@ final class Receiver extends ReceiverAbstract
 							$image_current = $image_current[0];
 						}
 
+                        if($image_current)
+                        {
+                            $current_file_extension = $image_current->getMeta('_wc1c_external_image_extension', true);
+                            $current_file_extension = reset($current_file_extension);
+                            $current_file_hash = $image_current->getMeta('_wc1c_external_hash', true);
+                            $current_file_hash = reset($current_file_hash);
+
+                            if(!empty($current_file_extension) && $current_file_extension !== $file_extension)
+                            {
+                                $image_current = false;
+                            }
+                            elseif(empty($current_file_extension))
+                            {
+                                $image_current->addMetaData('_wc1c_external_image_extension', $file_extension);
+                            }
+
+                            if(!empty($current_file_hash) && $current_file_hash !== $file_hash)
+                            {
+                                $image_current = false;
+                            }
+                            elseif(empty($current_file_hash))
+                            {
+                                $image_current->addMetaData('_wc1c_external_hash', $file_hash);
+                            }
+                        }
+
 						if(false === $image_current)
 						{
 							$new_image = new Image();
@@ -638,7 +673,10 @@ final class Receiver extends ReceiverAbstract
 							$new_image->setExternalName($image_file_name[0]);
 							$new_image->setSlug($image_file_name[0]);
 
-							$new_image->setConfigurationId($this->core()->configuration()->getId());
+                            $new_image->addMetaData('_wc1c_external_image_extension', $file_extension);
+                            $new_image->addMetaData('_wc1c_external_hash', $file_hash);
+
+                            $new_image->setConfigurationId($this->core()->configuration()->getId());
 							$new_image->setSchemaId($this->core()->getId());
 
 							$new_image->setUserId($this->core()->configuration()->getUserId());

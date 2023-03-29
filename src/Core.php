@@ -2,6 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Main\Abstracts\SettingsAbstract;
+use Wc1c\Main\Log\StreamHandler;
 use wpdb;
 use Digiom\Woplucore\Abstracts\CoreAbstract;
 use Digiom\Woplucore\Traits\SingletonTrait;
@@ -12,7 +14,6 @@ use Wc1c\Main\Log\Handler;
 use Wc1c\Main\Log\Logger;
 use Wc1c\Main\Log\Processor;
 use Wc1c\Main\Settings\ConnectionSettings;
-use Wc1c\Main\Settings\Contracts\SettingsContract;
 use Wc1c\Main\Settings\InterfaceSettings;
 use Wc1c\Main\Settings\LogsSettings;
 use Wc1c\Main\Settings\MainSettings;
@@ -37,7 +38,7 @@ final class Core extends CoreAbstract
 	private $timer;
 
 	/**
-	 * @var SettingsContract
+	 * @var SettingsAbstract[]
 	 */
 	private $settings = [];
 
@@ -276,8 +277,13 @@ final class Core extends CoreAbstract
 
 				$logger->pushProcessor($uid_processor);
 				$logger->pushHandler($handler);
+
+				if('yes' === $this->settings('logs')->get('logger_output', 'no'))
+				{
+					$logger->pushHandler(new StreamHandler('php://output', Logger::DEBUG));
+				}
 			}
-			catch(\Exception $e){}
+			catch(\Throwable $e){}
 
 			/**
 			 * Внешние назначения для логгера
@@ -302,7 +308,7 @@ final class Core extends CoreAbstract
 	 *
 	 * @param string $context
 	 *
-	 * @return SettingsContract
+	 * @return SettingsAbstract
 	 */
 	public function settings(string $context = 'main')
 	{

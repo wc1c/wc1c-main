@@ -20,7 +20,7 @@
         <div class="col-24 col-lg-7 p-0">
             <?php do_action('wc1c_admin_configurations_create_sidebar_before_show'); ?>
 
-            <div class="alert alert-primary border-0 mи-4" style="max-width: 100%;">
+            <div class="alert alert-primary border-0" style="max-width: 100%;">
                 <h4 class="alert-heading mt-0 mb-1"><?php _e('More schemas for configurations', 'wc1c-main'); ?></h4>
 		        <?php _e('Additional schemes are available in extensions on the official website.', 'wc1c-main'); ?>
                 <br/>

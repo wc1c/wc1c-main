@@ -27,6 +27,7 @@ use Wc1c\Wc\Products\SimpleProduct;
 use Wc1c\Wc\Products\VariableProduct;
 use Wc1c\Wc\Products\VariationVariableProduct;
 use Wc1c\Wc\Storage;
+use XMLReader;
 
 /**
  * Core
@@ -58,7 +59,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.11.2');
+		$this->setVersion('0.12.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -414,19 +415,27 @@ class Core extends SchemaAbstract
 
 			$assign_description = $this->getOptions('categories_classifier_groups_create_assign_description', 'no');
 			$assign_parent = $this->getOptions('categories_classifier_groups_create_assign_parent', 'yes');
+			$assign_image = $this->getOptions('categories_classifier_groups_create_assign_image', 'no');
 
 			$update_parent = $this->getOptions('categories_classifier_groups_update_parent', 'yes');
 			$update_description = $this->getOptions('categories_classifier_groups_update_description', 'no');
 			$update_name = $this->getOptions('categories_classifier_groups_update_name', 'no');
+			$update_image = $this->getOptions('categories_classifier_groups_update_image', 'no');
 
 			/** @var CategoriesStorageContract $categories_storage */
 			$categories_storage = Storage::load('category');
 
+			if('yes' === $assign_image || 'yes' === $update_image)
+			{
+				/** @var ImagesStorageContract $images_storage */
+				$images_storage = Storage::load('image');
+			}
+
 			foreach($classifier_groups as $group_id => $group)
 			{
-				$category = false;
-
 				$this->log()->debug(__('Classifier group processing.', 'wc1c-main'), ['group_id' => $group_id, 'group' => $group]);
+
+				$category = false;
 
 				/**
 				 * Поиск существующей категории по внешним алгоритмам
@@ -440,6 +449,8 @@ class Core extends SchemaAbstract
 				if(has_filter('wc1c_schema_productscml_processing_classifier_groups_category_search'))
 				{
 					$category = apply_filters('wc1c_schema_productscml_processing_classifier_groups_category_search', $this, $group, $reader);
+
+					$this->log()->debug(__('The category was searched using external algorithms.', 'wc1c-main'), ['category' => $category]);
 				}
 
 				/*
@@ -447,6 +458,8 @@ class Core extends SchemaAbstract
 				 */
 				if(false === $category)
 				{
+					$this->log()->debug(__('Category search by category ID from 1C.', 'wc1c-main'), ['group_id' => $group_id]);
+
 					$category = $categories_storage->getByExternalId($group_id);
 				}
 
@@ -471,6 +484,8 @@ class Core extends SchemaAbstract
 				 */
 				if(!$category instanceof Category && 'no' !== $merge_categories)
 				{
+					$this->log()->debug(__('Category not found. Trying to use existing categories.', 'wc1c-main'), ['group_id' => $group_id]);
+
 					$cats = [];
 					$category_merge = false;
 
@@ -478,7 +493,7 @@ class Core extends SchemaAbstract
 
 					if(false === $category)
 					{
-						$this->log()->info(__('No category found for the specified name.', 'wc1c-main'));
+						$this->log()->info(__('No category found for the specified name.', 'wc1c-main'), ['category_name' => $group['name']]);
 					}
 					else
 					{
@@ -498,6 +513,8 @@ class Core extends SchemaAbstract
 							 */
 							if('yes' === $merge_categories)
 							{
+								$this->log()->debug(__('Category found by name without nesting.', 'wc1c-main'), ['category' => $cat->getData()]);
+
 								$category_merge = true;
 								$category = $cat;
 								break;
@@ -508,11 +525,15 @@ class Core extends SchemaAbstract
 							 */
 							if('yes_parent' === $merge_categories)
 							{
+								$this->log()->debug(__('Category search taking into account nesting.', 'wc1c-main'), ['category' => $cat->getData()]);
+
 								/*
 								 * Родитель отсутствует в 1С и в WooCommerce
 								 */
 								if(false === $cat->hasParent() && empty($group['parent_id']))
 								{
+									$this->log()->info(__('Category found. The parent is absent both in 1C and on the site.', 'wc1c-main'));
+
 									$category_merge = true;
 									$category = $cat;
 									break;
@@ -533,6 +554,8 @@ class Core extends SchemaAbstract
 										break;
 									}
 								}
+
+								$category = false;
 							}
 						}
 					}
@@ -542,18 +565,24 @@ class Core extends SchemaAbstract
 					 */
 					if($category_merge)
 					{
+						$this->log()->info(__('Assigning a category identifier according to 1C data for an existing category.', 'wc1c-main'));
+
 						// Назначение идентификатора категории
 						$category->assignExternalId($group_id);
 
 						// Назначение идентификатора родительской категории
 						if(!empty($group['parent_id']))
 						{
+							$this->log()->info(__('Assigning a parent category ID from 1C to an existing category.', 'wc1c-main'));
+
 							$category->assignExternalParentId($group['parent_id']);
 						}
 
 						// Обновление отключено, либо доступно только при совпадении конфигураций
 						if('yes' !== $update_categories || 'yes' === $update_categories_only_configuration)
 						{
+							$this->log()->info(__('Saving a category.', 'wc1c-main'));
+
 							$category->save();
 						}
 					}
@@ -571,7 +600,7 @@ class Core extends SchemaAbstract
 					 */
 					if('yes' === $update_categories_only_configuration && (int)$category->getConfigurationId() !== $this->configuration()->getId())
 					{
-						$this->log()->warning(__('Category update skipped. The category was created from a different configuration.', 'wc1c-main'));
+						$this->log()->notice(__('Category update skipped. The category was created from a different configuration.', 'wc1c-main'));
 						continue;
 					}
 
@@ -580,7 +609,54 @@ class Core extends SchemaAbstract
 					 */
 					if('yes' === $update_name)
 					{
-						$category->setName($group['name']);
+						$this->log()->info(__('Category name update.', 'wc1c-main'));
+
+						if($category->getName() === $group['name'])
+						{
+							$this->log()->info(__('The name of the category has not changed, skipping the name update.', 'wc1c-main'));
+						}
+						else
+						{
+							$this->log()->info(__('A new category name has been set.', 'wc1c-main'), ['category_old' => $category->getName(), 'category_new' => $group['name']]);
+
+							$category->setName($group['name']);
+						}
+					}
+
+					/**
+					 * Обновление изображения
+					 */
+					if('yes' === $update_image && isset($images_storage))
+					{
+						$image_id = 0;
+
+						if(isset($group['image']))
+						{
+							$file = explode('.', basename($group['image']));
+
+							$image_current = $images_storage->getByExternalName(reset($file));
+
+							if(false === $image_current)
+							{
+								$this->log()->notice(__('The image updating for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+							}
+							else
+							{
+								if(is_array($image_current))
+								{
+									$image_current = reset($image_current);
+								}
+
+								$image_id = $image_current->getId();
+
+								if(0 === $image_id)
+								{
+									$this->log()->notice(__('The image updating for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+								}
+							}
+						}
+
+						$category->setImageId($image_id);
 					}
 
 					/**
@@ -588,7 +664,18 @@ class Core extends SchemaAbstract
 					 */
 					if('yes' === $update_description)
 					{
-						$category->setDescription($group['description']);
+						$this->log()->info(__('Category description update.', 'wc1c-main'));
+
+						if($category->getDescription() === $group['description'])
+						{
+							$this->log()->info(__('The description of the category has not changed, skipping the description update.', 'wc1c-main'));
+						}
+						else
+						{
+							$this->log()->info(__('A new category description has been set.', 'wc1c-main'), ['category_description_old' => $category->getDescription(), 'category_description_new' => $group['description']]);
+
+							$category->setDescription($group['description']);
+						}
 					}
 
 					/**
@@ -596,12 +683,18 @@ class Core extends SchemaAbstract
 					 */
 					if('yes' === $update_parent)
 					{
+						$this->log()->info(__('Update the parent for the category.', 'wc1c-main'));
+
 						if(empty($group['parent_id']))
 						{
+							$this->log()->info(__('The parent is absent in 1C.', 'wc1c-main'));
+
 							$category->setParentId(0);
 						}
 						else
 						{
+							$this->log()->info(__('Search for a parent category by ID from 1C.', 'wc1c-main'));
+
 							$parent_category = $categories_storage->getByExternalId($group['parent_id']);
 
 							/**
@@ -615,6 +708,8 @@ class Core extends SchemaAbstract
 
 							if($parent_category instanceof Category && $category->getParentId() !== $parent_category->getId())
 							{
+								$this->log()->info(__('Assigning parent IDs to a category.', 'wc1c-main'));
+
 								$category->setParentId($parent_category->getId());
 								$category->assignExternalParentId($group['parent_id']);
 							}
@@ -652,6 +747,8 @@ class Core extends SchemaAbstract
 					 */
 					if('yes' === $assign_parent && !empty($group['parent_id']))
 					{
+						$this->log()->info(__('Search for a parent category by ID from 1C.', 'wc1c-main'));
+
 						$parent_category = $categories_storage->getByExternalId($group['parent_id']);
 
 						/**
@@ -665,6 +762,8 @@ class Core extends SchemaAbstract
 
 						if($parent_category instanceof Category)
 						{
+							$this->log()->info(__('Assigning parent IDs to a category.', 'wc1c-main'));
+
 							$category->setParentId($parent_category->getId());
 							$category->assignExternalParentId($group['parent_id']);
 						}
@@ -680,16 +779,50 @@ class Core extends SchemaAbstract
 					 */
 					if('yes' === $assign_description)
 					{
+						$this->log()->info(__('Assign a description to a category.', 'wc1c-main'));
+
 						$category->setDescription($group['description']);
+					}
+
+					if('yes' === $assign_image && isset($images_storage))
+					{
+						$this->log()->info(__('Assign a image to a category.', 'wc1c-main'));
+
+						$image_id = 0;
+
+						if(isset($group['image']))
+						{
+							$file = explode('.', basename($group['image']));
+
+							$image_current = $images_storage->getByExternalName(reset($file));
+
+							if(false === $image_current)
+							{
+								$this->log()->notice(__('The image assignment for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+							}
+							else
+							{
+								if(is_array($image_current))
+								{
+									$image_current = reset($image_current);
+								}
+
+								$image_id = $image_current->getId();
+
+								if(0 === $image_id)
+								{
+									$this->log()->notice(__('The image assignment for the category is missing. It is not found in the media library.', 'wc1c-main'), ['image' => $group['image']]);
+								}
+							}
+						}
+
+						$category->setImageId($image_id);
 					}
 
 					$category->save();
 
-					$this->log()->info(__('Category creation completed successfully.', 'wc1c-main'), ['category' => $category]);
-					continue;
+					$this->log()->info(__('Category creation completed successfully.', 'wc1c-main'), ['category' => $category->getData()]);
 				}
-
-				$this->log()->debug(__('No action was taken for the classifier group.', 'wc1c-main'));
 			}
 
 			return;
@@ -949,6 +1082,14 @@ class Core extends SchemaAbstract
 	{
 		if(false === $reader->isElement())
 		{
+			if($reader->nodeName === 'Каталог' && $reader->xml_reader->nodeType === XMLReader::END_ELEMENT)
+			{
+				$this->log()->info(__('Saving a catalog to meta configuration data.', 'wc1c-main'), ['filetype' => $reader->getFiletype()]);
+
+				$this->configuration()->addMetaData('catalog:' . $reader->catalog->getId(), maybe_serialize($reader->catalog), true);
+				$this->configuration()->saveMetaData();
+			}
+
 			return;
 		}
 
@@ -956,6 +1097,8 @@ class Core extends SchemaAbstract
 		{
 			if(is_null($reader->catalog))
 			{
+				$this->log()->info(__('The catalog object has not been previously initialized. Initialization.', 'wc1c-main'));
+
 				$reader->catalog = new Catalog();
 			}
 
@@ -980,24 +1123,30 @@ class Core extends SchemaAbstract
 			{
 				case 'Ид':
 					$reader->catalog->setId($reader->xml_reader->readString());
+					$this->log()->debug(__('The catalog object has been assigned an ID.', 'wc1c-main'), ['id' => $reader->catalog->getId()]);
 					break;
 				case 'ИдКлассификатора':
 					$reader->catalog->setClassifierId($reader->xml_reader->readString());
+					$this->log()->debug(__('The catalog object has been assigned a classifier ID.', 'wc1c-main'), ['classifier_id' => $reader->catalog->getClassifierId()]);
 					break;
 				case 'Наименование':
 					$reader->catalog->setName($reader->xml_reader->readString());
+					$this->log()->debug(__('A name has been assigned to the catalog object.', 'wc1c-main'), ['name' => $reader->catalog->getName()]);
 					break;
 				case 'Владелец':
 					$owner = $reader->decoder()->process('counterparty', $reader->xml_reader->readOuterXml());
 					$reader->catalog->setOwner($owner);
+					$this->log()->debug(__('The catalog object has been assigned an owner.', 'wc1c-main'), ['owner' => $owner]);
 					break;
 				case 'Описание':
 					$reader->catalog->setDescription($reader->xml_reader->readString());
+					$this->log()->debug(__('A description has been assigned to the catalog object.', 'wc1c-main'), ['description' => $reader->catalog->getDescription()]);
 					break;
 				case 'Склады':
 					$warehouses = $reader->decoder()->process('warehouses', $reader->xml_reader->readOuterXml());
 					$reader->catalog->setWarehouses($warehouses);
 					$reader->next();
+					$this->log()->debug(__('A warehouses has been assigned to the catalog object.', 'wc1c-main'), ['warehouses' => $warehouses]);
 					break;
 			}
 		}
@@ -1034,11 +1183,13 @@ class Core extends SchemaAbstract
 			if(has_filter('wc1c_schema_productscml_processing_products'))
 			{
 				$product = apply_filters('wc1c_schema_productscml_processing_products', $product, $reader, $this, $product_xml);
+
+				$this->log()->info(__('The product is modified according to external algorithms.', 'wc1c-main'));
 			}
 
 			if(!$product instanceof ProductDataContract)
 			{
-				$this->log()->debug(__('Product !instanceof ProductDataContract. Skip processing.', 'wc1c-main'), ['data' => $product]);
+				$this->log()->warning(__('Product !instanceof ProductDataContract. Skip processing.', 'wc1c-main'), ['data' => $product]);
 				return;
 			}
 
@@ -3004,7 +3155,7 @@ class Core extends SchemaAbstract
 					{
 						if($price_type['name'] === $regular_price_name)
 						{
-							$regular_price_id = $price_type['guid'];
+							$regular_price_id = $price_type['id'];
 							break;
 						}
 					}
@@ -3038,7 +3189,7 @@ class Core extends SchemaAbstract
 					{
 						if($price_type['name'] === $sale_price_name)
 						{
-							$sale_price_id = $price_type['guid'];
+							$sale_price_id = $price_type['id'];
 							break;
 						}
 					}
@@ -3675,32 +3826,46 @@ class Core extends SchemaAbstract
 
 			if(empty($reader->offers_package->getPriceTypes()))
 			{
-				$price_types = $this->configuration()->getMeta('classifier-prices:import:' . $reader->offers_package->getClassifierId());
+				$price_types = $this->configuration()->getMeta('classifier-price-types:' . $reader->offers_package->getClassifierId());
 				if(is_array($price_types))
 				{
 					$reader->offers_package->setPriceTypes($price_types);
 				}
 			}
-
-	        if('yes' === $this->getOptions('browser_debug', 'no'))
-	        {
-		        $this->dump($reader->offers_package);
-	        }
         }
 
 		if($reader->parentNodeName === 'Предложения' && $reader->nodeName === 'Предложение')
 		{
 			$offer_xml = new SimpleXMLElement($reader->xml_reader->readOuterXml());
 
-			$offer = $reader->decoder->process('offer', $offer_xml);
+			try
+			{
+				$offer = $reader->decoder->process('offer', $offer_xml);
+			}
+			catch(\Throwable $e)
+			{
+				$this->log()->warning(__('An exception was thrown decode the offer.', 'wc1c-main'), ['exception' => $e]);
+				return;
+			}
 
+			/**
+			 * Внешняя фильтрация перед непосредственной обработкой
+			 *
+			 * @param ProductDataContract $offer
+			 * @param Reader $reader
+			 * @param SchemaAbstract $this
+			 * @param SimpleXMLElement $offer_xml
+			 */
 			if(has_filter('wc1c_schema_productscml_processing_offers'))
 			{
 				$offer = apply_filters('wc1c_schema_productscml_processing_offers', $offer, $reader, $this, $offer_xml);
+
+				$this->log()->info(__('The offer has been changed according to external algorithms.', 'wc1c-main'));
 			}
 
 			if(!$offer instanceof ProductDataContract)
 			{
+				$this->log()->warning(__('Offer !instanceof ProductDataContract. Skip processing.', 'wc1c-main'), ['data' => $offer]);
 				return;
 			}
 

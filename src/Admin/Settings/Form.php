@@ -3,8 +3,8 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Main\Abstracts\FormAbstract;
+use Wc1c\Main\Abstracts\SettingsAbstract;
 use Wc1c\Main\Exceptions\Exception;
-use Wc1c\Main\Settings\Contracts\SettingsContract;
 use Wc1c\Main\Traits\SingletonTrait;
 
 /**
@@ -17,22 +17,22 @@ abstract class Form extends FormAbstract
 	use SingletonTrait;
 
 	/**
-	 * @var SettingsContract
+	 * @var SettingsAbstract
 	 */
 	public $settings;
 
 	/**
-	 * @return SettingsContract
+	 * @return SettingsAbstract
 	 */
-	public function getSettings()
+	public function getSettings(): SettingsAbstract
 	{
 		return $this->settings;
 	}
 
 	/**
-	 * @param SettingsContract $settings
+	 * @param SettingsAbstract $settings
 	 */
-	public function setSettings($settings)
+	public function setSettings(SettingsAbstract $settings)
 	{
 		$this->settings = $settings;
 	}
