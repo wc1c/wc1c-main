@@ -71,6 +71,12 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 == Changelog ==
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
+= 0.21.0 =
+* WC tested up to: 7.6, 7.7, 7.8
+* Up: ProductsCML to 0.13.0
+* Up: Bootstrap to 5.3.0
+* Fix: more
+
 = 0.20.0 =
 * WP tested up to: 6.2
 * Up: ProductsCML to 0.12.0
