@@ -280,7 +280,7 @@ final class Core extends CoreAbstract
 
 				if('yes' === $this->settings('logs')->get('logger_output', 'no'))
 				{
-					$logger->pushHandler(new StreamHandler('php://output', Logger::DEBUG));
+					$logger->pushHandler(new StreamHandler('php://output', $level));
 				}
 			}
 			catch(\Throwable $e){}
