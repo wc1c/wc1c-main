@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "485ed5d646b04c8f5d4f0b6275824043",
+    "content-hash": "32bf41369ba2aef543f5f8cc8b4cc094",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -137,16 +137,16 @@
         },
         {
             "name": "digiom/wotices",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/wotices.git",
-                "reference": "1bc3a6909245727e639bf5b0fad6ed71a61cf89a"
+                "reference": "8b859084fa24ba7ff0ada87bc65e5bc11d57f4d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/wotices/zipball/1bc3a6909245727e639bf5b0fad6ed71a61cf89a",
-                "reference": "1bc3a6909245727e639bf5b0fad6ed71a61cf89a",
+                "url": "https://api.github.com/repos/digiom/wotices/zipball/8b859084fa24ba7ff0ada87bc65e5bc11d57f4d8",
+                "reference": "8b859084fa24ba7ff0ada87bc65e5bc11d57f4d8",
                 "shasum": ""
             },
             "require": {
@@ -172,9 +172,9 @@
             "description": "Notices for WordPress",
             "homepage": "https://digiom.ru",
             "support": {
-                "source": "https://github.com/digiom/wotices/tree/1.1.0"
+                "source": "https://github.com/digiom/wotices/tree/1.1.1"
             },
-            "time": "2023-02-10T18:25:38+00:00"
+            "time": "2023-06-23T12:23:58+00:00"
         },
         {
             "name": "monolog/monolog",
