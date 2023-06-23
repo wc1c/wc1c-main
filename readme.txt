@@ -75,6 +75,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * WC tested up to: 7.6, 7.7, 7.8
 * Up: ProductsCML to 0.13.0
 * Up: Bootstrap to 5.3.0
+* Up: language files
 * Fix: more
 
 = 0.20.0 =
