@@ -18,7 +18,7 @@ $text = sprintf
                 <div class="">
                     <h2><?php _e('How to activate?', 'wc1c-main'); ?></h2>
                     <ul>
-                        <li class="fs-6"><b>1.</b> <?php _e('Get an activation code in any available way. For example, on the official website.', 'wc1c-main'); ?> (<a href="://wc1c.info/market/code">wc1c.info/market/code</a>)</li>
+                        <li class="fs-6"><b>1.</b> <?php _e('Get an activation code in any available way. For example, on the official website.', 'wc1c-main'); ?> (<a target="_blank" href="//wc1c.info/market/code">wc1c.info/market/code</a>)</li>
                         <li class="fs-6"><b>2.</b> <?php _e('Enter the activation code in the plugin settings.', 'wc1c-main'); ?> (<a href="<?php printf('%s', get_home_url('', add_query_arg(['section' => 'settings', 'do_settings' => 'activation']))) ?>"><?php printf('%s', get_home_url('', add_query_arg(['section' => 'settings', 'do_settings' => 'activation']))) ?></a>)</li>
                     </ul>
                 </div>
@@ -36,6 +36,12 @@ $text = sprintf
                     <p class="fs-6">
                         <?php _e('In addition to supporting the software you use, additional features will be added.', 'wc1c-main'); ?>
                     </p>
+
+                    <h2><?php _e('ATTENTION! Activation does not add the possibility of extensions.', 'wc1c-main'); ?></h2>
+                    <p class="fs-6">
+                        <?php _e('Additional features are implemented in extensions! After activation, features from extensions are not activated.', 'wc1c-main'); ?>
+                        <?php _e('To add features, you need to install extensions. They are supplied by separate plugins, after activation of which the necessary features are added.', 'wc1c-main'); ?>
+                    </p>
                 </div>
 
             </div>
@@ -44,14 +50,14 @@ $text = sprintf
     </div>
     <div class="col-24 col-lg-7 p-0">
 
-        <div class="alert alert-info border-0 mt-2" style="max-width: 100%;">
+        <div class="alert alert-info border-0 mt-2 mw-100">
             <h4 class="alert-heading mt-0 mb-1"><?php _e('Do not wait until something breaks!', 'wc1c-main'); ?></h4>
             <?php _e('Activate your current copy of the software.', 'wc1c-main'); ?>
             <hr>
             <?php _e('Buy code:', 'wc1c-main'); ?> <a target="_blank" href="//wc1c.info/market/code">wc1c.info/market/code</a>
         </div>
 
-        <div class="alert alert-secondary border-0 mt-2" style="max-width: 100%;">
+        <div class="alert alert-secondary border-0 mt-2 mw-100">
             <h4 class="alert-heading mt-0 mb-1"><?php _e('No financial opportunity?', 'wc1c-main'); ?></h4>
             <?php _e('Take part in the development of the solution you use.', 'wc1c-main'); ?>
             <br/>
@@ -60,7 +66,7 @@ $text = sprintf
             <?php _e('Docs:', 'wc1c-main'); ?> <a target="_blank" href="//wc1c.info/docs">wc1c.info/docs</a>
         </div>
 
-        <div class="alert alert-secondary border-0 mt-2" style="max-width: 100%;">
+        <div class="alert alert-secondary border-0 mt-2 mw-100">
             <h4 class="alert-heading mt-0 mb-1"><?php _e('Every activation counts!', 'wc1c-main'); ?></h4>
             <?php _e('By activating your project, you let the WC1C team know that the plugin is in active use.', 'wc1c-main'); ?>
             <br/>
