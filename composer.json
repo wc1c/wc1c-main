@@ -34,7 +34,7 @@
     "digiom/woap": "dev-main",
     "tecodes/client": "dev-main",
     "psr/log": "1.*",
-    "psr/http-message": "1.*",
+    "psr/http-message": "1.0.*",
     "monolog/monolog": "1.*",
     "ext-simplexml": "*",
     "ext-xmlreader": "*"
