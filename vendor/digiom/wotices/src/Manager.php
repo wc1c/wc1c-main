@@ -409,8 +409,8 @@ class Manager implements ManagerInterface, Countable, IteratorAggregate
 	 *
 	 * @return bool
 	 */
-	public function is_users($args)
-	{
+	public function is_users($args): bool
+    {
 		// If user ids is empty we want this shown on all users.
 		if(!isset($args['user_ids']))
 		{
@@ -420,13 +420,18 @@ class Manager implements ManagerInterface, Countable, IteratorAggregate
 		/**
 		 * @var WP_User $current_user
 		 */
-		$current_user = wp_get_current_user();
+		$current_user = \wp_get_current_user();
 
 		// Per user
 		if(!is_array($args['user_ids']) && $current_user->ID === $args['user_ids'])
 		{
 			return true;
 		}
+
+        if(!is_array($args['user_ids']))
+        {
+            return false;
+        }
 
 		if(count($args['user_ids']) < 1)
 		{

@@ -201,7 +201,7 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c-main') . '</a>';
 		}
 
-		if($configuration->isEnabled())
+		if($configuration->isEnabled() && 'deleted' !== $item['status'])
 		{
 			unset($actions['delete']);
 		}

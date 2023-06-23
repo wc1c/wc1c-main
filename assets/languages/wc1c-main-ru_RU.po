@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-03-30 01:34+0300\n"
-"PO-Revision-Date: 2023-03-30 01:36+0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2023-06-23 17:33+0300\n"
+"PO-Revision-Date: 2023-06-23 17:34+0300\n"
+"Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
@@ -42,48 +42,48 @@ msgstr ""
 msgid "Go to setting."
 msgstr "Перейти к настройке."
 
-#: src/Admin.php:101 src/Admin.php:102 views/header.php:3
+#: src/Admin.php:103 src/Admin.php:104 views/header.php:3
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: src/Admin.php:119 src/Admin/Settings/LogsForm.php:133
+#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:133
 #: src/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr "Конфигурации"
 
-#: src/Admin.php:126 src/Admin/Settings/LogsForm.php:99
+#: src/Admin.php:128 src/Admin/Settings/LogsForm.php:99
 msgid "Tools"
 msgstr "Инструменты"
 
-#: src/Admin.php:135
+#: src/Admin.php:137
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/Admin.php:145 views/helps/features.php:34
+#: src/Admin.php:147 views/helps/features.php:34
 msgid "Extensions"
 msgstr "Расширения"
 
-#: src/Admin.php:155 src/Admin/Settings.php:55
+#: src/Admin.php:157 src/Admin/Settings.php:55
 msgid "Activation"
 msgstr "Активация"
 
-#: src/Admin.php:280
+#: src/Admin.php:282
 msgid "Dashboard"
 msgstr "Панель"
 
-#: src/Admin.php:308 src/Admin/Settings/ActivationForm.php:229
+#: src/Admin.php:310 src/Admin/Settings/ActivationForm.php:229
 msgid "never"
 msgstr "никогда"
 
-#: src/Admin.php:309
+#: src/Admin.php:311
 msgid "no deadline"
 msgstr "вечный"
 
-#: src/Admin.php:314
+#: src/Admin.php:316
 msgid "to:"
 msgstr "до:"
 
-#: src/Admin.php:321
+#: src/Admin.php:323
 msgid "not activated"
 msgstr "активации нет"
 
@@ -1150,7 +1150,7 @@ msgstr "Ошибка: код активации в состоянии забло
 msgid "Receiver loading: class is not exists, use is default."
 msgstr "Загрузка получателя: класс не найден, используется класс по умолчанию."
 
-#: src/Core.php:514
+#: src/Core.php:500
 msgid "Localization loaded."
 msgstr "Локализация загружена."
 
@@ -4987,31 +4987,55 @@ msgstr "Получение кода"
 msgid "The code can be obtained from the plugin website."
 msgstr "Код можно получить на сайте плагина."
 
-#: views/activation/form.php:34 views/configurations/create_form.php:29
+#: views/activation/form.php:34 views/configurations/create_form.php:40
 msgid "Site:"
 msgstr "Сайт:"
+
+#: views/activation/form.php:38 views/promo/activation.php:61
+msgid "No financial opportunity?"
+msgstr "Нет финансовой возможности?"
+
+#: views/activation/form.php:39 views/promo/activation.php:62
+msgid "Take part in the development of the solution you use."
+msgstr "Примите участие в разработке решения, которое вы используете."
+
+#: views/activation/form.php:41 views/promo/activation.php:64
+msgid ""
+"Information on how to participate is available in the official documentation "
+"on the official website."
+msgstr ""
+"Информация о том, как принять участие, доступна в официальной документации "
+"на официальном сайте."
+
+#: views/activation/form.php:43 views/promo/activation.php:66
+msgid "Docs:"
+msgstr "Документация:"
+
+#: views/activation/form.php:47 views/promo/activation.php:70
+msgid "Every activation counts!"
+msgstr "Каждая активация имеет значение!"
+
+#: views/activation/form.php:48 views/promo/activation.php:71
+msgid ""
+"By activating your project, you let the WC1C team know that the plugin is in "
+"active use."
+msgstr ""
+"Активируя свой проект, вы сообщаете команде WC1C, что плагин активно "
+"используется."
+
+#: views/activation/form.php:50 views/promo/activation.php:73
+msgid ""
+"Also, you give a financial opportunity to release compatibility updates and "
+"add new features!"
+msgstr ""
+"Также вы даете финансовую возможность выпускать обновления совместимости и "
+"добавлять новые функции!"
 
 #: views/configurations/create.php:7 views/configurations/delete.php:7
 msgid "Back to all configurations"
 msgstr "Вернуться ко всем конфигурациям"
 
-#: views/configurations/create_form.php:24
-msgid "More schemas for configurations"
-msgstr "Больше схем для конфигураций"
-
 #: views/configurations/create_form.php:25
-msgid "Additional schemes are available in extensions on the official website."
-msgstr "Дополнительные схемы доступны в расширениях на официальном сайте."
-
-#: views/configurations/create_form.php:27
-msgid ""
-"Each exchange scheme has a unique algorithm of operation and purpose. You "
-"need to choose only the scheme you need."
-msgstr ""
-"Каждая схема обмена имеет уникальный алгоритм работы и назначение. Вам нужно "
-"выбрать только ту схему, которая вам нужна."
-
-#: views/configurations/create_form.php:34
 msgid ""
 "Enter a name for the new configuration, select a scheme, and click the "
 "create configuration button."
@@ -5019,9 +5043,25 @@ msgstr ""
 "Введите наименование новой конфигурации, выберите схему и нажмите кнопку "
 "создания конфигурации."
 
-#: views/configurations/create_form.php:38
+#: views/configurations/create_form.php:29
 msgid "Create configuration"
 msgstr "Создать конфигурацию"
+
+#: views/configurations/create_form.php:35
+msgid "More schemas for configurations"
+msgstr "Больше схем для конфигураций"
+
+#: views/configurations/create_form.php:36
+msgid "Additional schemes are available in extensions on the official website."
+msgstr "Дополнительные схемы доступны в расширениях на официальном сайте."
+
+#: views/configurations/create_form.php:38
+msgid ""
+"Each exchange scheme has a unique algorithm of operation and purpose. You "
+"need to choose only the scheme you need."
+msgstr ""
+"Каждая схема обмена имеет уникальный алгоритм работы и назначение. Вам нужно "
+"выбрать только ту схему, которая вам нужна."
 
 #: views/configurations/delete.php:16
 msgid "ID of the configuration to be deleted:"
@@ -5360,57 +5400,38 @@ msgstr ""
 "Помимо поддержки используемого вами программного обеспечения, будут "
 "добавлены дополнительные функции."
 
-#: views/promo/activation.php:48
+#: views/promo/activation.php:40
+msgid "ATTENTION! Activation does not add the possibility of extensions."
+msgstr "ВНИМАНИЕ! Активация не добавляет возможности расширений."
+
+#: views/promo/activation.php:42
+msgid ""
+"Additional features are implemented in extensions! After activation, "
+"features from extensions are not activated."
+msgstr ""
+"Дополнительные возможности реализованы в расширениях! После активации "
+"функции из расширений не активируются."
+
+#: views/promo/activation.php:43
+msgid ""
+"To add features, you need to install extensions. They are supplied by "
+"separate plugins, after activation of which the necessary features are added."
+msgstr ""
+"Для добавления функций необходимо установить расширения. Они поставляются "
+"отдельными плагинами, после активации которых добавляются необходимые "
+"функции."
+
+#: views/promo/activation.php:54
 msgid "Do not wait until something breaks!"
 msgstr "Не ждите, пока что-нибудь сломается!"
 
-#: views/promo/activation.php:49
+#: views/promo/activation.php:55
 msgid "Activate your current copy of the software."
 msgstr "Активируйте вашу текущую копию программного обеспечения."
 
-#: views/promo/activation.php:51
+#: views/promo/activation.php:57
 msgid "Buy code:"
 msgstr "Купить код:"
-
-#: views/promo/activation.php:55
-msgid "No financial opportunity?"
-msgstr "Нет финансовой возможности?"
-
-#: views/promo/activation.php:56
-msgid "Take part in the development of the solution you use."
-msgstr "Примите участие в разработке решения, которое вы используете."
-
-#: views/promo/activation.php:58
-msgid ""
-"Information on how to participate is available in the official documentation "
-"on the official website."
-msgstr ""
-"Информация о том, как принять участие, доступна в официальной документации "
-"на официальном сайте."
-
-#: views/promo/activation.php:60
-msgid "Docs:"
-msgstr "Документация:"
-
-#: views/promo/activation.php:64
-msgid "Every activation counts!"
-msgstr "Каждая активация имеет значение!"
-
-#: views/promo/activation.php:65
-msgid ""
-"By activating your project, you let the WC1C team know that the plugin is in "
-"active use."
-msgstr ""
-"Активируя свой проект, вы сообщаете команде WC1C, что плагин активно "
-"используется."
-
-#: views/promo/activation.php:67
-msgid ""
-"Also, you give a financial opportunity to release compatibility updates and "
-"add new features!"
-msgstr ""
-"Также вы даете финансовую возможность выпускать обновления совместимости и "
-"добавлять новые функции!"
 
 #: views/promo/logs.php:6
 msgid ""

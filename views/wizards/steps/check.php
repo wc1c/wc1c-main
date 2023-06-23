@@ -17,7 +17,7 @@ $available = true;
 
 <p><?php _e('This quick setup wizard will help you configure the basic settings.', 'wc1c-main'); ?></p>
 
-<?php if(10 > wc1c()->environment()->get('php_max_execution_time')) : ?>
+<?php if(0 < (int)wc1c()->environment()->get('php_max_execution_time') && 10 > (int)wc1c()->environment()->get('php_max_execution_time')) : ?>
     <?php $available = false; ?>
     <p><?php _e('PHP scripts execution time is less than 10 seconds. WC1C requires at least 20. Set php_max_execution_time to more than 20 seconds.', 'wc1c-main'); ?></p>
 <?php endif; ?>

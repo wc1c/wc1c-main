@@ -280,7 +280,7 @@ final class Core extends CoreAbstract
 
 				if('yes' === $this->settings('logs')->get('logger_output', 'no'))
 				{
-					$logger->pushHandler(new StreamHandler('php://output', Logger::DEBUG));
+					$logger->pushHandler(new StreamHandler('php://output', $level));
 				}
 			}
 			catch(\Throwable $e){}
@@ -475,25 +475,11 @@ final class Core extends CoreAbstract
 			$use_class_name = $default_class_name;
 		}
 
-		try
-		{
-			$receiver = new $use_class_name();
-		}
-		catch(Exception $e)
-		{
-			throw $e;
-		}
+		$receiver = new $use_class_name();
 
 		$receiver->register();
 
-		try
-		{
-			$this->setReceiver($receiver);
-		}
-		catch(Exception $e)
-		{
-			throw $e;
-		}
+		$this->setReceiver($receiver);
 	}
 
 	/**

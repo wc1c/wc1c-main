@@ -76,10 +76,12 @@ final class Admin
 	{
 		if(empty($this->notices))
 		{
+            $admin = isset($_GET['page']) && 'wc1c' === $_GET['page'] && wc1c()->context()->isAdmin();
+
 			$args =
 			[
 				'auto_save' => true,
-				'admin_notices' => true,
+				'admin_notices' => !$admin,
 				'user_admin_notices' => false,
 				'network_admin_notices' => false
 			];
