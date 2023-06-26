@@ -59,7 +59,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.12.0');
+		$this->setVersion('0.13.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c-main'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c-main'));
@@ -355,7 +355,7 @@ class Core extends SchemaAbstract
 
 			if(!$classifier instanceof ClassifierDataContract)
 			{
-				$this->log()->debug(__('Classifier !instanceof ClassifierDataContract. Skip processing.', 'wc1c-main'), ['data' => $classifier]);
+				$this->log()->debug(__('Classifier !instanceof ClassifierDataContract. Processing skipped.', 'wc1c-main'), ['data' => $classifier]);
 				return;
 			}
 
@@ -1189,7 +1189,7 @@ class Core extends SchemaAbstract
 
 			if(!$product instanceof ProductDataContract)
 			{
-				$this->log()->warning(__('Product !instanceof ProductDataContract. Skip processing.', 'wc1c-main'), ['data' => $product]);
+				$this->log()->warning(__('Product !instanceof ProductDataContract. Processing skipped.', 'wc1c-main'), ['data' => $product]);
 				return;
 			}
 
@@ -3398,24 +3398,36 @@ class Core extends SchemaAbstract
 			 */
 			if($external_product->hasCharacteristicId())
 			{
-				$this->log()->notice(__('The product contains the characteristics.', 'wc1c-main')); // todo: реализация
-				return;
+				$this->log()->notice(__('The product contains the characteristics. Parent product is not found.', 'wc1c-main'));
+
+                if('yes' !== $this->getOptions('products_with_characteristics_simple', 'no'))
+                {
+                    $this->log()->info(__('Creating simple products by characteristics is disabled in the settings. Processing skipped.', 'wc1c-main'));
+                    return;
+                }
+
+                $this->log()->info(__('The product is simple by characteristics. Creating.', 'wc1c-main'));
 			}
 			else
 			{
-				$this->log()->info(__('The product is simple. Create.', 'wc1c-main'));
-
-				/**
-				 * Создание простого продукта с заполнением данных
-				 *
-				 * @var $internal_product ProductContract
-				 */
-				$internal_product = new SimpleProduct();
-
-				$internal_product->setSchemaId($this->getId());
-				$internal_product->setConfigurationId($this->configuration()->getId());
-				$internal_product->setExternalId($external_product->getId());
+				$this->log()->info(__('The product is simple. Creating.', 'wc1c-main'));
 			}
+
+            /**
+             * Создание простого продукта с заполнением данных
+             *
+             * @var $internal_product ProductContract
+             */
+            $internal_product = new SimpleProduct();
+
+            $internal_product->setSchemaId($this->getId());
+            $internal_product->setConfigurationId($this->configuration()->getId());
+            $internal_product->setExternalId($external_product->getId());
+
+            if($external_product->hasCharacteristicId())
+            {
+                $internal_product->setExternalCharacteristicId($external_product->getCharacteristicId());
+            }
 
 			/**
 			 * Назначение данных создаваемого продукта по внешним алгоритмам перед сохранением
@@ -3433,6 +3445,8 @@ class Core extends SchemaAbstract
 			}
 
 			$internal_product = $this->setProductTimes($internal_product);
+
+            $internal_product->update_meta_data('_wc1c_time_catalog', (int)$this->configuration()->getMeta('_catalog_full_time'));
 
 			try
 			{
@@ -3539,6 +3553,8 @@ class Core extends SchemaAbstract
 
 		$update_product = $this->setProductTimes($update_product);
 
+        $update_product->update_meta_data('_wc1c_time_catalog', (int)$this->configuration()->getMeta('_catalog_full_time'));
+
 		try
 		{
 			$update_product->save();
@@ -3633,7 +3649,7 @@ class Core extends SchemaAbstract
 		$internal_parent_offer_id = 0;
 		if(!empty($external_offer->getCharacteristicId()))
 		{
-			$internal_parent_offer_id = $product_factory->findIdsByExternalIdAndCharacteristicId($external_offer->getId(), '');
+			$internal_parent_offer_id = $product_factory->findIdsByExternalIdAndCharacteristicId($external_offer->getId(), $external_offer->getCharacteristicId());
 
 			if(is_array($internal_parent_offer_id)) // todo: обработка нескольких?
 			{
@@ -3644,24 +3660,27 @@ class Core extends SchemaAbstract
 			/*
 			 * Родительский продукт не найден
 			 */
-			if(0 === $internal_parent_offer_id)
+			if(empty($internal_parent_offer_id))
 			{
 				$this->log()->notice(__('Product parent not found. Offer update skipped.', 'wc1c-main'), ['offer' => $external_offer]);
 				return;
 			}
 
-			$internal_product_parent = $product_factory->getProduct($internal_parent_offer_id);
+            if($internal_parent_offer_id !== $internal_offer_id)
+            {
+                $internal_product_parent = $product_factory->getProduct($internal_parent_offer_id);
 
-			/*
-			 * Продукт не вариативный, превращаем его в вариативный
-			 */
-			if(!$internal_product_parent instanceof VariableProduct)
-			{
-				$this->log()->debug(__('Changing the product type to variable.', 'wc1c-main'), ['product_id' => $internal_parent_offer_id]);
+                /*
+                 * Продукт не вариативный, превращаем его в вариативный
+                 */
+                if(!$internal_product_parent instanceof VariableProduct)
+                {
+                    $this->log()->debug(__('Changing the product type to variable.', 'wc1c-main'), ['product_id' => $internal_parent_offer_id]);
 
-				$internal_product_parent = new VariableProduct($internal_parent_offer_id);
-				$internal_parent_offer_id = $internal_product_parent->save();
-			}
+                    $internal_product_parent = new VariableProduct($internal_parent_offer_id);
+                    $internal_parent_offer_id = $internal_product_parent->save();
+                }
+            }
 		}
 
 		/*
@@ -3865,7 +3884,7 @@ class Core extends SchemaAbstract
 
 			if(!$offer instanceof ProductDataContract)
 			{
-				$this->log()->warning(__('Offer !instanceof ProductDataContract. Skip processing.', 'wc1c-main'), ['data' => $offer]);
+				$this->log()->warning(__('Offer !instanceof ProductDataContract. Processing skipped.', 'wc1c-main'), ['data' => $offer]);
 				return;
 			}
 

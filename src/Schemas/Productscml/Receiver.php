@@ -343,13 +343,13 @@ final class Receiver extends ReceiverAbstract
 	 */
 	public function handlerCheckauthKey(bool $send_response = false): bool
 	{
+        if('yes' === $this->core()->getOptions('browser_debug', 'no'))
+        {
+            return true;
+        }
+
 		if(!isset($_GET['lazysign']))
 		{
-			if('yes' === $this->core()->getOptions('browser_debug', 'no'))
-			{
-				return true;
-			}
-
 			$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c-main');
 			$this->core()->log()->warning($warning);
 

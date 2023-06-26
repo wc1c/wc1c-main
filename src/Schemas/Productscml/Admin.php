@@ -462,7 +462,7 @@ class Admin
 		[
 			'title' => __('Using global attributes for products', 'wc1c-main'),
 			'type' => 'checkbox',
-			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+			'label' => __('Check the box if you want to enable this feature. Enabled by default.', 'wc1c-main'),
 			'description' => sprintf
 			(
 				'%s<br /><hr>%s',
@@ -471,6 +471,21 @@ class Admin
 			),
 			'default' => 'yes'
 		];
+
+        $fields['products_with_characteristics_simple'] =
+        [
+            'title' => __('Create simple products from features', 'wc1c-main'),
+            'type' => 'checkbox',
+            'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c-main'),
+            'description' => sprintf
+            (
+                '%s %s<br /><hr>%s',
+                __('Sometimes 1C does not provide complete information for creating variable products in WooCommerce.', 'wc1c-main'),
+                __('The option allows you to enable the creation of simple products according to the characteristics of the item from 1C.', 'wc1c-main'),
+                __('As a result, it turns out like this: a characteristic in 1C is equal to a simple product in WooCommerce.', 'wc1c-main')
+            ),
+            'default' => 'no'
+        ];
 
 		return $fields;
 	}
