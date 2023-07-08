@@ -45,9 +45,8 @@ class UpdateForm extends FormAbstract
             'default' => 'yes',
             'description' => sprintf
             (
-	            '%s<hr>%s',
-	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-main'),
-	            __('The extended state is required for users, while this token is used for technical purposes.', 'wc1c-main')
+	            '%s',
+	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-main')
             ),
         ];
 
