@@ -42,7 +42,7 @@ class UpdateForm extends FormAbstract
             'title' => __('Status', 'wc1c-main'),
             'type' => 'checkbox',
             'label' => __('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-main'),
-            'default' => 'no',
+            'default' => 'yes',
             'description' => sprintf
             (
 	            '%s<hr>%s',
