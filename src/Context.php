@@ -14,17 +14,22 @@ final class Context extends \Digiom\Woplucore\Context
 	 *
 	 * @return bool
 	 */
-	public function isReceiver()
-	{
-		if(false === isset($_GET['wc1c-receiver']))
-		{
-			return false;
-		}
-
-		if(wc1c()->getVar($_GET['wc1c-receiver'], false))
+	public function isReceiver(): bool
+    {
+		if(isset($_GET['wc1c-receiver']))
 		{
 			return true;
 		}
+
+        if(isset($_POST['wc1c-receiver']))
+        {
+            return true;
+        }
+
+        if(isset($_REQUEST['wc1c-receiver']))
+        {
+            return true;
+        }
 
 		return false;
 	}
