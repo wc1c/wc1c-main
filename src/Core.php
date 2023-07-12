@@ -124,7 +124,7 @@ final class Core extends CoreAbstract
 			{
 				$this->tools()->init();
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->log()->alert(__('Tools is not initialized.', 'wc1c-main'), ['exception' => $e]);
 			}
@@ -335,7 +335,7 @@ final class Core extends CoreAbstract
 			{
 				$settings->init();
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->log()->error($e->getMessage(), ['exception' => $e]);
 			}
@@ -471,8 +471,9 @@ final class Core extends CoreAbstract
 
 		if(false === class_exists($use_class_name))
 		{
-			wc1c()->log()->error(__('Receiver loading: class is not exists, use is default.', 'wc1c-main'), ['context' => $use_class_name]);
-			$use_class_name = $default_class_name;
+			wc1c()->log()->notice(__('Receiver loading: class is not exists, use is default.', 'wc1c-main'), ['context' => $use_class_name]);
+
+            $use_class_name = $default_class_name;
 		}
 
 		$receiver = new $use_class_name();
