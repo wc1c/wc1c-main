@@ -9,8 +9,13 @@ defined('ABSPATH') || exit;
  */
 trait CoreTrait
 {
+    /**
+     * @var mixed
+     */
+    public $core;
+
 	/**
-	 * @return
+	 * @return mixed
 	 */
 	public function core()
 	{
@@ -18,7 +23,7 @@ trait CoreTrait
 	}
 
 	/**
-	 * @param $core
+	 * @param mixed $core
 	 */
 	public function setCore($core)
 	{
