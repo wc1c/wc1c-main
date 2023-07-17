@@ -75,6 +75,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * WC tested up to: 7.9
 * Up: ProductsCML to 0.14.0
 * Up: language files
+* Up: CML library
 * Fix: more
 
 = 0.21.1 =
