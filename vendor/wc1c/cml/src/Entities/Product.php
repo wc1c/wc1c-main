@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml\Entities;
 
-defined('ABSPATH') || exit;
-
 use Wc1c\Cml\Abstracts\DataAbstract;
 use Wc1c\Cml\Contracts\ProductDataContract;
 
@@ -420,4 +418,17 @@ class Product extends DataAbstract implements ProductDataContract
 
 		return $this->data['quantity'];
 	}
+
+    /**
+     * @return bool
+     */
+    public function hasDeleted(): bool
+    {
+        if(isset($this->data['delete_mark']) && $this->data['delete_mark'] === 'yes')
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

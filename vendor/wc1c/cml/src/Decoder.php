@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml;
 
-defined('ABSPATH') || exit;
-
 use SimpleXMLElement;
 use Wc1c\Cml\Entities\OrderDocument;
 use Wc1c\Main\Exceptions\Exception;

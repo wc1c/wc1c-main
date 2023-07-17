@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml\Entities;
 
-defined('ABSPATH') || exit;
-
 use Wc1c\Cml\Abstracts\DataAbstract;
 use Wc1c\Cml\Contracts\CounterpartyDataContract;
 use Wc1c\Cml\Contracts\OffersPackageDataContract;

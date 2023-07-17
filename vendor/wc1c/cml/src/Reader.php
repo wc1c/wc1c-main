@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml;
 
-defined('ABSPATH') || exit;
-
 use XMLReader;
 use RuntimeException;
 use Wc1c\Cml\Entities\OffersPackage;

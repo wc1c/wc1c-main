@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml\Abstracts;
 
-defined('ABSPATH') || exit;
-
 use Wc1c\Cml\Contracts\DataContract;
 
 /**

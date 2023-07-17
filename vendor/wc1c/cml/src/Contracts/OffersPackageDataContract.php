@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml\Contracts;
 
-defined('ABSPATH') || exit;
-
 /**
  * OffersPackageDataContract
  *
