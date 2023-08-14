@@ -72,7 +72,7 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
 = 0.22.0 =
-* WP tested up to: 6.2
+* WP tested up to: 6.3
 * WC tested up to: 7.9 & 8.0
 * Up: ProductsCML to 0.14.0
 * Up: language files
