@@ -2,9 +2,9 @@
 Contributors: WC1C, Frescoref
 Tags: commerceml, 1c, cml, ecommerce, wc1c, woocommerce, integration 1C, 1s, 1с, 1C, 1С
 Requires at least: 5.2
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 0.21.1
+Stable tag: 0.22.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
@@ -70,6 +70,14 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 
 == Changelog ==
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
+
+= 0.22.0 =
+* WP tested up to: 6.2
+* WC tested up to: 7.9 & 8.0
+* Up: ProductsCML to 0.14.0
+* Up: language files
+* Up: CML library
+* Fix: more
 
 = 0.21.1 =
 * Fix: more

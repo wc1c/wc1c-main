@@ -2,9 +2,9 @@
 
 defined('ABSPATH') || exit;
 
+use wpdb;
 use Wc1c\Main\Abstracts\SettingsAbstract;
 use Wc1c\Main\Log\StreamHandler;
-use wpdb;
 use Digiom\Woplucore\Abstracts\CoreAbstract;
 use Digiom\Woplucore\Traits\SingletonTrait;
 use Psr\Log\LoggerInterface;
@@ -76,9 +76,9 @@ final class Core extends CoreAbstract
 		{
 			$this->timer();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Timer not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Timer is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return;
 		}
 
@@ -86,36 +86,36 @@ final class Core extends CoreAbstract
 		{
 			$this->extensions()->load();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Extensions not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions is not loaded.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
 		{
 			$this->extensions()->init();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Extensions not initialized.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions is not initialized.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
 		{
 			$this->schemas()->load();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Schemas not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Schemas is not loaded.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
 		{
 			$this->tools()->load();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Tools not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Tools is not loaded.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isAdmin())
@@ -124,9 +124,9 @@ final class Core extends CoreAbstract
 			{
 				$this->tools()->init();
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
-				wc1c()->log()->alert(__('Tools not initialized.', 'wc1c-main'), ['exception' => $e]);
+				wc1c()->log()->alert(__('Tools is not initialized.', 'wc1c-main'), ['exception' => $e]);
 			}
 		}
 
@@ -136,9 +136,9 @@ final class Core extends CoreAbstract
 			{
 				$this->loadReceiver();
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
-				wc1c()->log()->alert(__('Receiver not loaded.', 'wc1c-main'), ['exception' => $e]);
+				wc1c()->log()->alert(__('Receiver is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			}
 		}
 
@@ -335,7 +335,7 @@ final class Core extends CoreAbstract
 			{
 				$settings->init();
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->log()->error($e->getMessage(), ['exception' => $e]);
 			}
@@ -471,8 +471,9 @@ final class Core extends CoreAbstract
 
 		if(false === class_exists($use_class_name))
 		{
-			wc1c()->log()->error(__('Receiver loading: class is not exists, use is default.', 'wc1c-main'), ['context' => $use_class_name]);
-			$use_class_name = $default_class_name;
+			wc1c()->log()->notice(__('Receiver loading: class is not exists, use is default.', 'wc1c-main'), ['context' => $use_class_name]);
+
+            $use_class_name = $default_class_name;
 		}
 
 		$receiver = new $use_class_name();
@@ -526,13 +527,13 @@ final class Core extends CoreAbstract
 	 * Prevents notices when data is not set
 	 *
 	 * @param mixed $var variable
-	 * @param string $default default value
+	 * @param mixed $default default value
 	 *
 	 * @return mixed
 	 */
 	public function getVar(&$var, $default = null)
 	{
-		return isset($var) ? $var : $default;
+		return $var ?? $default;
 	}
 
 	/**

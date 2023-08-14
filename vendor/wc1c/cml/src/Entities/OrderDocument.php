@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml\Entities;
 
-defined('ABSPATH') || exit;
-
 /**
  * OrderDocument
  *

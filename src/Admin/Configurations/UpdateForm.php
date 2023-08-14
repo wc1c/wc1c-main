@@ -42,12 +42,11 @@ class UpdateForm extends FormAbstract
             'title' => __('Status', 'wc1c-main'),
             'type' => 'checkbox',
             'label' => __('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-main'),
-            'default' => 'no',
+            'default' => 'yes',
             'description' => sprintf
             (
-	            '%s<hr>%s',
-	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-main'),
-	            __('The extended state is required for users, while this token is used for technical purposes.', 'wc1c-main')
+	            '%s',
+	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-main')
             ),
         ];
 

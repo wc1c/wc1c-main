@@ -33,7 +33,9 @@ class MainUpdate
 		$form = new UpdateForm();
 
 		$form_data = $configuration->getOptions();
+
 		$form_data['status'] = $configuration->isEnabled() ? 'yes' : 'no';
+        $form_data['status'] = $configuration->isDraft() ? 'yes' : $form_data['status'];
 
 		$form->loadSavedData($form_data);
 

@@ -4,7 +4,6 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Schemas\Abstracts\Cml\ReceiverAbstract;
-use Wc1c\Main\Schemas\Contracts\SchemaContract;
 use Wc1c\Main\Traits\CoreTrait;
 use Wc1c\Main\Traits\SingletonTrait;
 use Wc1c\Main\Traits\UtilityTrait;
@@ -22,11 +21,6 @@ final class Receiver extends ReceiverAbstract
 	use SingletonTrait;
 	use UtilityTrait;
 	use CoreTrait;
-
-	/**
-	 * @var SchemaContract Core Schema core
-	 */
-	protected $core;
 
 	/**
 	 * @return void
@@ -117,7 +111,9 @@ final class Receiver extends ReceiverAbstract
 	 */
 	public function handlerCatalogModeComplete()
 	{
-		$this->sendResponseByType('success');
+        $this->core()->log()->info(__('Sending a successful completion of the exchange in 1C.', 'wc1c-main'));
+
+        $this->sendResponseByType('success');
 	}
 
 	/**
@@ -176,7 +172,7 @@ final class Receiver extends ReceiverAbstract
 			$description = apply_filters('wc1c_schema_productscml_receiver_send_response_by_type_description', $description, $this, $type);
 		}
 
-		$this->core()->log()->info(__('In 1C was send a response of the type:', 'wc1c-main') . ' ' . $type);
+		$this->core()->log()->info(sprintf('%s %s.', __('In 1C was send a response of the type:', 'wc1c-main'),  $type), ['type' => $type]);
 
 		$headers= [];
 		$headers['Content-Type'] = 'Content-Type: text/plain; charset=utf-8';
@@ -188,10 +184,13 @@ final class Receiver extends ReceiverAbstract
 
 		$this->core()->log()->debug(__('Headers for response.', 'wc1c-main'), ['context' => $headers]);
 
-		foreach($headers as $header)
-		{
-			header($header);
-		}
+        if(!headers_sent())
+        {
+            foreach($headers as $header)
+            {
+                header($header);
+            }
+        }
 
 		switch($type)
 		{
@@ -739,7 +738,7 @@ final class Receiver extends ReceiverAbstract
 			$response_description = __('File for import is not exists.', 'wc1c-main');
 
             $this->core()->log()->error($response_description);
-			$this->sendResponseByType('success', $response_description);
+			$this->sendResponseByType('failure', $response_description);
 		}
 
 		try
