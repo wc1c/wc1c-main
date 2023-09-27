@@ -73,6 +73,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 
 = 0.23.0 =
 * WC tested up to: 8.1
+* Up: Bootstrap to 5.3.2
 * Fix: more
 
 = 0.22.0 =
