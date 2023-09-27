@@ -71,6 +71,10 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 == Changelog ==
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
+= 0.23.0 =
+* WC tested up to: 8.1
+* Fix: more
+
 = 0.22.0 =
 * WP tested up to: 6.3
 * WC tested up to: 7.9 & 8.0
