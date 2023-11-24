@@ -19,9 +19,11 @@ final class Orders
 	public function __construct()
 	{
 		add_filter('manage_edit-shop_order_columns',  [$this, 'manage_edit_order_columns']);
+        add_filter('manage_woocommerce_page_wc-orders_columns',  [$this, 'manage_edit_order_columns']);
 		add_filter('wc1c_admin_interface_orders_lists_column', [$this, 'wc1c_admin_interface_orders_lists_column'], 10, 2);
 
 		add_action('manage_shop_order_posts_custom_column', [$this, 'manage_order_posts_custom_column'], 10, 2);
+        add_action('manage_woocommerce_page_wc-orders_custom_column', [$this, 'manage_order_hpos_custom_column'], 10, 2);
 	}
 
 	/**
@@ -40,6 +42,34 @@ final class Orders
 
 		return array_merge($columns, $columns_after);
 	}
+
+    /**
+     * Information from 1C in orders list by HPOS
+     *
+     * @param $column
+     * @param $order
+     */
+    public function manage_order_hpos_custom_column($column, $order)
+    {
+        if('wc1c' === $column)
+        {
+            $post_id = $order->get_id();
+
+            $content = '';
+
+            if(has_filter('wc1c_admin_interface_orders_lists_column'))
+            {
+                $content = apply_filters('wc1c_admin_interface_orders_lists_column', $content, $post_id);
+            }
+
+            if('' === $content)
+            {
+                $content .= '<span class="na">' . __('Not found', 'wc1c-main') . '</span>';
+            }
+
+            echo wp_kses_post($content);
+        }
+    }
 
 	/**
 	 * Information from 1C in orders list
