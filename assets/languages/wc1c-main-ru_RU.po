@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
 "POT-Creation-Date: 2023-08-14 12:47+0300\n"
-"PO-Revision-Date: 2023-08-14 12:58+0300\n"
+"PO-Revision-Date: 2023-11-27 02:25+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -4612,7 +4612,7 @@ msgstr "Назначение полного описания продукта п
 
 #: src/Schemas/Productscml/Core.php:2058
 msgid "Assign categories to a product."
-msgstr "Назначение каттегорий для продукта."
+msgstr "Назначение категорий для продукта."
 
 #: src/Schemas/Productscml/Core.php:2062
 msgid ""
