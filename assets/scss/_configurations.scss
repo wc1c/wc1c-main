@@ -5,3 +5,16 @@
   background-color: white;
   border-left: 4px solid #fd0;
 }
+
+.configurations-status-popover
+{
+  --bs-popover-max-width: 277px;
+  --bs-popover-border-color: #fd0;
+  --bs-popover-header-bg: #fd0;
+  --bs-popover-border-width: 3px;
+
+  .popover-header
+  {
+    margin: 0!important;
+  }
+}
