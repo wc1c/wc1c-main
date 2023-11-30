@@ -192,7 +192,7 @@ class AllTable extends TableAbstract
 
 		$actions =
 		[
-			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Open', 'wc1c-main') . '</a>',
+			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Open configuration', 'wc1c-main') . '</a>',
 			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c-main') . '</a>',
 		];
 
