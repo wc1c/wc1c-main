@@ -11,7 +11,11 @@
   --bs-popover-max-width: 277px;
   --bs-popover-border-color: #fd0;
   --bs-popover-border-width: 4px;
+
   padding: 0!important;
+  border-right-width: 2px!important;
+  border-bottom-width: 2px!important;
+  border-top-width: 2px!important;
 
   .popover-header
   {
