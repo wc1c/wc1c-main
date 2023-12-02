@@ -102,6 +102,8 @@ class MainUpdate
 		$configuration_options = $configuration->getOptions();
 		if(isset($configuration_options['logger_level']))
 		{
+            $args = [];
+
 			if((int)$configuration_options['logger_level'] === 100)
 			{
 				$args =
