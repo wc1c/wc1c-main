@@ -11,6 +11,7 @@
   --bs-popover-max-width: 277px;
   --bs-popover-border-color: #fd0;
   --bs-popover-border-width: 4px;
+  border-radius: 2px!important;
 
   padding: 0!important;
   border-right-width: 2px!important;
@@ -20,6 +21,7 @@
   .popover-header
   {
     margin: 0!important;
+    border-bottom-width: 2px!important;
   }
 
   &.draft
