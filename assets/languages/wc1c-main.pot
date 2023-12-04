@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-08-14 12:47+0300\n"
+"POT-Creation-Date: 2023-12-04 15:37+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -83,7 +83,7 @@ msgid "not activated"
 msgstr ""
 
 #: src/Admin/Columns/WooCommerce/Categories.php:38
-#: src/Admin/Columns/WooCommerce/Orders.php:38
+#: src/Admin/Columns/WooCommerce/Orders.php:40
 #: src/Admin/Columns/WooCommerce/Products.php:38
 #: src/Admin/Columns/WordPress/MediaLibrary.php:38
 msgid "1C information"
@@ -98,19 +98,20 @@ msgid "Configuration ID: "
 msgstr ""
 
 #: src/Admin/Columns/WooCommerce/Categories.php:90
-#: src/Admin/Columns/WooCommerce/Orders.php:63
+#: src/Admin/Columns/WooCommerce/Orders.php:67
+#: src/Admin/Columns/WooCommerce/Orders.php:93
 #: src/Admin/Columns/WooCommerce/Products.php:63
 #: src/Admin/Columns/WordPress/MediaLibrary.php:63
 msgid "Not found"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:85
+#: src/Admin/Columns/WooCommerce/Orders.php:115
 #: src/Admin/Columns/WooCommerce/Products.php:85
 #: src/Admin/Columns/WordPress/MediaLibrary.php:85
 msgid "Activity:"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:86
+#: src/Admin/Columns/WooCommerce/Orders.php:116
 #: src/Admin/Columns/WooCommerce/Products.php:86
 #: src/Admin/Columns/WordPress/MediaLibrary.php:86
 #, php-format
@@ -118,14 +119,14 @@ msgctxt "%s = human-readable time difference"
 msgid "%s ago."
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:92
+#: src/Admin/Columns/WooCommerce/Orders.php:122
 #: src/Admin/Columns/WooCommerce/Products.php:92
 #: src/Admin/Columns/WordPress/MediaLibrary.php:92
-#: src/Admin/Configurations/MainUpdate.php:144
+#: src/Admin/Configurations/MainUpdate.php:146
 msgid "Schema ID:"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:97
+#: src/Admin/Columns/WooCommerce/Orders.php:127
 #: src/Admin/Columns/WooCommerce/Products.php:97
 #: src/Admin/Columns/WordPress/MediaLibrary.php:97
 msgid "Configuration ID:"
@@ -171,8 +172,12 @@ msgstr ""
 msgid "Awaiting final removal. All algorithms are disabled."
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:195 views/tools/item.php:14
-msgid "Open"
+#: src/Admin/Configurations/AllTable.php:172
+msgid "Status description"
+msgstr ""
+
+#: src/Admin/Configurations/AllTable.php:195
+msgid "Open configuration"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:196
@@ -188,7 +193,7 @@ msgid "User: "
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:218
-#: src/Admin/Configurations/MainUpdate.php:160
+#: src/Admin/Configurations/MainUpdate.php:162
 msgid "User is not exists."
 msgstr ""
 
@@ -209,7 +214,7 @@ msgid "%s ago"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:240
-msgid "in"
+msgid "at"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:250
@@ -229,7 +234,7 @@ msgid "Base information"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:311
-#: src/Admin/Configurations/MainUpdate.php:148
+#: src/Admin/Configurations/MainUpdate.php:150
 #: src/Admin/Configurations/UpdateForm.php:42
 #: src/Admin/Settings/ActivationForm.php:159
 msgid "Status"
@@ -252,48 +257,59 @@ msgid "Search"
 msgstr ""
 
 #: src/Admin/Configurations/CreateForm.php:42
-#: src/Admin/Configurations/Update.php:136
-msgid "Configuration name"
+msgid "Name of the configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:44
+#: src/Admin/Configurations/CreateForm.php:47
 msgid "Enter any data up to 255 characters."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:72
+#: src/Admin/Configurations/CreateForm.php:48
+msgid ""
+"The name is used to quickly distinguish between multiple configurations that "
+"have been created."
+msgstr ""
+
+#: src/Admin/Configurations/CreateForm.php:49
+msgid ""
+"Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. "
+"Update prices and stocks, etc."
+msgstr ""
+
+#: src/Admin/Configurations/CreateForm.php:78
 msgid "Configuration schema"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:137
+#: src/Admin/Configurations/CreateForm.php:143
 msgid "Identifier:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:187
+#: src/Admin/Configurations/CreateForm.php:193
 msgid "Configuration create error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:227
+#: src/Admin/Configurations/CreateForm.php:233
 msgid "Configuration create error. Name is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:240
+#: src/Admin/Configurations/CreateForm.php:246
 msgid "Configuration create error. Schema is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:257
-msgid "Configuration create error. Name is exists."
+#: src/Admin/Configurations/CreateForm.php:263
+msgid "Create configuration error. Name exists."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:274
-msgid "Configuration create success. Configuration id: "
+#: src/Admin/Configurations/CreateForm.php:280
+msgid "Configuration create success. Configuration ID: "
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:275
+#: src/Admin/Configurations/CreateForm.php:281
 msgid "edit configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:287
-msgid "Configuration create error. Please retry saving or change fields."
+#: src/Admin/Configurations/CreateForm.php:293
+msgid "Configuration create error. Please try saving again or change fields."
 msgstr ""
 
 #: src/Admin/Configurations/Delete.php:55
@@ -344,72 +360,72 @@ msgstr ""
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:110
+#: src/Admin/Configurations/MainUpdate.php:112
 msgid "Debug is enabled!"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:112
+#: src/Admin/Configurations/MainUpdate.php:114
 msgid ""
 "The current configuration has debug mode enabled. You must disable this mode "
 "after debugging is complete."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:121
+#: src/Admin/Configurations/MainUpdate.php:123
 msgid "Info is enabled!"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:123
+#: src/Admin/Configurations/MainUpdate.php:125
 msgid ""
 "The extended information recording mode is enabled for the current "
 "configuration. It is recommended to disable this mode after debugging is "
 "complete."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:135
+#: src/Admin/Configurations/MainUpdate.php:137
 msgid "About configuration"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:141 views/extensions/item.php:20
+#: src/Admin/Configurations/MainUpdate.php:143 views/extensions/item.php:20
 msgid "ID:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:156
+#: src/Admin/Configurations/MainUpdate.php:158
 msgid "Owner:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:165
+#: src/Admin/Configurations/MainUpdate.php:167
 msgid "Date active:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:169
-#: src/Admin/Configurations/MainUpdate.php:179
-#: src/Admin/Configurations/MainUpdate.php:188
+#: src/Admin/Configurations/MainUpdate.php:171
+#: src/Admin/Configurations/MainUpdate.php:181
+#: src/Admin/Configurations/MainUpdate.php:190
 #, php-format
 msgctxt "%s = human-readable time difference"
 msgid " (%s ago)."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:175
+#: src/Admin/Configurations/MainUpdate.php:177
 msgid "Date create:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:184
+#: src/Admin/Configurations/MainUpdate.php:186
 msgid "Date modify:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:194
+#: src/Admin/Configurations/MainUpdate.php:196
 msgid "Directory:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:206
+#: src/Admin/Configurations/MainUpdate.php:208
 msgid "Directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:218
+#: src/Admin/Configurations/MainUpdate.php:220
 msgid "Logs directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:233
+#: src/Admin/Configurations/MainUpdate.php:235
 msgid "About schema"
 msgstr ""
 
@@ -431,6 +447,10 @@ msgstr ""
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
 "name, or delete the configuration."
+msgstr ""
+
+#: src/Admin/Configurations/Update.php:136
+msgid "Configuration name"
 msgstr ""
 
 #: src/Admin/Configurations/Update.php:138
@@ -5154,15 +5174,38 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: views/configurations/empty.php:7
+#: views/configurations/empty.php:4
+msgid ""
+"To exchange data, at least one configuration must be created and configured."
+msgstr ""
+
+#: views/configurations/empty.php:5
+msgid ""
+"The number of settings and method of data exchange in the configuration "
+"depends on the scheme selected for exchange during creation."
+msgstr ""
+
+#: views/configurations/empty.php:13
 msgid "Configurations by query is not found, query:"
 msgstr ""
 
-#: views/configurations/empty.php:11
-msgid "Configurations not found."
+#: views/configurations/empty.php:17
+msgid "Configurations not found"
 msgstr ""
 
-#: views/configurations/empty.php:16 views/header.php:6
+#: views/configurations/empty.php:23
+msgid ""
+"For flexible exchange distribution, an unlimited number of configurations "
+"can be created."
+msgstr ""
+
+#: views/configurations/empty.php:24
+msgid ""
+"It is recommended to create at least two configurations: 1. To exchange "
+"nomenclature data, 2. To exchange orders data."
+msgstr ""
+
+#: views/configurations/empty.php:27 views/header.php:6
 msgid "New configuration"
 msgstr ""
 
@@ -5486,6 +5529,10 @@ msgstr ""
 msgid "As soon as the tools are installed, they will appear in this section."
 msgstr ""
 
+#: views/tools/item.php:14
+msgid "Open"
+msgstr ""
+
 #: views/wizards/error.php:3
 msgid "Error. Step not found or unavailable."
 msgstr ""
@@ -5570,8 +5617,8 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Implementation of a mechanism for flexible exchange of various data between "
-"1C products and the WooCommerce plugin."
+"Implementing a flexible mechanism for exchanging various data between 1C "
+"Company products and the WooCommerce plugin."
 msgstr ""
 
 #. Author of the plugin/theme
