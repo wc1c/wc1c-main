@@ -10,7 +10,7 @@
     <div class="card-body p-2">
         <div class="row g-0">
             <div class="col-24 col-md-15 col-lg-18 p-0">
-                <p class="card-text mt-2 mb-2">
+                <p class="card-text mt-2 mb-2 fs-6">
 		            <?php printf('%s', wp_kses_post($args['object']->getMeta('description', __('none')))); ?>
                 </p>
             </div>
