@@ -5,7 +5,7 @@
         <h2 class="card-title mt-0">
             <?php printf('%s', sanitize_text_field($args['name'])); ?>
         </h2>
-        <p class="card-text">
+        <p class="card-text fs-6">
             <?php printf('%s', wp_kses_post($args['description'])); ?>
         </p>
     </div>
