@@ -76,6 +76,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * WP tested up to: 6.4
 * WC tested up to: 8.1 & 8.2 & 8.3
 * Up: Bootstrap to 5.3.2
+* Up: styles
 * Fix: 1C information column in new orders list by HPOS
 * Fix: more
 
