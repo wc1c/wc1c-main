@@ -41,7 +41,13 @@ class CreateForm extends FormAbstract
         [
             'title' => __('Configuration name', 'wc1c-main'),
             'type' => 'text',
-            'description' => __('Enter any data up to 255 characters.', 'wc1c-main'),
+            'description' => sprintf
+            (
+                    '%s %s<hr>%s',
+                    __('Enter any data up to 255 characters.', 'wc1c-main'),
+                    __('The name is used to quickly distinguish between multiple configurations that have been created.', 'wc1c-main'),
+                    __('Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. Update prices and stocks, etc.', 'wc1c-main')
+            ),
             'default' => '',
             'css' => 'width: 100%;',
         ];
@@ -50,7 +56,7 @@ class CreateForm extends FormAbstract
 		{
 			$schemas = wc1c()->schemas()->get();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			return $fields;
 		}
@@ -254,7 +260,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Name is exists.', 'wc1c-main')
+					'data' => __('Create configuration error. Name exists.', 'wc1c-main')
 				]
 			);
 
@@ -271,7 +277,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'update',
-					'data' => __('Configuration create success. Configuration id: ', 'wc1c-main') . $configuration->getId()
+					'data' => __('Configuration create success. Configuration ID: ', 'wc1c-main') . $configuration->getId()
 					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
 				]
 			);
@@ -284,7 +290,7 @@ class CreateForm extends FormAbstract
 		(
 			[
 				'type' => 'error',
-				'data' => __('Configuration create error. Please retry saving or change fields.', 'wc1c-main')
+				'data' => __('Configuration create error. Please try saving again or change fields.', 'wc1c-main')
 			]
 		);
 
