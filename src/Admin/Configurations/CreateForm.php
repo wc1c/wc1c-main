@@ -39,7 +39,7 @@ class CreateForm extends FormAbstract
 	{
 		$fields['name'] =
         [
-            'title' => __('Configuration name', 'wc1c-main'),
+            'title' => __('Name of the configuration', 'wc1c-main'),
             'type' => 'text',
             'description' => sprintf
             (
