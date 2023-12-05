@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
 "POT-Creation-Date: 2023-12-05 18:10+0300\n"
-"PO-Revision-Date: 2023-12-05 18:14+0300\n"
+"PO-Revision-Date: 2023-12-05 18:23+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -793,7 +793,7 @@ msgstr "Информация — INFO (200)"
 #: src/Schemas/Productscleanercml/Admin.php:307
 #: src/Schemas/Productscml/Admin.php:1925
 msgid "NOTICE (250)"
-msgstr "Замечание — NOTICE (250)"
+msgstr "Уведомление — NOTICE (250)"
 
 #: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
 #: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
