@@ -141,7 +141,7 @@ class AllTable extends TableAbstract
 		if($item['status'] === 'draft')
 		{
 			$status_class = 'draft';
-			$status_description = __('An initial setup is required.', 'wc1c-main');
+			$status_description = __('An initial configuration setup is required.', 'wc1c-main');
 		}
 		if($item['status'] === 'active')
 		{
@@ -151,22 +151,22 @@ class AllTable extends TableAbstract
 		if($item['status'] === 'inactive')
 		{
 			$status_class = 'inactive';
-			$status_description = __('All configuration algorithms are disabled.', 'wc1c-main');
+			$status_description = __('All configuration algorithms are disabled. Configuration is switched off in the settings.', 'wc1c-main');
 		}
 		if($item['status'] === 'processing')
 		{
 			$status_class = 'processing';
-			$status_description = __('Data is being exchanged. Changing settings is not recommended.', 'wc1c-main');
+			$status_description = __('Data is being exchanged. Changing configuration settings is not recommended.', 'wc1c-main');
 		}
 		if($item['status'] === 'error')
 		{
 			$status_class = 'error';
-			$status_description = __('An error has occurred. You need to look at the event logs, they contain detailed information.', 'wc1c-main');
+			$status_description = __('An error has occurred. You should review the event logs for the configuration, they contain detailed information about the error.', 'wc1c-main');
 		}
 		if($item['status'] === 'deleted')
 		{
 			$status_class = 'deleted';
-			$status_description = __('Awaiting final removal. All algorithms are disabled.', 'wc1c-main');
+			$status_description = __('Awaiting final configuration removal. All algorithms are disabled.', 'wc1c-main');
 		}
 
 		return '<span class="' . $status_class . '" data-bs-toggle="popover" data-bs-custom-class="configurations-status-popover ' . $status_class . '" data-bs-title="' . __('Status description', 'wc1c-main') . '" data-bs-trigger="hover focus click" data-bs-content="' . $status_description . '">' . $status . '</span>';
