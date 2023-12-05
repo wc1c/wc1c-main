@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-12-04 15:37+0300\n"
+"POT-Creation-Date: 2023-12-05 18:09+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -147,7 +147,7 @@ msgid "No activity"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:144
-msgid "An initial setup is required."
+msgid "An initial configuration setup is required."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:149
@@ -155,21 +155,24 @@ msgid "All configuration algorithms are active."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:154
-msgid "All configuration algorithms are disabled."
+msgid ""
+"All configuration algorithms are disabled. Configuration is switched off in "
+"the settings."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:159
-msgid "Data is being exchanged. Changing settings is not recommended."
+msgid ""
+"Data is being exchanged. Changing configuration settings is not recommended."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:164
 msgid ""
-"An error has occurred. You need to look at the event logs, they contain "
-"detailed information."
+"An error has occurred. Should review the event logs for the configuration, "
+"they contain detailed information about the error."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:169
-msgid "Awaiting final removal. All algorithms are disabled."
+msgid "Awaiting final configuration removal. All algorithms are disabled."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:172

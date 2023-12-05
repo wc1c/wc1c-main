@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-12-04 15:37+0300\n"
-"PO-Revision-Date: 2023-12-04 15:47+0300\n"
+"POT-Creation-Date: 2023-12-05 18:10+0300\n"
+"PO-Revision-Date: 2023-12-05 18:14+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -152,32 +152,38 @@ msgid "No activity"
 msgstr "Не было"
 
 #: src/Admin/Configurations/AllTable.php:144
-msgid "An initial setup is required."
-msgstr "Требуется первоначальная настройка."
+msgid "An initial configuration setup is required."
+msgstr "Требуется первоначальная настройка конфигурации."
 
 #: src/Admin/Configurations/AllTable.php:149
 msgid "All configuration algorithms are active."
 msgstr "Все алгоритмы конфигурации активны."
 
 #: src/Admin/Configurations/AllTable.php:154
-msgid "All configuration algorithms are disabled."
-msgstr "Все алгоритмы конфигурации отключены."
+msgid ""
+"All configuration algorithms are disabled. Configuration is switched off in "
+"the settings."
+msgstr ""
+"Все алгоритмы конфигурации отключены. Конфигурация отключена в настройках."
 
 #: src/Admin/Configurations/AllTable.php:159
-msgid "Data is being exchanged. Changing settings is not recommended."
-msgstr "Идет обмен данными. Менять настройки не рекомендуется."
+msgid ""
+"Data is being exchanged. Changing configuration settings is not recommended."
+msgstr "Идет обмен данными. Изменять настройки конфигурации не рекомендуется."
 
 #: src/Admin/Configurations/AllTable.php:164
 msgid ""
-"An error has occurred. You need to look at the event logs, they contain "
-"detailed information."
+"An error has occurred. Should review the event logs for the configuration, "
+"they contain detailed information about the error."
 msgstr ""
-"Произошла ошибка. Нужно смотреть журналы событий, в них есть подробная "
-"информация."
+"Произошла ошибка. Следует просмотреть журналы событий для конфигурации, в "
+"них содержится подробная информация об ошибке."
 
 #: src/Admin/Configurations/AllTable.php:169
-msgid "Awaiting final removal. All algorithms are disabled."
-msgstr "Ожидает окончательного удаления. Все алгоритмы отключены."
+msgid "Awaiting final configuration removal. All algorithms are disabled."
+msgstr ""
+"Конфигурация ожидает окончательного удаления. Все алгоритмы конфигурации "
+"отключены."
 
 #: src/Admin/Configurations/AllTable.php:172
 msgid "Status description"
