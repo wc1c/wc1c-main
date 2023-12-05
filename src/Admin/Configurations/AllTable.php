@@ -161,7 +161,7 @@ class AllTable extends TableAbstract
 		if($item['status'] === 'error')
 		{
 			$status_class = 'error';
-			$status_description = __('An error has occurred. You should review the event logs for the configuration, they contain detailed information about the error.', 'wc1c-main');
+			$status_description = __('An error has occurred. Should review the event logs for the configuration, they contain detailed information about the error.', 'wc1c-main');
 		}
 		if($item['status'] === 'deleted')
 		{
