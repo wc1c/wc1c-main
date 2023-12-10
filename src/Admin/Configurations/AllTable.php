@@ -211,17 +211,17 @@ class AllTable extends TableAbstract
 		$user = get_userdata($item['user_id']);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$metas['user'] = __('User: ', 'wc1c-main') . $user->get('nickname') . ' (' . $item['user_id']. ')';
+			$metas['user'] = __('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $user->get('nickname') . ' (' . $item['user_id']. ')</span>';
 		}
 		else
 		{
-			$metas['user'] =  __('User is not exists.', 'wc1c-main');
+			$metas['user'] =  __('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . __('user is not exists.', 'wc1c-main') . '</span>';
 		}
 
 		try
 		{
 			$schema = wc1c()->schemas()->get($item['schema']);
-			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+			$metas['schema'] = __('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $item['schema'] . ' (' . $schema->getName() . ')</span>';
 
             if($item['schema'] === 'productscml' || $item['schema'] === 'pqcml')
             {
@@ -233,7 +233,7 @@ class AllTable extends TableAbstract
 
                     $metas['productscml-catalog-full'] = sprintf
                     (
-                        '%s %s (<span class="time">%s %s</span> %s)',
+                        '%s <span class="row-metas-line-content">%s(<span class="time">%s %s</span> %s)</span>',
                         __('Full exchange:', 'wc1c-main'),
                         sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp'))),
                         date_i18n('d/m/Y', $timestamp),
@@ -245,7 +245,7 @@ class AllTable extends TableAbstract
 				{
 					$metas['productscml-catalog-full'] = sprintf
 					(
-						'%s %s',
+						'%s <span class="row-metas-line-content">%s</span>',
 						__('Full exchange:', 'wc1c-main'),
 						__('not produced', 'wc1c-main')
 					);
@@ -254,7 +254,7 @@ class AllTable extends TableAbstract
 		}
 		catch(\Throwable $e)
 		{
-			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')';
+			$metas['schema'] = __('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')</span>';
 		}
 
 		if(has_filter('wc1c_admin_configurations_all_row_metas'))
@@ -289,7 +289,7 @@ class AllTable extends TableAbstract
 
 		foreach($data as $meta => $meta_text)
 		{
-			$out .= "<div class='row-metas-line $meta'>$meta_text</div>";
+			$out .= '<div class="row-metas-line ' . $meta . '">' . $meta_text . '</div>';
 		}
 
 		$out .= '</div>';
