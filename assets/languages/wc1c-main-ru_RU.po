@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-12-05 18:10+0300\n"
-"PO-Revision-Date: 2023-12-05 18:23+0300\n"
+"POT-Creation-Date: 2023-12-30 00:39+0300\n"
+"PO-Revision-Date: 2023-12-30 00:49+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -46,16 +46,16 @@ msgstr "Перейти к настройке."
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:133
+#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:174
 #: src/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr "Конфигурации"
 
-#: src/Admin.php:128 src/Admin/Settings/LogsForm.php:99
+#: src/Admin.php:128 src/Admin/Settings/LogsForm.php:130
 msgid "Tools"
 msgstr "Инструменты"
 
-#: src/Admin.php:137
+#: src/Admin.php:137 src/Admin/Configurations/Update.php:35
 msgid "Settings"
 msgstr "Настройки"
 
@@ -202,13 +202,13 @@ msgid "Remove forever"
 msgstr "Удалить окончательно"
 
 #: src/Admin/Configurations/AllTable.php:214
-msgid "User: "
-msgstr "Пользователь: "
+#: src/Admin/Configurations/AllTable.php:218
+msgid "User:"
+msgstr "Пользователь:"
 
 #: src/Admin/Configurations/AllTable.php:218
-#: src/Admin/Configurations/MainUpdate.php:162
-msgid "User is not exists."
-msgstr "Пользователь не существует."
+msgid "user is not exists."
+msgstr "пользователь не существует."
 
 #: src/Admin/Configurations/AllTable.php:224
 #: src/Admin/Configurations/AllTable.php:257
@@ -422,6 +422,10 @@ msgstr "ID:"
 msgid "Owner:"
 msgstr "Владелец:"
 
+#: src/Admin/Configurations/MainUpdate.php:162
+msgid "User is not exists."
+msgstr "Пользователь не существует."
+
 #: src/Admin/Configurations/MainUpdate.php:167
 msgid "Date active:"
 msgstr "Последняя активность:"
@@ -458,10 +462,6 @@ msgstr "Размер директории журналов:"
 msgid "About schema"
 msgstr "О схеме"
 
-#: src/Admin/Configurations/Update.php:35 src/Admin/Settings.php:48
-msgid "Main"
-msgstr "Основное"
-
 #: src/Admin/Configurations/Update.php:42
 msgid "Logs"
 msgstr "Журналы"
@@ -488,15 +488,15 @@ msgstr "Название конфигурации"
 msgid "Used for convenient distribution of multiple configurations."
 msgstr "Используется для удобного распределения нескольких конфигураций."
 
-#: src/Admin/Configurations/Update.php:141
+#: src/Admin/Configurations/Update.php:142
 msgid "Rename"
 msgstr "Переименовать"
 
-#: src/Admin/Configurations/Update.php:170
+#: src/Admin/Configurations/Update.php:171
 msgid "Configuration name update success."
 msgstr "Название конфигурации успешно обновлено."
 
-#: src/Admin/Configurations/Update.php:180
+#: src/Admin/Configurations/Update.php:181
 msgid "Configuration name update error. Please retry saving or change fields."
 msgstr ""
 "Ошибка обновления названия конфигурации. Повторите попытку сохранения или "
@@ -536,6 +536,10 @@ msgstr "Нашли ошибку?"
 #: src/Admin/Helps/Init.php:58 views/helps/features.php:3
 msgid "Not a feature?"
 msgstr "Нет возможности?"
+
+#: src/Admin/Settings.php:48
+msgid "Main"
+msgstr "Основное"
 
 #: src/Admin/Settings.php:62 src/Schemas/Productscleanercml/Admin.php:291
 #: src/Schemas/Productscml/Admin.php:1909
@@ -761,63 +765,123 @@ msgstr "Вывод колонки с информацией из 1С в спис
 msgid "Level for main events"
 msgstr "Уровень для основных событий"
 
-#: src/Admin/Settings/LogsForm.php:43
-#: src/Schemas/Productscleanercml/Admin.php:300
-#: src/Schemas/Productscml/Admin.php:1918
+#: src/Admin/Settings/LogsForm.php:46
 msgid ""
-"All events of the selected level will be recorded in the log file. The "
-"higher the level, the less data is recorded."
+"Events of the selected level will be recorded in the log file. The bigger "
+"the level (numbers), the less data is recorded."
 msgstr ""
-"Все события выбранного уровня будут записаны в файл журнала. Чем выше "
-"уровень, тем меньше записывается данных."
+"События выбранного уровня будут записаны в файлы журналов. Чем больше "
+"уровень (цифры), тем меньше данных записывается."
 
-#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
-#: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
-#: src/Admin/Settings/LogsForm.php:140
+#: src/Admin/Settings/LogsForm.php:47
+msgid ""
+"If the plugin is stable, you will need to use at least the NOTICE level "
+"(250), otherwise the event logs will become very large."
+msgstr ""
+"Если плагин работает стабильно, необходимо использовать хотя бы уровень "
+"NOTICE (250), иначе журналы событий станут очень большими."
+
+#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:63
+#: src/Admin/Settings/LogsForm.php:120 src/Admin/Settings/LogsForm.php:142
+#: src/Admin/Settings/LogsForm.php:164 src/Admin/Settings/LogsForm.php:186
 #: src/Schemas/Productscleanercml/Admin.php:305
 #: src/Schemas/Productscml/Admin.php:1923
 msgid "DEBUG (100)"
 msgstr "Отладка — DEBUG (100)"
 
-#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
-#: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/LogsForm.php:141
+#: src/Admin/Settings/LogsForm.php:49
+msgid ""
+"Data from the algorithm development process with debugging information. It "
+"is used by administrators in case of some unclear errors in the process of "
+"plugin operation."
+msgstr ""
+"Данные из процесса отработки алгоритмов с отладочной информацией. "
+"Используется администраторами в случае возникновения непонятных ошибок в "
+"процессе работы плагина."
+
+#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:64
+#: src/Admin/Settings/LogsForm.php:121 src/Admin/Settings/LogsForm.php:143
+#: src/Admin/Settings/LogsForm.php:165 src/Admin/Settings/LogsForm.php:187
 #: src/Schemas/Productscleanercml/Admin.php:306
 #: src/Schemas/Productscml/Admin.php:1924
 msgid "INFO (200)"
 msgstr "Информация — INFO (200)"
 
-#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
-#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
-#: src/Admin/Settings/LogsForm.php:142
+#: src/Admin/Settings/LogsForm.php:51
+msgid ""
+"Data from the algorithm development process, but without debugging "
+"information. In this mode, less data is written than in debugging mode, but "
+"still a lot."
+msgstr ""
+"Данные из процесса отработки алгоритмов, но без отладочной информации. В "
+"этом режиме записывается меньше данных, чем в режиме отладки, но все равно "
+"много."
+
+#: src/Admin/Settings/LogsForm.php:52 src/Admin/Settings/LogsForm.php:65
+#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:144
+#: src/Admin/Settings/LogsForm.php:166 src/Admin/Settings/LogsForm.php:188
 #: src/Schemas/Productscleanercml/Admin.php:307
 #: src/Schemas/Productscml/Admin.php:1925
 msgid "NOTICE (250)"
 msgstr "Уведомление — NOTICE (250)"
 
-#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
-#: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
-#: src/Admin/Settings/LogsForm.php:143
+#: src/Admin/Settings/LogsForm.php:53
+msgid ""
+"This mode records events that notify of situations that you need to be aware "
+"of. For example, when changing settings or renaming a product during data "
+"exchange."
+msgstr ""
+"В этом режиме записываются события, уведомляющие о ситуациях, на которые "
+"необходимо обратить внимание. Например, при изменении настроек или "
+"переименовании продукта во время обмена данными."
+
+#: src/Admin/Settings/LogsForm.php:54 src/Admin/Settings/LogsForm.php:66
+#: src/Admin/Settings/LogsForm.php:123 src/Admin/Settings/LogsForm.php:145
+#: src/Admin/Settings/LogsForm.php:167 src/Admin/Settings/LogsForm.php:189
 #: src/Schemas/Productscleanercml/Admin.php:308
 #: src/Schemas/Productscml/Admin.php:1926
 msgid "WARNING (300)"
 msgstr "Предупреждение — WARNING (300)"
 
-#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
-#: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
-#: src/Admin/Settings/LogsForm.php:144
+#: src/Admin/Settings/LogsForm.php:55
+msgid ""
+"Recording warnings that occur during operation. Warnings are worth "
+"investigating and taking into account, but they are not errors."
+msgstr ""
+"Запись предупреждений, возникающих во время работы. Предупреждения стоит "
+"изучить и принять во внимание, но они не являются ошибками."
+
+#: src/Admin/Settings/LogsForm.php:56 src/Admin/Settings/LogsForm.php:67
+#: src/Admin/Settings/LogsForm.php:124 src/Admin/Settings/LogsForm.php:146
+#: src/Admin/Settings/LogsForm.php:168 src/Admin/Settings/LogsForm.php:190
 #: src/Schemas/Productscleanercml/Admin.php:309
 #: src/Schemas/Productscml/Admin.php:1927
 msgid "ERROR (400)"
 msgstr "Ошибка — ERROR (400)"
 
 #: src/Admin/Settings/LogsForm.php:57
+msgid ""
+"Will be recorded only data on errors occurring during the processing of "
+"plugin algorithms."
+msgstr ""
+"Будут записываться только данные об ошибках, возникающих при обработке "
+"алгоритмов плагина."
+
+#: src/Admin/Settings/LogsForm.php:58
+msgid ""
+"Event logs always record data about critical errors in the code, regardless "
+"of the level configured."
+msgstr ""
+"В журналы событий всегда записываются данные о критических ошибках в коде, "
+"независимо от настроенного уровня."
+
+#: src/Admin/Settings/LogsForm.php:73
 #: src/Schemas/Productscleanercml/Admin.php:315
 #: src/Schemas/Productscml/Admin.php:1933
 msgid "Maximum files"
 msgstr "Максимальное количество файлов"
 
-#: src/Admin/Settings/LogsForm.php:59
+#: src/Admin/Settings/LogsForm.php:75
 #: src/Schemas/Productscleanercml/Admin.php:317
 msgid ""
 "Log files created daily. This option on the maximum number of stored files. "
@@ -827,11 +891,11 @@ msgstr ""
 "количество хранимых файлов. По умолчанию сохраняются журналы за последние 30 "
 "дней."
 
-#: src/Admin/Settings/LogsForm.php:66
+#: src/Admin/Settings/LogsForm.php:82
 msgid "Output on display"
 msgstr "Вывод на экран"
 
-#: src/Admin/Settings/LogsForm.php:68
+#: src/Admin/Settings/LogsForm.php:84
 #: src/Schemas/Productscleanercml/Admin.php:170
 #: src/Schemas/Productscml/Admin.php:173 src/Schemas/Productscml/Admin.php:210
 #: src/Schemas/Productscml/Admin.php:291 src/Schemas/Productscml/Admin.php:305
@@ -852,23 +916,36 @@ msgid "Check the box if you want to enable this feature. Disabled by default."
 msgstr ""
 "Установите флажок, если хотите включить эту функцию. Отключено по умолчанию."
 
-#: src/Admin/Settings/LogsForm.php:69
-msgid "All entries in the event logs will be displayed."
-msgstr "Будут отображены все записи журналов событий."
+#: src/Admin/Settings/LogsForm.php:88
+msgid "All entries event logs will be displayed on the screen."
+msgstr "На экране появятся все записи журналов событий."
 
-#: src/Admin/Settings/LogsForm.php:75
+#: src/Admin/Settings/LogsForm.php:89
+msgid ""
+"It is used only by developers. If enable this setting just for fun, 1C will "
+"not be able to connect to the site."
+msgstr ""
+"Она используется только разработчиками. Если включить эту настройку просто "
+"для развлечения, 1С не сможет подключиться к сайту."
+
+#: src/Admin/Settings/LogsForm.php:96
 msgid "Levels by context"
 msgstr "Уровни по контексту"
 
-#: src/Admin/Settings/LogsForm.php:77
+#: src/Admin/Settings/LogsForm.php:101
 msgid "Event log settings based on context."
 msgstr "Настройки журнала событий исходя из контекста."
 
-#: src/Admin/Settings/LogsForm.php:82 src/Admin/Settings/MainForm.php:140
+#: src/Admin/Settings/LogsForm.php:102
+msgid "Logical distribution of event logs into contexts for flexible analysis."
+msgstr ""
+"Логическое распределение журналов событий по контекстам для гибкого анализа."
+
+#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/MainForm.php:140
 msgid "Receiver"
 msgstr "Получатель"
 
-#: src/Admin/Settings/LogsForm.php:84
+#: src/Admin/Settings/LogsForm.php:113
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
@@ -876,40 +953,75 @@ msgstr ""
 "Все события выбранного уровня будут записаны как события приемника в файл "
 "журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
-#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
+#: src/Admin/Settings/LogsForm.php:114
+msgid ""
+"It is convenient to use for debugging missing requests from 1C to the site "
+"in case need to understand on which side there is a problem with the "
+"connection."
+msgstr ""
+"Его удобно использовать для отладки пропавших запросов от 1С к сайту в "
+"случае, если нужно понять, на какой стороне есть проблема с соединением."
+
+#: src/Admin/Settings/LogsForm.php:119 src/Admin/Settings/LogsForm.php:141
+#: src/Admin/Settings/LogsForm.php:163 src/Admin/Settings/LogsForm.php:185
 #: src/Schemas/Productscleanercml/Admin.php:304
 #: src/Schemas/Productscml/Admin.php:1922
 msgid "Use level for main events"
 msgstr "Использовать уровень для основных событий"
 
-#: src/Admin/Settings/LogsForm.php:101
+#: src/Admin/Settings/LogsForm.php:135
 msgid ""
-"All events of the selected level will be recorded the tools events in the "
-"log file. The higher the level, the less data is recorded."
+"All events of the selected level are recorded in the tools events log file. "
+"The higher the level, the less data is logged."
 msgstr ""
-"Все события выбранного уровня будут записываться как события инструментов в "
-"файл журнала. Чем выше уровень, тем меньше данных записывается."
+"Все события выбранного уровня записываются в файлы журналов событий для "
+"инструментов. Чем выше уровень, тем меньше данных записывается в журнал."
 
-#: src/Admin/Settings/LogsForm.php:116
+#: src/Admin/Settings/LogsForm.php:136
+msgid ""
+"In this context, events are recorded when users work with tools, both global "
+"and for a specific configuration."
+msgstr ""
+"В этом контексте события записываются когда пользователи работают с "
+"инструментами как глобальными, так и для конкретной конфигурации."
+
+#: src/Admin/Settings/LogsForm.php:152
 msgid "Schemas"
 msgstr "Схемы"
 
-#: src/Admin/Settings/LogsForm.php:118
+#: src/Admin/Settings/LogsForm.php:157
 msgid ""
-"All events of the selected level will be recorded the schemas events in the "
-"log file. The higher the level, the less data is recorded."
+"All events of the selected level are recorded in the events log files for "
+"schemas. The higher the level, the less data is logged."
 msgstr ""
-"Все события выбранного уровня будут записаны как события схемам в файл "
-"журнала. Чем выше уровень, тем меньше данных записывается."
+"Все события выбранного уровня записываются в файлы журнала событий для схем. "
+"Чем выше уровень, тем меньше данных записывается в журнал."
 
-#: src/Admin/Settings/LogsForm.php:135
+#: src/Admin/Settings/LogsForm.php:158
+msgid ""
+"Only events that are processed in the schema algorithms are recorded. If the "
+"events are related to the user configuration, they are not written to schema "
+"events."
+msgstr ""
+"Записываются только те события, которые обрабатываются алгоритмами схемы. "
+"Если события относятся к пользовательской конфигурации, они не записываются "
+"в события схемы."
+
+#: src/Admin/Settings/LogsForm.php:179
 msgid ""
 "All events of the selected level will be recorded the configurations events "
 "in the log file. The higher the level, the less data is recorded."
 msgstr ""
 "Все события выбранного уровня будут записываться как события конфигурации в "
 "файл журнала. Чем выше уровень, тем меньше данных записывается."
+
+#: src/Admin/Settings/LogsForm.php:180
+msgid ""
+"A personalized event log level can be set on the level of each "
+"configuration. The current value is taken for creating new configurations."
+msgstr ""
+"На уровне каждой конфигурации можно установить персональный уровень журнала "
+"событий. При создании новых конфигураций принимается текущее значение."
 
 #: src/Admin/Settings/MainForm.php:45
 msgid "Some settings for the configurations."
@@ -1616,6 +1728,15 @@ msgstr ""
 #: src/Schemas/Productscml/Admin.php:1916
 msgid "Level for events"
 msgstr "Уровень для событий"
+
+#: src/Schemas/Productscleanercml/Admin.php:300
+#: src/Schemas/Productscml/Admin.php:1918
+msgid ""
+"All events of the selected level will be recorded in the log file. The "
+"higher the level, the less data is recorded."
+msgstr ""
+"Все события выбранного уровня будут записаны в файл журнала. Чем выше "
+"уровень, тем меньше записывается данных."
 
 #: src/Schemas/Productscleanercml/Core.php:45
 msgid "Cleaning of products via CommerceML"
@@ -5785,13 +5906,13 @@ msgstr "Ошибка. Удаление недоступно"
 msgid "Delete"
 msgstr "Удалить"
 
-#: views/configurations/empty.php:4
+#: views/configurations/empty.php:8
 msgid ""
 "To exchange data, at least one configuration must be created and configured."
 msgstr ""
 "Для обмена данными необходимо создать и настроить хотя бы одну конфигурацию."
 
-#: views/configurations/empty.php:5
+#: views/configurations/empty.php:9
 msgid ""
 "The number of settings and method of data exchange in the configuration "
 "depends on the scheme selected for exchange during creation."
@@ -5799,15 +5920,15 @@ msgstr ""
 "Количество настроек и способ обмена данными в конфигурации зависит от схемы, "
 "выбранной для обмена при создании."
 
-#: views/configurations/empty.php:13
+#: views/configurations/empty.php:22
 msgid "Configurations by query is not found, query:"
 msgstr "Конфигурации по запросу не найдены, запрос:"
 
-#: views/configurations/empty.php:17
+#: views/configurations/empty.php:26
 msgid "Configurations not found"
 msgstr "Конфигурации не найдены"
 
-#: views/configurations/empty.php:23
+#: views/configurations/empty.php:36
 msgid ""
 "For flexible exchange distribution, an unlimited number of configurations "
 "can be created."
@@ -5815,7 +5936,7 @@ msgstr ""
 "Для гибкого распределения обмена можно создать неограниченное количество "
 "конфигураций."
 
-#: views/configurations/empty.php:24
+#: views/configurations/empty.php:37
 msgid ""
 "It is recommended to create at least two configurations: 1. To exchange "
 "nomenclature data, 2. To exchange orders data."
@@ -5823,7 +5944,7 @@ msgstr ""
 "Рекомендуется создать не менее двух конфигураций: 1. Для обмена "
 "номенклатурными данными, 2. Для обмена данными о заказах."
 
-#: views/configurations/empty.php:27 views/header.php:6
+#: views/configurations/empty.php:40 views/header.php:6
 msgid "New configuration"
 msgstr "Новая конфигурация"
 
@@ -6074,11 +6195,11 @@ msgid ""
 "After activation, this section will disappear and will no longer be shown."
 msgstr "После активации этот раздел исчезнет и больше не будет отображаться."
 
-#: views/promo/activation.php:19
+#: views/promo/activation.php:20
 msgid "How to activate?"
 msgstr "Как активировать?"
 
-#: views/promo/activation.php:21
+#: views/promo/activation.php:22
 msgid ""
 "Get an activation code in any available way. For example, on the official "
 "website."
@@ -6086,15 +6207,15 @@ msgstr ""
 "Получить код активации любым доступным способом. Например, на официальном "
 "сайте."
 
-#: views/promo/activation.php:22
+#: views/promo/activation.php:23
 msgid "Enter the activation code in the plugin settings."
 msgstr "Ввести полученный код активации в настройках плагина."
 
-#: views/promo/activation.php:27
+#: views/promo/activation.php:28
 msgid "Why is activation required?"
 msgstr "Зачем нужна активация?"
 
-#: views/promo/activation.php:29
+#: views/promo/activation.php:30
 msgid ""
 "You received a copy of the software completely free of charge and you can "
 "use it as is without any activation."
@@ -6102,7 +6223,7 @@ msgstr ""
 "Вы получили копию программного обеспечения совершенно бесплатно и можете "
 "использовать плагин как есть без какой-либо активации."
 
-#: views/promo/activation.php:30
+#: views/promo/activation.php:31
 msgid ""
 "However, in order to receive timely, as well as necessary updates and "
 "improvements, it is necessary to activate the current environment."
@@ -6110,7 +6231,7 @@ msgstr ""
 "Однако для получения своевременных, а также необходимых обновлений и "
 "улучшений необходимо активировать текущую среду."
 
-#: views/promo/activation.php:33
+#: views/promo/activation.php:34
 msgid ""
 "Activation is vital for the performance of the plugin and its further active "
 "development. Dont ignore activation."
@@ -6118,13 +6239,13 @@ msgstr ""
 "Активация необходима для работоспособности плагина и его дальнейшего "
 "активного развития. Не игнорируйте активацию."
 
-#: views/promo/activation.php:34
+#: views/promo/activation.php:35
 msgid "Each activation triggers a mechanism to improve the software you use."
 msgstr ""
 "Каждая активация запускает механизм улучшения используемого вами "
 "программного обеспечения."
 
-#: views/promo/activation.php:37
+#: views/promo/activation.php:38
 msgid ""
 "In addition to supporting the software you use, additional features will be "
 "added."
@@ -6132,11 +6253,11 @@ msgstr ""
 "Помимо поддержки используемого вами программного обеспечения, будут "
 "добавлены дополнительные функции."
 
-#: views/promo/activation.php:40
+#: views/promo/activation.php:41
 msgid "ATTENTION! Activation does not add the possibility of extensions."
 msgstr "ВНИМАНИЕ! Активация не добавляет возможности расширений."
 
-#: views/promo/activation.php:42
+#: views/promo/activation.php:43
 msgid ""
 "Additional features are implemented in extensions! After activation, "
 "features from extensions are not activated."
@@ -6144,7 +6265,7 @@ msgstr ""
 "Дополнительные возможности реализованы в расширениях! После активации "
 "функции из расширений не активируются."
 
-#: views/promo/activation.php:43
+#: views/promo/activation.php:44
 msgid ""
 "To add features, you need to install extensions. They are supplied by "
 "separate plugins, after activation of which the necessary features are added."
@@ -6314,6 +6435,13 @@ msgstr "Команда WC1C"
 #. Author URI of the plugin/theme
 msgid "https://wc1c.info"
 msgstr "https://wc1c.info"
+
+#~ msgid ""
+#~ "All events of the selected level will be recorded the schemas events in "
+#~ "the log file. The higher the level, the less data is recorded."
+#~ msgstr ""
+#~ "Все события выбранного уровня будут записаны как события схемам в файл "
+#~ "журнала. Чем выше уровень, тем меньше данных записывается."
 
 #~ msgid "in"
 #~ msgstr "в"
