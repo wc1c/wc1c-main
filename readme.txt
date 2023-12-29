@@ -72,6 +72,7 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
 
 = 0.23.0 =
+* Improvement: language phrases
 * Improvement: High Performance Order Storage (HPOS) compatibility
 * WP tested up to: 6.4
 * WC tested up to: 8.1 & 8.2 & 8.3 & 8.4
