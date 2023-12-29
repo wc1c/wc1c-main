@@ -40,13 +40,13 @@ class ConnectionForm extends Form
 			$this->connection = new Connection();
 			$this->connection->setAppName(get_bloginfo());
 		}
-		catch(\Exception $e){}
+		catch(\Throwable $e){}
 
 		try
 		{
 			$this->apHandle();
 		}
-		catch(\Exception $e){}
+		catch(\Throwable $e){}
 
 		if('' !== $settings->get('token', ''))
 		{
@@ -65,11 +65,12 @@ class ConnectionForm extends Form
 		$this->init();
 	}
 
-	/**
-	 * Handle AP
-	 *
-	 * @return void
-	 */
+    /**
+     * Handle AP
+     *
+     * @return void
+     * @throws \Exception
+     */
 	public function apHandle()
 	{
 		if(isset($_GET['site_url'], $_GET['user_login']))
@@ -113,7 +114,7 @@ class ConnectionForm extends Form
 					wp_safe_redirect($sold_url);
 					die;
 				}
-				catch(Exception $e)
+				catch(\Throwable $e)
 				{
 					wc1c()->log()->addNotice('Settings is not successful save.', ['exception' => $e]);
 				}
@@ -170,7 +171,7 @@ class ConnectionForm extends Form
 			{
 				$this->settings->save(['login' => '', 'token' => '']);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->log()->addNotice('Settings is not successful save.', ['exception' => $e]);
 			}
@@ -201,8 +202,8 @@ class ConnectionForm extends Form
 	 *
 	 * @return array
 	 */
-	public function init_fields_connected($fields)
-	{
+	public function init_fields_connected($fields): array
+    {
 		$fields['connected_title'] =
 		[
 			'title' => __('Site is connected to WC1C', 'wc1c-main'),
@@ -212,7 +213,7 @@ class ConnectionForm extends Form
 
 		$fields['login'] =
 		[
-			'title' => __('Login', 'wc1c-main'),
+			'title' => __('Username', 'wc1c-main'),
 			'type' => 'text',
 			'description' => __('Connected login from the WC1C website.', 'wc1c-main'),
 			'default' => '',
