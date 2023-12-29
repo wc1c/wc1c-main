@@ -233,7 +233,7 @@ class AllTable extends TableAbstract
 
                     $metas['productscml-catalog-full'] = sprintf
                     (
-                        '%s <span class="row-metas-line-content">%s(<span class="time">%s %s</span> %s)</span>',
+                        '%s <span class="row-metas-line-content">%s (<span class="time">%s %s</span> %s)</span>',
                         __('Full exchange:', 'wc1c-main'),
                         sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp'))),
                         date_i18n('d/m/Y', $timestamp),
