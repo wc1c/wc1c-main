@@ -62,9 +62,9 @@
 
     .column-configuration_id
     {
-      width: 75px;
+      width: 45px;
       border-right: 1px solid #ccd0d4;
-      max-width: 75px;
+      max-width: 45px;
 
       @include media-breakpoint-down(md)
       {
