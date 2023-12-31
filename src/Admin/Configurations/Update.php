@@ -90,9 +90,9 @@ class Update
 	 */
 	public function outputSchemaErrorText($text): string
 	{
-		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c-main');
+		$new_text = __('The exchange schema based on which the configuration was created is not available.', 'wc1c-main');
 
-		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c-main');
+		$new_text .= '<br /> ' . __('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-main');
 
 		return $new_text;
 	}
