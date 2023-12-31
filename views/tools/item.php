@@ -11,7 +11,7 @@
     </div>
     <div class="card-footer bg-light p-3">
        <a class="text-decoration-none button button-primary" href="<?php echo esc_url($args['url']); ?>">
-	       <?php _e('Open', 'wc1c-main'); ?>
+	       <?php _e('Open tool', 'wc1c-main'); ?>
        </a>
     </div>
 </div>
