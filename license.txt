@@ -1,6 +1,6 @@
 WC1C
 
-Copyright © 2018-2023 by WC1C team (http://wc1c.info)
+Copyright © 2018-2024 by WC1C team (http://wc1c.info)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
