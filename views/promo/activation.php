@@ -51,14 +51,14 @@ $text = sprintf
     <div class="col-24 col-lg-7 p-0">
 
         <div class="alert alert-info border-0 mt-2 mw-100">
-            <h4 class="alert-heading mt-0 mb-1"><?php _e('Do not wait until something breaks!', 'wc1c-main'); ?></h4>
+            <h4 class="alert-heading mt-0 mb-1 fs-6"><?php _e('Do not wait until something breaks!', 'wc1c-main'); ?></h4>
             <?php _e('Activate your current copy of the software.', 'wc1c-main'); ?>
             <hr>
             <?php _e('Buy code:', 'wc1c-main'); ?> <a target="_blank" href="//wc1c.info/market/code">wc1c.info/market/code</a>
         </div>
 
         <div class="alert alert-secondary border-0 mt-2 mw-100">
-            <h4 class="alert-heading mt-0 mb-1"><?php _e('No financial opportunity?', 'wc1c-main'); ?></h4>
+            <h4 class="alert-heading mt-0 mb-1 fs-6"><?php _e('No financial opportunity?', 'wc1c-main'); ?></h4>
             <?php _e('Take part in the development of the solution you use.', 'wc1c-main'); ?>
             <br/>
             <?php _e('Information on how to participate is available in the official documentation on the official website.', 'wc1c-main'); ?>
@@ -67,7 +67,7 @@ $text = sprintf
         </div>
 
         <div class="alert alert-secondary border-0 mt-2 mw-100">
-            <h4 class="alert-heading mt-0 mb-1"><?php _e('Every activation counts!', 'wc1c-main'); ?></h4>
+            <h4 class="alert-heading mt-0 mb-1 fs-6"><?php _e('Every activation counts!', 'wc1c-main'); ?></h4>
             <?php _e('By activating your project, you let the WC1C team know that the plugin is in active use.', 'wc1c-main'); ?>
             <br/>
             <?php _e('Also, you give a financial opportunity to release compatibility updates and add new features!', 'wc1c-main'); ?>
