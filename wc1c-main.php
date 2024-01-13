@@ -11,7 +11,7 @@
  * Requires Plugins: woocommerce
  * Text Domain: wc1c-main
  * Domain Path: /assets/languages
- * Copyright: WC1C team © 2018-2023
+ * Copyright: WC1C team © 2018-2024
  * Author: WC1C team
  * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
