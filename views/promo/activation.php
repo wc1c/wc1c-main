@@ -14,7 +14,7 @@ $text = sprintf
         <div class="mb-1 mt-2">
             <div class="me-lg-2 p-2 rounded-2 bg-white">
 
-                <div class="fs-6 alert wc1c-yellow-alert"><?php echo wp_kses_post($text); ?></div>
+                <div class="fs-6 alert wc1c-yellow-alert p-2"><?php echo wp_kses_post($text); ?></div>
 
                 <div class="">
                     <h2><?php _e('How to activate?', 'wc1c-main'); ?></h2>
