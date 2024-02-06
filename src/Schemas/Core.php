@@ -102,9 +102,9 @@ final class Core
 
 		$current_configuration_id = $configuration->getId();
 
-		$init_schema->setPrefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
+		$init_schema->setPrefix(wc1c()->context()->getSlug() . '_prefix_' . $schema_id . '_' . $current_configuration_id);
 		$init_schema->setConfiguration($configuration);
-		$init_schema->setConfigurationPrefix('wc1c_configuration_' . $current_configuration_id);
+		$init_schema->setConfigurationPrefix(wc1c()->context()->getSlug() . '_configuration_' . $current_configuration_id);
 
 		try
 		{
