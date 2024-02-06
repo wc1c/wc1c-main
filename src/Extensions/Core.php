@@ -81,7 +81,7 @@ final class Core
 
 			$this->set($extensions);
 
-            wc1c()->log()->debug(sprintf('%s %s %s', __('Initialization of the extension by identifier', 'wc1c-main'), $extension_id, __('is completed.', 'wc1c-main')), ['extension_id' => $extension_id]);
+            wc1c()->log()->debug(sprintf('%s "%s" %s', __('Initialization of the extension by identifier', 'wc1c-main'), $extension_id, __('is completed.', 'wc1c-main')), ['extension_id' => $extension_id]);
 
             return;
 		}
