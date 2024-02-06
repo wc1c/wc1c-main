@@ -49,19 +49,24 @@ final class Core
 		 */
 		if('' !== $extension_id)
 		{
+            wc1c()->log()->debug(__('Initialization of the extension by identifier.', 'wc1c-main'), ['extension_id' => $extension_id]);
+
 			if(!array_key_exists($extension_id, $extensions))
 			{
-				throw new Exception(__('Extension not found by id.', 'wc1c-main'));
+                wc1c()->log()->warning(__('Extension not found by identifier.', 'wc1c-main'), ['extension_id' => $extension_id]);
+				return;
 			}
 
 			if(!$extensions[$extension_id] instanceof ExtensionContract)
 			{
-				throw new Exception(__('Extension is not implementation ExtensionContract. Skipped init.', 'wc1c-main'));
+                wc1c()->log()->warning(__('Extension is not implementation ExtensionContract. Initialization skipped.', 'wc1c-main'), ['extension_id' => $extension_id]);
+                return;
 			}
 
 			if($extensions[$extension_id]->isInitialized())
 			{
-				return;
+                wc1c()->log()->warning(__('The extension has already been initialized previously. Re-initialization is skipped.', 'wc1c-main'), ['extension_id' => $extension_id]);
+                return;
 			}
 
 			try
@@ -71,13 +76,17 @@ final class Core
 			}
 			catch(\Throwable $e)
 			{
-				throw new Exception(__('Init extension exception:', 'wc1c-main') . ' ' . $e->getMessage());
+				throw new Exception(sprintf('%s: %s', __('The extension threw an exception on initialization', 'wc1c-main'), $e->getMessage()));
 			}
 
 			$this->set($extensions);
 
-			return;
+            wc1c()->log()->debug(__('Initialization of the extension by identifier is completed.', 'wc1c-main'), ['extension_id' => $extension_id]);
+
+            return;
 		}
+
+        wc1c()->log()->debug(__('Initialization of available extensions.', 'wc1c-main'));
 
 		/**
 		 * Init all extensions
@@ -93,6 +102,8 @@ final class Core
 				wc1c()->log()->warning($e->getMessage(), ['exception' => $e]);
 			}
 		}
+
+        wc1c()->log()->debug(__('Initialization of available extensions is complete.', 'wc1c-main'));
 	}
 
 	/**
