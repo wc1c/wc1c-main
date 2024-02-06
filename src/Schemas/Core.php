@@ -157,23 +157,29 @@ final class Core
 	 */
 	public function load()
 	{
-		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
-		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
+        wc1c()->log()->debug(__('Schemas loading.', 'wc1c-main'));
 
-		$schemas = apply_filters('wc1c_default_schemas_loading', []);
+		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
+		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
+
+		$schemas = apply_filters(wc1c()->context()->getSlug() . '_default_schemas_loading', []);
 
 		if('yes' === wc1c()->settings()->get('extensions_schemas', 'yes'))
 		{
-			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
+			$schemas = apply_filters(wc1c()->context()->getSlug() . '_schemas_loading', $schemas);
 		}
+        else
+        {
+            wc1c()->log()->info(__('Loading of external schemes is disabled through the settings. Only standard schemas are loaded.', 'wc1c-main'));
+        }
 
-		wc1c()->log()->debug(__('Schemas loaded.', 'wc1c-main'), ['schemas' => $schemas]);
+		wc1c()->log()->debug(__('Schemas loading is completed.', 'wc1c-main'), ['schemas' => $schemas]);
 
 		try
 		{
 			$this->set($schemas);
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			throw new RuntimeException($e->getMessage());
 		}
@@ -192,7 +198,7 @@ final class Core
 		{
 			$schema = new Productscml\Core();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('schemas')->error(__('Schema ProductsCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return $schemas;
@@ -216,7 +222,7 @@ final class Core
 		{
 			$schema = new Productscleanercml\Core();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('schemas')->error(__('Schema ProductsCleanerCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return $schemas;
