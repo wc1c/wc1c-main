@@ -103,24 +103,24 @@ final class Receiver
 		}
 
 		$action = false;
-		$wc1c_receiver_action = 'wc1c_receiver_' . $configuration->getSchema();
+		$receiver_action = wc1c()->context()->getSlug() . '_receiver_' . $configuration->getSchema();
 
-		if(has_action($wc1c_receiver_action))
+		if(has_action($receiver_action))
 		{
 			$action = true;
 
 			ob_start();
 			nocache_headers();
 
-			wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the selected configuration.', 'wc1c-main'), ['action' => $wc1c_receiver_action]);
-			do_action($wc1c_receiver_action);
+			wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the selected configuration.', 'wc1c-main'), ['action' => $receiver_action]);
+			do_action($receiver_action);
 
 			ob_end_clean();
 		}
 
 		if(false === $action)
 		{
-			wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found in selected configuration.', 'wc1c-main'), ['action' => $wc1c_receiver_action]);
+			wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found in selected configuration.', 'wc1c-main'), ['action' => $receiver_action]);
 			die(__('Receiver request is very bad! Action not found.', 'wc1c-main'));
 		}
 		die();
