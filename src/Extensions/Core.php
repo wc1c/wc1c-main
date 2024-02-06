@@ -49,7 +49,7 @@ final class Core
 		 */
 		if('' !== $extension_id)
 		{
-            wc1c()->log()->debug(__('Initialization of the extension by identifier.', 'wc1c-main'), ['extension_id' => $extension_id]);
+            wc1c()->log()->debug(sprintf('%s: %s', __('Initialization of the extension by identifier', 'wc1c-main'), $extension_id), ['extension_id' => $extension_id]);
 
 			if(!array_key_exists($extension_id, $extensions))
 			{
@@ -81,7 +81,7 @@ final class Core
 
 			$this->set($extensions);
 
-            wc1c()->log()->debug(__('Initialization of the extension by identifier is completed.', 'wc1c-main'), ['extension_id' => $extension_id]);
+            wc1c()->log()->debug(sprintf('%s %s %s', __('Initialization of the extension by identifier', 'wc1c-main'), $extension_id, __('is completed.', 'wc1c-main')), ['extension_id' => $extension_id]);
 
             return;
 		}
@@ -103,7 +103,7 @@ final class Core
 			}
 		}
 
-        wc1c()->log()->debug(__('Initialization of available extensions is complete.', 'wc1c-main'));
+        wc1c()->log()->debug(__('Initialization of available extensions is completed.', 'wc1c-main'));
 	}
 
 	/**
