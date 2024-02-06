@@ -16,7 +16,7 @@ final class Receiver
 	 */
 	public function __construct()
 	{
-		do_action('wc1c_receiver_loaded');
+		do_action(wc1c()->context()->getSlug() . '_receiver_loaded');
 	}
 
 	/**
