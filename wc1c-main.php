@@ -23,6 +23,7 @@ namespace
 
 	if(version_compare(PHP_VERSION, '7.0') < 0)
 	{
+        trigger_error('Minimal PHP version for used WC1C plugin: 7.0. Please update PHP version.');
 		return false;
 	}
 
@@ -34,7 +35,7 @@ namespace
 
 		if(!is_readable($autoloader))
 		{
-			trigger_error('File is not found: ' . $autoloader);
+			trigger_error(sprintf('%s: %s','File is not found', $autoloader));
 			return false;
 		}
 
@@ -84,10 +85,10 @@ namespace Wc1c\Main
 
 	$loader = new \Digiom\Woplucore\Loader();
 
+    $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
+
 	try
 	{
-		$loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
-
 		$loader->register(__FILE__);
 
 		$loader->registerActivation([Activation::class, 'instance']);
