@@ -165,6 +165,6 @@ final class Core
 
 		$this->set($extensions);
 
-        wc1c()->log()->debug(__('Extensions loaded.', 'wc1c-main'), ['extensions' => $extensions]);
+        wc1c()->log()->debug(__('Extensions loading is completed.', 'wc1c-main'), ['extensions' => $extensions]);
 	}
 }
