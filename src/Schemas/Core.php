@@ -46,6 +46,8 @@ final class Core
 	 */
 	public function init($configuration): SchemaContract
 	{
+        wc1c()->log()->debug(__('Initializing the schema for configuration.', 'wc1c-main'));
+
 		if(false === $configuration)
 		{
 			throw new Exception(__('$configuration is false', 'wc1c-main'));
@@ -110,7 +112,7 @@ final class Core
 		{
 			$init_schema_result = $init_schema->init();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			throw new Exception($e->getMessage());
 		}
@@ -121,6 +123,8 @@ final class Core
 		}
 
 		$init_schema->setInitialized(true);
+
+        wc1c()->log()->debug(__('Initializing the schema for configuration is completed.', 'wc1c-main'), ['configuration_id' => $current_configuration_id, 'schema_id' => $schema_id]);
 
 		return $init_schema;
 	}
