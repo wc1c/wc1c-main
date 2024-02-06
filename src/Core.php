@@ -68,7 +68,7 @@ final class Core extends CoreAbstract
 	public function init()
 	{
 		// hook
-		do_action('wc1c_before_init');
+		do_action($this->context()->getSlug() . '_before_init');
 
 		$this->localization();
 
@@ -143,7 +143,7 @@ final class Core extends CoreAbstract
 		}
 
 		// hook
-		do_action('wc1c_after_init');
+		do_action($this->context()->getSlug() . '_after_init');
 	}
 
 	/**
