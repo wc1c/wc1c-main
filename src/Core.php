@@ -465,6 +465,8 @@ final class Core extends CoreAbstract
 	 */
 	private function loadReceiver()
 	{
+        wc1c()->log()->debug(__('Receiver loading.', 'wc1c-main'));
+
 		$default_class_name = Receiver::class;
 
 		$use_class_name = apply_filters('wc1c_receiver_loading_class_name', $default_class_name);
@@ -481,6 +483,8 @@ final class Core extends CoreAbstract
 		$receiver->register();
 
 		$this->setReceiver($receiver);
+
+        wc1c()->log()->debug(__('Receiver loaded.', 'wc1c-main'), ['class' => $use_class_name]);
 	}
 
 	/**
