@@ -78,7 +78,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Timer is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->emergency(__('Timer is not loaded. Further execution of algorithms without a timer is impossible.', 'wc1c-main'), ['exception' => $e]);
 			return;
 		}
 
@@ -88,7 +88,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Extensions is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions is not loaded. Execution continued, but without all plugins.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
