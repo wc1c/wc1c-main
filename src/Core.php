@@ -488,6 +488,8 @@ final class Core extends CoreAbstract
 	 */
 	public function localization()
 	{
+        wc1c()->log()->debug(__('Localization loading.'));
+
 		$locale = determine_locale();
 
 		if(has_filter('plugin_locale'))
