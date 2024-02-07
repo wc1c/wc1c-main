@@ -81,7 +81,7 @@ class DeleteForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Delete error. Please retry.', 'wc1c-main')
+					'data' => __('Deleting error. Please retry.', 'wc1c-main')
 				]
 			);
 
