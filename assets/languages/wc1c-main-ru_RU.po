@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-12-30 00:39+0300\n"
-"PO-Revision-Date: 2023-12-30 00:49+0300\n"
+"POT-Creation-Date: 2024-02-08 12:12+0300\n"
+"PO-Revision-Date: 2024-02-08 12:20+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -32,8 +32,8 @@ msgstr ""
 
 #: src/Activation.php:28
 msgid ""
-"The basic plugin setup has not been done yet, so you can proceed to the "
-"setup, which takes no more than 5 minutes."
+"The basic plugin setup has not been done yet, so can proceed to the setup, "
+"which takes no more than 5 minutes."
 msgstr ""
 "Базовая настройка плагина еще не сделана, поэтому можно переходить к "
 "настройке, которая занимает не более 5 минут."
@@ -331,27 +331,27 @@ msgstr ""
 "Ошибка создания конфигурации. Пожалуйста, попробуйте сохранить еще раз или "
 "измените поля."
 
-#: src/Admin/Configurations/Delete.php:55
+#: src/Admin/Configurations/Delete.php:56
 msgid "Error. The configuration to be deleted is active and cannot be deleted."
 msgstr "Ошибка. Удаляемая конфигурация активна и не может быть удалена."
 
-#: src/Admin/Configurations/Delete.php:108
+#: src/Admin/Configurations/Delete.php:109
 msgid "The configuration has been marked as deleted."
 msgstr "Конфигурация помечена как удаленная."
 
-#: src/Admin/Configurations/Delete.php:118
+#: src/Admin/Configurations/Delete.php:119
 msgid "The configuration has been successfully deleted."
 msgstr "Конфигурация успешно удалена."
 
-#: src/Admin/Configurations/Delete.php:125
+#: src/Admin/Configurations/Delete.php:126
 msgid "Deleting error. Please retry again."
 msgstr "Ошибка при удалении. Пожалуйста, попробуйте еще раз."
 
-#: src/Admin/Configurations/DeleteForm.php:38
+#: src/Admin/Configurations/DeleteForm.php:37
 msgid "Delete confirmation"
 msgstr "Подтверждение удаления"
 
-#: src/Admin/Configurations/DeleteForm.php:42
+#: src/Admin/Configurations/DeleteForm.php:41
 msgid ""
 "I confirm that Configuration will be permanently and irrevocably deleted "
 "from WooCommerce."
@@ -359,7 +359,7 @@ msgstr ""
 "Я подтверждаю, что Конфигурация будет окончательно и безвозвратно удалена из "
 "WooCommerce."
 
-#: src/Admin/Configurations/DeleteForm.php:43
+#: src/Admin/Configurations/DeleteForm.php:42
 msgid ""
 "The directory with files for configuration from the FILE system will be "
 "completely removed."
@@ -367,12 +367,12 @@ msgstr ""
 "Каталог с файлами для конфигурации из ФАЙЛОВОЙ системы будет полностью "
 "удален."
 
-#: src/Admin/Configurations/DeleteForm.php:84
-msgid "Delete error. Please retry."
-msgstr "Ошибка при удалении. Пожалуйста повторите."
+#: src/Admin/Configurations/DeleteForm.php:77
+msgid "Deleting error. Please retry."
+msgstr "Ошибка удаления. Пожалуйста повторите."
 
-#: src/Admin/Configurations/DeleteForm.php:126
-msgid "Delete error. Confirmation of final deletion is required."
+#: src/Admin/Configurations/DeleteForm.php:125
+msgid "Deleting error. Confirmation of final deletion is required."
 msgstr "Ошибка удаления. Требуется подтверждение окончательного удаления."
 
 #: src/Admin/Configurations/MainUpdate.php:74
@@ -468,14 +468,14 @@ msgstr "Журналы"
 
 #: src/Admin/Configurations/Update.php:93
 msgid ""
-"The exchange scheme on the basis of which created configuration is "
-"unavailable ."
+"The exchange schema based on which the configuration was created is not "
+"available."
 msgstr "Схема обмена на основании которой создана конфигурация, недоступна."
 
 #: src/Admin/Configurations/Update.php:95
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
-"name, or delete the configuration."
+"name or delete the configuration."
 msgstr ""
 "Установите отсутствующую схему для работы с этой конфигурацией, измените "
 "состояние и имя или удалите конфигурацию."
@@ -554,7 +554,7 @@ msgstr "Интерфейс"
 msgid "Connection to the WC1C"
 msgstr "Подключение к WC1C"
 
-#: src/Admin/Settings/ActivationForm.php:50 src/Admin/Settings/Form.php:75
+#: src/Admin/Settings/ActivationForm.php:50
 msgid "Save error. Please retry."
 msgstr "Ошибка при сохранении. Пожалуйста повторите."
 
@@ -602,7 +602,7 @@ msgstr "Доменное имя"
 msgid "Activate"
 msgstr "Активировать"
 
-#: src/Admin/Settings/ConnectionForm.php:106
+#: src/Admin/Settings/ConnectionForm.php:107
 #, php-format
 msgid ""
 "The user with the login %s on the site %s successfully connected to the "
@@ -610,7 +610,7 @@ msgid ""
 msgstr ""
 "Пользователь с логином %s на сайте %s успешно подключен к текущему сайту."
 
-#: src/Admin/Settings/ConnectionForm.php:128
+#: src/Admin/Settings/ConnectionForm.php:129
 #, php-format
 msgid ""
 "Error connecting user with login %s on site %s to the current site. Please "
@@ -619,35 +619,37 @@ msgstr ""
 "Ошибка подключения пользователя с логином %s на сайте %s к текущему сайту. "
 "Пожалуйста, повторите попытку позже."
 
-#: src/Admin/Settings/ConnectionForm.php:160
+#: src/Admin/Settings/ConnectionForm.php:161
 msgid "Connection error. Please retry."
 msgstr "Ошибка подключения. Пожалуйста повторите."
 
-#: src/Admin/Settings/ConnectionForm.php:182
+#: src/Admin/Settings/ConnectionForm.php:183
 msgid "Disconnect successful. Reconnect is available"
 msgstr "Отключение успешно. Доступно повторное подключение"
 
-#: src/Admin/Settings/ConnectionForm.php:208
+#: src/Admin/Settings/ConnectionForm.php:209
 msgid "Site is connected to WC1C"
 msgstr "Сайт подключен к WC1C"
 
-#: src/Admin/Settings/ConnectionForm.php:210
+#: src/Admin/Settings/ConnectionForm.php:211
 msgid "To create a new connection, need to disconnect the current connection."
 msgstr "Для создания нового подключения, необходимо отключить текущее."
 
-#: src/Admin/Settings/ConnectionForm.php:215
-msgid "Login"
-msgstr "Логин"
+#: src/Admin/Settings/ConnectionForm.php:216
+#: src/Schemas/Productscleanercml/Admin.php:95
+#: src/Schemas/Productscml/Admin.php:98
+msgid "Username"
+msgstr "Имя пользователя"
 
-#: src/Admin/Settings/ConnectionForm.php:217
+#: src/Admin/Settings/ConnectionForm.php:218
 msgid "Connected login from the WC1C website."
 msgstr "Подключенный логин с сайта WC1C."
 
-#: src/Admin/Settings/ConnectionForm.php:225
+#: src/Admin/Settings/ConnectionForm.php:226
 msgid "App token"
 msgstr "Токен приложения"
 
-#: src/Admin/Settings/ConnectionForm.php:227
+#: src/Admin/Settings/ConnectionForm.php:228
 msgid ""
 "The current application token for the user. This token can be revoked in "
 "your personal account on the WC1C website, as well as by clicking the "
@@ -656,9 +658,17 @@ msgstr ""
 "Текущий токен приложения для пользователя. Этот токен можно отозвать в "
 "личном кабинете на сайте WC1C, а также нажав кнопку «Отключить»."
 
-#: src/Admin/Settings/Form.php:130
-msgid "Save success."
-msgstr "Успешное сохранение."
+#: src/Admin/Settings/Form.php:69
+msgid "Saving settings."
+msgstr "Сохранение настроек."
+
+#: src/Admin/Settings/Form.php:71
+msgid "The settings have not been saved."
+msgstr "Настройки не были сохранены."
+
+#: src/Admin/Settings/Form.php:136
+msgid "The settings have been successfully saved."
+msgstr "Настройки были успешно сохранены."
 
 #: src/Admin/Settings/InterfaceForm.php:40
 msgid "Changing the interface"
@@ -1155,12 +1165,16 @@ msgid "Completing"
 msgstr "Завершение"
 
 #: src/Core.php:81
-msgid "Timer is not loaded."
-msgstr "Таймер не загружен."
+msgid ""
+"Timer is not loaded. Further execution of algorithms without a timer is "
+"impossible."
+msgstr ""
+"Таймер не загружен. Дальнейшее выполнение алгоритмов без таймера невозможно."
 
 #: src/Core.php:91
-msgid "Extensions is not loaded."
-msgstr "Расширения не загружены."
+msgid "Extensions is not loaded. Execution continued, but without all plugins."
+msgstr ""
+"Расширения не загружены. Выполнение продолжилось, но без всех плагинов."
 
 #: src/Core.php:100
 msgid "Extensions is not initialized."
@@ -1280,11 +1294,23 @@ msgstr "Ошибка: код активации в состоянии - дост
 msgid "Error: This activation code has been blocked."
 msgstr "Ошибка: код активации в состоянии заблокирован."
 
-#: src/Core.php:474
+#: src/Core.php:468
+msgid "Receiver loading."
+msgstr "Загрузка получателя."
+
+#: src/Core.php:476
 msgid "Receiver loading: class is not exists, use is default."
 msgstr "Загрузка получателя: класс не найден, используется класс по умолчанию."
 
-#: src/Core.php:501
+#: src/Core.php:487
+msgid "Receiver loading is completed."
+msgstr "Загрузка получателя завершена."
+
+#: src/Core.php:495
+msgid "Localization loading."
+msgstr "Загрузка локализации."
+
+#: src/Core.php:507
 msgid "Localization loaded."
 msgstr "Локализация загружена."
 
@@ -1296,31 +1322,72 @@ msgstr "Не удалось вставить в базу данных"
 msgid "Meta value by name is not available."
 msgstr "Мета-значение по имени недоступно."
 
-#: src/Extensions/Core.php:55
-msgid "Extension not found by id."
-msgstr "Расширение по идентификатору не найдено."
+#: src/Extensions/Core.php:52 src/Extensions/Core.php:84
+msgid "Initialization of the extension by identifier"
+msgstr "Инициализация расширения по идентификатору"
 
-#: src/Extensions/Core.php:60
-msgid "Extension is not implementation ExtensionContract. Skipped init."
+#: src/Extensions/Core.php:56
+msgid "Extension not found by identifier."
+msgstr "Расширение не найдено по идентификатору."
+
+#: src/Extensions/Core.php:62
+msgid ""
+"Extension is not implementation ExtensionContract. Initialization skipped."
 msgstr ""
 "Расширение не является реализацией ExtensionContract. Инициализация "
 "пропущена."
 
-#: src/Extensions/Core.php:75
-msgid "Init extension exception:"
-msgstr "Исключение инициализации расширения:"
+#: src/Extensions/Core.php:68
+msgid ""
+"The extension has already been initialized previously. Re-initialization is "
+"skipped."
+msgstr ""
+"Расширение уже было инициализировано ранее. Повторная инициализация "
+"пропущена."
 
-#: src/Extensions/Core.php:116
+#: src/Extensions/Core.php:79
+msgid "The extension threw an exception on initialization"
+msgstr "Расширение выбросило исключение при инициализации"
+
+#: src/Extensions/Core.php:84
+msgid "is completed."
+msgstr "завершена."
+
+#: src/Extensions/Core.php:89
+msgid "Initialization of available extensions."
+msgstr "Инициализация доступных расширений."
+
+#: src/Extensions/Core.php:106
+msgid "Initialization of available extensions is completed."
+msgstr "Инициализация доступных расширений завершена."
+
+#: src/Extensions/Core.php:126
 msgid "Get extension by id is unavailable."
 msgstr "Не удалось получить расширение по его идентификатору."
 
 #: src/Extensions/Core.php:140
+msgid "Extensions loading."
+msgstr "Загрузка расширений."
+
+#: src/Extensions/Core.php:144
+msgid ""
+"Extension loading is turned off in global settings. Extension loading is "
+"skipped."
+msgstr ""
+"Загрузка расширений отключена в глобальных настройках. Загрузка расширений "
+"пропускается."
+
+#: src/Extensions/Core.php:158
 msgid "Extensions load error:"
 msgstr "Ошибка загрузки расширения:"
 
-#: src/Extensions/Core.php:144
+#: src/Extensions/Core.php:162
 msgid "Extensions load exception:"
 msgstr "Исключение загрузки расширений:"
+
+#: src/Extensions/Core.php:168
+msgid "Extensions loading is completed."
+msgstr "Загрузка расширений завершена."
 
 #: src/Receiver.php:46 src/Schemas/Productscleanercml/Receiver.php:64
 #: src/Schemas/Productscml/Receiver.php:52
@@ -1374,55 +1441,75 @@ msgstr ""
 msgid "Receiver request is very bad! Action not found."
 msgstr "Запрос получателя очень плохой! Действие не найдено."
 
-#: src/Schemas/Core.php:51
+#: src/Schemas/Core.php:49
+msgid "Initializing the schema for configuration."
+msgstr "Инициализация схемы для конфигурации."
+
+#: src/Schemas/Core.php:53
 msgid "$configuration is false"
 msgstr "$configuration is false"
 
-#: src/Schemas/Core.php:61
+#: src/Schemas/Core.php:63
 msgid "$configuration is not exists"
 msgstr "$configuration не существует"
 
-#: src/Schemas/Core.php:69
+#: src/Schemas/Core.php:71
 msgid "$configuration is not instanceof Configuration"
 msgstr "$configuration не реализует Configuration"
 
-#: src/Schemas/Core.php:76
+#: src/Schemas/Core.php:78
 msgid "$schemas is not array."
 msgstr "$schemas не является массивом."
 
-#: src/Schemas/Core.php:83
+#: src/Schemas/Core.php:85
 msgid "Schema not found by id:"
 msgstr "Схема не найдена по ИД:"
 
-#: src/Schemas/Core.php:88
+#: src/Schemas/Core.php:90
 msgid "$schemas[$schema_id] is not object"
 msgstr "$schemas[$schema_id] не является объектом"
 
-#: src/Schemas/Core.php:95
+#: src/Schemas/Core.php:97
 msgid "Old initialized, $schema_id:"
 msgstr "Уже инициализирована, $schema_id:"
 
-#: src/Schemas/Core.php:100
+#: src/Schemas/Core.php:102
 msgid "Method init not found in schema, $schema_id:"
 msgstr "Метод для инициализации не найден в схеме, $schema_id:"
 
-#: src/Schemas/Core.php:120
+#: src/Schemas/Core.php:122
 msgid "Schema is not initialized."
 msgstr "Схема не инициализирована."
 
-#: src/Schemas/Core.php:147
+#: src/Schemas/Core.php:127
+msgid "Initializing the schema for configuration is completed."
+msgstr "Инициализация схемы для конфигурации завершена."
+
+#: src/Schemas/Core.php:151
 msgid "Schema by ID is unavailable."
 msgstr "Схема по идентификатору недоступна."
 
-#: src/Schemas/Core.php:170
-msgid "Schemas loaded."
-msgstr "Схема загружена."
+#: src/Schemas/Core.php:164
+msgid "Schemas loading."
+msgstr "Загрузка схем."
 
-#: src/Schemas/Core.php:197
+#: src/Schemas/Core.php:177
+msgid ""
+"Loading of external schemes is disabled through the settings. Only standard "
+"schemas are loaded."
+msgstr ""
+"Загрузка внешних схем отключена в настройках. Загружаются только стандартные "
+"схемы."
+
+#: src/Schemas/Core.php:180
+msgid "Schemas loading is completed."
+msgstr "Загрузка схем завершена."
+
+#: src/Schemas/Core.php:207
 msgid "Schema ProductsCML is not loaded."
 msgstr "Схема ProductsCML не загружена."
 
-#: src/Schemas/Core.php:221
+#: src/Schemas/Core.php:231
 msgid "Schema ProductsCleanerCML is not loaded."
 msgstr "Схема ProductsCleanerCML не загружена."
 
@@ -1462,11 +1549,6 @@ msgid ""
 msgstr ""
 "При копировании нужно избавиться от пробельных символов, если они "
 "присутствуют."
-
-#: src/Schemas/Productscleanercml/Admin.php:95
-#: src/Schemas/Productscml/Admin.php:98
-msgid "Username"
-msgstr "Имя пользователя"
 
 #: src/Schemas/Productscleanercml/Admin.php:99
 #: src/Schemas/Productscml/Admin.php:102
@@ -5814,15 +5896,15 @@ msgstr "Код можно получить на сайте плагина."
 msgid "Site:"
 msgstr "Сайт:"
 
-#: views/activation/form.php:38 views/promo/activation.php:61
+#: views/activation/form.php:38 views/promo/activation.php:63
 msgid "No financial opportunity?"
 msgstr "Нет финансовой возможности?"
 
-#: views/activation/form.php:39 views/promo/activation.php:62
+#: views/activation/form.php:39 views/promo/activation.php:64
 msgid "Take part in the development of the solution you use."
 msgstr "Примите участие в разработке решения, которое вы используете."
 
-#: views/activation/form.php:41 views/promo/activation.php:64
+#: views/activation/form.php:41 views/promo/activation.php:66
 msgid ""
 "Information on how to participate is available in the official documentation "
 "on the official website."
@@ -5830,15 +5912,15 @@ msgstr ""
 "Информация о том, как принять участие, доступна в официальной документации "
 "на официальном сайте."
 
-#: views/activation/form.php:43 views/promo/activation.php:66
+#: views/activation/form.php:43 views/promo/activation.php:68
 msgid "Docs:"
 msgstr "Документация:"
 
-#: views/activation/form.php:47 views/promo/activation.php:70
+#: views/activation/form.php:47 views/promo/activation.php:72
 msgid "Every activation counts!"
 msgstr "Каждая активация имеет значение!"
 
-#: views/activation/form.php:48 views/promo/activation.php:71
+#: views/activation/form.php:48 views/promo/activation.php:73
 msgid ""
 "By activating your project, you let the WC1C team know that the plugin is in "
 "active use."
@@ -5846,7 +5928,7 @@ msgstr ""
 "Активируя свой проект, вы сообщаете команде WC1C, что плагин активно "
 "используется."
 
-#: views/activation/form.php:50 views/promo/activation.php:73
+#: views/activation/form.php:50 views/promo/activation.php:75
 msgid ""
 "Also, you give a financial opportunity to release compatibility updates and "
 "add new features!"
@@ -5968,7 +6050,7 @@ msgstr "Сохранить конфигурацию"
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: views/configurations/update_schema_error.php:5
+#: views/configurations/update_schema_error.php:6
 msgid "Update is not available."
 msgstr "Обновление не доступно."
 
@@ -6177,11 +6259,11 @@ msgstr ""
 msgid "Documentation"
 msgstr "Документация"
 
-#: views/promo/activation.php:6
+#: views/promo/activation.php:8
 msgid "Your copy of the free software has not been activated."
 msgstr "Ваша копия бесплатного программного обеспечения не активирована."
 
-#: views/promo/activation.php:7
+#: views/promo/activation.php:9
 msgid ""
 "We recommend that you activate your copy of the free software for stable "
 "updates and better performance."
@@ -6190,16 +6272,16 @@ msgstr ""
 "обеспечения для получения стабильных обновлений и повышения "
 "производительности."
 
-#: views/promo/activation.php:8
+#: views/promo/activation.php:10
 msgid ""
 "After activation, this section will disappear and will no longer be shown."
 msgstr "После активации этот раздел исчезнет и больше не будет отображаться."
 
-#: views/promo/activation.php:20
+#: views/promo/activation.php:22
 msgid "How to activate?"
 msgstr "Как активировать?"
 
-#: views/promo/activation.php:22
+#: views/promo/activation.php:24
 msgid ""
 "Get an activation code in any available way. For example, on the official "
 "website."
@@ -6207,15 +6289,15 @@ msgstr ""
 "Получить код активации любым доступным способом. Например, на официальном "
 "сайте."
 
-#: views/promo/activation.php:23
+#: views/promo/activation.php:25
 msgid "Enter the activation code in the plugin settings."
 msgstr "Ввести полученный код активации в настройках плагина."
 
-#: views/promo/activation.php:28
+#: views/promo/activation.php:30
 msgid "Why is activation required?"
 msgstr "Зачем нужна активация?"
 
-#: views/promo/activation.php:30
+#: views/promo/activation.php:32
 msgid ""
 "You received a copy of the software completely free of charge and you can "
 "use it as is without any activation."
@@ -6223,7 +6305,7 @@ msgstr ""
 "Вы получили копию программного обеспечения совершенно бесплатно и можете "
 "использовать плагин как есть без какой-либо активации."
 
-#: views/promo/activation.php:31
+#: views/promo/activation.php:33
 msgid ""
 "However, in order to receive timely, as well as necessary updates and "
 "improvements, it is necessary to activate the current environment."
@@ -6231,7 +6313,7 @@ msgstr ""
 "Однако для получения своевременных, а также необходимых обновлений и "
 "улучшений необходимо активировать текущую среду."
 
-#: views/promo/activation.php:34
+#: views/promo/activation.php:36
 msgid ""
 "Activation is vital for the performance of the plugin and its further active "
 "development. Dont ignore activation."
@@ -6239,13 +6321,13 @@ msgstr ""
 "Активация необходима для работоспособности плагина и его дальнейшего "
 "активного развития. Не игнорируйте активацию."
 
-#: views/promo/activation.php:35
+#: views/promo/activation.php:37
 msgid "Each activation triggers a mechanism to improve the software you use."
 msgstr ""
 "Каждая активация запускает механизм улучшения используемого вами "
 "программного обеспечения."
 
-#: views/promo/activation.php:38
+#: views/promo/activation.php:40
 msgid ""
 "In addition to supporting the software you use, additional features will be "
 "added."
@@ -6253,11 +6335,11 @@ msgstr ""
 "Помимо поддержки используемого вами программного обеспечения, будут "
 "добавлены дополнительные функции."
 
-#: views/promo/activation.php:41
+#: views/promo/activation.php:43
 msgid "ATTENTION! Activation does not add the possibility of extensions."
 msgstr "ВНИМАНИЕ! Активация не добавляет возможности расширений."
 
-#: views/promo/activation.php:43
+#: views/promo/activation.php:45
 msgid ""
 "Additional features are implemented in extensions! After activation, "
 "features from extensions are not activated."
@@ -6265,7 +6347,7 @@ msgstr ""
 "Дополнительные возможности реализованы в расширениях! После активации "
 "функции из расширений не активируются."
 
-#: views/promo/activation.php:44
+#: views/promo/activation.php:46
 msgid ""
 "To add features, you need to install extensions. They are supplied by "
 "separate plugins, after activation of which the necessary features are added."
@@ -6274,15 +6356,15 @@ msgstr ""
 "отдельными плагинами, после активации которых добавляются необходимые "
 "функции."
 
-#: views/promo/activation.php:54
+#: views/promo/activation.php:56
 msgid "Do not wait until something breaks!"
 msgstr "Не ждите, пока что-нибудь сломается!"
 
-#: views/promo/activation.php:55
+#: views/promo/activation.php:57
 msgid "Activate your current copy of the software."
 msgstr "Активируйте вашу текущую копию программного обеспечения."
 
-#: views/promo/activation.php:57
+#: views/promo/activation.php:59
 msgid "Buy code:"
 msgstr "Купить код:"
 
@@ -6327,8 +6409,8 @@ msgid "As soon as the tools are installed, they will appear in this section."
 msgstr "Как только инструменты будут установлены, они появятся в этом разделе."
 
 #: views/tools/item.php:14
-msgid "Open"
-msgstr "Открыть"
+msgid "Open tool"
+msgstr "Открыть инструмент"
 
 #: views/wizards/error.php:3
 msgid "Error. Step not found or unavailable."
@@ -6435,6 +6517,18 @@ msgstr "Команда WC1C"
 #. Author URI of the plugin/theme
 msgid "https://wc1c.info"
 msgstr "https://wc1c.info"
+
+#~ msgid "Login"
+#~ msgstr "Логин"
+
+#~ msgid "Save success."
+#~ msgstr "Успешное сохранение."
+
+#~ msgid "Timer is not loaded."
+#~ msgstr "Таймер не загружен."
+
+#~ msgid "Init extension exception:"
+#~ msgstr "Исключение инициализации расширения:"
 
 #~ msgid ""
 #~ "All events of the selected level will be recorded the schemas events in "
