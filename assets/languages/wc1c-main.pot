@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2024-02-08 00:06+0300\n"
+"POT-Creation-Date: 2024-02-09 17:25+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -287,48 +287,48 @@ msgstr ""
 msgid "Identifier:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:193
-msgid "Configuration create error. Please retry."
+#: src/Admin/Configurations/CreateForm.php:187
+msgid "Configuration creating error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:233
-msgid "Configuration create error. Name is required."
+#: src/Admin/Configurations/CreateForm.php:235
+msgid "Configuration creating error. Name is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:246
-msgid "Configuration create error. Schema is required."
+#: src/Admin/Configurations/CreateForm.php:252
+msgid "Configuration creating error. Schema select is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:263
-msgid "Create configuration error. Name exists."
+#: src/Admin/Configurations/CreateForm.php:273
+msgid "Configuration creating error. Name is exists."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:280
-msgid "Configuration create success. Configuration ID: "
+#: src/Admin/Configurations/CreateForm.php:294
+msgid "Configuration creating is complete. Configuration ID:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:281
+#: src/Admin/Configurations/CreateForm.php:300
 msgid "edit configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:293
-msgid "Configuration create error. Please try saving again or change fields."
+#: src/Admin/Configurations/CreateForm.php:310
+msgid "Configuration creating error. Please try saving again or change fields."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:55
+#: src/Admin/Configurations/Delete.php:56
 msgid "Error. The configuration to be deleted is active and cannot be deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:108
+#: src/Admin/Configurations/Delete.php:109
 msgid "The configuration has been marked as deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:118
+#: src/Admin/Configurations/Delete.php:119
 msgid "The configuration has been successfully deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:125
-msgid "Deleting error. Please retry again."
+#: src/Admin/Configurations/Delete.php:126
+msgid "Configuration deleting error. Please retry again."
 msgstr ""
 
 #: src/Admin/Configurations/DeleteForm.php:37
@@ -348,11 +348,12 @@ msgid ""
 msgstr ""
 
 #: src/Admin/Configurations/DeleteForm.php:77
-msgid "Deleting error. Please retry."
+msgid "Configuration deleting error. Please retry."
 msgstr ""
 
 #: src/Admin/Configurations/DeleteForm.php:125
-msgid "Deleting error. Confirmation of final deletion is required."
+msgid ""
+"Configuration deleting error. Confirmation of final deletion is required."
 msgstr ""
 
 #: src/Admin/Configurations/MainUpdate.php:74
@@ -627,7 +628,7 @@ msgstr ""
 msgid "The settings have not been saved."
 msgstr ""
 
-#: src/Admin/Settings/Form.php:136
+#: src/Admin/Settings/Form.php:138
 msgid "The settings have been successfully saved."
 msgstr ""
 

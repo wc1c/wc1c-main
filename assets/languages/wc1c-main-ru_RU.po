@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2024-02-08 12:12+0300\n"
-"PO-Revision-Date: 2024-02-08 12:20+0300\n"
+"POT-Creation-Date: 2024-02-09 17:25+0300\n"
+"PO-Revision-Date: 2024-02-09 17:28+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -301,32 +301,32 @@ msgstr "Схема конфигурации"
 msgid "Identifier:"
 msgstr "Идентификатор:"
 
-#: src/Admin/Configurations/CreateForm.php:193
-msgid "Configuration create error. Please retry."
-msgstr "Конфигурация не создана. Пожалуйста повторите."
+#: src/Admin/Configurations/CreateForm.php:187
+msgid "Configuration creating error. Please retry."
+msgstr "Ошибка создания конфигурации. Пожалуйста, повторите попытку."
 
-#: src/Admin/Configurations/CreateForm.php:233
-msgid "Configuration create error. Name is required."
-msgstr "Конфигурация не создана. Название конфигурации не заполнено."
+#: src/Admin/Configurations/CreateForm.php:235
+msgid "Configuration creating error. Name is required."
+msgstr "Ошибка создания конфигурации. Название конфигурации не заполнено."
 
-#: src/Admin/Configurations/CreateForm.php:246
-msgid "Configuration create error. Schema is required."
-msgstr "Конфигурация не создана. Не выбрана схема."
+#: src/Admin/Configurations/CreateForm.php:252
+msgid "Configuration creating error. Schema select is required."
+msgstr "Ошибка создания конфигурации. Требуется выбор схемы."
 
-#: src/Admin/Configurations/CreateForm.php:263
-msgid "Create configuration error. Name exists."
-msgstr "Ошибка создания конфигурации. Наименование существует."
+#: src/Admin/Configurations/CreateForm.php:273
+msgid "Configuration creating error. Name is exists."
+msgstr "Ошибка создания конфигурации. Конфигурация с таким именем существует."
 
-#: src/Admin/Configurations/CreateForm.php:280
-msgid "Configuration create success. Configuration ID: "
-msgstr "Конфигурация успешно создана. Идентификатор конфигурации: "
+#: src/Admin/Configurations/CreateForm.php:294
+msgid "Configuration creating is complete. Configuration ID:"
+msgstr "Создание конфигурации завершено. Идентификатор конфигурации:"
 
-#: src/Admin/Configurations/CreateForm.php:281
+#: src/Admin/Configurations/CreateForm.php:300
 msgid "edit configuration"
 msgstr "редактировать конфигурацию"
 
-#: src/Admin/Configurations/CreateForm.php:293
-msgid "Configuration create error. Please try saving again or change fields."
+#: src/Admin/Configurations/CreateForm.php:310
+msgid "Configuration creating error. Please try saving again or change fields."
 msgstr ""
 "Ошибка создания конфигурации. Пожалуйста, попробуйте сохранить еще раз или "
 "измените поля."
@@ -344,8 +344,8 @@ msgid "The configuration has been successfully deleted."
 msgstr "Конфигурация успешно удалена."
 
 #: src/Admin/Configurations/Delete.php:126
-msgid "Deleting error. Please retry again."
-msgstr "Ошибка при удалении. Пожалуйста, попробуйте еще раз."
+msgid "Configuration deleting error. Please retry again."
+msgstr "Ошибка удаления конфигурации. Пожалуйста, повторите попытку."
 
 #: src/Admin/Configurations/DeleteForm.php:37
 msgid "Delete confirmation"
@@ -368,12 +368,15 @@ msgstr ""
 "удален."
 
 #: src/Admin/Configurations/DeleteForm.php:77
-msgid "Deleting error. Please retry."
-msgstr "Ошибка удаления. Пожалуйста повторите."
+msgid "Configuration deleting error. Please retry."
+msgstr "Ошибка удаления конфигурации. Пожалуйста, повторите попытку."
 
 #: src/Admin/Configurations/DeleteForm.php:125
-msgid "Deleting error. Confirmation of final deletion is required."
-msgstr "Ошибка удаления. Требуется подтверждение окончательного удаления."
+msgid ""
+"Configuration deleting error. Confirmation of final deletion is required."
+msgstr ""
+"Ошибка удаления конфигурации. Требуется подтверждение окончательного "
+"удаления."
 
 #: src/Admin/Configurations/MainUpdate.php:74
 msgid "Configuration update success."
@@ -666,7 +669,7 @@ msgstr "Сохранение настроек."
 msgid "The settings have not been saved."
 msgstr "Настройки не были сохранены."
 
-#: src/Admin/Settings/Form.php:136
+#: src/Admin/Settings/Form.php:138
 msgid "The settings have been successfully saved."
 msgstr "Настройки были успешно сохранены."
 
@@ -6517,6 +6520,15 @@ msgstr "Команда WC1C"
 #. Author URI of the plugin/theme
 msgid "https://wc1c.info"
 msgstr "https://wc1c.info"
+
+#~ msgid "Create configuration error. Name exists."
+#~ msgstr "Ошибка создания конфигурации. Наименование существует."
+
+#~ msgid "Deleting error. Please retry again."
+#~ msgstr "Ошибка при удалении. Пожалуйста, попробуйте еще раз."
+
+#~ msgid "Deleting error. Please retry."
+#~ msgstr "Ошибка удаления. Пожалуйста повторите."
 
 #~ msgid "Login"
 #~ msgstr "Логин"
