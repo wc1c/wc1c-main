@@ -32,7 +32,7 @@
             </div>
 
             <div class="alert alert-primary border-0">
-                <h4 class="alert-heading mt-0 mb-1"><?php _e('More schemas for configurations', 'wc1c-main'); ?></h4>
+                <h4 class="alert-heading mt-0 mb-1 fs-6"><?php _e('More schemas for configurations', 'wc1c-main'); ?></h4>
 		        <?php _e('Additional schemes are available in extensions on the official website.', 'wc1c-main'); ?>
                 <br/>
                 <?php _e('Each exchange scheme has a unique algorithm of operation and purpose. You need to choose only the scheme you need.', 'wc1c-main'); ?>
