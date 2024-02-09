@@ -74,7 +74,7 @@ class DeleteForm extends FormAbstract
 			return false;
 		}
 
-        $message = __('Deleting error. Please retry.', 'wc1c-main');
+        $message = __('Configuration deleting error. Please retry.', 'wc1c-main');
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce-configurations-delete'], 'wc1c-admin-configurations-delete-save'))
 		{
@@ -122,7 +122,7 @@ class DeleteForm extends FormAbstract
 
 		if(!isset($data['accept']) || $data['accept'] !== 'yes')
 		{
-            $message = __('Deleting error. Confirmation of final deletion is required.', 'wc1c-main');
+            $message = __('Configuration deleting error. Confirmation of final deletion is required.', 'wc1c-main');
 
 			wc1c()->admin()->notices()->create
 			(
