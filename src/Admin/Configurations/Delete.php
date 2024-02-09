@@ -123,7 +123,7 @@ class Delete
 				if(!$configuration->delete($force_delete))
 				{
 					$notice_args['type'] = 'error';
-					$notice_args['data'] = __('Deleting error. Please retry again.', 'wc1c-main');
+					$notice_args['data'] = __('Configuration deleting error. Please retry again.', 'wc1c-main');
 				}
 			}
 		}
