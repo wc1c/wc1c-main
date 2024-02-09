@@ -184,15 +184,19 @@ class CreateForm extends FormAbstract
 			return false;
 		}
 
+        $message = __('Configuration creating error. Please retry.', 'wc1c-main');
+
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Please retry.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -210,7 +214,7 @@ class CreateForm extends FormAbstract
 			{
 				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->admin()->notices()->create
 				(
@@ -219,6 +223,8 @@ class CreateForm extends FormAbstract
 						'data' => $e->getMessage()
 					]
 				);
+
+                wc1c()->log()->error($message, ['user_id' => get_current_user_id(), 'exception' => $e, 'form_id' => $this->getId()]);
 			}
 		}
 
@@ -226,26 +232,34 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['name']))
 		{
+            $message = __('Configuration creating error. Name is required.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Name is required.', 'wc1c-main')
+					'data' => $message
 				]
 			);
 
-			return false;
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
+
+            return false;
 		}
 
 		if(empty($data['schema']))
 		{
+            $message = __('Configuration creating error. Schema select is required.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Schema is required.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'configuration_name' => $data['name'], 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -256,13 +270,17 @@ class CreateForm extends FormAbstract
 
 		if('yes' === wc1c()->settings()->get('configurations_unique_name', 'yes') && $data_storage->isExistingByName($data['name']))
 		{
+            $message = __('Configuration creating error. Name is exists.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Create configuration error. Name exists.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'configuration_name' => $data['name'], 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -273,26 +291,33 @@ class CreateForm extends FormAbstract
 
 		if($configuration->save())
 		{
+            $message = __('Configuration creating is complete. Configuration ID:', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'update',
-					'data' => __('Configuration create success. Configuration ID: ', 'wc1c-main') . $configuration->getId()
-					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
+					'data' => $message . ' ' . $configuration->getId() . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
 				]
 			);
+
+            wc1c()->log()->notice($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			$this->setSavedData([]);
 			return true;
 		}
 
+        $message = __('Configuration creating error. Please try saving again or change fields.', 'wc1c-main');
+
 		wc1c()->admin()->notices()->create
 		(
 			[
 				'type' => 'error',
-				'data' => __('Configuration create error. Please try saving again or change fields.', 'wc1c-main')
+				'data' => $message
 			]
 		);
+
+        wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 		return false;
 	}
