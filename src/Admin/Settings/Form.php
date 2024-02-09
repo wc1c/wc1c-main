@@ -108,6 +108,8 @@ abstract class Form extends FormAbstract
 						'data' => $e->getMessage()
 					]
 				);
+
+                wc1c()->log()->error($message, ['user_id' => get_current_user_id(), 'exception' => $e, 'form_id' => $this->getId()]);
 			}
 		}
 
