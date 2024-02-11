@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Log\Logger;
 use Wc1c\Main\Schemas\Contracts\SchemaContract;

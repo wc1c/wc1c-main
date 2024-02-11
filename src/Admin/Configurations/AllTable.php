@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Main\Abstracts\TableAbstract;
-use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Data\Storage;
 use Wc1c\Main\Data\Storages\ConfigurationsStorage;
 use Wc1c\Main\Traits\ConfigurationsUtilityTrait;

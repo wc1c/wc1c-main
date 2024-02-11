@@ -314,6 +314,7 @@ class Configuration extends ConfigurationsDataAbstract
 	 * @param string $context
 	 *
 	 * @return string
+     * @deprecated 0.23
 	 */
 	public function getUploadDirectory(string $context = 'main'): string
 	{
