@@ -206,21 +206,28 @@ final class Core extends CoreAbstract
 		return Tools\Core::instance();
 	}
 
-	/**
-	 * Logger
-	 *
-	 * @param string $channel
-	 * @param string $name
-	 * @param mixed $hard_level
-	 *
-	 * @return LoggerInterface
-	 */
-	public function log(string $channel = 'main', string $name = '', $hard_level = null)
+    /**
+     * Logger
+     *
+     * @param string $channel
+     * @param string $name
+     * @param array $params
+     * @return LoggerInterface
+     */
+	public function log(string $channel = 'main', string $name = '', array $params = [])
 	{
 		$channel = strtolower($channel);
 
 		if(!isset($this->log[$channel]))
 		{
+            $default_params =
+            [
+                'hard_level' => null,
+                'files_max' => null
+            ];
+
+            $params = array_merge($default_params, $params);
+
 			if('' === $name)
 			{
 				$name = $channel;
@@ -257,10 +264,15 @@ final class Core extends CoreAbstract
 				$level = $this->settings('logs')->get('logger_level', 300);
 			}
 
-			if(!is_null($hard_level))
+			if(!is_null($params['hard_level']))
 			{
-				$level = $hard_level;
+				$level = $params['hard_level'];
 			}
+
+            if(!is_null($params['files_max']))
+            {
+                $max_files = $params['files_max'];
+            }
 
 			if('' === $path)
 			{
@@ -271,11 +283,13 @@ final class Core extends CoreAbstract
 			{
 				$uid_processor = new Processor();
 				$formatter = new Formatter();
+
 				$handler = new Handler($path, $max_files, $level);
 
 				$handler->setFormatter($formatter);
 
 				$logger->pushProcessor($uid_processor);
+
 				$logger->pushHandler($handler);
 
 				if('yes' === $this->settings('logs')->get('logger_output', 'no'))
