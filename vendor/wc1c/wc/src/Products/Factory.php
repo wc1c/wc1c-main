@@ -298,4 +298,71 @@ class Factory extends WC_Product_Factory
 		$this->init = true;
 		add_filter('woocommerce_product_data_store_cpt_get_products_query', [$this, 'handleCustomQueryVar'], 10, 2);
 	}
+
+    /**
+     * Get a product.
+     *
+     * @param mixed $product_id WC_Product|WP_Post|int|bool $product Product instance, post instance, numeric or false to use global $post.
+     * @param array $deprecated Previously used to pass arguments to the factory, e.g. to force a type.
+     * @return \WC_Product|bool Product object or false if the product cannot be loaded.
+     */
+    public function get_product( $product_id = false, $deprecated = array() )
+    {
+        $product_id = $this->get_product_id( $product_id );
+
+        if ( ! $product_id ) {
+            return false;
+        }
+
+        $product_type = $this->get_product_type( $product_id );
+
+        // Backwards compatibility.
+        if ( ! empty( $deprecated ) )
+        {
+            wc_deprecated_argument( 'args', '3.0', 'Passing args to the product factory is deprecated. If you need to force a type, construct the product class directly.' );
+
+            if ( isset( $deprecated['product_type'] ) ) {
+                $product_type = $this->get_classname_from_product_type( $deprecated['product_type'] );
+            }
+        }
+
+        $classname = $this->get_product_classname( $product_id, $product_type );
+
+        try
+        {
+            return new $classname($product_id, $deprecated);
+        }
+        catch(\Exception $e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Get the product ID depending on what was passed.
+     *
+     * @param  \WC_Product|\WP_Post|int|bool $product Product instance, post instance, numeric or false to use global $post.
+     * @return int|bool false on failure
+     */
+    private function get_product_id( $product )
+    {
+        global $post;
+
+        if ( false === $product && isset( $post, $post->ID ) && 'product' === get_post_type( $post->ID ) )
+        {
+            return absint( $post->ID );
+        }
+        elseif ( is_numeric( $product ) )
+        {
+            return $product;
+        }
+        elseif ( $product instanceof \WC_Product )
+        {
+            return $product->get_id();
+        } elseif ( ! empty( $product->ID ) ) {
+            return $product->ID;
+        } else {
+            return false;
+        }
+    }
 }

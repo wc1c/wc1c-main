@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2024-02-16 01:59+0300\n"
-"PO-Revision-Date: 2024-02-16 02:04+0300\n"
+"POT-Creation-Date: 2024-02-16 11:16+0300\n"
+"PO-Revision-Date: 2024-02-16 11:17+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -1881,12 +1881,12 @@ msgstr ""
 "Продукт не является экземпляром ProductDataContract. Обработка пропущена."
 
 #: src/Schemas/Productscleanercml/Core.php:382
-#: src/Schemas/Productscml/Core.php:1327
+#: src/Schemas/Productscml/Core.php:1330
 msgid "An exception was thrown while saving the product."
 msgstr "При сохранении продукта возникло исключение."
 
 #: src/Schemas/Productscleanercml/Core.php:400
-#: src/Schemas/Productscml/Core.php:3796
+#: src/Schemas/Productscml/Core.php:3799
 msgid "Processing a product from a catalog of products."
 msgstr "Обработка продукта из каталога продуктов."
 
@@ -1899,18 +1899,18 @@ msgid "Product search result by external code from 1C."
 msgstr "Результат поиска продукта по внешнему коду из 1С."
 
 #: src/Schemas/Productscleanercml/Core.php:422
-#: src/Schemas/Productscml/Core.php:3812 src/Schemas/Productscml/Core.php:3837
-#: src/Schemas/Productscml/Core.php:4192 src/Schemas/Productscml/Core.php:4216
+#: src/Schemas/Productscml/Core.php:3815 src/Schemas/Productscml/Core.php:3840
+#: src/Schemas/Productscml/Core.php:4195 src/Schemas/Productscml/Core.php:4219
 msgid "Several identical products were found. The first one is selected."
 msgstr "Было найдено несколько идентичных продуктов. Выбран первый из них."
 
 #: src/Schemas/Productscleanercml/Core.php:440
-#: src/Schemas/Productscml/Core.php:3841 src/Schemas/Productscml/Core.php:4220
+#: src/Schemas/Productscml/Core.php:3844 src/Schemas/Productscml/Core.php:4223
 msgid "Product search result by external algorithms."
 msgstr "Результат поиска товара с помощью внешних алгоритмов."
 
 #: src/Schemas/Productscleanercml/Core.php:448
-#: src/Schemas/Productscml/Core.php:3849
+#: src/Schemas/Productscml/Core.php:3852
 msgid "Product is not found."
 msgstr "Продукт не найден."
 
@@ -4617,7 +4617,7 @@ msgid "Saving classifier data in terms of warehouses."
 msgstr "Сохранение данных классификатора по частям: склады."
 
 #: src/Schemas/Productscml/Core.php:1184
-msgid "Processing of the product catalog is completed."
+msgid "Processing of the product catalog as completed."
 msgstr "Обработка каталога продукции завершена."
 
 #: src/Schemas/Productscml/Core.php:1189
@@ -4628,104 +4628,106 @@ msgstr "Сохранение каталога в метаданные конфи
 msgid "The catalog object has not been previously initialized. Initialization."
 msgstr "Объект каталога ранее не был инициализирован. Инициализация."
 
-#: src/Schemas/Productscml/Core.php:1219
-#: src/Schemas/Productscml/Receiver.php:131
-msgid "The time of the last full exchange has been set."
-msgstr "Установлено время последнего полного обмена."
-
-#: src/Schemas/Productscml/Core.php:1232
+#: src/Schemas/Productscml/Core.php:1222
 msgid "The catalog object has been assigned an ID."
 msgstr "Объекту каталога присвоен идентификатор."
 
-#: src/Schemas/Productscml/Core.php:1236
+#: src/Schemas/Productscml/Core.php:1226
 msgid "The catalog object has been assigned a classifier ID."
 msgstr "Объекту каталога присвоен идентификатор классификатора."
 
-#: src/Schemas/Productscml/Core.php:1240
+#: src/Schemas/Productscml/Core.php:1230
 msgid "A name has been assigned to the catalog object."
 msgstr "Объекту каталога присвоено имя."
 
-#: src/Schemas/Productscml/Core.php:1245
+#: src/Schemas/Productscml/Core.php:1235
 msgid "The catalog object has been assigned an owner."
 msgstr "Объекту каталога назначен владелец."
 
-#: src/Schemas/Productscml/Core.php:1249
+#: src/Schemas/Productscml/Core.php:1239
 msgid "A description has been assigned to the catalog object."
 msgstr "Объекту каталога присвоено описание."
 
-#: src/Schemas/Productscml/Core.php:1254
+#: src/Schemas/Productscml/Core.php:1244
 msgid "A warehouses has been assigned to the catalog object."
 msgstr "Объекту каталога присвоены склады."
 
-#: src/Schemas/Productscml/Core.php:1268
+#: src/Schemas/Productscml/Core.php:1259
+msgid ""
+"The catalog contains full data. The time of the last full exchange has been "
+"set."
+msgstr ""
+"Каталог содержит полные данные. Установлено время последнего полного обмена."
+
+#: src/Schemas/Productscml/Core.php:1271
 msgid ""
 "Products creation and updating is disabled. The processing of goods was "
 "skipped."
 msgstr ""
 "Создание и обновление продуктов отключено. Обработка товаров была пропущена."
 
-#: src/Schemas/Productscml/Core.php:1293
+#: src/Schemas/Productscml/Core.php:1296
 msgid "The product is modified according to external algorithms."
 msgstr "Продукт изменен по внешним алгоритмам."
 
-#: src/Schemas/Productscml/Core.php:1298
+#: src/Schemas/Productscml/Core.php:1301
 msgid "Product !instanceof ProductDataContract. Processing skipped."
 msgstr ""
 "Продукт не является экземпляром ProductDataContract. Обработка пропущена."
 
-#: src/Schemas/Productscml/Core.php:1307 src/Schemas/Productscml/Core.php:4516
+#: src/Schemas/Productscml/Core.php:1310 src/Schemas/Productscml/Core.php:4519
 msgid ""
 "The use of products with characteristics is disabled. Processing skipped."
 msgstr ""
 "Использование продуктов с характеристиками отключено. Обработка пропущена."
 
-#: src/Schemas/Productscml/Core.php:1351
+#: src/Schemas/Productscml/Core.php:1354
 msgid "Move on to the next product."
 msgstr "Переход к следующему продукту."
 
-#: src/Schemas/Productscml/Core.php:1369
+#: src/Schemas/Productscml/Core.php:1372
 msgid "Assign a name to the product."
 msgstr "Назначение наименования для продукта."
 
-#: src/Schemas/Productscml/Core.php:1373
+#: src/Schemas/Productscml/Core.php:1376
 msgid "The product is a variation. Name assignment omitted."
 msgstr "Продукт является вариацией. Назначение наименования пропущено."
 
-#: src/Schemas/Productscml/Core.php:1382
+#: src/Schemas/Productscml/Core.php:1385
 msgid "The source for assigning the product name has not been selected."
 msgstr "Не выбран источник для присвоения наименования продукта."
 
-#: src/Schemas/Productscml/Core.php:1389
+#: src/Schemas/Productscml/Core.php:1392
 msgid "Product name update skipped because its disabled in the settings."
 msgstr ""
 "Обновление наименования продукта пропущено, так как обновление отключено в "
 "настройках."
 
-#: src/Schemas/Productscml/Core.php:1431
+#: src/Schemas/Productscml/Core.php:1434
 msgid "Assign name of the product has been successfully completed."
 msgstr "Назначение наименования продукта успешно завершено."
 
-#: src/Schemas/Productscml/Core.php:1435
+#: src/Schemas/Productscml/Core.php:1438
 msgid "The name assignment for the product is skipping. Name is not changed."
 msgstr "Назначение наименования продукта пропущено. Наименование не изменено."
 
-#: src/Schemas/Productscml/Core.php:1499
+#: src/Schemas/Productscml/Core.php:1502
 msgid "Assign a SKU to a product."
 msgstr "Назначение артикула для продукта."
 
-#: src/Schemas/Productscml/Core.php:1503
+#: src/Schemas/Productscml/Core.php:1506
 msgid "SKU update during product update is disabled in the settings."
 msgstr "Обновление артикула при обновлении продукта отключено в настройках."
 
-#: src/Schemas/Productscml/Core.php:1510
+#: src/Schemas/Productscml/Core.php:1513
 msgid "Adding a SKU when adding a product is disabled in the settings."
 msgstr "Добавление артикула при добавлении продукта отключено в настройках."
 
-#: src/Schemas/Productscml/Core.php:1519
+#: src/Schemas/Productscml/Core.php:1522
 msgid "The source for the article is not specified."
 msgstr "Источник артикула не указан."
 
-#: src/Schemas/Productscml/Core.php:1561
+#: src/Schemas/Productscml/Core.php:1564
 msgid ""
 "SKU update skipped. The mode of adding SKU is enabled for products that do "
 "not have them."
@@ -4733,7 +4735,7 @@ msgstr ""
 "Обновление артикула пропущено. Режим добавления SKU включен для продуктов, у "
 "которых их нет."
 
-#: src/Schemas/Productscml/Core.php:1568
+#: src/Schemas/Productscml/Core.php:1571
 msgid ""
 "SKU update skipped. The mode for adding SKUs is enabled for products that "
 "have them on the site and in 1C."
@@ -4741,19 +4743,19 @@ msgstr ""
 "Обновление артикула пропущено. Режим добавления артикулов включен для "
 "продуктов, у которых они есть на сайте и в 1С."
 
-#: src/Schemas/Productscml/Core.php:1577
+#: src/Schemas/Productscml/Core.php:1580
 msgid "The SKU assignment for the product has been successfully completed."
 msgstr "Назначение артикула для продукта успешно выполнено."
 
-#: src/Schemas/Productscml/Core.php:1581
+#: src/Schemas/Productscml/Core.php:1584
 msgid "Failed to set SKU for product."
 msgstr "Ошибка установки артикула для продукта."
 
-#: src/Schemas/Productscml/Core.php:1866
+#: src/Schemas/Productscml/Core.php:1869
 msgid "Assign a description to the product."
 msgstr "Назначение описания для продукта."
 
-#: src/Schemas/Productscml/Core.php:1870
+#: src/Schemas/Productscml/Core.php:1873
 msgid ""
 "Assigning a description to the created product is disabled. Assigning "
 "description skipped."
@@ -4761,7 +4763,7 @@ msgstr ""
 "Назначение описания создаваемым продуктам отключено. Назначение описания "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:1877
+#: src/Schemas/Productscml/Core.php:1880
 msgid ""
 "Assigning a description to the updated product is disabled. Assigning "
 "description skipped."
@@ -4769,7 +4771,7 @@ msgstr ""
 "Назначение описания обновляемым продуктам отключено. Назначение описания "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:1923
+#: src/Schemas/Productscml/Core.php:1926
 msgid ""
 "When updating products, it is allowed to add descriptions only to products "
 "without a description on the site if there is a description in 1C. Assigning "
@@ -4778,7 +4780,7 @@ msgstr ""
 "При обновлении продуктов разрешено добавлять описания только к продуктам без "
 "описания на сайте при наличии описания в 1С. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:1930
+#: src/Schemas/Productscml/Core.php:1933
 msgid ""
 "When updating products, it is allowed to add descriptions only to products "
 "with a description on the site if there is a description in 1C. Assigning "
@@ -4787,21 +4789,21 @@ msgstr ""
 "При обновлении продуктов разрешено добавлять описания только к продуктам с "
 "описанием на сайте при наличии описания в 1С. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:1941
+#: src/Schemas/Productscml/Core.php:1944
 msgid "Assign description of the product has been successfully completed."
 msgstr "Назначение описания для продукта успешно выполнено."
 
-#: src/Schemas/Productscml/Core.php:1945
+#: src/Schemas/Productscml/Core.php:1948
 msgid ""
 "The description assignment for the product is skipping. Description is not "
 "changed."
 msgstr "Пропуск назначения описания продукта. Описание не изменено."
 
-#: src/Schemas/Productscml/Core.php:1963
+#: src/Schemas/Productscml/Core.php:1966
 msgid "Assign a full description to the product."
 msgstr "Назначение полного описания для продукта."
 
-#: src/Schemas/Productscml/Core.php:1967
+#: src/Schemas/Productscml/Core.php:1970
 msgid ""
 "Assigning a full description to the created product is disabled. Assigning "
 "description skipped."
@@ -4809,7 +4811,7 @@ msgstr ""
 "Назначение полного описания создаваемым товарам отключено. Назначение "
 "описания пропущено."
 
-#: src/Schemas/Productscml/Core.php:1974
+#: src/Schemas/Productscml/Core.php:1977
 msgid ""
 "Assigning a full description to the updated product is disabled. Assigning "
 "description skipped."
@@ -4817,7 +4819,7 @@ msgstr ""
 "Назначение обновляемым продуктам полного описания отключено. Назначение "
 "описания пропущено."
 
-#: src/Schemas/Productscml/Core.php:2019
+#: src/Schemas/Productscml/Core.php:2022
 msgid ""
 "When updating products, it is allowed to add full descriptions only to "
 "products without a description on the site if there is a description in 1C. "
@@ -4827,7 +4829,7 @@ msgstr ""
 "продуктам без описания на сайте при наличии описания в 1С. Назначение "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:2026
+#: src/Schemas/Productscml/Core.php:2029
 msgid ""
 "When updating products, it is allowed to add full descriptions only to "
 "products with a description on the site if there is a description in 1C. "
@@ -4837,26 +4839,26 @@ msgstr ""
 "продуктам с описанием на сайте при наличии описания в 1С. Назначение "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:2037
+#: src/Schemas/Productscml/Core.php:2040
 msgid "Assign full description of the product has been successfully completed."
 msgstr "Назначение полного описания продукта успешно завершено."
 
-#: src/Schemas/Productscml/Core.php:2041
+#: src/Schemas/Productscml/Core.php:2044
 msgid ""
 "The full description assignment for the product is skipping. Description is "
 "not changed."
 msgstr "Назначение полного описания продукта пропущено. Описание не изменено."
 
-#: src/Schemas/Productscml/Core.php:2060
+#: src/Schemas/Productscml/Core.php:2063
 msgid "Assign categories to a product."
 msgstr "Назначение категорий для продукта."
 
-#: src/Schemas/Productscml/Core.php:2064
+#: src/Schemas/Productscml/Core.php:2067
 msgid ""
 "Assigning categories when creating products is disabled in the settings."
 msgstr "Назначение категорий при создании продуктов отключено в настройках."
 
-#: src/Schemas/Productscml/Core.php:2071
+#: src/Schemas/Productscml/Core.php:2074
 msgid ""
 "The assignment of categories when creating products is enabled, but in 1C "
 "the product does not have groups."
@@ -4864,38 +4866,38 @@ msgstr ""
 "Назначение категорий при создании продуктов включено, но в 1С у продукта нет "
 "групп."
 
-#: src/Schemas/Productscml/Core.php:2078
+#: src/Schemas/Productscml/Core.php:2081
 msgid "Update categories when updating products is disabled in the settings."
 msgstr "Обновление категорий при обновлении продуктов отключено в настройках."
 
-#: src/Schemas/Productscml/Core.php:2085
+#: src/Schemas/Productscml/Core.php:2088
 msgid "Variations cannot be categorized. Skip assigning categories."
 msgstr "Вариации не могут иметь категории. Пропуск назначения категорий."
 
-#: src/Schemas/Productscml/Core.php:2094
+#: src/Schemas/Productscml/Core.php:2097
 msgid ""
 "The source for assigning categories was not specified. Skip assigning "
 "categories."
 msgstr ""
 "Источник для назначения категорий не указан. Пропуск назначения категорий."
 
-#: src/Schemas/Productscml/Core.php:2108
+#: src/Schemas/Productscml/Core.php:2111
 msgid "Filling in product categories based on classifier groups."
 msgstr "Заполнение категорий продуктов на основе групп классификатора."
 
-#: src/Schemas/Productscml/Core.php:2112
+#: src/Schemas/Productscml/Core.php:2115
 msgid "Processing of the classifier group."
 msgstr "Обработка группы из классификатора."
 
-#: src/Schemas/Productscml/Core.php:2118
+#: src/Schemas/Productscml/Core.php:2121
 msgid "The category was found by the external group ID from 1C."
 msgstr "Категория найдена по идентификатору группы из 1С."
 
-#: src/Schemas/Productscml/Core.php:2124
+#: src/Schemas/Productscml/Core.php:2127
 msgid "Category not found by external group ID from 1C."
 msgstr "Категория не найдена по идентификатору группы из 1С."
 
-#: src/Schemas/Productscml/Core.php:2130
+#: src/Schemas/Productscml/Core.php:2133
 msgid ""
 "Categories update skipped. The mode of adding categories is enabled for "
 "products that do not have them."
@@ -4903,7 +4905,7 @@ msgstr ""
 "Обновление категорий пропущено. Режим добавления категорий включен для "
 "продуктов, у которых их нет."
 
-#: src/Schemas/Productscml/Core.php:2137
+#: src/Schemas/Productscml/Core.php:2140
 msgid ""
 "Categories update skipped. The mode for adding categories is enabled for "
 "products that have them on the site and in 1C."
@@ -4911,24 +4913,24 @@ msgstr ""
 "Обновление категорий пропущено. Режим добавления категорий включен для "
 "продуктов, у которых они есть на сайте и в 1С."
 
-#: src/Schemas/Productscml/Core.php:2149
+#: src/Schemas/Productscml/Core.php:2152
 msgid "Filling parent categories according to the WordPress structure."
 msgstr ""
 "Заполнение родительских категорий в соответствии со структурой WordPress."
 
-#: src/Schemas/Productscml/Core.php:2153
+#: src/Schemas/Productscml/Core.php:2156
 msgid "Filling result."
 msgstr "Результат заполнения."
 
-#: src/Schemas/Productscml/Core.php:2158
+#: src/Schemas/Productscml/Core.php:2161
 msgid "Category assignment completed successfully."
 msgstr "Назначение категорий успешно завершено."
 
-#: src/Schemas/Productscml/Core.php:2288
+#: src/Schemas/Productscml/Core.php:2291
 msgid "Assigning images to a product by offers."
 msgstr "Назначение изображений для продукта по пакету предложений."
 
-#: src/Schemas/Productscml/Core.php:2292
+#: src/Schemas/Productscml/Core.php:2295
 msgid ""
 "Assigning of images based on offer package is only possible for variations. "
 "Assignment skipped."
@@ -4936,7 +4938,7 @@ msgstr ""
 "Назначение изображений на основе пакета предложений возможно только для "
 "вариаций. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2299
+#: src/Schemas/Productscml/Core.php:2302
 msgid ""
 "Image assignments for CommerceML data are disabled in the settings. "
 "Assignment skipped."
@@ -4944,11 +4946,11 @@ msgstr ""
 "Назначение изображений для данных CommerceML отключено в настройках. "
 "Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2306
+#: src/Schemas/Productscml/Core.php:2309
 msgid "There are no images for the product. Assignment skipped."
 msgstr "Для продукта нет изображений. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2313
+#: src/Schemas/Productscml/Core.php:2316
 msgid ""
 "Image assigning for the product being updated is disabled. Assignment "
 "skipped."
@@ -4956,7 +4958,7 @@ msgstr ""
 "Назначение изображения для обновляемого продукта отключено. Назначение "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:2324
+#: src/Schemas/Productscml/Core.php:2327
 msgid ""
 "The product being updated contains images. Adding images is allowed only if "
 "there are none. Assignment skipped."
@@ -4964,7 +4966,7 @@ msgstr ""
 "Обновляемый продукт содержит изображения. Добавление изображений разрешено "
 "только в том случае, если их нет. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2331
+#: src/Schemas/Productscml/Core.php:2334
 msgid ""
 "The product being updated does not contain an image. Updating images is "
 "allowed only if they are present on the site and in 1C. Assignment skipped."
@@ -4973,7 +4975,7 @@ msgstr ""
 "разрешено только в том случае, если они присутствуют на сайте и в 1С. "
 "Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2350 src/Schemas/Productscml/Core.php:2485
+#: src/Schemas/Productscml/Core.php:2353 src/Schemas/Productscml/Core.php:2488
 msgid ""
 "The maximum possible number of images has been processed. The rest of the "
 "images are skip."
@@ -4981,8 +4983,8 @@ msgstr ""
 "Обработано максимально возможное количество изображений. Остальные "
 "изображения пропущены."
 
-#: src/Schemas/Productscml/Core.php:2360 src/Schemas/Productscml/Core.php:2373
-#: src/Schemas/Productscml/Core.php:2495 src/Schemas/Productscml/Core.php:2508
+#: src/Schemas/Productscml/Core.php:2363 src/Schemas/Productscml/Core.php:2376
+#: src/Schemas/Productscml/Core.php:2498 src/Schemas/Productscml/Core.php:2511
 msgid ""
 "The image assignment for the product is missing. Image is not found in the "
 "media library."
@@ -4990,19 +4992,19 @@ msgstr ""
 "Отсутствует назначение изображения для продукта. Изображение не найдено в "
 "медиатеке."
 
-#: src/Schemas/Productscml/Core.php:2393
+#: src/Schemas/Productscml/Core.php:2396
 msgid "Assigning a main image for a product variation."
 msgstr "Назначение основного изображения для вариации."
 
-#: src/Schemas/Productscml/Core.php:2401
+#: src/Schemas/Productscml/Core.php:2404
 msgid "Assigning images to a product by offers as completed."
 msgstr "Присвоение изображений продукту по предложениям завершено."
 
-#: src/Schemas/Productscml/Core.php:2419
+#: src/Schemas/Productscml/Core.php:2422
 msgid "Assign images to a product."
 msgstr "Назначение изображений для продукта."
 
-#: src/Schemas/Productscml/Core.php:2423
+#: src/Schemas/Productscml/Core.php:2426
 msgid ""
 "Image assignments for CommerceML data are disabled in the settings. "
 "Assigning skipped."
@@ -5010,22 +5012,22 @@ msgstr ""
 "Назначение изображений из данных CommerceML отключено в настройках. "
 "Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2430
+#: src/Schemas/Productscml/Core.php:2433
 msgid "There are no images for the product being created. Assigning skipped."
 msgstr "Нет изображений для создаваемого продукта. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2437
+#: src/Schemas/Productscml/Core.php:2440
 msgid ""
 "Assigning images to a product variation is not possible. Assigning skipped"
 msgstr ""
 "Назначение изображений варианту продукта невозможно. Назначение пропущено"
 
-#: src/Schemas/Productscml/Core.php:2444
+#: src/Schemas/Productscml/Core.php:2447
 msgid "Assigning images to the created product is disabled. Assigning skipped."
 msgstr ""
 "Привязка изображений к созданному товару отключена. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2451
+#: src/Schemas/Productscml/Core.php:2454
 msgid ""
 "Image assignment for the product being updated is disabled. Assigning "
 "skipped."
@@ -5033,7 +5035,7 @@ msgstr ""
 "Назначение изображения для обновляемого продукта отключено. Назначение "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:2462
+#: src/Schemas/Productscml/Core.php:2465
 msgid ""
 "The product being updated contains images. Adding images is allowed only if "
 "there are none. Assigning skipped."
@@ -5041,7 +5043,7 @@ msgstr ""
 "Обновляемый продукт содержит изображения. Добавление изображений разрешено, "
 "только если их нет. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2469
+#: src/Schemas/Productscml/Core.php:2472
 msgid ""
 "The product being updated does not contain an image. Updating images is "
 "allowed only if they are present on the site and in 1C. Assigning skipped."
@@ -5049,72 +5051,72 @@ msgstr ""
 "Обновляемый продукт не содержит изображения. Обновление изображений "
 "допускается только при их наличии на сайте и в 1С. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:2519
+#: src/Schemas/Productscml/Core.php:2522
 msgid "Assigning a main image for a product."
 msgstr "Назначение основного изображения для продукта."
 
-#: src/Schemas/Productscml/Core.php:2530
+#: src/Schemas/Productscml/Core.php:2533
 msgid "Assign images to a product as completed."
 msgstr "Назначение изображений продукту завершено."
 
-#: src/Schemas/Productscml/Core.php:2738
+#: src/Schemas/Productscml/Core.php:2741
 msgid "Assigning attributes for product."
 msgstr "Назначение атрибутов для продукта."
 
-#: src/Schemas/Productscml/Core.php:2854
+#: src/Schemas/Productscml/Core.php:2857
 msgid "Adding attributes to the product is successfully."
 msgstr "Добавление атрибутов к продукту выполнено успешно."
 
-#: src/Schemas/Productscml/Core.php:2860
+#: src/Schemas/Productscml/Core.php:2863
 msgid "Adding default attributes to the variable product is successfully."
 msgstr ""
 "Добавление атрибутов по умолчанию к вариативному продукту выполнено успешно."
 
-#: src/Schemas/Productscml/Core.php:2878
+#: src/Schemas/Productscml/Core.php:2881
 msgid "Assigning attributes for variation."
 msgstr "Назначение атрибутов для вариаии."
 
-#: src/Schemas/Productscml/Core.php:2888
+#: src/Schemas/Productscml/Core.php:2891
 msgid "The parent product was not found. Skipped."
 msgstr "Родительский продукт не был найден. Пропуск."
 
-#: src/Schemas/Productscml/Core.php:2895
+#: src/Schemas/Productscml/Core.php:2898
 msgid "The parent product is variation. Skipped."
 msgstr "Родительский продукт - это вариация. Пропуск."
 
-#: src/Schemas/Productscml/Core.php:2904
+#: src/Schemas/Productscml/Core.php:2907
 msgid "The parent product attributes."
 msgstr "Атрибуты родительского продукта."
 
-#: src/Schemas/Productscml/Core.php:2921
+#: src/Schemas/Productscml/Core.php:2924
 msgid "The attribute was not found in the parent product."
 msgstr "Атрибут не найден в родительском продукте."
 
-#: src/Schemas/Productscml/Core.php:2927
+#: src/Schemas/Productscml/Core.php:2930
 msgid "The attribute is not for variations."
 msgstr "Атрибут не для вариаций."
 
-#: src/Schemas/Productscml/Core.php:2954
+#: src/Schemas/Productscml/Core.php:2957
 msgid "Adding attributes to the variation is successfully."
 msgstr "Добавление атрибутов к вариации выполнено успешно."
 
-#: src/Schemas/Productscml/Core.php:2971
+#: src/Schemas/Productscml/Core.php:2974
 msgid "Getting to variation parent attributes."
 msgstr "Получение родительских атрибутов для вариации."
 
-#: src/Schemas/Productscml/Core.php:2995
+#: src/Schemas/Productscml/Core.php:2998
 msgid "The attribute is not for variations. Save required."
 msgstr "Атрибут не для вариаций. Требуется сохранить."
 
-#: src/Schemas/Productscml/Core.php:3008
+#: src/Schemas/Productscml/Core.php:3011
 msgid "Preserve parent attributes for accessibility in variations."
 msgstr "Сохранение родительских атрибутов для доступности в вариантах."
 
-#: src/Schemas/Productscml/Core.php:3030
+#: src/Schemas/Productscml/Core.php:3033
 msgid "Processing of product attributes."
 msgstr "Обработка атрибутов продукта."
 
-#: src/Schemas/Productscml/Core.php:3034
+#: src/Schemas/Productscml/Core.php:3037
 msgid ""
 "Assigning attributes when creating products is disabled. Attribute "
 "assignment skipped."
@@ -5122,7 +5124,7 @@ msgstr ""
 "Назначение атрибутов при создании товаров отключено. Назначение атрибута "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:3041
+#: src/Schemas/Productscml/Core.php:3044
 msgid ""
 "Assigning attributes when updating products is disabled. Attribute "
 "assignment skipped."
@@ -5130,33 +5132,33 @@ msgstr ""
 "Назначение атрибутов при обновлении продуктов отключено. Назначение атрибута "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:3046
+#: src/Schemas/Productscml/Core.php:3049
 msgid ""
 "Assigning attributes to a product based on the properties of the product "
 "catalog."
 msgstr "Присвоение атрибутов продукту на основе свойств каталога продуктов."
 
-#: src/Schemas/Productscml/Core.php:3050
+#: src/Schemas/Productscml/Core.php:3053
 msgid "Zeroing the characteristics of a variable product."
 msgstr "Обнуление характеристик вариативного продукта."
 
-#: src/Schemas/Productscml/Core.php:3065 src/Schemas/Productscml/Core.php:3296
+#: src/Schemas/Productscml/Core.php:3068 src/Schemas/Productscml/Core.php:3299
 msgid "Processing of product properties."
 msgstr "Обработка свойств продукта."
 
-#: src/Schemas/Productscml/Core.php:3073 src/Schemas/Productscml/Core.php:3310
+#: src/Schemas/Productscml/Core.php:3076 src/Schemas/Productscml/Core.php:3313
 msgid "The attribute has an empty value."
 msgstr "Атрибут имеет пустое значение."
 
-#: src/Schemas/Productscml/Core.php:3079 src/Schemas/Productscml/Core.php:3316
+#: src/Schemas/Productscml/Core.php:3082 src/Schemas/Productscml/Core.php:3319
 msgid "The attribute was not found in the classifier properties."
 msgstr "Атрибут не был найден в свойствах классификатора."
 
-#: src/Schemas/Productscml/Core.php:3093 src/Schemas/Productscml/Core.php:3330
+#: src/Schemas/Productscml/Core.php:3096 src/Schemas/Productscml/Core.php:3333
 msgid "The attribute contains an empty value identifier."
 msgstr "Атрибут содержит пустой идентификатор значения."
 
-#: src/Schemas/Productscml/Core.php:3116 src/Schemas/Productscml/Core.php:3360
+#: src/Schemas/Productscml/Core.php:3119 src/Schemas/Productscml/Core.php:3363
 msgid ""
 "Adding values from product properties is disabled and the value is missing "
 "from the classifier properties directory. Adding a value is skipped."
@@ -5164,22 +5166,22 @@ msgstr ""
 "Добавление значений из свойств продукта отключено и значение отсутствует в "
 "справочнике свойств классификатора. Добавление значения пропущено."
 
-#: src/Schemas/Productscml/Core.php:3143 src/Schemas/Productscml/Core.php:3383
+#: src/Schemas/Productscml/Core.php:3146 src/Schemas/Productscml/Core.php:3386
 msgid "Processing of product characteristics."
 msgstr "Обработка характеристик продукта."
 
-#: src/Schemas/Productscml/Core.php:3167 src/Schemas/Productscml/Core.php:3406
-#: src/Schemas/Productscml/Core.php:3484
+#: src/Schemas/Productscml/Core.php:3170 src/Schemas/Productscml/Core.php:3409
+#: src/Schemas/Productscml/Core.php:3487
 msgid "The characteristic has an empty value."
 msgstr "Характеристика имеет пустое значение."
 
-#: src/Schemas/Productscml/Core.php:3177 src/Schemas/Productscml/Core.php:3416
-#: src/Schemas/Productscml/Core.php:3492
+#: src/Schemas/Productscml/Core.php:3180 src/Schemas/Productscml/Core.php:3419
+#: src/Schemas/Productscml/Core.php:3495
 msgid "The attribute was not found. Creating by characteristic."
 msgstr "Атрибут не найден. Создание по характеристике."
 
-#: src/Schemas/Productscml/Core.php:3201 src/Schemas/Productscml/Core.php:3447
-#: src/Schemas/Productscml/Core.php:3516
+#: src/Schemas/Productscml/Core.php:3204 src/Schemas/Productscml/Core.php:3450
+#: src/Schemas/Productscml/Core.php:3519
 msgid ""
 "Adding values from product characteristics is disabled and the value is "
 "missing in global attributes. Adding a value is skipped."
@@ -5187,17 +5189,17 @@ msgstr ""
 "Добавление значений из характеристик продукта отключено, и это значение "
 "отсутствует в глобальных атрибутах. Добавление значения пропущено."
 
-#: src/Schemas/Productscml/Core.php:3245 src/Schemas/Productscml/Core.php:3559
+#: src/Schemas/Productscml/Core.php:3248 src/Schemas/Productscml/Core.php:3562
 msgid "Attributes before processing."
 msgstr "Атрибуты перед обработкой."
 
-#: src/Schemas/Productscml/Core.php:3271
+#: src/Schemas/Productscml/Core.php:3274
 msgid ""
 "Assigning attributes to a product based on the properties of the offers "
 "package."
 msgstr "Присвоение атрибутов продукту на основе свойств пакета предложений."
 
-#: src/Schemas/Productscml/Core.php:3275
+#: src/Schemas/Productscml/Core.php:3278
 msgid ""
 "The file type is not an offer package. Skip assigning attributes on offer "
 "data."
@@ -5205,131 +5207,131 @@ msgstr ""
 "Тип файла не является пакетом предложений. Пропустить присвоение атрибутов "
 "данным предложения."
 
-#: src/Schemas/Productscml/Core.php:3337
+#: src/Schemas/Productscml/Core.php:3340
 msgid "The attribute contains in products characteristics."
 msgstr "Атрибут содержится в характеристиках товаров."
 
-#: src/Schemas/Productscml/Core.php:3563
+#: src/Schemas/Productscml/Core.php:3566
 msgid "Attributes not found. Skipped."
 msgstr "Атрибуты не найдены. Пропуск."
 
-#: src/Schemas/Productscml/Core.php:3595
+#: src/Schemas/Productscml/Core.php:3598
 msgid "Prices processing."
 msgstr "Обработка цен."
 
-#: src/Schemas/Productscml/Core.php:3599
+#: src/Schemas/Productscml/Core.php:3602
 msgid "Prices is not found. Update skipping."
 msgstr "Цены не найдены. Пропуск обновления."
 
-#: src/Schemas/Productscml/Core.php:3605
+#: src/Schemas/Productscml/Core.php:3608
 msgid "Prices before processing."
 msgstr "Цены до обработки."
 
-#: src/Schemas/Productscml/Core.php:3643
+#: src/Schemas/Productscml/Core.php:3646
 msgid "Assign the regular price."
 msgstr "Назначение обычной цены."
 
-#: src/Schemas/Productscml/Core.php:3676
+#: src/Schemas/Productscml/Core.php:3679
 msgid "Assign the sale price."
 msgstr "Назначение цены распродажи."
 
-#: src/Schemas/Productscml/Core.php:3684
+#: src/Schemas/Productscml/Core.php:3687
 msgid "Assign the current price from sale price."
 msgstr "Назначение текущей цены из цены распродажи."
 
-#: src/Schemas/Productscml/Core.php:3689
+#: src/Schemas/Productscml/Core.php:3692
 msgid "Assign the current price from regular price."
 msgstr "Назначение текущей цены из базовой цены."
 
-#: src/Schemas/Productscml/Core.php:3696
+#: src/Schemas/Productscml/Core.php:3699
 msgid "Prices processing is off. Assigning is skip."
 msgstr "Обработка цен отключена. Назначение пропущено."
 
-#: src/Schemas/Productscml/Core.php:3700
+#: src/Schemas/Productscml/Core.php:3703
 msgid "Prices processing is successful."
 msgstr "Обработка цен прошла успешно."
 
-#: src/Schemas/Productscml/Core.php:3722
+#: src/Schemas/Productscml/Core.php:3725
 msgid "Inventories processing."
 msgstr "Обработка запасов."
 
-#: src/Schemas/Productscml/Core.php:3726
+#: src/Schemas/Productscml/Core.php:3729
 msgid ""
 "Product inventories update by offers quantity is disabled. Update skipping."
 msgstr ""
 "Обновление товарных запасов по количеству предложений отключено. Пропуск "
 "обновления."
 
-#: src/Schemas/Productscml/Core.php:3730
+#: src/Schemas/Productscml/Core.php:3733
 msgid "Set inventories by offers quantity: start."
 msgstr "Установка запасов по количеству предложений: начато."
 
-#: src/Schemas/Productscml/Core.php:3746
+#: src/Schemas/Productscml/Core.php:3749
 msgid ""
 "Product inventories stored in parent product. Update variation skipping."
 msgstr ""
 "Запасы продуктов хранятся в родительском продукте. Пропуск обновления "
 "вариации."
 
-#: src/Schemas/Productscml/Core.php:3780
+#: src/Schemas/Productscml/Core.php:3783
 msgid "Set inventories by offers quantity: end."
 msgstr "Установка запасов по количеству предложений: завершено."
 
-#: src/Schemas/Productscml/Core.php:3806 src/Schemas/Productscml/Core.php:4186
+#: src/Schemas/Productscml/Core.php:3809 src/Schemas/Productscml/Core.php:4189
 msgid "Product search by external ID from 1C."
 msgstr "Поиск продукта по внешнему идентификатору из 1С."
 
-#: src/Schemas/Productscml/Core.php:3816 src/Schemas/Productscml/Core.php:4196
+#: src/Schemas/Productscml/Core.php:3819 src/Schemas/Productscml/Core.php:4199
 msgid "Product search result by external ID from 1C."
 msgstr "Результат поиска продукта по идентификатору из 1С."
 
-#: src/Schemas/Productscml/Core.php:3831
+#: src/Schemas/Productscml/Core.php:3834
 msgid "Product search by external algorithms."
 msgstr "Поиск продукта с помощью внешних алгоритмов."
 
-#: src/Schemas/Productscml/Core.php:3856
+#: src/Schemas/Productscml/Core.php:3859
 msgid "Products create is disabled. Product create skipped."
 msgstr "Создание новых продуктов отключено. Создание продукта пропущено."
 
-#: src/Schemas/Productscml/Core.php:3865
+#: src/Schemas/Productscml/Core.php:3868
 msgid "The use of products delete mark is disabled. Product create skipped."
 msgstr ""
 "Использование метки удаления продуктов отключено. Создание продукта "
 "пропущено."
 
-#: src/Schemas/Productscml/Core.php:3878 src/Schemas/Productscml/Core.php:4239
+#: src/Schemas/Productscml/Core.php:3881 src/Schemas/Productscml/Core.php:4242
 msgid "The product contains the characteristics."
 msgstr "Продукт содержит характеристики."
 
-#: src/Schemas/Productscml/Core.php:3887
+#: src/Schemas/Productscml/Core.php:3890
 msgid "Parent product search by external ID from 1C."
 msgstr "Поиск родительского продукта по идентификатору от 1С."
 
-#: src/Schemas/Productscml/Core.php:3893 src/Schemas/Productscml/Core.php:3918
-#: src/Schemas/Productscml/Core.php:4254
+#: src/Schemas/Productscml/Core.php:3896 src/Schemas/Productscml/Core.php:3921
+#: src/Schemas/Productscml/Core.php:4257
 msgid ""
 "Several identical parent products were found. The first one is selected."
 msgstr ""
 "Было обнаружено несколько идентичных родительских продуктов. Выбран первый "
 "из найденных."
 
-#: src/Schemas/Productscml/Core.php:3897
+#: src/Schemas/Productscml/Core.php:3900
 msgid "Parent product search result by external ID from 1C."
 msgstr "Поиска родительского продукта по внешнему идентификатору от 1С."
 
-#: src/Schemas/Productscml/Core.php:3912
+#: src/Schemas/Productscml/Core.php:3915
 msgid "Parent product search by external algorithms."
 msgstr "Поиска родительского продукта по внешним алгоритмам."
 
-#: src/Schemas/Productscml/Core.php:3922 src/Schemas/Productscml/Core.php:4273
+#: src/Schemas/Productscml/Core.php:3925 src/Schemas/Productscml/Core.php:4276
 msgid "Parent product search result by external algorithms."
 msgstr "Результат поиска родительского продукта по внешним алгоритмам."
 
-#: src/Schemas/Productscml/Core.php:3929 src/Schemas/Productscml/Core.php:4280
+#: src/Schemas/Productscml/Core.php:3932 src/Schemas/Productscml/Core.php:4283
 msgid "Parent product is not found."
 msgstr "Родительский продукт не найден."
 
-#: src/Schemas/Productscml/Core.php:3930
+#: src/Schemas/Productscml/Core.php:3933
 msgid ""
 "Creating simple products by characteristics is disabled in the settings. "
 "Product create skipped."
@@ -5337,7 +5339,7 @@ msgstr ""
 "Создание простых продуктов по характеристикам отключено в настройках. "
 "Создание продукта пропущено."
 
-#: src/Schemas/Productscml/Core.php:3934 src/Schemas/Productscml/Core.php:4285
+#: src/Schemas/Productscml/Core.php:3937 src/Schemas/Productscml/Core.php:4288
 msgid ""
 "Creating simple products by characteristics is enabled in the settings. "
 "Parent product is not found. Creating simple product by characteristic."
@@ -5345,32 +5347,32 @@ msgstr ""
 "Создание простых продуктов по характеристикам включено в настройках. "
 "Родительский продукт не найден. Создание простого продукта по характеристике."
 
-#: src/Schemas/Productscml/Core.php:3945 src/Schemas/Productscml/Core.php:4296
+#: src/Schemas/Productscml/Core.php:3948 src/Schemas/Productscml/Core.php:4299
 msgid "Changing the parent product type to variable."
 msgstr "Изменение типа родительского продукта на вариативный."
 
-#: src/Schemas/Productscml/Core.php:3952 src/Schemas/Productscml/Core.php:4303
+#: src/Schemas/Productscml/Core.php:3955 src/Schemas/Productscml/Core.php:4306
 msgid "Variation is not found. Creating."
 msgstr "Вариация не найдена. Создание."
 
-#: src/Schemas/Productscml/Core.php:3966 src/Schemas/Productscml/Core.php:4317
+#: src/Schemas/Productscml/Core.php:3969 src/Schemas/Productscml/Core.php:4320
 msgid "The creation of the variation is completed."
 msgstr "Создание вариации завершено."
 
-#: src/Schemas/Productscml/Core.php:3971
+#: src/Schemas/Productscml/Core.php:3974
 msgid "The product is simple. Creating."
 msgstr "Продукт простой. Создание."
 
-#: src/Schemas/Productscml/Core.php:4005
+#: src/Schemas/Productscml/Core.php:4008
 msgid ""
 "Assignment of data for the created product according to external algorithms."
 msgstr "Назначение данных для созданного продукта по внешним алгоритмам."
 
-#: src/Schemas/Productscml/Core.php:4018
+#: src/Schemas/Productscml/Core.php:4021
 msgid "The product is created."
 msgstr "Продукт создан."
 
-#: src/Schemas/Productscml/Core.php:4037
+#: src/Schemas/Productscml/Core.php:4040
 msgid ""
 "Assignment of data for the created product according to external algorithms "
 "after saving."
@@ -5378,41 +5380,41 @@ msgstr ""
 "Присвоение данных для созданного продукта по внешним алгоритмам после "
 "сохранения."
 
-#: src/Schemas/Productscml/Core.php:4045
+#: src/Schemas/Productscml/Core.php:4048
 msgid "The product has been updated using external algorithms."
 msgstr "Продукт был обновлен с использованием внешних алгоритмов."
 
-#: src/Schemas/Productscml/Core.php:4056
+#: src/Schemas/Productscml/Core.php:4059
 msgid "Product is found. Updating."
 msgstr "Продукт найден. Обновление."
 
-#: src/Schemas/Productscml/Core.php:4063
+#: src/Schemas/Productscml/Core.php:4066
 msgid "Products update is disabled in settings. Product update skipped."
 msgstr ""
 "Обновление продуктов отключено в настройках. Обновление продукта пропущено."
 
-#: src/Schemas/Productscml/Core.php:4077 src/Schemas/Productscml/Core.php:4340
+#: src/Schemas/Productscml/Core.php:4080 src/Schemas/Productscml/Core.php:4343
 msgid "The product is created from a different configuration. Update skipped."
 msgstr "Продукт создан на основе другой конфигурации. Обновление пропущено."
 
-#: src/Schemas/Productscml/Core.php:4086 src/Schemas/Productscml/Core.php:4349
+#: src/Schemas/Productscml/Core.php:4089 src/Schemas/Productscml/Core.php:4352
 msgid "The product is created from a different schema. Update skipped."
 msgstr "Продукт создан на основе другой схемы. Обновление пропущено."
 
-#: src/Schemas/Productscml/Core.php:4100
+#: src/Schemas/Productscml/Core.php:4103
 msgid "The use of products from trash is disabled. Updating skipped."
 msgstr "Использование продуктов из корзины отключено. Обновление пропущено."
 
-#: src/Schemas/Productscml/Core.php:4116
+#: src/Schemas/Productscml/Core.php:4119
 msgid ""
 "Assignment of data for the updated product according to external algorithms."
 msgstr "Назначение данных для обновляемого продукта по внешним алгоритмам."
 
-#: src/Schemas/Productscml/Core.php:4129
+#: src/Schemas/Productscml/Core.php:4132
 msgid "Product update has been successfully completed."
 msgstr "Обновление продукта успешно завершено."
 
-#: src/Schemas/Productscml/Core.php:4148
+#: src/Schemas/Productscml/Core.php:4151
 msgid ""
 "Assignment of data for the updated product according to external algorithms "
 "after saving."
@@ -5420,7 +5422,7 @@ msgstr ""
 "Назначение данных для обновляемого товара по внешним алгоритмам после "
 "сохранения."
 
-#: src/Schemas/Productscml/Core.php:4156
+#: src/Schemas/Productscml/Core.php:4159
 msgid ""
 "Product update after assigning data using external algorithms has been "
 "successfully completed."
@@ -5428,23 +5430,23 @@ msgstr ""
 "Обновление продукта после присвоения данных с помощью внешних алгоритмов "
 "успешно завершено."
 
-#: src/Schemas/Productscml/Core.php:4176
+#: src/Schemas/Productscml/Core.php:4179
 msgid "Processing an offer from a package of offers."
 msgstr "Обработка предложения из пакета предложений."
 
-#: src/Schemas/Productscml/Core.php:4210
+#: src/Schemas/Productscml/Core.php:4213
 msgid "Product not found. Search by external algorithms."
 msgstr "Продукт не найден. Поиск по внешним алгоритмам."
 
-#: src/Schemas/Productscml/Core.php:4228
+#: src/Schemas/Productscml/Core.php:4231
 msgid "Product not found."
 msgstr "Продукт не найден."
 
-#: src/Schemas/Productscml/Core.php:4250
+#: src/Schemas/Productscml/Core.php:4253
 msgid "Parent product search result by external code from 1C."
 msgstr "Результат поиска родительского продукта по внешнему коду от 1С."
 
-#: src/Schemas/Productscml/Core.php:4281
+#: src/Schemas/Productscml/Core.php:4284
 msgid ""
 "Creating simple products by characteristics is disabled in the settings. "
 "Processing skipped."
@@ -5452,32 +5454,32 @@ msgstr ""
 "Создание простых продуктов по характеристикам отключено в настройках. "
 "Обработка пропущена."
 
-#: src/Schemas/Productscml/Core.php:4322
+#: src/Schemas/Productscml/Core.php:4325
 msgid "Offer update skipped."
 msgstr "Обновление предложения пропущено."
 
-#: src/Schemas/Productscml/Core.php:4410 src/Schemas/Productscml/Core.php:4415
+#: src/Schemas/Productscml/Core.php:4413 src/Schemas/Productscml/Core.php:4418
 msgid "The offer package object contains only the changes."
 msgstr "Объект пакета предложений содержит только изменения."
 
-#: src/Schemas/Productscml/Core.php:4460
+#: src/Schemas/Productscml/Core.php:4463
 msgid "Saving the offer package to configuration meta data."
 msgstr "Сохранение пакета предложений в метаданные конфигурации."
 
-#: src/Schemas/Productscml/Core.php:4486
+#: src/Schemas/Productscml/Core.php:4489
 msgid "An exception was thrown decode the offer."
 msgstr "При декодировании предложения возникло исключение."
 
-#: src/Schemas/Productscml/Core.php:4502
+#: src/Schemas/Productscml/Core.php:4505
 msgid "The offer has been changed according to external algorithms."
 msgstr "Предложение было изменено в соответствии с внешними алгоритмами."
 
-#: src/Schemas/Productscml/Core.php:4507
+#: src/Schemas/Productscml/Core.php:4510
 msgid "Offer !instanceof ProductDataContract. Processing skipped."
 msgstr ""
 "Предложение не является экземпляром ProductDataContract. Обработка пропущена."
 
-#: src/Schemas/Productscml/Core.php:4526
+#: src/Schemas/Productscml/Core.php:4529
 msgid "An exception was thrown while processing the offer."
 msgstr "При обработке предложения возникло исключение."
 
@@ -5496,6 +5498,10 @@ msgstr "Действие не найдено в схеме."
 #: src/Schemas/Productscml/Receiver.php:115
 msgid "Sending a successful completion of the exchange in 1C."
 msgstr "Отправка ответа об успешном завершении обмена в 1С."
+
+#: src/Schemas/Productscml/Receiver.php:131
+msgid "The time of the last full exchange has been set."
+msgstr "Установлено время последнего полного обмена."
 
 #: src/Schemas/Productscml/Receiver.php:317
 msgid "1C authorization has been successfully passed."
