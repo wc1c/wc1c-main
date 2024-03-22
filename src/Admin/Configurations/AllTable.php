@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Main\Abstracts\TableAbstract;
-use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Data\Storage;
 use Wc1c\Main\Data\Storages\ConfigurationsStorage;
 use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
@@ -141,7 +141,7 @@ class AllTable extends TableAbstract
 		if($item['status'] === 'draft')
 		{
 			$status_class = 'draft';
-			$status_description = __('An initial setup is required.', 'wc1c-main');
+			$status_description = __('An initial configuration setup is required.', 'wc1c-main');
 		}
 		if($item['status'] === 'active')
 		{
@@ -151,25 +151,25 @@ class AllTable extends TableAbstract
 		if($item['status'] === 'inactive')
 		{
 			$status_class = 'inactive';
-			$status_description = __('All configuration algorithms are disabled.', 'wc1c-main');
+			$status_description = __('All configuration algorithms are disabled. Configuration is switched off in the settings.', 'wc1c-main');
 		}
 		if($item['status'] === 'processing')
 		{
 			$status_class = 'processing';
-			$status_description = __('Data is being exchanged. Changing settings is not recommended.', 'wc1c-main');
+			$status_description = __('Data is being exchanged. Changing configuration settings is not recommended.', 'wc1c-main');
 		}
 		if($item['status'] === 'error')
 		{
 			$status_class = 'error';
-			$status_description = __('An error has occurred. You need to look at the event logs, they contain detailed information.', 'wc1c-main');
+			$status_description = __('An error has occurred. Should review the event logs for the configuration, they contain detailed information about the error.', 'wc1c-main');
 		}
 		if($item['status'] === 'deleted')
 		{
 			$status_class = 'deleted';
-			$status_description = __('Awaiting final removal. All algorithms are disabled.', 'wc1c-main');
+			$status_description = __('Awaiting final configuration removal. All algorithms are disabled.', 'wc1c-main');
 		}
 
-		return '<span class="' . $status_class . '" data-bs-toggle="popover" data-bs-trigger="hover focus click" data-bs-content="' . $status_description . '">' . $status . '</span>';
+		return '<span class="' . $status_class . '" data-bs-toggle="popover" data-bs-custom-class="configurations-status-popover ' . $status_class . '" data-bs-title="' . __('Status description', 'wc1c-main') . '" data-bs-trigger="hover focus click" data-bs-content="' . $status_description . '">' . $status . '</span>';
 	}
 
 	/**
@@ -192,7 +192,7 @@ class AllTable extends TableAbstract
 
 		$actions =
 		[
-			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Open', 'wc1c-main') . '</a>',
+			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Open configuration', 'wc1c-main') . '</a>',
 			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c-main') . '</a>',
 		];
 
@@ -211,17 +211,17 @@ class AllTable extends TableAbstract
 		$user = get_userdata($item['user_id']);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$metas['user'] = __('User: ', 'wc1c-main') . $user->get('nickname') . ' (' . $item['user_id']. ')';
+			$metas['user'] = __('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $user->get('nickname') . ' (' . $item['user_id']. ')</span>';
 		}
 		else
 		{
-			$metas['user'] =  __('User is not exists.', 'wc1c-main');
+			$metas['user'] =  __('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . __('user is not exists.', 'wc1c-main') . '</span>';
 		}
 
 		try
 		{
 			$schema = wc1c()->schemas()->get($item['schema']);
-			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+			$metas['schema'] = __('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $item['schema'] . ' (' . $schema->getName() . ')</span>';
 
             if($item['schema'] === 'productscml' || $item['schema'] === 'pqcml')
             {
@@ -233,11 +233,11 @@ class AllTable extends TableAbstract
 
                     $metas['productscml-catalog-full'] = sprintf
                     (
-                        '%s %s (<span class="time">%s %s</span> %s)',
+                        '%s <span class="row-metas-line-content">%s (<span class="time">%s %s</span> %s)</span>',
                         __('Full exchange:', 'wc1c-main'),
                         sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp'))),
                         date_i18n('d/m/Y', $timestamp),
-                        __('in', 'wc1c-main'),
+                        __('at', 'wc1c-main'),
                         date_i18n('H:i:s', $timestamp)
                       );
                 }
@@ -245,7 +245,7 @@ class AllTable extends TableAbstract
 				{
 					$metas['productscml-catalog-full'] = sprintf
 					(
-						'%s %s',
+						'%s <span class="row-metas-line-content">%s</span>',
 						__('Full exchange:', 'wc1c-main'),
 						__('not produced', 'wc1c-main')
 					);
@@ -254,7 +254,7 @@ class AllTable extends TableAbstract
 		}
 		catch(\Throwable $e)
 		{
-			$metas['schema'] = __('Schema:', 'wc1c-main') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')';
+			$metas['schema'] = __('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')</span>';
 		}
 
 		if(has_filter('wc1c_admin_configurations_all_row_metas'))
@@ -289,7 +289,7 @@ class AllTable extends TableAbstract
 
 		foreach($data as $meta => $meta_text)
 		{
-			$out .= "<div class='row-metas-line $meta'>$meta_text</div>";
+			$out .= '<div class="row-metas-line ' . $meta . '">' . $meta_text . '</div>';
 		}
 
 		$out .= '</div>';

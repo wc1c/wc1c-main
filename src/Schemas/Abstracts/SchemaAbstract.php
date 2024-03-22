@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Log\Logger;
 use Wc1c\Main\Schemas\Contracts\SchemaContract;
@@ -347,6 +347,7 @@ abstract class SchemaAbstract implements SchemaContract
 			$name = $this->configuration()->getSchema();
 		}
 
+        $files_max = $this->getOptions('logger_files_max', null);
 		$hard_level = $this->getOptions('logger_level', 'logger_level');
 
 		if('logger_level' === $hard_level)
@@ -354,6 +355,12 @@ abstract class SchemaAbstract implements SchemaContract
 			$hard_level = null;
 		}
 
-		return wc1c()->log($channel, $name, $hard_level);
+        $params =
+        [
+            'hard_level' => $hard_level,
+            'files_max' => $files_max
+        ];
+
+		return wc1c()->log($channel, $name, $params);
 	}
 }

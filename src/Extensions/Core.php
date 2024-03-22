@@ -26,8 +26,7 @@ final class Core
 	 * @param array $extensions
 	 *
 	 * @return void
-	 * @throws Exception
-	 */
+     */
 	public function set(array $extensions)
 	{
 		$this->extensions = $extensions;
@@ -50,19 +49,24 @@ final class Core
 		 */
 		if('' !== $extension_id)
 		{
+            wc1c()->log()->debug(sprintf('%s: %s', __('Initialization of the extension by identifier', 'wc1c-main'), $extension_id), ['extension_id' => $extension_id]);
+
 			if(!array_key_exists($extension_id, $extensions))
 			{
-				throw new Exception(__('Extension not found by id.', 'wc1c-main'));
+                wc1c()->log()->warning(__('Extension not found by identifier.', 'wc1c-main'), ['extension_id' => $extension_id]);
+				return;
 			}
 
 			if(!$extensions[$extension_id] instanceof ExtensionContract)
 			{
-				throw new Exception(__('Extension is not implementation ExtensionContract. Skipped init.', 'wc1c-main'));
+                wc1c()->log()->warning(__('Extension is not implementation ExtensionContract. Initialization skipped.', 'wc1c-main'), ['extension_id' => $extension_id]);
+                return;
 			}
 
 			if($extensions[$extension_id]->isInitialized())
 			{
-				return;
+                wc1c()->log()->warning(__('The extension has already been initialized previously. Re-initialization is skipped.', 'wc1c-main'), ['extension_id' => $extension_id]);
+                return;
 			}
 
 			try
@@ -70,15 +74,19 @@ final class Core
 				$extensions[$extension_id]->init();
 				$extensions[$extension_id]->setInitialized(true);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
-				throw new Exception(__('Init extension exception:', 'wc1c-main') . ' ' . $e->getMessage());
+				throw new Exception(sprintf('%s: %s', __('The extension threw an exception on initialization', 'wc1c-main'), $e->getMessage()));
 			}
 
 			$this->set($extensions);
 
-			return;
+            wc1c()->log()->debug(sprintf('%s "%s" %s', __('Initialization of the extension by identifier', 'wc1c-main'), $extension_id, __('is completed.', 'wc1c-main')), ['extension_id' => $extension_id]);
+
+            return;
 		}
+
+        wc1c()->log()->debug(__('Initialization of available extensions.', 'wc1c-main'));
 
 		/**
 		 * Init all extensions
@@ -89,11 +97,13 @@ final class Core
 			{
 				$this->init($extension);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->log()->warning($e->getMessage(), ['exception' => $e]);
 			}
 		}
+
+        wc1c()->log()->debug(__('Initialization of available extensions is completed.', 'wc1c-main'));
 	}
 
 	/**
@@ -127,24 +137,34 @@ final class Core
 	 */
 	public function load()
 	{
+        wc1c()->log()->debug(__('Extensions loading.', 'wc1c-main'));
+
+        if('yes' !== wc1c()->settings('main')->get('extensions', 'yes'))
+        {
+            wc1c()->log()->info(__('Extension loading is turned off in global settings. Extension loading is skipped.', 'wc1c-main'));
+            return;
+        }
+
 		$extensions = [];
 
-		if(has_filter('wc1c_extensions_loading') && 'yes' === wc1c()->settings('main')->get('extensions', 'yes'))
+		if(has_filter(wc1c()->context()->getSlug() . '_extensions_loading'))
 		{
 			try
 			{
-				$extensions = apply_filters('wc1c_extensions_loading', $extensions);
+				$extensions = apply_filters(wc1c()->context()->getSlug() . '_extensions_loading', $extensions);
 			}
 			catch(\Error $e)
 			{
 				throw new Exception(__('Extensions load error:', 'wc1c-main') . ' ' . $e->getMessage());
 			}
-			catch(\Exception $e)
+			catch(\Throwable $e)
 			{
 				throw new Exception(__('Extensions load exception:', 'wc1c-main') . ' ' . $e->getMessage());
 			}
 		}
 
 		$this->set($extensions);
+
+        wc1c()->log()->debug(__('Extensions loading is completed.', 'wc1c-main'), ['extensions' => $extensions]);
 	}
 }

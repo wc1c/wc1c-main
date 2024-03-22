@@ -1,12 +1,12 @@
 /*
 *** Init
  */
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/functions";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/variables";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/variables-dark";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/maps";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/mixins";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/utilities";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/functions";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/variables";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/variables-dark";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/maps";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/mixins";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/utilities";
 
 @import "../variables";
 @import "../mixins";
@@ -14,23 +14,23 @@
 /*
 *** bootstrap
  */
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/root";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/buttons";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/transitions";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/badge";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/button-group";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/list-group";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/grid";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/card";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/tables";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/progress";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/forms";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/nav";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/alert";
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/popover";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/root";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/buttons";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/transitions";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/badge";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/button-group";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/list-group";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/grid";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/card";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/tables";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/progress";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/forms";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/nav";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/alert";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/popover";
 
 // Helpers
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/helpers";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/helpers";
 
 // Utilities
-@import "F:/Sources/bootstrap/bootstrap-5.3.0/scss/utilities/api";
+@import "F:/Sources/bootstrap/bootstrap-5.3.2/scss/utilities/api";

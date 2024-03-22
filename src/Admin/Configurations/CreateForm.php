@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Main\Abstracts\FormAbstract;
-use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Traits\UtilityTrait;
 
@@ -39,9 +39,15 @@ class CreateForm extends FormAbstract
 	{
 		$fields['name'] =
         [
-            'title' => __('Configuration name', 'wc1c-main'),
+            'title' => __('Name of the configuration', 'wc1c-main'),
             'type' => 'text',
-            'description' => __('Enter any data up to 255 characters.', 'wc1c-main'),
+            'description' => sprintf
+            (
+                    '%s %s<hr>%s',
+                    __('Enter any data up to 255 characters.', 'wc1c-main'),
+                    __('The name is used to quickly distinguish between multiple configurations that have been created.', 'wc1c-main'),
+                    __('Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. Update prices and stocks, etc.', 'wc1c-main')
+            ),
             'default' => '',
             'css' => 'width: 100%;',
         ];
@@ -50,7 +56,7 @@ class CreateForm extends FormAbstract
 		{
 			$schemas = wc1c()->schemas()->get();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			return $fields;
 		}
@@ -178,15 +184,19 @@ class CreateForm extends FormAbstract
 			return false;
 		}
 
+        $message = __('Configuration creating error. Please retry.', 'wc1c-main');
+
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Please retry.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -204,7 +214,7 @@ class CreateForm extends FormAbstract
 			{
 				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->admin()->notices()->create
 				(
@@ -213,6 +223,8 @@ class CreateForm extends FormAbstract
 						'data' => $e->getMessage()
 					]
 				);
+
+                wc1c()->log()->error($message, ['user_id' => get_current_user_id(), 'exception' => $e, 'form_id' => $this->getId()]);
 			}
 		}
 
@@ -220,26 +232,34 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['name']))
 		{
+            $message = __('Configuration creating error. Name is required.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Name is required.', 'wc1c-main')
+					'data' => $message
 				]
 			);
 
-			return false;
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
+
+            return false;
 		}
 
 		if(empty($data['schema']))
 		{
+            $message = __('Configuration creating error. Schema select is required.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Schema is required.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'configuration_name' => $data['name'], 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -250,13 +270,17 @@ class CreateForm extends FormAbstract
 
 		if('yes' === wc1c()->settings()->get('configurations_unique_name', 'yes') && $data_storage->isExistingByName($data['name']))
 		{
+            $message = __('Configuration creating error. Name is exists.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Configuration create error. Name is exists.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'configuration_name' => $data['name'], 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -267,26 +291,33 @@ class CreateForm extends FormAbstract
 
 		if($configuration->save())
 		{
+            $message = __('Configuration creating is complete. Configuration ID:', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'update',
-					'data' => __('Configuration create success. Configuration id: ', 'wc1c-main') . $configuration->getId()
-					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
+					'data' => $message . ' ' . $configuration->getId() . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
 				]
 			);
+
+            wc1c()->log()->notice($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			$this->setSavedData([]);
 			return true;
 		}
 
+        $message = __('Configuration creating error. Please try saving again or change fields.', 'wc1c-main');
+
 		wc1c()->admin()->notices()->create
 		(
 			[
 				'type' => 'error',
-				'data' => __('Configuration create error. Please retry saving or change fields.', 'wc1c-main')
+				'data' => $message
 			]
 		);
+
+        wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 		return false;
 	}

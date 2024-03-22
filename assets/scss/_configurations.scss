@@ -5,3 +5,57 @@
   background-color: white;
   border-left: 4px solid #fd0;
 }
+
+.configurations-status-popover
+{
+  --bs-popover-max-width: 277px;
+  --bs-popover-border-color: #fd0;
+  --bs-popover-border-width: 4px;
+  border-radius: 2px!important;
+
+  padding: 0!important;
+  border-right-width: 2px!important;
+  border-bottom-width: 2px!important;
+  border-top-width: 2px!important;
+
+  .popover-header
+  {
+    margin: 0!important;
+    border-bottom-width: 2px!important;
+  }
+
+  &.draft
+  {
+    --bs-popover-border-color: rgba(128, 0, 128, 0.9);
+  }
+
+  &.deleted
+  {
+    --bs-popover-border-color: rgba(128, 0, 128, 0.4);
+  }
+
+  &.active
+  {
+    --bs-popover-border-color: rgba(18, 128, 3, 0.6);
+  }
+
+  &.processing
+  {
+    --bs-popover-border-color: #128003;
+  }
+
+  &.inactive
+  {
+    --bs-popover-border-color: rgba(196, 22, 28, 0.6);
+  }
+
+  &.error
+  {
+    --bs-popover-border-color: #b8151a;
+  }
+
+  .popover-header, .popover-body
+  {
+    background-color: #fcf9e2;
+  }
+}

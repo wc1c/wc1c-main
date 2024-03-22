@@ -33,7 +33,7 @@ if(count($views) < 2)
 echo "<ul class='subsubsub w-100 d-block float-none'>";
 foreach($views as $class => $view)
 {
-	$views[$class] = "<li class='$class'>$view";
+	$views[$class] = "<li class='fs-6 $class'>$view";
 }
 echo wp_kses_post(implode(" |</li>", $views) . "</li>");
 echo '</ul>';

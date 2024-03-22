@@ -8,6 +8,8 @@
       {
         height: auto;
         padding: 0;
+        margin-bottom: .5rem !important;
+        margin-top: .5rem !important;
 
         .tablenav-pages
         {
@@ -39,6 +41,11 @@
       font-weight: 500;
     }
 
+    .row-actions
+    {
+      font-size: 14px;
+    }
+
     .column-name .configuration-metas
     {
       border: 1px solid #ccd0d4;
@@ -48,11 +55,16 @@
       margin-top: 10px;
     }
 
+    .row-metas-line-content
+    {
+      color: #000000!important;
+    }
+
     .column-configuration_id
     {
-      width: 75px;
+      width: 45px;
       border-right: 1px solid #ccd0d4;
-      max-width: 75px;
+      max-width: 45px;
 
       @include media-breakpoint-down(md)
       {
@@ -90,9 +102,8 @@
     {
       .colspanchange
       {
-        padding-top: 70px!important;
-        padding-bottom: 70px!important;
-        text-align: center;
+        padding: 10px!important;
+        text-align: left;
       }
     }
 

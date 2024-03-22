@@ -51,6 +51,7 @@ class Delete
 		$redirect = true;
 		$force_delete = false;
 		$configuration_status = $configuration->getStatus();
+
 		$notice_args['type'] = 'error';
 		$notice_args['data'] = __('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c-main');
 
@@ -122,7 +123,7 @@ class Delete
 				if(!$configuration->delete($force_delete))
 				{
 					$notice_args['type'] = 'error';
-					$notice_args['data'] = __('Deleting error. Please retry again.', 'wc1c-main');
+					$notice_args['data'] = __('Configuration deleting error. Please retry again.', 'wc1c-main');
 				}
 			}
 		}

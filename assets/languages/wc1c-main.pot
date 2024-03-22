@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2023-08-14 12:47+0300\n"
+"POT-Creation-Date: 2024-02-09 17:25+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,8 +29,8 @@ msgstr ""
 
 #: src/Activation.php:28
 msgid ""
-"The basic plugin setup has not been done yet, so you can proceed to the "
-"setup, which takes no more than 5 minutes."
+"The basic plugin setup has not been done yet, so can proceed to the setup, "
+"which takes no more than 5 minutes."
 msgstr ""
 
 #: src/Activation.php:30
@@ -41,16 +41,16 @@ msgstr ""
 msgid "Integration with 1C"
 msgstr ""
 
-#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:133
+#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:174
 #: src/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr ""
 
-#: src/Admin.php:128 src/Admin/Settings/LogsForm.php:99
+#: src/Admin.php:128 src/Admin/Settings/LogsForm.php:130
 msgid "Tools"
 msgstr ""
 
-#: src/Admin.php:137
+#: src/Admin.php:137 src/Admin/Configurations/Update.php:35
 msgid "Settings"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "not activated"
 msgstr ""
 
 #: src/Admin/Columns/WooCommerce/Categories.php:38
-#: src/Admin/Columns/WooCommerce/Orders.php:38
+#: src/Admin/Columns/WooCommerce/Orders.php:40
 #: src/Admin/Columns/WooCommerce/Products.php:38
 #: src/Admin/Columns/WordPress/MediaLibrary.php:38
 msgid "1C information"
@@ -98,19 +98,20 @@ msgid "Configuration ID: "
 msgstr ""
 
 #: src/Admin/Columns/WooCommerce/Categories.php:90
-#: src/Admin/Columns/WooCommerce/Orders.php:63
+#: src/Admin/Columns/WooCommerce/Orders.php:67
+#: src/Admin/Columns/WooCommerce/Orders.php:93
 #: src/Admin/Columns/WooCommerce/Products.php:63
 #: src/Admin/Columns/WordPress/MediaLibrary.php:63
 msgid "Not found"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:85
+#: src/Admin/Columns/WooCommerce/Orders.php:115
 #: src/Admin/Columns/WooCommerce/Products.php:85
 #: src/Admin/Columns/WordPress/MediaLibrary.php:85
 msgid "Activity:"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:86
+#: src/Admin/Columns/WooCommerce/Orders.php:116
 #: src/Admin/Columns/WooCommerce/Products.php:86
 #: src/Admin/Columns/WordPress/MediaLibrary.php:86
 #, php-format
@@ -118,14 +119,14 @@ msgctxt "%s = human-readable time difference"
 msgid "%s ago."
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:92
+#: src/Admin/Columns/WooCommerce/Orders.php:122
 #: src/Admin/Columns/WooCommerce/Products.php:92
 #: src/Admin/Columns/WordPress/MediaLibrary.php:92
-#: src/Admin/Configurations/MainUpdate.php:144
+#: src/Admin/Configurations/MainUpdate.php:146
 msgid "Schema ID:"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Orders.php:97
+#: src/Admin/Columns/WooCommerce/Orders.php:127
 #: src/Admin/Columns/WooCommerce/Products.php:97
 #: src/Admin/Columns/WordPress/MediaLibrary.php:97
 msgid "Configuration ID:"
@@ -146,7 +147,7 @@ msgid "No activity"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:144
-msgid "An initial setup is required."
+msgid "An initial configuration setup is required."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:149
@@ -154,25 +155,32 @@ msgid "All configuration algorithms are active."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:154
-msgid "All configuration algorithms are disabled."
+msgid ""
+"All configuration algorithms are disabled. Configuration is switched off in "
+"the settings."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:159
-msgid "Data is being exchanged. Changing settings is not recommended."
+msgid ""
+"Data is being exchanged. Changing configuration settings is not recommended."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:164
 msgid ""
-"An error has occurred. You need to look at the event logs, they contain "
-"detailed information."
+"An error has occurred. Should review the event logs for the configuration, "
+"they contain detailed information about the error."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:169
-msgid "Awaiting final removal. All algorithms are disabled."
+msgid "Awaiting final configuration removal. All algorithms are disabled."
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:195 views/tools/item.php:14
-msgid "Open"
+#: src/Admin/Configurations/AllTable.php:172
+msgid "Status description"
+msgstr ""
+
+#: src/Admin/Configurations/AllTable.php:195
+msgid "Open configuration"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:196
@@ -184,12 +192,12 @@ msgid "Remove forever"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:214
-msgid "User: "
+#: src/Admin/Configurations/AllTable.php:218
+msgid "User:"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:218
-#: src/Admin/Configurations/MainUpdate.php:160
-msgid "User is not exists."
+msgid "user is not exists."
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:224
@@ -209,7 +217,7 @@ msgid "%s ago"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:240
-msgid "in"
+msgid "at"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:250
@@ -229,7 +237,7 @@ msgid "Base information"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:311
-#: src/Admin/Configurations/MainUpdate.php:148
+#: src/Admin/Configurations/MainUpdate.php:150
 #: src/Admin/Configurations/UpdateForm.php:42
 #: src/Admin/Settings/ActivationForm.php:159
 msgid "Status"
@@ -252,88 +260,100 @@ msgid "Search"
 msgstr ""
 
 #: src/Admin/Configurations/CreateForm.php:42
-#: src/Admin/Configurations/Update.php:136
-msgid "Configuration name"
+msgid "Name of the configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:44
+#: src/Admin/Configurations/CreateForm.php:47
 msgid "Enter any data up to 255 characters."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:72
+#: src/Admin/Configurations/CreateForm.php:48
+msgid ""
+"The name is used to quickly distinguish between multiple configurations that "
+"have been created."
+msgstr ""
+
+#: src/Admin/Configurations/CreateForm.php:49
+msgid ""
+"Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. "
+"Update prices and stocks, etc."
+msgstr ""
+
+#: src/Admin/Configurations/CreateForm.php:78
 msgid "Configuration schema"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:137
+#: src/Admin/Configurations/CreateForm.php:143
 msgid "Identifier:"
 msgstr ""
 
 #: src/Admin/Configurations/CreateForm.php:187
-msgid "Configuration create error. Please retry."
+msgid "Configuration creating error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:227
-msgid "Configuration create error. Name is required."
+#: src/Admin/Configurations/CreateForm.php:235
+msgid "Configuration creating error. Name is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:240
-msgid "Configuration create error. Schema is required."
+#: src/Admin/Configurations/CreateForm.php:252
+msgid "Configuration creating error. Schema select is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:257
-msgid "Configuration create error. Name is exists."
+#: src/Admin/Configurations/CreateForm.php:273
+msgid "Configuration creating error. Name is exists."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:274
-msgid "Configuration create success. Configuration id: "
+#: src/Admin/Configurations/CreateForm.php:294
+msgid "Configuration creating is complete. Configuration ID:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:275
+#: src/Admin/Configurations/CreateForm.php:300
 msgid "edit configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:287
-msgid "Configuration create error. Please retry saving or change fields."
+#: src/Admin/Configurations/CreateForm.php:310
+msgid "Configuration creating error. Please try saving again or change fields."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:55
+#: src/Admin/Configurations/Delete.php:56
 msgid "Error. The configuration to be deleted is active and cannot be deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:108
+#: src/Admin/Configurations/Delete.php:109
 msgid "The configuration has been marked as deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:118
+#: src/Admin/Configurations/Delete.php:119
 msgid "The configuration has been successfully deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:125
-msgid "Deleting error. Please retry again."
+#: src/Admin/Configurations/Delete.php:126
+msgid "Configuration deleting error. Please retry again."
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:38
+#: src/Admin/Configurations/DeleteForm.php:37
 msgid "Delete confirmation"
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:42
+#: src/Admin/Configurations/DeleteForm.php:41
 msgid ""
 "I confirm that Configuration will be permanently and irrevocably deleted "
 "from WooCommerce."
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:43
+#: src/Admin/Configurations/DeleteForm.php:42
 msgid ""
 "The directory with files for configuration from the FILE system will be "
 "completely removed."
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:84
-msgid "Delete error. Please retry."
+#: src/Admin/Configurations/DeleteForm.php:77
+msgid "Configuration deleting error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:126
-msgid "Delete error. Confirmation of final deletion is required."
+#: src/Admin/Configurations/DeleteForm.php:125
+msgid ""
+"Configuration deleting error. Confirmation of final deletion is required."
 msgstr ""
 
 #: src/Admin/Configurations/MainUpdate.php:74
@@ -344,77 +364,77 @@ msgstr ""
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:110
+#: src/Admin/Configurations/MainUpdate.php:112
 msgid "Debug is enabled!"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:112
+#: src/Admin/Configurations/MainUpdate.php:114
 msgid ""
 "The current configuration has debug mode enabled. You must disable this mode "
 "after debugging is complete."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:121
+#: src/Admin/Configurations/MainUpdate.php:123
 msgid "Info is enabled!"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:123
+#: src/Admin/Configurations/MainUpdate.php:125
 msgid ""
 "The extended information recording mode is enabled for the current "
 "configuration. It is recommended to disable this mode after debugging is "
 "complete."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:135
+#: src/Admin/Configurations/MainUpdate.php:137
 msgid "About configuration"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:141 views/extensions/item.php:20
+#: src/Admin/Configurations/MainUpdate.php:143 views/extensions/item.php:20
 msgid "ID:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:156
+#: src/Admin/Configurations/MainUpdate.php:158
 msgid "Owner:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:165
+#: src/Admin/Configurations/MainUpdate.php:162
+msgid "User is not exists."
+msgstr ""
+
+#: src/Admin/Configurations/MainUpdate.php:167
 msgid "Date active:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:169
-#: src/Admin/Configurations/MainUpdate.php:179
-#: src/Admin/Configurations/MainUpdate.php:188
+#: src/Admin/Configurations/MainUpdate.php:171
+#: src/Admin/Configurations/MainUpdate.php:181
+#: src/Admin/Configurations/MainUpdate.php:190
 #, php-format
 msgctxt "%s = human-readable time difference"
 msgid " (%s ago)."
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:175
+#: src/Admin/Configurations/MainUpdate.php:177
 msgid "Date create:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:184
+#: src/Admin/Configurations/MainUpdate.php:186
 msgid "Date modify:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:194
+#: src/Admin/Configurations/MainUpdate.php:196
 msgid "Directory:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:206
+#: src/Admin/Configurations/MainUpdate.php:208
 msgid "Directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:218
+#: src/Admin/Configurations/MainUpdate.php:220
 msgid "Logs directory size:"
 msgstr ""
 
-#: src/Admin/Configurations/MainUpdate.php:233
+#: src/Admin/Configurations/MainUpdate.php:235
 msgid "About schema"
-msgstr ""
-
-#: src/Admin/Configurations/Update.php:35 src/Admin/Settings.php:48
-msgid "Main"
 msgstr ""
 
 #: src/Admin/Configurations/Update.php:42
@@ -423,29 +443,33 @@ msgstr ""
 
 #: src/Admin/Configurations/Update.php:93
 msgid ""
-"The exchange scheme on the basis of which created configuration is "
-"unavailable ."
+"The exchange schema based on which the configuration was created is not "
+"available."
 msgstr ""
 
 #: src/Admin/Configurations/Update.php:95
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
-"name, or delete the configuration."
+"name or delete the configuration."
+msgstr ""
+
+#: src/Admin/Configurations/Update.php:136
+msgid "Configuration name"
 msgstr ""
 
 #: src/Admin/Configurations/Update.php:138
 msgid "Used for convenient distribution of multiple configurations."
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:141
+#: src/Admin/Configurations/Update.php:142
 msgid "Rename"
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:170
+#: src/Admin/Configurations/Update.php:171
 msgid "Configuration name update success."
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:180
+#: src/Admin/Configurations/Update.php:181
 msgid "Configuration name update error. Please retry saving or change fields."
 msgstr ""
 
@@ -480,6 +504,10 @@ msgstr ""
 msgid "Not a feature?"
 msgstr ""
 
+#: src/Admin/Settings.php:48
+msgid "Main"
+msgstr ""
+
 #: src/Admin/Settings.php:62 src/Schemas/Productscleanercml/Admin.php:291
 #: src/Schemas/Productscml/Admin.php:1909
 msgid "Event logs"
@@ -493,7 +521,7 @@ msgstr ""
 msgid "Connection to the WC1C"
 msgstr ""
 
-#: src/Admin/Settings/ActivationForm.php:50 src/Admin/Settings/Form.php:75
+#: src/Admin/Settings/ActivationForm.php:50
 msgid "Save error. Please retry."
 msgstr ""
 
@@ -541,57 +569,67 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:106
+#: src/Admin/Settings/ConnectionForm.php:107
 #, php-format
 msgid ""
 "The user with the login %s on the site %s successfully connected to the "
 "current site."
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:128
+#: src/Admin/Settings/ConnectionForm.php:129
 #, php-format
 msgid ""
 "Error connecting user with login %s on site %s to the current site. Please "
 "try again later."
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:160
+#: src/Admin/Settings/ConnectionForm.php:161
 msgid "Connection error. Please retry."
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:182
+#: src/Admin/Settings/ConnectionForm.php:183
 msgid "Disconnect successful. Reconnect is available"
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:208
+#: src/Admin/Settings/ConnectionForm.php:209
 msgid "Site is connected to WC1C"
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:210
+#: src/Admin/Settings/ConnectionForm.php:211
 msgid "To create a new connection, need to disconnect the current connection."
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:215
-msgid "Login"
+#: src/Admin/Settings/ConnectionForm.php:216
+#: src/Schemas/Productscleanercml/Admin.php:95
+#: src/Schemas/Productscml/Admin.php:98
+msgid "Username"
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:217
+#: src/Admin/Settings/ConnectionForm.php:218
 msgid "Connected login from the WC1C website."
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:225
+#: src/Admin/Settings/ConnectionForm.php:226
 msgid "App token"
 msgstr ""
 
-#: src/Admin/Settings/ConnectionForm.php:227
+#: src/Admin/Settings/ConnectionForm.php:228
 msgid ""
 "The current application token for the user. This token can be revoked in "
 "your personal account on the WC1C website, as well as by clicking the "
 "Disconnect button."
 msgstr ""
 
-#: src/Admin/Settings/Form.php:130
-msgid "Save success."
+#: src/Admin/Settings/Form.php:69
+msgid "Saving settings."
+msgstr ""
+
+#: src/Admin/Settings/Form.php:71
+msgid "The settings have not been saved."
+msgstr ""
+
+#: src/Admin/Settings/Form.php:138
+msgid "The settings have been successfully saved."
 msgstr ""
 
 #: src/Admin/Settings/InterfaceForm.php:40
@@ -693,72 +731,115 @@ msgstr ""
 msgid "Level for main events"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:43
-#: src/Schemas/Productscleanercml/Admin.php:300
-#: src/Schemas/Productscml/Admin.php:1918
+#: src/Admin/Settings/LogsForm.php:46
 msgid ""
-"All events of the selected level will be recorded in the log file. The "
-"higher the level, the less data is recorded."
+"Events of the selected level will be recorded in the log file. The bigger "
+"the level (numbers), the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
-#: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
-#: src/Admin/Settings/LogsForm.php:140
+#: src/Admin/Settings/LogsForm.php:47
+msgid ""
+"If the plugin is stable, you will need to use at least the NOTICE level "
+"(250), otherwise the event logs will become very large."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:63
+#: src/Admin/Settings/LogsForm.php:120 src/Admin/Settings/LogsForm.php:142
+#: src/Admin/Settings/LogsForm.php:164 src/Admin/Settings/LogsForm.php:186
 #: src/Schemas/Productscleanercml/Admin.php:305
 #: src/Schemas/Productscml/Admin.php:1923
 msgid "DEBUG (100)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
-#: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/LogsForm.php:141
+#: src/Admin/Settings/LogsForm.php:49
+msgid ""
+"Data from the algorithm development process with debugging information. It "
+"is used by administrators in case of some unclear errors in the process of "
+"plugin operation."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:64
+#: src/Admin/Settings/LogsForm.php:121 src/Admin/Settings/LogsForm.php:143
+#: src/Admin/Settings/LogsForm.php:165 src/Admin/Settings/LogsForm.php:187
 #: src/Schemas/Productscleanercml/Admin.php:306
 #: src/Schemas/Productscml/Admin.php:1924
 msgid "INFO (200)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
-#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
-#: src/Admin/Settings/LogsForm.php:142
+#: src/Admin/Settings/LogsForm.php:51
+msgid ""
+"Data from the algorithm development process, but without debugging "
+"information. In this mode, less data is written than in debugging mode, but "
+"still a lot."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:52 src/Admin/Settings/LogsForm.php:65
+#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:144
+#: src/Admin/Settings/LogsForm.php:166 src/Admin/Settings/LogsForm.php:188
 #: src/Schemas/Productscleanercml/Admin.php:307
 #: src/Schemas/Productscml/Admin.php:1925
 msgid "NOTICE (250)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
-#: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
-#: src/Admin/Settings/LogsForm.php:143
+#: src/Admin/Settings/LogsForm.php:53
+msgid ""
+"This mode records events that notify of situations that you need to be aware "
+"of. For example, when changing settings or renaming a product during data "
+"exchange."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:54 src/Admin/Settings/LogsForm.php:66
+#: src/Admin/Settings/LogsForm.php:123 src/Admin/Settings/LogsForm.php:145
+#: src/Admin/Settings/LogsForm.php:167 src/Admin/Settings/LogsForm.php:189
 #: src/Schemas/Productscleanercml/Admin.php:308
 #: src/Schemas/Productscml/Admin.php:1926
 msgid "WARNING (300)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
-#: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
-#: src/Admin/Settings/LogsForm.php:144
+#: src/Admin/Settings/LogsForm.php:55
+msgid ""
+"Recording warnings that occur during operation. Warnings are worth "
+"investigating and taking into account, but they are not errors."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:56 src/Admin/Settings/LogsForm.php:67
+#: src/Admin/Settings/LogsForm.php:124 src/Admin/Settings/LogsForm.php:146
+#: src/Admin/Settings/LogsForm.php:168 src/Admin/Settings/LogsForm.php:190
 #: src/Schemas/Productscleanercml/Admin.php:309
 #: src/Schemas/Productscml/Admin.php:1927
 msgid "ERROR (400)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:57
+msgid ""
+"Will be recorded only data on errors occurring during the processing of "
+"plugin algorithms."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:58
+msgid ""
+"Event logs always record data about critical errors in the code, regardless "
+"of the level configured."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:73
 #: src/Schemas/Productscleanercml/Admin.php:315
 #: src/Schemas/Productscml/Admin.php:1933
 msgid "Maximum files"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:59
+#: src/Admin/Settings/LogsForm.php:75
 #: src/Schemas/Productscleanercml/Admin.php:317
 msgid ""
 "Log files created daily. This option on the maximum number of stored files. "
 "By default saved of the logs are for the last 30 days."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:66
+#: src/Admin/Settings/LogsForm.php:82
 msgid "Output on display"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:68
+#: src/Admin/Settings/LogsForm.php:84
 #: src/Schemas/Productscleanercml/Admin.php:170
 #: src/Schemas/Productscml/Admin.php:173 src/Schemas/Productscml/Admin.php:210
 #: src/Schemas/Productscml/Admin.php:291 src/Schemas/Productscml/Admin.php:305
@@ -778,55 +859,91 @@ msgstr ""
 msgid "Check the box if you want to enable this feature. Disabled by default."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:69
-msgid "All entries in the event logs will be displayed."
+#: src/Admin/Settings/LogsForm.php:88
+msgid "All entries event logs will be displayed on the screen."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:75
+#: src/Admin/Settings/LogsForm.php:89
+msgid ""
+"It is used only by developers. If enable this setting just for fun, 1C will "
+"not be able to connect to the site."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:96
 msgid "Levels by context"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:77
+#: src/Admin/Settings/LogsForm.php:101
 msgid "Event log settings based on context."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:82 src/Admin/Settings/MainForm.php:140
+#: src/Admin/Settings/LogsForm.php:102
+msgid "Logical distribution of event logs into contexts for flexible analysis."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/MainForm.php:140
 msgid "Receiver"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:84
+#: src/Admin/Settings/LogsForm.php:113
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
-#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
+#: src/Admin/Settings/LogsForm.php:114
+msgid ""
+"It is convenient to use for debugging missing requests from 1C to the site "
+"in case need to understand on which side there is a problem with the "
+"connection."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:119 src/Admin/Settings/LogsForm.php:141
+#: src/Admin/Settings/LogsForm.php:163 src/Admin/Settings/LogsForm.php:185
 #: src/Schemas/Productscleanercml/Admin.php:304
 #: src/Schemas/Productscml/Admin.php:1922
 msgid "Use level for main events"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:101
+#: src/Admin/Settings/LogsForm.php:135
 msgid ""
-"All events of the selected level will be recorded the tools events in the "
-"log file. The higher the level, the less data is recorded."
+"All events of the selected level are recorded in the tools events log file. "
+"The higher the level, the less data is logged."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:116
+#: src/Admin/Settings/LogsForm.php:136
+msgid ""
+"In this context, events are recorded when users work with tools, both global "
+"and for a specific configuration."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:152
 msgid "Schemas"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:118
+#: src/Admin/Settings/LogsForm.php:157
 msgid ""
-"All events of the selected level will be recorded the schemas events in the "
-"log file. The higher the level, the less data is recorded."
+"All events of the selected level are recorded in the events log files for "
+"schemas. The higher the level, the less data is logged."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:135
+#: src/Admin/Settings/LogsForm.php:158
+msgid ""
+"Only events that are processed in the schema algorithms are recorded. If the "
+"events are related to the user configuration, they are not written to schema "
+"events."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:179
 msgid ""
 "All events of the selected level will be recorded the configurations events "
 "in the log file. The higher the level, the less data is recorded."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:180
+msgid ""
+"A personalized event log level can be set on the level of each "
+"configuration. The current value is taken for creating new configurations."
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:45
@@ -947,11 +1064,13 @@ msgid "Completing"
 msgstr ""
 
 #: src/Core.php:81
-msgid "Timer is not loaded."
+msgid ""
+"Timer is not loaded. Further execution of algorithms without a timer is "
+"impossible."
 msgstr ""
 
 #: src/Core.php:91
-msgid "Extensions is not loaded."
+msgid "Extensions is not loaded. Execution continued, but without all plugins."
 msgstr ""
 
 #: src/Core.php:100
@@ -1066,11 +1185,23 @@ msgstr ""
 msgid "Error: This activation code has been blocked."
 msgstr ""
 
-#: src/Core.php:474
+#: src/Core.php:468
+msgid "Receiver loading."
+msgstr ""
+
+#: src/Core.php:476
 msgid "Receiver loading: class is not exists, use is default."
 msgstr ""
 
-#: src/Core.php:501
+#: src/Core.php:487
+msgid "Receiver loading is completed."
+msgstr ""
+
+#: src/Core.php:495
+msgid "Localization loading."
+msgstr ""
+
+#: src/Core.php:507
 msgid "Localization loaded."
 msgstr ""
 
@@ -1082,28 +1213,65 @@ msgstr ""
 msgid "Meta value by name is not available."
 msgstr ""
 
-#: src/Extensions/Core.php:55
-msgid "Extension not found by id."
+#: src/Extensions/Core.php:52 src/Extensions/Core.php:84
+msgid "Initialization of the extension by identifier"
 msgstr ""
 
-#: src/Extensions/Core.php:60
-msgid "Extension is not implementation ExtensionContract. Skipped init."
+#: src/Extensions/Core.php:56
+msgid "Extension not found by identifier."
 msgstr ""
 
-#: src/Extensions/Core.php:75
-msgid "Init extension exception:"
+#: src/Extensions/Core.php:62
+msgid ""
+"Extension is not implementation ExtensionContract. Initialization skipped."
 msgstr ""
 
-#: src/Extensions/Core.php:116
+#: src/Extensions/Core.php:68
+msgid ""
+"The extension has already been initialized previously. Re-initialization is "
+"skipped."
+msgstr ""
+
+#: src/Extensions/Core.php:79
+msgid "The extension threw an exception on initialization"
+msgstr ""
+
+#: src/Extensions/Core.php:84
+msgid "is completed."
+msgstr ""
+
+#: src/Extensions/Core.php:89
+msgid "Initialization of available extensions."
+msgstr ""
+
+#: src/Extensions/Core.php:106
+msgid "Initialization of available extensions is completed."
+msgstr ""
+
+#: src/Extensions/Core.php:126
 msgid "Get extension by id is unavailable."
 msgstr ""
 
 #: src/Extensions/Core.php:140
-msgid "Extensions load error:"
+msgid "Extensions loading."
 msgstr ""
 
 #: src/Extensions/Core.php:144
+msgid ""
+"Extension loading is turned off in global settings. Extension loading is "
+"skipped."
+msgstr ""
+
+#: src/Extensions/Core.php:158
+msgid "Extensions load error:"
+msgstr ""
+
+#: src/Extensions/Core.php:162
 msgid "Extensions load exception:"
+msgstr ""
+
+#: src/Extensions/Core.php:168
+msgid "Extensions loading is completed."
 msgstr ""
 
 #: src/Receiver.php:46 src/Schemas/Productscleanercml/Receiver.php:64
@@ -1156,55 +1324,73 @@ msgstr ""
 msgid "Receiver request is very bad! Action not found."
 msgstr ""
 
-#: src/Schemas/Core.php:51
+#: src/Schemas/Core.php:49
+msgid "Initializing the schema for configuration."
+msgstr ""
+
+#: src/Schemas/Core.php:53
 msgid "$configuration is false"
 msgstr ""
 
-#: src/Schemas/Core.php:61
+#: src/Schemas/Core.php:63
 msgid "$configuration is not exists"
 msgstr ""
 
-#: src/Schemas/Core.php:69
+#: src/Schemas/Core.php:71
 msgid "$configuration is not instanceof Configuration"
 msgstr ""
 
-#: src/Schemas/Core.php:76
+#: src/Schemas/Core.php:78
 msgid "$schemas is not array."
 msgstr ""
 
-#: src/Schemas/Core.php:83
+#: src/Schemas/Core.php:85
 msgid "Schema not found by id:"
 msgstr ""
 
-#: src/Schemas/Core.php:88
+#: src/Schemas/Core.php:90
 msgid "$schemas[$schema_id] is not object"
 msgstr ""
 
-#: src/Schemas/Core.php:95
+#: src/Schemas/Core.php:97
 msgid "Old initialized, $schema_id:"
 msgstr ""
 
-#: src/Schemas/Core.php:100
+#: src/Schemas/Core.php:102
 msgid "Method init not found in schema, $schema_id:"
 msgstr ""
 
-#: src/Schemas/Core.php:120
+#: src/Schemas/Core.php:122
 msgid "Schema is not initialized."
 msgstr ""
 
-#: src/Schemas/Core.php:147
+#: src/Schemas/Core.php:127
+msgid "Initializing the schema for configuration is completed."
+msgstr ""
+
+#: src/Schemas/Core.php:151
 msgid "Schema by ID is unavailable."
 msgstr ""
 
-#: src/Schemas/Core.php:170
-msgid "Schemas loaded."
+#: src/Schemas/Core.php:164
+msgid "Schemas loading."
 msgstr ""
 
-#: src/Schemas/Core.php:197
+#: src/Schemas/Core.php:177
+msgid ""
+"Loading of external schemes is disabled through the settings. Only standard "
+"schemas are loaded."
+msgstr ""
+
+#: src/Schemas/Core.php:180
+msgid "Schemas loading is completed."
+msgstr ""
+
+#: src/Schemas/Core.php:207
 msgid "Schema ProductsCML is not loaded."
 msgstr ""
 
-#: src/Schemas/Core.php:221
+#: src/Schemas/Core.php:231
 msgid "Schema ProductsCleanerCML is not loaded."
 msgstr ""
 
@@ -1237,11 +1423,6 @@ msgstr ""
 msgid ""
 "When copying, you need to get rid of whitespace characters, if they are "
 "present."
-msgstr ""
-
-#: src/Schemas/Productscleanercml/Admin.php:95
-#: src/Schemas/Productscml/Admin.php:98
-msgid "Username"
 msgstr ""
 
 #: src/Schemas/Productscleanercml/Admin.php:99
@@ -1468,6 +1649,13 @@ msgstr ""
 #: src/Schemas/Productscleanercml/Admin.php:298
 #: src/Schemas/Productscml/Admin.php:1916
 msgid "Level for events"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:300
+#: src/Schemas/Productscml/Admin.php:1918
+msgid ""
+"All events of the selected level will be recorded in the log file. The "
+"higher the level, the less data is recorded."
 msgstr ""
 
 #: src/Schemas/Productscleanercml/Core.php:45
@@ -5072,35 +5260,35 @@ msgstr ""
 msgid "Site:"
 msgstr ""
 
-#: views/activation/form.php:38 views/promo/activation.php:61
+#: views/activation/form.php:38 views/promo/activation.php:63
 msgid "No financial opportunity?"
 msgstr ""
 
-#: views/activation/form.php:39 views/promo/activation.php:62
+#: views/activation/form.php:39 views/promo/activation.php:64
 msgid "Take part in the development of the solution you use."
 msgstr ""
 
-#: views/activation/form.php:41 views/promo/activation.php:64
+#: views/activation/form.php:41 views/promo/activation.php:66
 msgid ""
 "Information on how to participate is available in the official documentation "
 "on the official website."
 msgstr ""
 
-#: views/activation/form.php:43 views/promo/activation.php:66
+#: views/activation/form.php:43 views/promo/activation.php:68
 msgid "Docs:"
 msgstr ""
 
-#: views/activation/form.php:47 views/promo/activation.php:70
+#: views/activation/form.php:47 views/promo/activation.php:72
 msgid "Every activation counts!"
 msgstr ""
 
-#: views/activation/form.php:48 views/promo/activation.php:71
+#: views/activation/form.php:48 views/promo/activation.php:73
 msgid ""
 "By activating your project, you let the WC1C team know that the plugin is in "
 "active use."
 msgstr ""
 
-#: views/activation/form.php:50 views/promo/activation.php:73
+#: views/activation/form.php:50 views/promo/activation.php:75
 msgid ""
 "Also, you give a financial opportunity to release compatibility updates and "
 "add new features!"
@@ -5154,15 +5342,38 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: views/configurations/empty.php:7
+#: views/configurations/empty.php:8
+msgid ""
+"To exchange data, at least one configuration must be created and configured."
+msgstr ""
+
+#: views/configurations/empty.php:9
+msgid ""
+"The number of settings and method of data exchange in the configuration "
+"depends on the scheme selected for exchange during creation."
+msgstr ""
+
+#: views/configurations/empty.php:22
 msgid "Configurations by query is not found, query:"
 msgstr ""
 
-#: views/configurations/empty.php:11
-msgid "Configurations not found."
+#: views/configurations/empty.php:26
+msgid "Configurations not found"
 msgstr ""
 
-#: views/configurations/empty.php:16 views/header.php:6
+#: views/configurations/empty.php:36
+msgid ""
+"For flexible exchange distribution, an unlimited number of configurations "
+"can be created."
+msgstr ""
+
+#: views/configurations/empty.php:37
+msgid ""
+"It is recommended to create at least two configurations: 1. To exchange "
+"nomenclature data, 2. To exchange orders data."
+msgstr ""
+
+#: views/configurations/empty.php:40 views/header.php:6
 msgid "New configuration"
 msgstr ""
 
@@ -5186,7 +5397,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: views/configurations/update_schema_error.php:5
+#: views/configurations/update_schema_error.php:6
 msgid "Update is not available."
 msgstr ""
 
@@ -5363,92 +5574,92 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: views/promo/activation.php:6
+#: views/promo/activation.php:8
 msgid "Your copy of the free software has not been activated."
 msgstr ""
 
-#: views/promo/activation.php:7
+#: views/promo/activation.php:9
 msgid ""
 "We recommend that you activate your copy of the free software for stable "
 "updates and better performance."
 msgstr ""
 
-#: views/promo/activation.php:8
+#: views/promo/activation.php:10
 msgid ""
 "After activation, this section will disappear and will no longer be shown."
 msgstr ""
 
-#: views/promo/activation.php:19
+#: views/promo/activation.php:22
 msgid "How to activate?"
 msgstr ""
 
-#: views/promo/activation.php:21
+#: views/promo/activation.php:24
 msgid ""
 "Get an activation code in any available way. For example, on the official "
 "website."
 msgstr ""
 
-#: views/promo/activation.php:22
+#: views/promo/activation.php:25
 msgid "Enter the activation code in the plugin settings."
 msgstr ""
 
-#: views/promo/activation.php:27
+#: views/promo/activation.php:30
 msgid "Why is activation required?"
 msgstr ""
 
-#: views/promo/activation.php:29
+#: views/promo/activation.php:32
 msgid ""
 "You received a copy of the software completely free of charge and you can "
 "use it as is without any activation."
 msgstr ""
 
-#: views/promo/activation.php:30
+#: views/promo/activation.php:33
 msgid ""
 "However, in order to receive timely, as well as necessary updates and "
 "improvements, it is necessary to activate the current environment."
 msgstr ""
 
-#: views/promo/activation.php:33
+#: views/promo/activation.php:36
 msgid ""
 "Activation is vital for the performance of the plugin and its further active "
 "development. Dont ignore activation."
 msgstr ""
 
-#: views/promo/activation.php:34
+#: views/promo/activation.php:37
 msgid "Each activation triggers a mechanism to improve the software you use."
 msgstr ""
 
-#: views/promo/activation.php:37
+#: views/promo/activation.php:40
 msgid ""
 "In addition to supporting the software you use, additional features will be "
 "added."
 msgstr ""
 
-#: views/promo/activation.php:40
+#: views/promo/activation.php:43
 msgid "ATTENTION! Activation does not add the possibility of extensions."
 msgstr ""
 
-#: views/promo/activation.php:42
+#: views/promo/activation.php:45
 msgid ""
 "Additional features are implemented in extensions! After activation, "
 "features from extensions are not activated."
 msgstr ""
 
-#: views/promo/activation.php:43
+#: views/promo/activation.php:46
 msgid ""
 "To add features, you need to install extensions. They are supplied by "
 "separate plugins, after activation of which the necessary features are added."
 msgstr ""
 
-#: views/promo/activation.php:54
+#: views/promo/activation.php:56
 msgid "Do not wait until something breaks!"
 msgstr ""
 
-#: views/promo/activation.php:55
+#: views/promo/activation.php:57
 msgid "Activate your current copy of the software."
 msgstr ""
 
-#: views/promo/activation.php:57
+#: views/promo/activation.php:59
 msgid "Buy code:"
 msgstr ""
 
@@ -5484,6 +5695,10 @@ msgstr ""
 
 #: views/tools/empty.php:5
 msgid "As soon as the tools are installed, they will appear in this section."
+msgstr ""
+
+#: views/tools/item.php:14
+msgid "Open tool"
 msgstr ""
 
 #: views/wizards/error.php:3
@@ -5570,8 +5785,8 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Implementation of a mechanism for flexible exchange of various data between "
-"1C products and the WooCommerce plugin."
+"Implementing a flexible mechanism for exchanging various data between 1C "
+"Company products and the WooCommerce plugin."
 msgstr ""
 
 #. Author of the plugin/theme

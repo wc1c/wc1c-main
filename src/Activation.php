@@ -25,7 +25,7 @@ final class Activation extends \Digiom\Woplucore\Activation
 					'extra_data' => sprintf
 					(
 						'<p>%s <a href="%s">%s</a></p>',
-						__('The basic plugin setup has not been done yet, so you can proceed to the setup, which takes no more than 5 minutes.', 'wc1c-main'),
+						__('The basic plugin setup has not been done yet, so can proceed to the setup, which takes no more than 5 minutes.', 'wc1c-main'),
 						admin_url('admin.php?page=wc1c'),
 						__('Go to setting.', 'wc1c-main')
 					)

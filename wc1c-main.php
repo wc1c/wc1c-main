@@ -2,16 +2,16 @@
 /**
  * Plugin Name: WC1C
  * Plugin URI: https://wordpress.org/plugins/wc1c-main/
- * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and the WooCommerce plugin.
- * Version: 0.22.0
+ * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
+ * Version: 0.23.0
  * WC requires at least: 4.3
- * WC tested up to: 8.0
+ * WC tested up to: 8.7
  * Requires at least: 5.2
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
  * Text Domain: wc1c-main
  * Domain Path: /assets/languages
- * Copyright: WC1C team © 2018-2023
+ * Copyright: WC1C team © 2018-2024
  * Author: WC1C team
  * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
@@ -23,6 +23,7 @@ namespace
 
 	if(version_compare(PHP_VERSION, '7.0') < 0)
 	{
+        trigger_error('Minimal PHP version for used WC1C plugin: 7.0. Please update PHP version.');
 		return false;
 	}
 
@@ -34,11 +35,26 @@ namespace
 
 		if(!is_readable($autoloader))
 		{
-			trigger_error('File is not found: ' . $autoloader);
+			trigger_error(sprintf('%s: %s','File is not found', $autoloader));
 			return false;
 		}
 
 		require_once $autoloader;
+
+        /**
+         * Adds an action to declare compatibility with High Performance Order Storage (HPOS) before WooCommerce initialization.
+         */
+        add_action
+        (
+            'before_woocommerce_init',
+            function()
+            {
+                if(class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class))
+                {
+                    \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', WC1C_PLUGIN_FILE, true);
+                }
+            }
+        );
 
         /**
          * For external use
@@ -69,10 +85,10 @@ namespace Wc1c\Main
 
 	$loader = new \Digiom\Woplucore\Loader();
 
+    $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
+
 	try
 	{
-		$loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
-
 		$loader->register(__FILE__);
 
 		$loader->registerActivation([Activation::class, 'instance']);

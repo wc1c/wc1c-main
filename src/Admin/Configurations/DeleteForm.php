@@ -2,7 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Abstracts\FormAbstract;
 
 /**
@@ -75,15 +74,19 @@ class DeleteForm extends FormAbstract
 			return false;
 		}
 
+        $message = __('Configuration deleting error. Please retry.', 'wc1c-main');
+
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce-configurations-delete'], 'wc1c-admin-configurations-delete-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Delete error. Please retry.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -101,7 +104,7 @@ class DeleteForm extends FormAbstract
 			{
 				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->admin()->notices()->create
 				(
@@ -119,13 +122,17 @@ class DeleteForm extends FormAbstract
 
 		if(!isset($data['accept']) || $data['accept'] !== 'yes')
 		{
+            $message = __('Configuration deleting error. Confirmation of final deletion is required.', 'wc1c-main');
+
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Delete error. Confirmation of final deletion is required.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			return false;
 		}

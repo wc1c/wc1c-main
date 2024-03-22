@@ -21,18 +21,18 @@
             <?php do_action('wc1c_admin_configurations_create_sidebar_before_show'); ?>
 
             <div class="card border-0 mt-0 p-0 mb-2 w-100" style="max-width: 100%;">
-                <div class="card-body p-3">
+                <div class="card-body p-3 fs-6">
                     <?php _e('Enter a name for the new configuration, select a scheme, and click the create configuration button.', 'wc1c-main'); ?>
                 </div>
                 <div class="card-footer p-3">
                     <p class="submit p-0 m-0">
-                        <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Create configuration', 'wc1c-main'); ?>">
+                        <input type="submit" name="submit" id="submit" class="button button-primary w-100 p-1 fs-6" value="<?php _e('Create configuration', 'wc1c-main'); ?>">
                     </p>
                 </div>
             </div>
 
             <div class="alert alert-primary border-0">
-                <h4 class="alert-heading mt-0 mb-1"><?php _e('More schemas for configurations', 'wc1c-main'); ?></h4>
+                <h4 class="alert-heading mt-0 mb-1 fs-6"><?php _e('More schemas for configurations', 'wc1c-main'); ?></h4>
 		        <?php _e('Additional schemes are available in extensions on the official website.', 'wc1c-main'); ?>
                 <br/>
                 <?php _e('Each exchange scheme has a unique algorithm of operation and purpose. You need to choose only the scheme you need.', 'wc1c-main'); ?>

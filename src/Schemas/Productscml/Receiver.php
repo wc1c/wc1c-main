@@ -49,13 +49,13 @@ final class Receiver extends ReceiverAbstract
 	 */
 	public function handler()
 	{
-		$this->core()->log()->info(__('Received new request for Receiver.', 'wc1c-main'));
+		$this->core()->log()->info(__('Received new request from 1C for Receiver.', 'wc1c-main'));
 
 		$mode_and_type = $this->detectModeAndType();
 		$mode = $mode_and_type['mode'];
 		$type = $mode_and_type['type'];
 
-		$this->core()->log()->debug(__('Received request params.', 'wc1c-main'), ['type' => $type, 'mode=' => $mode]);
+		$this->core()->log()->debug(__('The resulting query parameters.', 'wc1c-main'), ['type' => $type, 'mode=' => $mode]);
 
         $this->core()->configuration()->addMetaData('_receiver_mode', $mode, true);
         $this->core()->configuration()->addMetaData('_receiver_type', $type, true);
@@ -101,6 +101,7 @@ final class Receiver extends ReceiverAbstract
 		$response_description = __('Action is not found in schema.', 'wc1c-main');
 
 		$this->core()->log()->warning($response_description);
+
 		$this->sendResponseByType($this->core()->getOptions('response_unknown_action', 'failure'), $response_description);
 	}
 
@@ -111,7 +112,7 @@ final class Receiver extends ReceiverAbstract
 	 */
 	public function handlerCatalogModeComplete()
 	{
-        $this->core()->log()->info(__('Sending a successful completion of the exchange in 1C.', 'wc1c-main'));
+        $this->core()->log()->notice(__('Sending a successful completion of the exchange in 1C.', 'wc1c-main'));
 
         $this->sendResponseByType('success');
 	}
@@ -127,7 +128,7 @@ final class Receiver extends ReceiverAbstract
         {
             $timestamp = (int)$_GET['timestamp'];
 
-            $this->core()->log()->notice(__('The time of the last full exchange has been set.', 'wc1c-main'));
+            $this->core()->log()->notice(__('The time of the last full exchange has been set.', 'wc1c-main'), ['timestamp' => $timestamp]);
 
             $this->core()->configuration()->addMetaData('_catalog_full_time', $timestamp, true);
             $this->core()->configuration()->saveMetaData();
@@ -172,8 +173,6 @@ final class Receiver extends ReceiverAbstract
 			$description = apply_filters('wc1c_schema_productscml_receiver_send_response_by_type_description', $description, $this, $type);
 		}
 
-		$this->core()->log()->info(sprintf('%s %s.', __('In 1C was send a response of the type:', 'wc1c-main'),  $type), ['type' => $type]);
-
 		$headers= [];
 		$headers['Content-Type'] = 'Content-Type: text/plain; charset=utf-8';
 
@@ -182,15 +181,17 @@ final class Receiver extends ReceiverAbstract
 			$headers = apply_filters('wc1c_schema_productscml_receiver_send_response_by_type_headers', $headers, $this, $type);
 		}
 
-		$this->core()->log()->debug(__('Headers for response.', 'wc1c-main'), ['context' => $headers]);
-
         if(!headers_sent())
         {
+            $this->core()->log()->debug(__('Headers for response.', 'wc1c-main'), ['context' => $headers]);
+
             foreach($headers as $header)
             {
                 header($header);
             }
         }
+
+        $this->core()->log()->info(sprintf('%s %s.', __('In 1C was send a response of the type:', 'wc1c-main'),  $type), ['type' => $type]);
 
 		switch($type)
 		{
@@ -281,7 +282,8 @@ final class Receiver extends ReceiverAbstract
 			{
                 $message = __('Not a valid username.', 'wc1c-main');
 
-				$this->core()->log()->notice($message);
+				$this->core()->log()->warning($message);
+
 				$this->sendResponseByType('failure', $message);
 			}
 
@@ -289,7 +291,8 @@ final class Receiver extends ReceiverAbstract
 			{
                 $message = __('Not a valid user password.', 'wc1c-main');
 
-				$this->core()->log()->notice($message);
+				$this->core()->log()->warning($message);
+
 				$this->sendResponseByType('failure', $message);
 			}
 		}
@@ -308,9 +311,10 @@ final class Receiver extends ReceiverAbstract
 
 		$this->core()->configuration()->addMetaData('session_name', maybe_serialize($session_name), true);
 		$this->core()->configuration()->addMetaData('session_id', maybe_serialize($session_id), true);
+
 		$this->core()->configuration()->saveMetaData();
 
-		$this->core()->log()->debug(__('Request authorization from 1C successfully completed.', 'wc1c-main'), ['session_name' => $session_name, 'session_id' => $session_id]);
+		$this->core()->log()->info(__('1C authorization has been successfully passed.', 'wc1c-main'), ['session_name' => $session_name, 'session_id' => $session_id]);
 
 		$lines['success'] = 'success' . PHP_EOL;
 		$lines['session_name'] = $session_name . PHP_EOL;
@@ -324,7 +328,13 @@ final class Receiver extends ReceiverAbstract
 			$lines = apply_filters('wc1c_schema_productscml_handler_checkauth_lines', $lines);
 		}
 
-		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c-main'), ['data' => $lines]);
+		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c-main'), $lines);
+
+        if($this->core()->configuration()->isStatus('processing'))
+        {
+            $this->core()->configuration()->setStatus('active');
+            $this->core()->configuration()->save();
+        }
 
 		foreach($lines as $line)
 		{
@@ -411,7 +421,7 @@ final class Receiver extends ReceiverAbstract
 		{
 			session_id($session_id);
 
-			$this->core()->log()->info(__('PHP session none, restart last PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
+			$this->core()->log()->debug(__('PHP session none, restart last PHP session.', 'wc1c-main'), ['session_id' => $session_id]);
 			session_start();
 		}
 
@@ -433,13 +443,14 @@ final class Receiver extends ReceiverAbstract
 
 		if(wc1c()->filesystem()->cleanDirectory($directory))
 		{
-			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c-main'), ['directory' => $this->core()->getUploadDirectory()]);
+			$this->core()->log()->notice(__('Cleaning the directory for temporary files as completed.', 'wc1c-main'), ['directory' => $this->core()->getUploadDirectory()]);
 		}
 		else
 		{
-			$error = __('Failed to clear the temp directory of old files.', 'wc1c-main');
+			$error = __('Cleaning the directory for temporary files as failed.', 'wc1c-main');
 
 			$this->core()->log()->error($error, ['directory' => $directory]);
+
 			$this->sendResponseByType('failure', $error);
 		}
 	}
@@ -454,10 +465,12 @@ final class Receiver extends ReceiverAbstract
 		if(has_filter('wc1c_schema_productscml_handler_catalog_mode_init_session'))
 		{
 			$_SESSION = apply_filters('wc1c_schema_productscml_handler_catalog_mode_init_session', $_SESSION, $this);
-			$this->core()->log()->debug(__('Session for receiving requests is changed by external algorithms.', 'wc1c-main'), ['session'=> $_SESSION]);
+
+			$this->core()->log()->info(__('Session for receiving requests is changed by external algorithms.', 'wc1c-main'), ['session'=> $_SESSION]);
 		}
 
 		$directory = $this->core()->getUploadDirectory();
+
 		$this->core()->log()->info(__('Check the directory for temporary files.', 'wc1c-main'), ['directory' => $directory]);
 
 		wc1c()->filesystem()->ensureDirectoryExists($directory);
@@ -467,6 +480,7 @@ final class Receiver extends ReceiverAbstract
 			$error = __('Failed to check the temp directory.', 'wc1c-main');
 
 			$this->core()->log()->error($error, ['directory' => $directory]);
+
 			$this->sendResponseByType('failure', $error);
 		}
 		else
@@ -543,6 +557,7 @@ final class Receiver extends ReceiverAbstract
 			$response_description = sprintf('%s %s', __('Directory is unavailable:', 'wc1c-main'), $upload_directory);
 
 			$this->core()->log()->error($response_description, ['directory' => $upload_directory]);
+
 			$this->sendResponseByType('failure', $response_description);
 		}
 
@@ -558,12 +573,13 @@ final class Receiver extends ReceiverAbstract
 			$response_description = __('Filename is empty.', 'wc1c-main');
 
 			$this->core()->log()->error($response_description);
+
 			$this->sendResponseByType('failure', $response_description);
 		}
 
 		$upload_file_path = wp_normalize_path($upload_directory . $filename);
 
-		$this->core()->log()->info(sprintf('%s %s', __('Saving data to a file named:', 'wc1c-main'), $filename), ['file_path' => $upload_file_path]);
+		$this->core()->log()->info(sprintf('%s %s', __('Writing data to a file named:', 'wc1c-main'), $filename), ['file_path' => $upload_file_path]);
 
 		if(strpos($filename, 'import_files') !== false)
 		{
@@ -619,7 +635,7 @@ final class Receiver extends ReceiverAbstract
 			{
 				if('yes' !== $this->core()->getOptions('media_library', 'no'))
 				{
-					$this->core()->log()->notice(__('The file was not saved to the media library. Adding is disabled in the settings.', 'wc1c-main'));
+					$this->core()->log()->warning(__('The file was not saved to the media library. Adding is disabled in the settings.', 'wc1c-main'));
 				}
 				else
 				{
@@ -640,9 +656,16 @@ final class Receiver extends ReceiverAbstract
                         if($image_current)
                         {
                             $current_file_extension = $image_current->getMeta('_wc1c_external_image_extension', true);
-                            $current_file_extension = reset($current_file_extension);
+                            if(is_array($current_file_extension))
+                            {
+                                $current_file_extension = reset($current_file_extension);
+                            }
+
                             $current_file_hash = $image_current->getMeta('_wc1c_external_hash', true);
-                            $current_file_hash = reset($current_file_hash);
+                            if(is_array($current_file_hash))
+                            {
+                                $current_file_hash = reset($current_file_hash);
+                            }
 
                             if(!empty($current_file_extension) && $current_file_extension !== $file_extension)
                             {
@@ -704,6 +727,7 @@ final class Receiver extends ReceiverAbstract
 			}
 
 			$this->core()->log()->info($response_description, ['file_size' => $file_size]);
+
 			$this->sendResponseByType('success', $response_description);
 			return;
 		}
@@ -719,9 +743,9 @@ final class Receiver extends ReceiverAbstract
 	 */
 	public function handlerCatalogModeImport()
 	{
-		$this->core()->log()->info(__('On request from 1C - started importing data from a file.', 'wc1c-main'));
-
 		$filename = wc1c()->getVar($_GET['filename'], '');
+
+        $this->core()->log()->notice(__('On request from 1C - started importing data from a file.', 'wc1c-main'), ['file' => $filename]);
 
 		if($filename === '')
 		{
@@ -749,15 +773,16 @@ final class Receiver extends ReceiverAbstract
 			{
 				$response_description = __('Import of data from file completed successfully.', 'wc1c-main');
 
-                $this->core()->log()->info($response_description, ['file_name' => $filename, 'file_path' => $file]);
+                $this->core()->log()->notice($response_description, ['file_name' => $filename, 'file_path' => $file]);
 				$this->sendResponseByType('success', $response_description);
 			}
 		}
 		catch(\Throwable $e)
 		{
-			$response_description = __('Importing data from a file ended with an error:', 'wc1c-main') . ' ' . $e->getMessage();
+			$response_description = sprintf('%s %s', __('Importing data from a file ended with an error:', 'wc1c-main'), $e->getMessage());
 
             $this->core()->log()->error($response_description, ['exception' => $e]);
+
 			$this->sendResponseByType('failure', $response_description);
 		}
 

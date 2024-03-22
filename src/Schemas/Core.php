@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Data\Entities\Configuration;
+use Wc1c\Main\Configuration;
 use Wc1c\Main\Data\Storage;
 use Wc1c\Main\Data\Storages\ConfigurationsStorage;
 use Wc1c\Main\Exceptions\Exception;
@@ -46,6 +46,8 @@ final class Core
 	 */
 	public function init($configuration): SchemaContract
 	{
+        wc1c()->log()->debug(__('Initializing the schema for configuration.', 'wc1c-main'));
+
 		if(false === $configuration)
 		{
 			throw new Exception(__('$configuration is false', 'wc1c-main'));
@@ -102,15 +104,15 @@ final class Core
 
 		$current_configuration_id = $configuration->getId();
 
-		$init_schema->setPrefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
+		$init_schema->setPrefix(wc1c()->context()->getSlug() . '_prefix_' . $schema_id . '_' . $current_configuration_id);
 		$init_schema->setConfiguration($configuration);
-		$init_schema->setConfigurationPrefix('wc1c_configuration_' . $current_configuration_id);
+		$init_schema->setConfigurationPrefix(wc1c()->context()->getSlug() . '_configuration_' . $current_configuration_id);
 
 		try
 		{
 			$init_schema_result = $init_schema->init();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			throw new Exception($e->getMessage());
 		}
@@ -121,6 +123,8 @@ final class Core
 		}
 
 		$init_schema->setInitialized(true);
+
+        wc1c()->log()->debug(__('Initializing the schema for configuration is completed.', 'wc1c-main'), ['configuration_id' => $current_configuration_id, 'schema_id' => $schema_id]);
 
 		return $init_schema;
 	}
@@ -157,23 +161,29 @@ final class Core
 	 */
 	public function load()
 	{
-		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
-		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
+        wc1c()->log()->debug(__('Schemas loading.', 'wc1c-main'));
 
-		$schemas = apply_filters('wc1c_default_schemas_loading', []);
+		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
+		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
+
+		$schemas = apply_filters(wc1c()->context()->getSlug() . '_default_schemas_loading', []);
 
 		if('yes' === wc1c()->settings()->get('extensions_schemas', 'yes'))
 		{
-			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
+			$schemas = apply_filters(wc1c()->context()->getSlug() . '_schemas_loading', $schemas);
 		}
+        else
+        {
+            wc1c()->log()->info(__('Loading of external schemes is disabled through the settings. Only standard schemas are loaded.', 'wc1c-main'));
+        }
 
-		wc1c()->log()->debug(__('Schemas loaded.', 'wc1c-main'), ['schemas' => $schemas]);
+		wc1c()->log()->debug(__('Schemas loading is completed.', 'wc1c-main'), ['schemas' => $schemas]);
 
 		try
 		{
 			$this->set($schemas);
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			throw new RuntimeException($e->getMessage());
 		}
@@ -192,7 +202,7 @@ final class Core
 		{
 			$schema = new Productscml\Core();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('schemas')->error(__('Schema ProductsCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return $schemas;
@@ -216,7 +226,7 @@ final class Core
 		{
 			$schema = new Productscleanercml\Core();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->log('schemas')->error(__('Schema ProductsCleanerCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
 			return $schemas;

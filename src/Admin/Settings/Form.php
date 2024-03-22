@@ -66,15 +66,21 @@ abstract class Form extends FormAbstract
 			return false;
 		}
 
-		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
+        wc1c()->log()->info(__('Saving settings.', 'wc1c-main'));
+
+        $message = __('The settings have not been saved.', 'wc1c-main');
+
+        if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
-					'data' => __('Save error. Please retry.', 'wc1c-main')
+					'data' => $message
 				]
 			);
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
 			return false;
 		}
@@ -93,7 +99,7 @@ abstract class Form extends FormAbstract
 			{
 				$this->saved_data[$key] = $this->getFieldValue($key, $field, $post_data);
 			}
-			catch(Exception $e)
+			catch(\Throwable $e)
 			{
 				wc1c()->admin()->notices()->create
 				(
@@ -102,15 +108,19 @@ abstract class Form extends FormAbstract
 						'data' => $e->getMessage()
 					]
 				);
+
+                wc1c()->log()->error($message, ['user_id' => get_current_user_id(), 'exception' => $e, 'form_id' => $this->getId()]);
 			}
 		}
 
-		try
+        $saved_data = $this->getSavedData();
+
+        try
 		{
-			$this->getSettings()->set($this->getSavedData());
+			$this->getSettings()->set($saved_data);
 			$this->getSettings()->save();
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			wc1c()->admin()->notices()->create
 			(
@@ -120,16 +130,22 @@ abstract class Form extends FormAbstract
 				]
 			);
 
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'exception' => $e, 'form_id' => $this->getId()]);
+
 			return false;
 		}
+
+        $message = __('The settings have been successfully saved.', 'wc1c-main');
 
 		wc1c()->admin()->notices()->create
 		(
 			[
 				'type' => 'update',
-				'data' => __('Save success.', 'wc1c-main')
+				'data' => $message
 			]
 		);
+
+        wc1c()->log()->notice($message, ['user_id' => get_current_user_id(), 'data' => $saved_data, 'form_id' => $this->getId()]);
 
 		return true;
 	}

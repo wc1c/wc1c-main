@@ -68,7 +68,7 @@ final class Core extends CoreAbstract
 	public function init()
 	{
 		// hook
-		do_action('wc1c_before_init');
+		do_action($this->context()->getSlug() . '_before_init');
 
 		$this->localization();
 
@@ -78,7 +78,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Timer is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->emergency(__('Timer is not loaded. Further execution of algorithms without a timer is impossible.', 'wc1c-main'), ['exception' => $e]);
 			return;
 		}
 
@@ -88,7 +88,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Extensions is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions is not loaded. Execution continued, but without all plugins.', 'wc1c-main'), ['exception' => $e]);
 		}
 
 		try
@@ -143,7 +143,7 @@ final class Core extends CoreAbstract
 		}
 
 		// hook
-		do_action('wc1c_after_init');
+		do_action($this->context()->getSlug() . '_after_init');
 	}
 
 	/**
@@ -206,21 +206,28 @@ final class Core extends CoreAbstract
 		return Tools\Core::instance();
 	}
 
-	/**
-	 * Logger
-	 *
-	 * @param string $channel
-	 * @param string $name
-	 * @param mixed $hard_level
-	 *
-	 * @return LoggerInterface
-	 */
-	public function log(string $channel = 'main', string $name = '', $hard_level = null)
+    /**
+     * Logger
+     *
+     * @param string $channel
+     * @param string $name
+     * @param array $params
+     * @return LoggerInterface
+     */
+	public function log(string $channel = 'main', string $name = '', array $params = [])
 	{
 		$channel = strtolower($channel);
 
 		if(!isset($this->log[$channel]))
 		{
+            $default_params =
+            [
+                'hard_level' => null,
+                'files_max' => null
+            ];
+
+            $params = array_merge($default_params, $params);
+
 			if('' === $name)
 			{
 				$name = $channel;
@@ -257,10 +264,15 @@ final class Core extends CoreAbstract
 				$level = $this->settings('logs')->get('logger_level', 300);
 			}
 
-			if(!is_null($hard_level))
+			if(!is_null($params['hard_level']))
 			{
-				$level = $hard_level;
+				$level = $params['hard_level'];
 			}
+
+            if(!is_null($params['files_max']))
+            {
+                $max_files = $params['files_max'];
+            }
 
 			if('' === $path)
 			{
@@ -271,11 +283,13 @@ final class Core extends CoreAbstract
 			{
 				$uid_processor = new Processor();
 				$formatter = new Formatter();
+
 				$handler = new Handler($path, $max_files, $level);
 
 				$handler->setFormatter($formatter);
 
 				$logger->pushProcessor($uid_processor);
+
 				$logger->pushHandler($handler);
 
 				if('yes' === $this->settings('logs')->get('logger_output', 'no'))
@@ -465,9 +479,11 @@ final class Core extends CoreAbstract
 	 */
 	private function loadReceiver()
 	{
+        wc1c()->log()->debug(__('Receiver loading.', 'wc1c-main'));
+
 		$default_class_name = Receiver::class;
 
-		$use_class_name = apply_filters('wc1c_receiver_loading_class_name', $default_class_name);
+		$use_class_name = apply_filters(wc1c()->context()->getSlug() . '_receiver_loading_class_name', $default_class_name);
 
 		if(false === class_exists($use_class_name))
 		{
@@ -481,6 +497,8 @@ final class Core extends CoreAbstract
 		$receiver->register();
 
 		$this->setReceiver($receiver);
+
+        wc1c()->log()->debug(__('Receiver loading is completed.', 'wc1c-main'), ['class' => $use_class_name]);
 	}
 
 	/**
@@ -488,6 +506,8 @@ final class Core extends CoreAbstract
 	 */
 	public function localization()
 	{
+        wc1c()->log()->debug(__('Localization loading.'));
+
 		$locale = determine_locale();
 
 		if(has_filter('plugin_locale'))
